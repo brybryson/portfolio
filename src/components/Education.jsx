@@ -8,7 +8,7 @@ const Education = () => {
                 <div className="gradient-card p-10 rounded-[2.5rem] bento-shadow flex flex-col justify-between group text-left relative overflow-hidden">
                     <div className="relative z-10">
                         <div className="size-24 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-8 overflow-hidden p-4">
-                            <img src="/bryant-portfolio/images/education/NU LOGO.png" alt="National University Logo" className="w-full h-full object-contain" />
+                            <img src="/images/education/NU LOGO.png" alt="National University Logo" className="w-full h-full object-contain" />
                         </div>
                         <h4 className="text-white font-black text-2xl mb-2">BS Information Technology</h4>
                         <p className="text-gray-300 font-bold text-lg mb-6 text-left">National University — Fairview</p>
@@ -24,7 +24,7 @@ const Education = () => {
                 <div className="gradient-card p-10 rounded-[2.5rem] bento-shadow flex flex-col justify-between group text-left relative overflow-hidden">
                     <div className="relative z-10">
                         <div className="size-24 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-8 overflow-hidden p-4">
-                            <img src="/bryant-portfolio/images/education/CNSTHS.png" alt="CNSTHS Logo" className="w-full h-full object-contain" />
+                            <img src="/images/education/CNSTHS.png" alt="CNSTHS Logo" className="w-full h-full object-contain" />
                         </div>
                         <h4 className="text-white font-black text-2xl mb-2">STEM Strand</h4>
                         <p className="text-gray-300 font-bold text-lg mb-6 text-left">Caloocan National Science & Technology High School</p>

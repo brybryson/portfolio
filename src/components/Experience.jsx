@@ -7,7 +7,7 @@ const Experience = () => {
             <div className="space-y-8">
                 <div className="bg-card-dark p-10 rounded-[2.5rem] bento-shadow border border-white/5 flex flex-col md:flex-row items-start gap-10 hover:bg-white/[0.02] transition-colors">
                     <div className="size-24 bg-white/5 border border-white/10 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden p-4">
-                        <img src="/bryant-portfolio/images/experience/NLP LOGO.png" alt="NLP Business Development Services Logo" className="w-full h-full object-contain" />
+                        <img src="/images/experience/NLP LOGO.png" alt="NLP Business Development Services Logo" className="w-full h-full object-contain" />
                     </div>
                     <div className="flex-1">
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 text-left">

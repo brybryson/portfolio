@@ -28,7 +28,7 @@ const Hero = () => {
             <div className="md:col-span-5 lg:col-span-4 bg-card-dark rounded-[2.5rem] p-10 bento-shadow border border-white/5 flex flex-col">
                 <div className="flex flex-col items-center text-center">
                     <div className="size-48 md:size-56 bg-gradient-to-br from-royal-blue to-accent rounded-3xl mb-8 p-1.5 shadow-2xl overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-500">
-                        <img alt="Bryant Melliza" className="w-full h-full object-cover rounded-[1.25rem]" src="images/bry_pic.jpeg" />
+                        <img alt="Bryant Melliza" className="w-full h-full object-cover rounded-[1.25rem]" src="/images/bry_pic.jpeg" />
                     </div>
                     <h3 className="text-white text-3xl font-black mb-2">Bryant Melliza</h3>
                     <p className="text-royal-blue font-bold mb-6">Software Developer</p>
