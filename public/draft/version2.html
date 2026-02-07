@@ -1,0 +1,613 @@
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Light Portfolio - Logo Integrated</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6",
+                        "accent": "#2563eb",
+                        "background-light": "#f8fafc",
+                        "card-light": "#ffffff",
+                        "navy-deep": "#0f172a",
+                        "royal-blue": "#2563eb"
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "4xl": "2.5rem",
+                        "full": "9999px"
+                    },
+                    animation: {
+                        'marquee': 'marquee 40s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        :root {
+            --soft-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+            --layered-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --hero-glow: 0 0 80px -20px rgba(59, 130, 246, 0.15);
+        }
+        .grain-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.2;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAsGZzy7NIa8tR_rwcPLSEXpH1cZ2R9G1dsq2SUfOZmDPNT2Fy0WbRpvt-1J60fofm7aAICPBHJ59CD4Up1LAl0pK3MxtoD8VmJ6jaGYfukiqSWvrPWFqEAinJyE_VkYClfhLAgl3F-lXsVnVzaeSqcLyMVKsOJ0sl3TE-w8TDbhPEmsSAqqKJoTucwsBgYUltWHJmtIomGsq8G2BVaRx6083BEMOF3nvA3Ae2tnLROXe_tejE6rz4UQ_uo7WqibEOGfexV7Urc5DE);
+        }
+        .section-gap {
+            margin-top: 16rem;
+            margin-bottom: 16rem;
+        }
+        .carousel-container {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .outlined-card {
+            background: transparent;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .white-card {
+            background: #ffffff;
+            box-shadow: var(--layered-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light font-display text-slate-700 transition-colors duration-300 antialiased">
+    <div class="grain-texture"></div>
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col items-center">
+            <div class="w-full max-w-[1400px] px-6 py-8 md:px-12 lg:py-12 flex flex-col">
+                <header class="flex items-center justify-between w-full mb-32">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2 group cursor-pointer">
+                            <div
+                                class="flex items-center justify-center bg-royal-blue px-3 py-1.5 rounded-lg shadow-sm">
+                                <span class="text-white font-black text-xl tracking-tighter">BIM</span>
+                            </div>
+                            <div class="flex flex-col leading-none">
+                                <span
+                                    class="text-navy-deep text-lg font-black tracking-tight uppercase">Solutions</span>
+                                <span
+                                    class="text-slate-400 text-[10px] font-bold tracking-[0.2em] uppercase">Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+                    <nav
+                        class="hidden md:flex items-center bg-white/80 backdrop-blur-xl px-2 py-2 rounded-full border border-slate-200 shadow-sm">
+                        <a class="px-6 py-2 text-sm font-bold text-slate-500 hover:text-primary transition-colors"
+                            href="#works">Selected Projects</a>
+                        <a class="px-6 py-2 text-sm font-bold text-slate-500 hover:text-primary transition-colors"
+                            href="#tech-stack">Stack</a>
+                        <a class="px-6 py-2 text-sm font-bold text-slate-500 hover:text-primary transition-colors"
+                            href="#experience">Journey</a>
+                        <a class="px-6 py-2 text-sm font-bold text-slate-500 hover:text-primary transition-colors"
+                            href="#education">Education</a>
+                        <button
+                            class="ml-2 px-8 py-2.5 bg-primary text-white rounded-full text-sm font-black hover:bg-accent transition-all active:scale-95 shadow-lg shadow-primary/25">
+                            Let's Talk
+                        </button>
+                    </nav>
+                </header>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-32 items-center">
+                    <div class="md:col-span-7 lg:col-span-8 flex flex-col justify-center">
+                        <span
+                            class="inline-block px-4 py-2 rounded-full bg-primary/5 text-primary text-xs font-black uppercase tracking-[0.2em] mb-10 border border-primary/10 w-fit">Open
+                            for Collaboration</span>
+                        <h1 class="text-slate-900 text-6xl md:text-8xl font-black leading-[1.05] tracking-tight mb-10">
+                            Crafting <span class="text-primary italic">resilient</span> software architectures.
+                        </h1>
+                        <p class="text-slate-500 text-2xl leading-relaxed mb-12 max-w-2xl font-medium">
+                            Senior Systems Architect focused on high-scale distributed systems and performance-driven
+                            development.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-6">
+                            <button
+                                class="flex items-center gap-2 px-12 py-5 bg-primary text-white rounded-2xl font-black hover:bg-accent transition-all active:scale-95 shadow-xl shadow-primary/25">
+                                View Work <span class="material-symbols-outlined text-sm">arrow_downward</span>
+                            </button>
+                            <button
+                                class="flex items-center gap-2 px-12 py-5 bg-white text-slate-900 rounded-2xl font-black border border-slate-200 hover:bg-slate-50 transition-all shadow-sm">
+                                Curriculum Vitae
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="md:col-span-5 lg:col-span-4 white-card rounded-4xl p-10 flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 size-40 bg-primary/5 rounded-full -mr-20 -mt-20 blur-3xl">
+                        </div>
+                        <div
+                            class="size-64 md:size-72 bg-slate-100 rounded-3xl mb-10 p-1 shadow-inner overflow-hidden relative">
+                            <img alt="Professional Portrait" class="w-full h-full object-cover rounded-[1.5rem]"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxKHsfTfQQcdrHnWkPsJXzjM4vlP6CxKaOfOP-b5v8yoMJG8X6c-k2z-4CC4JIusnz9WZiZEwmN-gaNOOWbwzG91B4oXx6aJ5ynrcZsbYLhZh5lYI567YqaxKqiRAdHzDF6aFDQDaijGhD7P2dyf-OzujTkLkx790B3Dg8c1M-6P6CtUN_0ymOhwta9fw0cVLoo3nK2Y7q2YQSUBEhp4f5JdHtrWD8r40gvGn_I8nFD85ftZuy3P8OV7Uq_PnTUsecWfLihPLY0Wo" />
+                        </div>
+                        <div class="relative z-10">
+                            <h3 class="text-slate-900 text-4xl font-black mb-2">Alex Thorne</h3>
+                            <p class="text-primary font-bold text-lg mb-8">Principal Systems Architect</p>
+                            <div class="flex flex-col gap-3 w-full mb-10">
+                                <div
+                                    class="flex items-center gap-4 bg-slate-50 px-6 py-4 rounded-2xl border border-slate-100">
+                                    <span class="material-symbols-outlined text-primary">mail</span>
+                                    <span class="text-slate-600 font-semibold">alex@thorne.design</span>
+                                </div>
+                                <div
+                                    class="flex items-center gap-4 bg-slate-50 px-6 py-4 rounded-2xl border border-slate-100">
+                                    <span class="material-symbols-outlined text-primary">location_on</span>
+                                    <span class="text-slate-600 font-semibold">San Francisco, CA</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 w-full">
+                                <a class="flex-1 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-black transition-all"
+                                    href="#">GitHub</a>
+                                <a class="flex-1 py-4 border border-slate-200 text-slate-900 rounded-2xl font-bold hover:bg-slate-50 transition-all"
+                                    href="#">LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-gap relative" id="tech-stack">
+                    <div
+                        class="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-royal-blue/30 to-transparent hidden lg:block">
+                    </div>
+                    <div class="lg:pl-16">
+                        <h2 class="text-slate-900 text-5xl font-black tracking-tight mb-20 flex items-center gap-8">
+                            <span class="bg-royal-blue/10 p-4 rounded-2xl">
+                                <span class="material-symbols-outlined text-royal-blue text-4xl">database_off</span>
+                            </span>
+                            Tech Stack
+                            <span class="h-px bg-slate-200 grow"></span>
+                        </h2>
+                        <div class="white-card rounded-4xl p-12 overflow-hidden relative">
+                            <div
+                                class="absolute top-0 right-0 size-64 bg-primary/5 rounded-full -mr-32 -mt-32 blur-[100px]">
+                            </div>
+                            <div class="relative z-10 overflow-hidden">
+                                <div class="marquee-track animate-marquee">
+                                    <div class="flex items-center gap-20 pr-20">
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="React"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuArY9MvUNYlQ1TxxnIVn7qpFqFvx4rDJOO0q51GnL-LUreOdda-ZZWrQetLK6AgLg2hXTPjbZ9JxkMNdBp6vUgTSgU3g9-7JRJtzyopAyuTsrWIbZ3TsWWwIisyRVK2itkEn5Nezy69YDlmoQXlsyXSF8u8yuNV1Q_xQGqRK9ig_VCQ2uZry7M2pDcc6WDPL6_39GNwDcyCxfyylEqJctJqy77uPi6OuUG4tvYTvhGHOb4FVTGP7q6wDEjbIFYZntM3Q0gMKhyQP4Y" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">React</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="TypeScript"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtmfet6wRESZxtnhx-YTqru4dXSUjzU1qJyJvR5dF3_oe2QRTobKICgIhNVE1yRvh7weUXd8Y8Mb7-se7HYvNZDjAAhyv_8Fu0yNyEH0RoAzN7hyE2W2CzJTNm3WqhuQArdk7khS9xTqjsAy4VZ92x5hx072LQgRyU45IyAVWEsDr9QpkeVvAAtAKqMvItwA6c0OPqJspYblW6G-NczsEYI12kwLV-6FjqK8ggT2BExZ_1bU96ghKKta_HAcNSXO_K77eaBTQzeQw" />
+                                            <span
+                                                class="text-navy-deep font-bold text-xl tracking-tight">TypeScript</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Node.js"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJQ-T7ItPt5ifIo-1c3Xg45ohymdYs6bhJ0iFT4-lpGYqoYfuvXSwn6BWqA1Mzd8brABqP2m7UXsyNHnS2EMCQPnTFc53U4Un8fy8cGBgzKFiGGo2AJ0H6fMIY2_GHWOe4pGz0WNwYqhVd2I6Sn3n9UANv27ZfIIgqXbZjyiXknDNbIMUwQPWQr3ezgq5KXtLoHnYqT5eafpEwzPvugGdrLmC0LEambSmc6ZMf_GwjmbrwUU4FqYaHa759oPxO1IUCak3BGLjRvsk" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Node.js</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Python"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgwdLOeBN5LkZF5XkCH2IUx5F_0UDyJ8YUXHAycE-ZbYUk5i7Snn-A6M1yuKTuuvduShQVsFa9mPdAZKLkV-rCV-CbboRUXBbA0Rjqxz1kiwccSAqzmjX3IYjy7ouBecTVF4eN2GUQ3HIALRUFWXEpGo7VClyvNMcZaOCEEVli5Qdxpg1P6imJJ5LauuIArY7WJTeFqag4I1oSeKpHUXHsaGnqK1elBLtUuORuO6Du6jLueOnb9_gY5RxAm7nOjiy4tYAwKF4j0do" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Python</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="AWS"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXM7NfJ8czmOVKtwQkvmR_WhuNX1RtlRPOj4uODDQ-GwSPCoph99zoW3b5CuM6gC9Zx0dK4jD8uMvbiNyCnoqzEClvVgTWuv5osfY6DyrjFvBVaN1QZjErqFgSocuL84hXfSUNcghgPRGtZwln6aKoF3bqtePTk4-jkgbMMN-Ix8VD1w-Evyc0Ky7k5ZiL3dGyz9sUTz4eh-hv1GcM-XJvrtHijFupKL6zuOLlvVU45VqPIlWT-uHgV3l7I_F7kFzKYmeKUViT4yk" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">AWS</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Docker"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVAyKSQBMS1AF5gOZtHdxmEErefwhw_sdcFz8kxdrEvuyjcqZoDcuxzQ5OfavM4cuiw8_tcD6lDtT4IEwLDPmSoAl8n_SwsJ3_gpiCrdgjiIKE57yrY9xwniIcOUVhKskT44IpCe0N5bdFPI23L-Dkqf6u5NRloS2Gpq_oU5P1V2p9mOSn2FZCBOjCxb8jUJmpUOIvncL0Wr5tAeOOoBSXsyLFzK-YltM2wFCweWuWYfzqm128C_18wA9VVOYdIjEleAVo6xTEWOA" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Docker</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Kubernetes"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC64V4Fo7qImqwwHqQmYqzVsm7npgv7jv192tqD4Mg5RPTghGG51HTBWSD2K-S4nB9o7l2uUcaI_nduq2LmlcLM6qqChqaBbWkWDcUWI6fz9mHYl8y77_K123YqJ68O6t6pE0gkPijPGmWzPf5xo-nGSnr9Z_iIycK5mHjbKZOG2ddzXawkA6Q5WO04YdPnyYAKyV-trqcs1Ry7w5O08okOCqYMIngm3D4wbo4rzTc82OBLA7b4uGvu33y_e6PtXbd6d2KvSf2fUyY" />
+                                            <span
+                                                class="text-navy-deep font-bold text-xl tracking-tight">Kubernetes</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="PostgreSQL"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1z_1sEcyUPhJBpNh5NOSqbl4p-Mk5rTcwRhcR8vZwz5ogIr7jdQcj1FZmKpS53fMyP6xXz5LEVN8hz3CKL3fuJCDRpaf7ABl5TH94R0PU-ceM-dwdbkfU5WJBr5uzMwCbYdBeSzFb6u0wUb-lg5ceRJHc2WIAgzyhucxw6R76tyvUhLc8PIArel_H7hIbzl4aFARVGpHvHNGoJJriU5u9URb1-nL9xi8kvuTDawcZF4hXNlsYCHZ3hRHPVh6ACdcQxFDnNZquXtg" />
+                                            <span
+                                                class="text-navy-deep font-bold text-xl tracking-tight">PostgreSQL</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Redis"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2EcgrbvKJlc7-mM72MESbUm-4pIR1hH1wHRdDCtBA946qlGzwTGe_NAhHaaCPiyRiab8pW7P8jew267HyU1fPq7Ez6ekGvMC8tVonegLjWZPeVnn9WEt6Nee5FsGrUTcCqpyJnhbdMn9SQB7clSAIjPd5FAWfKHTkp6BMGByROnV7jtK4wF7Sn7jRnSaeTdG1l1KdO4w_RiO8Wqvl31mGzLrmyBajklV1dwwaAaVF6gxBlrh8zhHXQol2Fh4Oob7qBwE9mPokk-0" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Redis</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Go"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYqw_YsAs6anQbo9ZvS10cFdiCFhHkxSdWwrQeAzNBiTgi-joAt0WsdkBzUjpfoqDNkiNh2VJ0ZVisVF6O4-CMeMBruYTv68fxEJEiQavrAF00-63J6qvWMlAf2jeNuYTNMV43dhArDftk4yyLtF6Y4ZqlPlZ_yB98Y_jAxq1otlhZdeFBOHalVtJIGF1s8N7etmED_1WQ8Yf26xZ4xTbYYaOAL-uJcw2QYMUsRv9iiE_-8wLjjQwRZmDAiYgqTdZTuq53_dURwaw" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Golang</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-20 pr-20">
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="React"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuArY9MvUNYlQ1TxxnIVn7qpFqFvx4rDJOO0q51GnL-LUreOdda-ZZWrQetLK6AgLg2hXTPjbZ9JxkMNdBp6vUgTSgU3g9-7JRJtzyopAyuTsrWIbZ3TsWWwIisyRVK2itkEn5Nezy69YDlmoQXlsyXSF8u8yuNV1Q_xQGqRK9ig_VCQ2uZry7M2pDcc6WDPL6_39GNwDcyCxfyylEqJctJqy77uPi6OuUG4tvYTvhGHOb4FVTGP7q6wDEjbIFYZntM3Q0gMKhyQP4Y" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">React</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="TypeScript"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtmfet6wRESZxtnhx-YTqru4dXSUjzU1qJyJvR5dF3_oe2QRTobKICgIhNVE1yRvh7weUXd8Y8Mb7-se7HYvNZDjAAhyv_8Fu0yNyEH0RoAzN7hyE2W2CzJTNm3WqhuQArdk7khS9xTqjsAy4VZ92x5hx072LQgRyU45IyAVWEsDr9QpkeVvAAtAKqMvItwA6c0OPqJspYblW6G-NczsEYI12kwLV-6FjqK8ggT2BExZ_1bU96ghKKta_HAcNSXO_K77eaBTQzeQw" />
+                                            <span
+                                                class="text-navy-deep font-bold text-xl tracking-tight">TypeScript</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Node.js"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJQ-T7ItPt5ifIo-1c3Xg45ohymdYs6bhJ0iFT4-lpGYqoYfuvXSwn6BWqA1Mzd8brABqP2m7UXsyNHnS2EMCQPnTFc53U4Un8fy8cGBgzKFiGGo2AJ0H6fMIY2_GHWOe4pGz0WNwYqhVd2I6Sn3n9UANv27ZfIIgqXbZjyiXknDNbIMUwQPWQr3ezgq5KXtLoHnYqT5eafpEwzPvugGdrLmC0LEambSmc6ZMf_GwjmbrwUU4FqYaHa759oPxO1IUCak3BGLjRvsk" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Node.js</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Python"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgwdLOeBN5LkZF5XkCH2IUx5F_0UDyJ8YUXHAycE-ZbYUk5i7Snn-A6M1yuKTuuvduShQVsFa9mPdAZKLkV-rCV-CbboRUXBbA0Rjqxz1kiwccSAqzmjX3IYjy7ouBecTVF4eN2GUQ3HIALRUFWXEpGo7VClyvNMcZaOCEEVli5Qdxpg1P6imJJ5LauuIArY7WJTeFqag4I1oSeKpHUXHsaGnqK1elBLtUuORuO6Du6jLueOnb9_gY5RxAm7nOjiy4tYAwKF4j0do" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Python</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="AWS"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXM7NfJ8czmOVKtwQkvmR_WhuNX1RtlRPOj4uODDQ-GwSPCoph99zoW3b5CuM6gC9Zx0dK4jD8uMvbiNyCnoqzEClvVgTWuv5osfY6DyrjFvBVaN1QZjErqFgSocuL84hXfSUNcghgPRGtZwln6aKoF3bqtePTk4-jkgbMMN-Ix8VD1w-Evyc0Ky7k5ZiL3dGyz9sUTz4eh-hv1GcM-XJvrtHijFupKL6zuOLlvVU45VqPIlWT-uHgV3l7I_F7kFzKYmeKUViT4yk" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">AWS</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Docker"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVAyKSQBMS1AF5gOZtHdxmEErefwhw_sdcFz8kxdrEvuyjcqZoDcuxzQ5OfavM4cuiw8_tcD6lDtT4IEwLDPmSoAl8n_SwsJ3_gpiCrdgjiIKE57yrY9xwniIcOUVhKskT44IpCe0N5bdFPI23L-Dkqf6u5NRloS2Gpq_oU5P1V2p9mOSn2FZCBOjCxb8jUJmpUOIvncL0Wr5tAeOOoBSXsyLFzK-YltM2wFCweWuWYfzqm128C_18wA9VVOYdIjEleAVo6xTEWOA" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Docker</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Kubernetes"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC64V4Fo7qImqwwHqQmYqzVsm7npgv7jv192tqD4Mg5RPTghGG51HTBWSD2K-S4nB9o7l2uUcaI_nduq2LmlcLM6qqChqaBbWkWDcUWI6fz9mHYl8y77_K123YqJ68O6t6pE0gkPijPGmWzPf5xo-nGSnr9Z_iIycK5mHjbKZOG2ddzXawkA6Q5WO04YdPnyYAKyV-trqcs1Ry7w5O08okOCqYMIngm3D4wbo4rzTc82OBLA7b4uGvu33y_e6PtXbd6d2KvSf2fUyY" />
+                                            <span
+                                                class="text-navy-deep font-bold text-xl tracking-tight">Kubernetes</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="PostgreSQL"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1z_1sEcyUPhJBpNh5NOSqbl4p-Mk5rTcwRhcR8vZwz5ogIr7jdQcj1FZmKpS53fMyP6xXz5LEVN8hz3CKL3fuJCDRpaf7ABl5TH94R0PU-ceM-dwdbkfU5WJBr5uzMwCbYdBeSzFb6u0wUb-lg5ceRJHc2WIAgzyhucxw6R76tyvUhLc8PIArel_H7hIbzl4aFARVGpHvHNGoJJriU5u9URb1-nL9xi8kvuTDawcZF4hXNlsYCHZ3hRHPVh6ACdcQxFDnNZquXtg" />
+                                            <span
+                                                class="text-navy-deep font-bold text-xl tracking-tight">PostgreSQL</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Redis"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2EcgrbvKJlc7-mM72MESbUm-4pIR1hH1wHRdDCtBA946qlGzwTGe_NAhHaaCPiyRiab8pW7P8jew267HyU1fPq7Ez6ekGvMC8tVonegLjWZPeVnn9WEt6Nee5FsGrUTcCqpyJnhbdMn9SQB7clSAIjPd5FAWfKHTkp6BMGByROnV7jtK4wF7Sn7jRnSaeTdG1l1KdO4w_RiO8Wqvl31mGzLrmyBajklV1dwwaAaVF6gxBlrh8zhHXQol2Fh4Oob7qBwE9mPokk-0" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Redis</span>
+                                        </div>
+                                        <div class="flex items-center gap-5 group cursor-default">
+                                            <img alt="Go"
+                                                class="size-14 object-contain transition-transform group-hover:scale-110"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYqw_YsAs6anQbo9ZvS10cFdiCFhHkxSdWwrQeAzNBiTgi-joAt0WsdkBzUjpfoqDNkiNh2VJ0ZVisVF6O4-CMeMBruYTv68fxEJEiQavrAF00-63J6qvWMlAf2jeNuYTNMV43dhArDftk4yyLtF6Y4ZqlPlZ_yB98Y_jAxq1otlhZdeFBOHalVtJIGF1s8N7etmED_1WQ8Yf26xZ4xTbYYaOAL-uJcw2QYMUsRv9iiE_-8wLjjQwRZmDAiYgqTdZTuq53_dURwaw" />
+                                            <span class="text-navy-deep font-bold text-xl tracking-tight">Golang</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-gap" id="works">
+                    <div class="flex items-end justify-between mb-16">
+                        <div>
+                            <h2 class="text-slate-900 text-5xl font-black tracking-tight">Selected Projects</h2>
+                            <p class="text-slate-500 mt-4 text-xl">High-impact engineering solutions.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <button
+                                class="size-14 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-all text-slate-400 hover:text-primary">
+                                <span class="material-symbols-outlined">west</span>
+                            </button>
+                            <button
+                                class="size-14 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-all text-slate-400 hover:text-primary">
+                                <span class="material-symbols-outlined">east</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="carousel-container flex gap-8 overflow-x-auto pb-8 snap-x">
+                        <div class="min-w-[420px] snap-start group">
+                            <div
+                                class="white-card rounded-4xl p-6 h-full transition-transform duration-500 hover:-translate-y-2">
+                                <div class="aspect-[16/10] bg-slate-100 rounded-3xl mb-8 overflow-hidden">
+                                    <img alt="Project"
+                                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgbhFR7wkvymSjBsUCYogLACN6G8VMVeLbrzbtFTuRUZR5Gy0CTFuwQReaZu0TZdgujQ8dyHQ547equzH9dG5MngRtevExEzzxXriVTxeoNe9lq55N-z8XrRl-BQ2tRABmqY1WxLIVtKg-njvsDcWdebXifGpUY9e-OI0gsbdiwhdvSH9K0CniLHGDuVHmANs7jRpGCaWdolIUgVkS1v02dJn13clHMAZucbS4SX3vFrWOsmHrhlX-TOxkZhGBc8PuNgRcm5QBIgU" />
+                                </div>
+                                <div class="px-2 pb-2">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <h4 class="text-slate-900 font-black text-2xl">Nexus Cloud</h4>
+                                        <span
+                                            class="text-xs font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-full">Core
+                                            Infra</span>
+                                    </div>
+                                    <p class="text-slate-500 text-lg leading-relaxed">Scaling edge computing nodes
+                                        across 40+ global regions with 99.99% uptime.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="min-w-[420px] snap-start group">
+                            <div
+                                class="white-card rounded-4xl p-6 h-full transition-transform duration-500 hover:-translate-y-2">
+                                <div class="aspect-[16/10] bg-slate-100 rounded-3xl mb-8 overflow-hidden">
+                                    <img alt="Project"
+                                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwQzauhsqiyujDW9UjHskjKL5VMuARX55TgoTn1HkYKqkIGz-7WDbq_bnLD4h7m__pJB7Ck8mNdAHMgojEy6zDBrNmwXGKUdBO7nOBlpov-FdtwHWIeA22fTN_Ef6FmRMXh_OCKY3OBhZiBCW7Uq7He-B2AWQG1oBQdItP6IgrgMBjHYxTHDAcC25SLCkIicA2sBknT1h4BtR5buIpKVzHPVcFLkjcHr8z7bA_QBYeh2PwgtYNX2yb3Dqk08nMgfsLSlXS_ahhlHY" />
+                                </div>
+                                <div class="px-2 pb-2">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <h4 class="text-slate-900 font-black text-2xl">Lumina Engine</h4>
+                                        <span
+                                            class="text-xs font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-full">Rendering</span>
+                                    </div>
+                                    <p class="text-slate-500 text-lg leading-relaxed">Proprietary real-time engine
+                                        optimized for large-scale architectural visualization.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="min-w-[420px] snap-start group">
+                            <div
+                                class="white-card rounded-4xl p-6 h-full transition-transform duration-500 hover:-translate-y-2">
+                                <div class="aspect-[16/10] bg-slate-100 rounded-3xl mb-8 overflow-hidden">
+                                    <img alt="Project"
+                                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXYgsXLyVaq2hT0EKhvJksmpaTAdlyEuO4cktBfG-hmbnpnSUpB4o5KawDrxVRp9B9Af_BeTxt6H1g5UCkGB3iiCbHbEfEiVlYE087VblZCe-N41Y8G9UJc8a-G7PCWJ8QE_2BFH3C7v-JefIx4Xz8irO7LshJxBrJy20GWO3xuXDtVP2ajwUe6-aDE2QfD6bKElKx2qNRsHQYOUSuIFBWNm6NGSFd0bOOAYFoHXtEpgbnuWF040tzdKr7G48idUrRduxoJOOX8YI" />
+                                </div>
+                                <div class="px-2 pb-2">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <h4 class="text-slate-900 font-black text-2xl">Cipher Core</h4>
+                                        <span
+                                            class="text-xs font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-full">Security</span>
+                                    </div>
+                                    <p class="text-slate-500 text-lg leading-relaxed">Low-latency decentralized
+                                        authentication protocol for enterprise systems.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-gap" id="experience">
+                    <h2 class="text-slate-900 text-5xl font-black tracking-tight mb-20">Professional Journey</h2>
+                    <div class="space-y-12">
+                        <div class="group relative">
+                            <div class="absolute left-10 top-24 bottom-[-48px] w-px bg-slate-200"></div>
+                            <div
+                                class="white-card p-12 rounded-4xl flex flex-col md:flex-row items-start gap-12 relative z-10 transition-all hover:border-primary/20">
+                                <div
+                                    class="size-20 bg-primary/5 border border-primary/10 rounded-3xl flex-shrink-0 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-primary text-4xl">architecture</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+                                        <div>
+                                            <h4 class="text-slate-900 font-black text-3xl">Principal Systems Architect
+                                            </h4>
+                                            <p class="text-primary font-bold text-lg mt-1">TechFlow Global • Palo Alto
+                                            </p>
+                                        </div>
+                                        <span
+                                            class="text-primary text-xs font-black bg-primary/5 px-5 py-2.5 rounded-full uppercase tracking-widest border border-primary/10 self-start">2021
+                                            — Present</span>
+                                    </div>
+                                    <p class="text-slate-500 text-xl leading-relaxed max-w-4xl">
+                                        Leading the architectural evolution of a global data platform. Reduced
+                                        infrastructure costs by 45% while increasing data throughput by 3x through
+                                        serverless optimization and strategic caching.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group relative">
+                            <div
+                                class="white-card p-12 rounded-4xl flex flex-col md:flex-row items-start gap-12 relative z-10 transition-all hover:border-primary/20">
+                                <div
+                                    class="size-20 bg-slate-50 border border-slate-100 rounded-3xl flex-shrink-0 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-slate-400 text-4xl">cloud_sync</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+                                        <div>
+                                            <h4 class="text-slate-900 font-black text-3xl">Senior Backend Engineer</h4>
+                                            <p class="text-slate-500 font-bold text-lg mt-1">Stellar Networks • Seattle
+                                            </p>
+                                        </div>
+                                        <span
+                                            class="text-slate-400 text-xs font-black bg-slate-50 px-5 py-2.5 rounded-full uppercase tracking-widest border border-slate-100 self-start">2018
+                                            — 2021</span>
+                                    </div>
+                                    <p class="text-slate-500 text-xl leading-relaxed max-w-4xl">
+                                        Architected a micro-transactions engine processing over 10k requests per second.
+                                        Implemented real-time fraud detection using advanced stream processing
+                                        techniques.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-gap" id="education">
+                    <h2 class="text-slate-900 text-5xl font-black tracking-tight mb-20">Education</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div class="white-card p-12 rounded-4xl flex flex-col justify-between group">
+                            <div>
+                                <div
+                                    class="size-16 bg-primary/5 border border-primary/10 rounded-2xl flex items-center justify-center mb-10">
+                                    <span class="material-symbols-outlined text-primary text-3xl">school</span>
+                                </div>
+                                <h4 class="text-slate-900 font-black text-3xl mb-3">MSc in Computer Science</h4>
+                                <p class="text-slate-600 font-bold text-xl mb-8">Stanford University</p>
+                                <p class="text-slate-500 text-lg leading-relaxed">Specialized in Distributed Systems and
+                                    Cloud Computing. Thesis on fault-tolerant consensus mechanisms in edge networks.</p>
+                            </div>
+                            <div class="mt-12 pt-10 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-primary font-black text-sm uppercase tracking-widest">Graduated
+                                    2018</span>
+                                <span class="text-slate-400 font-bold text-sm">Distinction</span>
+                            </div>
+                        </div>
+                        <div class="white-card p-12 rounded-4xl flex flex-col justify-between group">
+                            <div>
+                                <div
+                                    class="size-16 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center mb-10">
+                                    <span
+                                        class="material-symbols-outlined text-slate-400 text-3xl">workspace_premium</span>
+                                </div>
+                                <h4 class="text-slate-900 font-black text-3xl mb-3">BSc Software Engineering</h4>
+                                <p class="text-slate-600 font-bold text-xl mb-8">MIT</p>
+                                <p class="text-slate-500 text-lg leading-relaxed">Focus on algorithmic complexity and
+                                    system design. Lead developer for the university's open-source student portal.</p>
+                            </div>
+                            <div class="mt-12 pt-10 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-slate-400 font-black text-sm uppercase tracking-widest">Graduated
+                                    2016</span>
+                                <span class="text-slate-400 font-bold text-sm">Dean's List</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-gap" id="awards">
+                    <h2 class="text-slate-900 text-5xl font-black tracking-tight mb-16">Awards &amp; Recognition</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div
+                            class="outlined-card p-10 rounded-4xl text-center flex flex-col items-center group hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
+                            <span class="material-symbols-outlined text-primary text-5xl mb-6">military_tech</span>
+                            <h5 class="text-slate-900 font-black text-xl">Top 30 Under 30</h5>
+                            <p class="text-slate-400 text-xs font-black uppercase tracking-widest mt-3">Tech Industry
+                                2023</p>
+                        </div>
+                        <div
+                            class="outlined-card p-10 rounded-4xl text-center flex flex-col items-center group hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
+                            <span class="material-symbols-outlined text-primary text-5xl mb-6">trophy</span>
+                            <h5 class="text-slate-900 font-black text-xl">Innovator Award</h5>
+                            <p class="text-slate-400 text-xs font-black uppercase tracking-widest mt-3">DevSummit 2022
+                            </p>
+                        </div>
+                        <div
+                            class="outlined-card p-10 rounded-4xl text-center flex flex-col items-center group hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
+                            <span class="material-symbols-outlined text-primary text-5xl mb-6">stars</span>
+                            <h5 class="text-slate-900 font-black text-xl">Product of Year</h5>
+                            <p class="text-slate-400 text-xs font-black uppercase tracking-widest mt-3">Web Awards 2021
+                            </p>
+                        </div>
+                        <div
+                            class="outlined-card p-10 rounded-4xl text-center flex flex-col items-center group hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
+                            <span class="material-symbols-outlined text-primary text-5xl mb-6">verified</span>
+                            <h5 class="text-slate-900 font-black text-xl">AWS Ambassador</h5>
+                            <p class="text-slate-400 text-xs font-black uppercase tracking-widest mt-3">Global Cloud
+                                2020</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-slate-900 rounded-[4rem] p-16 md:p-32 relative overflow-hidden flex flex-col items-center text-center shadow-2xl shadow-slate-300 mt-32">
+                    <div class="absolute top-0 right-0 size-96 bg-primary/10 rounded-full -mr-48 -mt-48 blur-3xl"></div>
+                    <div class="absolute bottom-0 left-0 size-96 bg-primary/10 rounded-full -ml-48 -mb-48 blur-3xl">
+                    </div>
+                    <div class="relative z-10">
+                        <h2 class="text-white text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-none">Let's
+                            build the <br />future, together.</h2>
+                        <p class="text-slate-400 text-2xl md:text-3xl mb-16 max-w-3xl mx-auto font-medium">
+                            Currently available for senior leadership roles and strategic consulting engagements.
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-6">
+                            <button
+                                class="px-16 py-7 bg-primary text-white rounded-[2.5rem] font-black text-2xl hover:bg-accent transition-all active:scale-95 shadow-2xl shadow-primary/20">
+                                Start a Conversation
+                            </button>
+                            <button
+                                class="px-16 py-7 bg-white/5 text-white border-2 border-white/10 rounded-[2.5rem] font-black text-2xl hover:bg-white/10 transition-all">
+                                Copy Email
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <footer
+                    class="flex flex-col md:flex-row items-center justify-between w-full pt-20 pb-16 mt-32 border-t border-slate-200 gap-8">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center justify-center bg-slate-900 px-2 py-1 rounded-md">
+                            <span class="text-white font-black text-sm tracking-tighter">BIM</span>
+                        </div>
+                        <p class="text-slate-500 text-sm font-bold">
+                            © 2024 Alex Thorne. All Rights Reserved.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-10">
+                        <a class="text-slate-400 font-bold hover:text-primary transition-colors text-xs uppercase tracking-[0.2em]"
+                            href="#">LinkedIn</a>
+                        <a class="text-slate-400 font-bold hover:text-primary transition-colors text-xs uppercase tracking-[0.2em]"
+                            href="#">GitHub</a>
+                        <a class="text-slate-400 font-bold hover:text-primary transition-colors text-xs uppercase tracking-[0.2em]"
+                            href="#">Twitter</a>
+                        <a class="text-slate-400 font-bold hover:text-primary transition-colors text-xs uppercase tracking-[0.2em]"
+                            href="#">Newsletter</a>
+                    </div>
+                </footer>
+            </div>
+            <div class="fixed bottom-10 left-1/2 -translate-x-1/2 z-40 lg:hidden">
+                <div
+                    class="bg-white/80 backdrop-blur-2xl border border-slate-200 shadow-2xl px-8 py-5 rounded-full flex items-center gap-10">
+                    <a class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors"
+                        href="#">home</a>
+                    <a class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors"
+                        href="#works">dashboard</a>
+                    <a class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors"
+                        href="#experience">work_history</a>
+                    <a class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors"
+                        href="#">chat_bubble</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

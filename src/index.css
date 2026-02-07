@@ -1,0 +1,288 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #3b82f6;
+    --color-royal-blue: #2563eb;
+    --color-accent: #6366f1;
+    --color-background-dark: #0a0a1a;
+    --color-card-dark: #16162e;
+
+    --font-display: "Inter", "sans-serif";
+
+    --animate-marquee: marquee 40s linear infinite;
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0%);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+@layer base {
+    :root {
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-primary: #ffffff;
+        --text-secondary: #9ca3af;
+        --card-bg: rgba(255, 255, 255, 0.03);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .dark {
+        /* Dark Mode Variables */
+        --bg-color: #0a0a1a;
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --card-bg: #16162e;
+        --glass-bg: rgba(22, 22, 46, 0.45);
+        --border-color: rgba(255, 255, 255, 0.08);
+        --highlight: rgba(37, 99, 235, 0.2);
+
+        --hero-glow: 0 0 50px -12px rgba(59, 130, 246, 0.2);
+        --cta-glow: 0 0 60px -10px rgba(59, 130, 246, 0.4);
+    }
+
+    body {
+        cursor: auto;
+        background-color: #030712;
+        /* background-dark */
+        color: var(--text-primary);
+    }
+}
+
+@layer components {
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .grain-texture {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0.04;
+        background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAsGZzy7NIa8tR_rwcPLSEXpH1cZ2R9G1dsq2SUfOZmDPNT2Fy0WbRpvt-1J60fofm7aAICPBHJ59CD4Up1LAl0pK3MxtoD8VmJ6jaGYfukiqSWvrPWFqEAinJyE_VkYClfhLAgl3F-lXsVnVzaeSqcLyMVKsOJ0sl3TE-w8TDbhPEmsSAqqKJoTucwsBgYUltWHJmtIomGsq8G2BVaRx6083BEMOF3nvA3Ae2tnLROXe_tejE6rz4UQ_uo7WqibEOGfexV7Urc5DE);
+    }
+
+    .bento-shadow {
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-glow-shadow {
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), var(--hero-glow);
+    }
+
+    .cta-glow-shadow {
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), var(--cta-glow);
+    }
+
+    .section-gap {
+        margin-bottom: 12rem;
+    }
+
+    .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--border-color);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .gradient-card {
+        background: linear-gradient(180deg, #1e1e2d 0%, #16162e 100%);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .outlined-card {
+        background: transparent;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .carousel-hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .carousel-hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .carousel-hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Custom Scrollbar for Awards */
+    .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+        transition: scrollbar-color 0.3s ease;
+    }
+
+    .custom-scrollbar:hover {
+        scrollbar-color: rgba(59, 130, 246, 0.5) rgba(255, 255, 255, 0.05);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        height: 6px;
+        background: transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 20px;
+    }
+
+    .custom-scrollbar:hover::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 20px;
+        border: 2px solid transparent;
+        /* Creates padding around thumb */
+        background-clip: content-box;
+    }
+
+    .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(59, 130, 246, 0.5);
+    }
+}
+
+/* Modal & Slideshow Styles */
+@layer components {
+    .modal {
+        position: fixed;
+        z-index: 99999;
+        inset: 0;
+        background-color: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-out;
+    }
+
+    .modal.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .modal-content {
+        transform: scale(0.95) translateY(10px);
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal.show .modal-content {
+        transform: scale(1) translateY(0);
+    }
+
+    .slide {
+        display: none;
+        animation: fadeIn 0.6s ease;
+    }
+
+    .slide.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(1.02);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .slideshow-container {
+        position: relative;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-button:hover {
+        background: rgba(59, 130, 246, 0.5);
+        border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .nav-button.prev {
+        left: 1rem;
+    }
+
+    .nav-button.next {
+        right: 1rem;
+    }
+
+    .slide-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .slide-indicator.active {
+        width: 24px;
+        background: #2563eb;
+    }
+}

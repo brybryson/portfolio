@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryant Melliza - Web Developer</title>
+    <link rel="icon" type="image/png" href="images/portfolio-logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(249, 115, 22, 0.8);
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Modern hover effect with cursor-following glow */
+        .modern-hover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modern-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(249, 115, 22, 0.2) 0%, transparent 30%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .modern-hover:hover::before {
+            opacity: 1;
+        }
+
+        .modern-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(249, 115, 22, 0.2);
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.6;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ea580c, #f97316);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #f97316, #ea580c);
+            top: 60%;
+            right: 15%;
+            animation-delay: -2s;
+        }
+
+        .orb-3 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #dc2626, #f97316);
+            bottom: 20%;
+            left: 60%;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+
+            66% {
+                transform: translateY(10px) rotate(240deg);
+            }
+        }
+
+        .skill-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(249, 115, 22, 0.4);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ea580c, #f97316);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.8);
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #ea580c, #dc2626, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .typing-animation {
+            border-right: 2px solid #ea580c;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: #ea580c;
+            }
+        }
+
+        .parallax {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        #arduino-docs-modal.modal {
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar Styles */
+        /* For Webkit browsers (Chrome, Safari, Edge) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, rgba(249, 115, 22, 0.5), rgba(234, 88, 12, 0.5));
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, rgba(249, 115, 22, 0.7), rgba(234, 88, 12, 0.7));
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+        }
+
+        /* For Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(249, 115, 22, 0.5) rgba(0, 0, 0, 0.1);
+        }
+
+        /* Specific styling for modal content */
+        .modal .glass {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(249, 115, 22, 0.5) rgba(0, 0, 0, 0.1);
+        }
+
+        /* Alternative darker theme scrollbar */
+        .dark-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .dark-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, rgba(249, 115, 22, 0.6), rgba(234, 88, 12, 0.6));
+        }
+
+        .dark-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, rgba(249, 115, 22, 0.8), rgba(234, 88, 12, 0.8));
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+        }
+
+
+        .slideshow-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .nav-button:hover {
+            background: rgba(249, 115, 22, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-button.prev {
+            left: 10px;
+        }
+
+        .nav-button.next {
+            right: 10px;
+        }
+
+        .slide-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #f97316;
+            transform: scale(1.2);
+        }
+
+        /* Circular navigation buttons with adaptive background */
+        .nav-button {
+            background: rgba(0, 0, 0, 0.6) !important;
+            padding: 12px !important;
+            border-radius: 50% !important;
+            width: 48px !important;
+            height: 48px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 0, 0, 0.8) !important;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .play-pause-btn {
+            display: none !important;
+        }
+
+        /* Ensure modal content scrolls within viewport */
+        .modal .glass {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* Remove fixed heights inside modals so media can size naturally */
+        .modal .h-48,
+        .modal .h-64 {
+            height: auto !important;
+            max-height: 80vh;
+        }
+
+        /* Slideshow container adapts to content; center its children */
+        .slideshow-container {
+            height: auto !important;
+            max-height: 80vh;
+            display: block;
+        }
+
+        .slideshow-container .slide {
+            width: 100%;
+        }
+
+        .slideshow-container .slide.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hide slide indicators to avoid dots showing beside the image */
+        .slideshow-container .slide-indicators {
+            display: none !important;
+        }
+
+        /* Make all images in modals show fully without cropping */
+        .modal img {
+            display: block;
+            width: 100% !important;
+            height: auto !important;
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .play-pause-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .play-pause-btn:hover {
+            background: rgba(249, 115, 22, 0.8);
+        }
+
+        /* Home section animations */
+        .home-content {
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .home-image {
+            animation: slideInLeft 1.2s ease-out 0.3s both;
+        }
+
+        .home-text {
+            animation: slideInRight 1.2s ease-out 0.6s both;
+        }
+
+        .home-greeting {
+            animation: bounceIn 0.8s ease-out 0.9s both;
+        }
+
+        .home-title {
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .home-subtitle {
+            animation: fadeInUp 1s ease-out 1.5s both;
+        }
+
+        .home-description {
+            animation: fadeInUp 1s ease-out 1.8s both;
+        }
+
+        .home-buttons {
+            animation: slideInUp 1s ease-out 2.1s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            70% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-black smooth-scroll">
+    <!-- Floating Orbs -->
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 py-4">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="font-poppins font-bold text-xl gradient-text">
+                    <img src="images/portfolio-logo.png" alt="Portfolio Logo" class="h-10 w-auto">
+                </div>
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="#home"
+                            class="hover:text-orange-600 transition-all duration-300 hover:neon-glow px-3 py-1 rounded">Home</a>
+                    </li>
+                    <li><a href="#about"
+                            class="hover:text-orange-600 transition-all duration-300 hover:neon-glow px-3 py-1 rounded">About</a>
+                    </li>
+                    <li><a href="#skills"
+                            class="hover:text-orange-600 transition-all duration-300 hover:neon-glow px-3 py-1 rounded">Skills</a>
+                    </li>
+                    <li><a href="#projects"
+                            class="hover:text-orange-600 transition-all duration-300 hover:neon-glow px-3 py-1 rounded">Projects</a>
+                    </li>
+                    <li><a href="#experience"
+                            class="hover:text-orange-600 transition-all duration-300 hover:neon-glow px-3 py-1 rounded">Experience</a>
+                    </li>
+                    <li><a href="#contact"
+                            class="hover:text-orange-600 transition-all duration-300 hover:neon-glow px-3 py-1 rounded">Contact</a>
+                    </li>
+                </ul>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-black focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="#home" class="block hover:text-orange-600 transition-all duration-300 px-3 py-2">Home</a>
+                <a href="#about" class="block hover:text-orange-600 transition-all duration-300 px-3 py-2">About</a>
+                <a href="#skills" class="block hover:text-orange-600 transition-all duration-300 px-3 py-2">Skills</a>
+                <a href="#projects"
+                    class="block hover:text-orange-600 transition-all duration-300 px-3 py-2">Projects</a>
+                <a href="#experience"
+                    class="block hover:text-orange-600 transition-all duration-300 px-3 py-2">Experience</a>
+                <a href="#contact" class="block hover:text-orange-600 transition-all duration-300 px-3 py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-32 -mt-16 home-content">
+                <div class="flex-shrink-0">
+                    <img src="images/bry_pic.jpeg" alt="Bryant Melliza"
+                        class="w-64 h-64 md:w-80 md:h-80 lg:w-[28rem] lg:h-[28rem] rounded-full object-cover shadow-xl home-image">
+                </div>
+                <div class="text-center md:text-left max-w-3xl home-text">
+                    <div
+                        class="inline-block bg-gradient-to-r from-orange-400 to-orange-600 text-white px-4 py-2 rounded-full font-poppins font-semibold text-xl md:text-2xl mb-6 shadow-lg home-greeting">
+                        Hello, I'm
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-poppins font-bold gradient-text mb-3 home-title">
+                        Bryant Iverson Melliza
+                    </h1>
+                    <h3 class="text-xl md:text-3xl font-poppins font-semibold text-gray-600 mb-6 home-subtitle">
+                        Software Developer
+                    </h3>
+                    <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl leading-relaxed home-description">
+                        A 4th-year IT student passionate about building efficient, responsive websites. Experienced in
+                        developing web systems with HTML, CSS, JavaScript, and PHP. Eager to grow as a Web Developer
+                        through real-world projects.
+                    </p>
+                    <div class="flex gap-4 home-buttons">
+                        <a href="https://www.linkedin.com/in/bryant-iverson-c-melliza-6759b8292" target="_blank"
+                            rel="noopener noreferrer"
+                            class="glass px-6 py-3 rounded-full font-semibold transition-all duration-300 text-black hover-glow flex items-center gap-2">
+                            <span class="text-xl">💼</span>
+                            LinkedIn
+                        </a>
+                        <a href="https://github.com/brybryson" target="_blank" rel="noopener noreferrer"
+                            class="glass px-6 py-3 rounded-full font-semibold transition-all duration-300 text-black hover-glow flex items-center gap-2">
+                            <span class="text-xl">💻</span>
+                            GitHub
+                        </a>
+                        <a href="mailto:bryantiversonmelliza03@gmail.com"
+                            class="glass px-6 py-3 rounded-full font-semibold transition-all duration-300 text-black hover-glow flex items-center gap-2">
+                            <span class="text-xl">📧</span>
+                            Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 reveal">
+        <div class="container mx-auto max-w-7xl">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-block bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-poppins font-semibold text-2xl md:text-3xl mb-6 shadow-lg">
+                    About Me
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col lg:flex-row items-start gap-16 lg:gap-20">
+                    <div class="flex-1">
+                        <div class="space-y-12">
+                            <div class="glass rounded-xl p-8 modern-hover transition-all duration-300 cursor-pointer"
+                                onmousemove="updateMousePosition(event, this)">
+                                <h3 class="text-2xl font-semibold mb-6 text-orange-600">Education</h3>
+                                <div class="space-y-6">
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.84l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-800 text-lg">Senior High School (STEM)</p>
+                                            <p class="text-gray-600 text-base">Caloocan National Science and Technology
+                                                High School</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-800 text-lg">College</p>
+                                            <p class="text-gray-600 text-base">NU Fairview</p>
+                                            <p class="text-gray-600 text-base">Bachelor of Science in Information
+                                                Technology with specialization in Mobile and Internet Technologies
+                                                (BSIT-MI)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="glass rounded-xl p-8 modern-hover transition-all duration-300 cursor-pointer"
+                                    onmousemove="updateMousePosition(event, this)">
+                                    <h3 class="text-2xl font-semibold mb-6 text-orange-600">Leadership</h3>
+                                    <div class="space-y-6">
+                                        <div class="flex items-start gap-4">
+                                            <div
+                                                class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-gray-800 text-lg">Chief Creative Officer</p>
+                                                <p class="text-gray-600 text-base">Google Developer Student Clubs (2024)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="glass rounded-xl p-8 modern-hover transition-all duration-300 cursor-pointer"
+                                    onmousemove="updateMousePosition(event, this)">
+                                    <h3 class="text-2xl font-semibold mb-6 text-orange-600">Contact Information</h3>
+                                    <div class="space-y-6">
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
+                                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <p class="text-gray-600 text-lg">Caloocan City, Metro Manila, Philippines
+                                            </p>
+                                        </div>
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
+                                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                                </svg>
+                                            </div>
+                                            <p class="text-gray-600 text-lg">+63 939 817 0375</p>
+                                        </div>
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
+                                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                                </svg>
+                                            </div>
+                                            <p class="text-gray-600 text-lg">bryantiversonmelliza03@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-1">
+                            <div class="glass rounded-xl p-8 modern-hover transition-all duration-300 cursor-pointer"
+                                onmousemove="updateMousePosition(event, this)">
+                                <h3 class="text-2xl font-semibold mb-6 text-orange-600">Achievements</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div>
+                                        <div class="leading-relaxed">
+                                            <p class="text-gray-800 font-semibold text-lg">Consistent Doña Miguela M.
+                                                Jhocson Blue Scholar</p>
+                                            <p class="text-gray-600 text-base">100% Full Scholarship</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div>
+                                        <div class="leading-relaxed">
+                                            <p class="text-gray-800 font-semibold text-lg">Consistent First Honor Dean's
+                                                Lister</p>
+                                            <p class="text-gray-600 text-base">First Year - Present</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div>
+                                        <div class="leading-relaxed">
+                                            <p class="text-gray-800 font-semibold text-lg">Best in IoT-Cross Platform
+                                                Award
+                                            </p>
+                                            <p class="text-gray-600 text-base">PBL 2 Project (October 2025)</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div>
+                                        <div class="leading-relaxed">
+                                            <p class="text-gray-800 font-semibold text-lg">Exemplary Performance in
+                                                Internal
+                                                Pursuit</p>
+                                            <p class="text-gray-600 text-base">July 2025</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div>
+                                        <div class="leading-relaxed">
+                                            <p class="text-gray-800 font-semibold text-lg">UI/UX Design Competition</p>
+                                            <p class="text-gray-600 text-base">1st Place (December 2024)</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div>
+                                        <div class="leading-relaxed">
+                                            <p class="text-gray-800 font-semibold text-lg">Networking Competition</p>
+                                            <p class="text-gray-600 text-base">1st Place (December 2024)</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div>
+                                        <div class="leading-relaxed">
+                                            <p class="text-gray-800 font-semibold text-lg">Best Web Game Design</p>
+                                            <p class="text-gray-600 text-base">XOXO (March 2024)</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div>
+                                        <div class="leading-relaxed">
+                                            <p class="text-gray-800 font-semibold text-lg">Networking Competition</p>
+                                            <p class="text-gray-600 text-base">Champion (December 2024)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-block bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-poppins font-semibold text-2xl md:text-3xl mb-6 shadow-lg">
+                    Tech Stacks
+                </div>
+            </div>
+            <div class="space-y-12">
+                <div class="glass rounded-xl p-8 modern-hover transition-all duration-300 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)">
+                    <h3 class="text-2xl font-semibold mb-6 text-orange-600">Frontend Development</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center gap-3">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                                    alt="React" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">React 19</h3>
+                        </div>
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+                                    alt="Next.js" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">Next.js</h3>
+                        </div>
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+                                    alt="Tailwind CSS" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">Tailwind CSS</h3>
+                        </div>
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center gap-3">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg"
+                                    alt="HTML5" class="h-10 w-auto">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-plain.svg"
+                                    alt="CSS3" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">HTML/CSS</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl p-8 modern-hover transition-all duration-300 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)">
+                    <h3 class="text-2xl font-semibold mb-6 text-orange-600">Backend Development</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+                                    alt="PHP" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">PHP</h3>
+                        </div>
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                                    alt="PostgreSQL" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">PostgreSQL</h3>
+                        </div>
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                    alt="MySQL" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">MySQL</h3>
+                        </div>
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <span class="text-4xl">▲</span>
+                            </div>
+                            <h3 class="font-semibold text-orange-600">Prisma ORM</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl p-8 modern-hover transition-all duration-300 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)">
+                    <h3 class="text-2xl font-semibold mb-6 text-orange-600">Design & IoT</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+                                    alt="Figma" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">Figma</h3>
+                        </div>
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg"
+                                    alt="Arduino" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">Arduino</h3>
+                        </div>
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg"
+                                    alt="Raspberry Pi" class="h-10 w-auto">
+                            </div>
+                            <h3 class="font-semibold text-orange-600">Raspberry Pi</h3>
+                        </div>
+                        <div class="skill-card glass rounded-xl p-6 text-center modern-hover transition-all duration-300 cursor-pointer"
+                            onmousemove="updateMousePosition(event, this)">
+                            <div class="mb-3 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
+                                    class="h-10 w-10 text-orange-600" fill="currentColor">
+                                    <path d="M12 3a9 9 0 1 0 9 9h-2a7 7 0 1 1-7-7V3z" />
+                                    <path d="M12 7a5 5 0 1 0 5 5h-2a3 3 0 1 1-3-3V7z" />
+                                    <circle cx="12" cy="12" r="1.5" fill="#06b6d4" />
+                                </svg>
+                            </div>
+                            <h3 class="font-semibold text-orange-600">IoT</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-block bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-poppins font-semibold text-2xl md:text-3xl mb-6 shadow-lg">
+                    Featured Projects
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+                <!-- Property Custodian Project -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center">
+                        <img src="images/property_custodian.png" alt="Property Custodian System"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">Property Custodian Management System</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">Resource management system with predictive
+                        algorithms for item replacement and inventory calculation (Commission, Feb 2026).</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Power
+                            Platform</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Predictive
+                            Analytics</span>
+                    </div>
+                </div>
+
+                <!-- Prefect Disciplinary Project -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center">
+                        <img src="images/prefect_system.png" alt="Prefect Disciplinary System"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">Prefect Disciplinary Action System</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">Rule-based decision support engine that
+                        categorizes student infractions and recommends actions (Commission, Feb 2026).</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Rule-Based
+                            AI</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Database
+                            Design</span>
+                    </div>
+                </div>
+                <!-- Safety Heroes Project -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)" onclick="openModal('safetyheroes')">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center">
+                        <img src="images/SafetyHeroes.png" alt="Safety Heroes"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">Safety Heroes</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">Disaster Preparedness Learning App for Children
+                        built during the Caffeine.AI Manila Hackathon — Technical Category, October 28, 2025</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Caffeine.AI</span>
+                    </div>
+                </div>
+
+                <!-- Animates Project -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)" onclick="openModal('petgrooming')">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center">
+                        <img src="images/animates.png" alt="Animates" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">PetSense</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">Web-Based RFID Pet Grooming Management System</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">HTML</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">CSS</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">JavaScript</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">MySQL</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Firebase</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">ESP32</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">RFID</span>
+                    </div>
+                </div>
+
+                <!-- AlertPoint Project -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)" onclick="openModal('alertpoint')">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center">
+                        <img src="images/alertpoint_1.png" alt="AlertPoint"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">AlertPoint</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">Disaster Risk Reduction Management System for
+                        Barangay 170, Caloocan City</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">HTML</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">CSS</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">JavaScript</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">MySQL</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Firebase</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">ESP32</span>
+                    </div>
+                </div>
+
+                <!-- VetFlow Project -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)" onclick="openModal('vetflow')">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center">
+                        <img src="images/vetflow_1.PNG" alt="VetFlow" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">VetFlow</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">Point-of-Sale and Inventory Management System for
+                        Animal Clinic</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">PHP</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">MySQL</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">CSS</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Bootstrap</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- SALBAG Project -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)" onclick="openModal('salbag')">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center">
+                        <img src="images/salbag_3d representation.png" alt="SALBAG"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">SALBAG</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">Smart Anti-Theft Device with IoT, Face Detection &
+                        GPS Tracking</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Raspberry
+                            Pi</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">IoT</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">AI/ML</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Face
+                            Detection</span>
+                    </div>
+                </div>
+
+                <!-- GDSC Confession Wall -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)" onclick="openModal('confession')">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="images/confession_wall_gdsc.png" alt="Confession Wall"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">Confession Wall</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">Valentine's Day Confession Wall for GDSC Community
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">HTML</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">CSS</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">JavaScript</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Firebase</span>
+                    </div>
+                </div>
+
+                <!-- XOXO TicTacToe Project -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)" onclick="openModal('xoxo')">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center">
+                        <img src="images/XOXO-landing.png" alt="XOXO TicTacToe"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">XOXO - TicTacToe</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">A multiplayer and AI-powered TicTacToe game where
+                        users can log in, play PvP or vs AI (Easy–Expert), and track scores on the leaderboard.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">PHP</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">MySQL</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">HTML</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">CSS</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">JavaScript</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Bootstrap</span>
+                    </div>
+                </div>
+
+                <!-- Smart Distancing Belt Project -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer"
+                    onmousemove="updateMousePosition(event, this)" onclick="openModal('arduino')">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl mb-6 flex items-center justify-center">
+                        <img src="images/arduino_belt_1.png" alt="Smart Distancing Belt"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-600">Smart Distancing Belt</h3>
+                    <p class="text-gray-700 text-sm font-medium mb-4">Arduino-based Waist Belt with PIR & Ultrasonic
+                        Sensors</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Arduino</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">Sensors</span>
+                        <span
+                            class="px-2 py-1 bg-transparent border border-orange-500 text-orange-600 rounded-full text-xs">IoT</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-block bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-poppins font-semibold text-2xl md:text-3xl mb-6 shadow-lg">
+                    Experience
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- NLP Internship -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">Software Developer Intern</h3>
+                            <p class="text-gray-600 text-sm mb-4">NLP Business Development Services (November 2025 -
+                                Present)</p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        Engineered responsive web applications using React 19, Next.js, and Prisma. Maintained legacy
+                        CodeIgniter systems. Integrated AI-assisted tooling to accelerate feature delivery.
+                    </p>
+                </div>
+                <!-- UI/UX & AI Developer Experience -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">UI/UX & AI Developer</h3>
+                            <p class="text-gray-600 text-sm mb-4">Caffeine.AI Manila Hackathon — Technical Category
+                                (October 2025)</p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        Safety Heroes: Disaster Preparedness Learning App for Children
+                    </p>
+                </div>
+
+                <!-- Full-Stack & IoT Developer Experience -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">Full-Stack & IoT Developer</h3>
+                            <p class="text-gray-600 text-sm mb-4">Capstone 2 / Project-Based Learning 2 (October 2025)
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        AlertPoint: A Disaster Risk Reduction Management System for Barangay 170, Caloocan City
+                    </p>
+                </div>
+
+                <!-- Web & IoT Developer Experience -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">Web & IoT Developer</h3>
+                            <p class="text-gray-600 text-sm mb-4">Commission (October 2025)</p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        PetSense: Web-Based RFID Pet Grooming Management
+                    </p>
+                </div>
+
+                <!-- VetFlow Experience -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">Lead Developer / Full-Stack Developer
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4">Capstone 1 / Project-Based Learning 1 (2024 - 2025)
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        VetFlow: A Point-of-Sale and Inventory Management System for Shepherd Animal Clinic
+                    </p>
+                </div>
+
+                <!-- SALBAG Experience -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">Project Manager & IoT Developer</h3>
+                            <p class="text-gray-600 text-sm mb-4">Programming Embedded Systems (June 2024)</p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        SALBAG: Smart Anti-Theft Device with Raspberry Pi 4B-Based with IoT Linked Real-Time Face
+                        Detection, GPS Tracking, and Panic Alarm Bag
+                    </p>
+                </div>
+
+                <!-- SALBAG Experience -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">Web Developer</h3>
+                            <p class="text-gray-600 text-sm mb-4">Google Developer Student Clubs (2024)</p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        Assisted in the frontend development of the Confession Wall site for Valentine's Day
+                    </p>
+                </div>
+
+                <!-- TicTacToe Experience -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">Full-Stack Developer</h3>
+                            <p class="text-gray-600 text-sm mb-4">Web Programming (June 2024)</p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        Web Based Game - TicTacToe (XOXO)
+                    </p>
+                </div>
+
+                <!-- FILGET Experience -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">UI/UX Designer</h3>
+                            <p class="text-gray-600 text-sm mb-4">Interactive Media Design (2024)</p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        FILGET Live Photo Sharing App
+                    </p>
+                </div>
+
+                <!-- Arduino Belt Experience -->
+                <div class="glass rounded-2xl p-8 modern-hover transition-all duration-500 cursor-pointer reveal"
+                    onmousemove="updateMousePosition(event, this)">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-orange-600 mb-2">Lead Programmer</h3>
+                            <p class="text-gray-600 text-sm mb-4">Practical Research 1 (2021-2022)</p>
+                        </div>
+                    </div>
+                    <p class="text-black text-sm leading-relaxed">
+                        Arduino-based Modified Waist Belt With Incorporated Passive Infrared and Ultrasonic Sensors for
+                        Social Distancing
+                    </p>
+                </div>
+            </div>
+
+            <!-- Certificates Section -->
+            <div class="mt-16">
+                <div class="text-center">
+                    <div
+                        class="inline-block bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-poppins font-semibold text-2xl md:text-3xl mb-6 shadow-lg">
+                        Certificates
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass rounded-xl p-6 modern-hover transition-all duration-500 cursor-pointer text-center reveal"
+                        onmousemove="updateMousePosition(event, this)">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h5 class="text-base font-semibold text-orange-600 mb-2">Software Design: Developing Effective
+                            Requirements</h5>
+                        <p class="text-black text-sm mb-2">LinkedIn Learning • August 2025</p>
+                        <p class="text-black text-sm text-justify">Skills in gathering, analyzing, and documenting
+                            software requirements effectively.</p>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 modern-hover transition-all duration-500 cursor-pointer text-center reveal"
+                        onmousemove="updateMousePosition(event, this)">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h5 class="text-base font-semibold text-orange-600 mb-2">Understanding Manual Testing</h5>
+                        <p class="text-black text-sm mb-2">LinkedIn Learning • August 2025</p>
+                        <p class="text-black text-sm text-justify">In-depth knowledge of manual testing techniques and
+                            best practices in software quality assurance.</p>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 modern-hover transition-all duration-500 cursor-pointer text-center reveal"
+                        onmousemove="updateMousePosition(event, this)">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h5 class="text-base font-semibold text-orange-600 mb-2">Salesforce Agentblazer Workshop –
+                            Completion Certificate</h5>
+                        <p class="text-black text-sm mb-2">August 6, 2025</p>
+                        <p class="text-black text-sm text-justify">Completion certificate for Salesforce Agentblazer
+                            workshop training program.</p>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 modern-hover transition-all duration-500 cursor-pointer text-center reveal"
+                        onmousemove="updateMousePosition(event, this)">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h5 class="text-base font-semibold text-orange-600 mb-2">Gen AI Prompt Engineering Workshop: AI
+                            for Financial Wellbeing</h5>
+                        <p class="text-black text-sm mb-2">Cognizant • July 27, 2025</p>
+                        <p class="text-black text-sm text-justify">Specialized training in generative AI prompt
+                            engineering for financial applications.</p>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 modern-hover transition-all duration-500 cursor-pointer text-center reveal"
+                        onmousemove="updateMousePosition(event, this)">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h5 class="text-base font-semibold text-orange-600 mb-2">REST APIs</h5>
+                        <p class="text-black text-sm mb-2">LinkedIn Learning • May 2025</p>
+                        <p class="text-black text-sm text-justify">Training in REST API design, development, and
+                            implementation best practices.</p>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 modern-hover transition-all duration-500 cursor-pointer text-center reveal"
+                        onmousemove="updateMousePosition(event, this)">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h5 class="text-base font-semibold text-orange-600 mb-2">Certificate of Completion, Google
+                            Developer Student Clubs – Core Team Member</h5>
+                        <p class="text-black text-sm mb-2">Academic Year 2023–2024</p>
+                        <p class="text-black text-sm text-justify">Recognized for active participation and contribution
+                            as a core team member in Google Developer Student Clubs activities and projects.</p>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 modern-hover transition-all duration-500 cursor-pointer text-center reveal"
+                        onmousemove="updateMousePosition(event, this)">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h5 class="text-base font-semibold text-orange-600 mb-2">Zuitt Coding Bootcamp – Basic Web
+                            Development Workshop</h5>
+                        <p class="text-black text-sm mb-2">May 2022</p>
+                        <p class="text-black text-sm text-justify">Foundational web development training covering HTML,
+                            CSS, and JavaScript basics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section Removed -->
+    <section id="contact" class="hidden">
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 px-6 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 text-white">
+        <div class="container mx-auto max-w-6xl text-center">
+            <p class="text-sm font-semibold mb-1">
+                © <span id="currentYear"></span> Bryant Iverson Melliza
+            </p>
+            <p class="text-white/80 text-xs">
+                Innovating the digital landscape with cutting-edge solutions
+            </p>
+        </div>
+    </footer>
+
+    <!-- Project Modals -->
+    <!-- AlertPoint Modal with Slideshow -->
+    <div id="alertpoint-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-red-600">AlertPoint</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Slideshow Container -->
+                <div class="slideshow-container rounded-xl relative">
+                    <!-- Navigation Buttons -->
+                    <button class="nav-button prev" onclick="changeSlide(-1)">❮</button>
+                    <button class="nav-button next" onclick="changeSlide(1)">❯</button>
+
+                    <!-- Play/Pause Button -->
+                    <button class="play-pause-btn" onclick="toggleAutoplay()">
+                        <span id="play-pause-text">Pause</span>
+                    </button>
+
+                    <!-- Slides -->
+                    <div class="slide active">
+                        <img src="images/alertpoint_1.png" alt="AlertPoint Main Interface"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div class="slide">
+                        <img src="images/alertpoint_2.png" alt="AlertPoint Dashboard"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div class="slide">
+                        <img src="images/alertpoint_3.png" alt="AlertPoint Monitoring"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div class="slide">
+                        <img src="images/alertpoint_4.png" alt="AlertPoint Analytics"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div class="slide">
+                        <img src="images/alertpoint_water_level_unit.png" alt="Water Level Monitoring Unit"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div class="slide">
+                        <img src="images/alertpoint_barangay_unit.png" alt="Barangay Monitoring Unit"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+
+                    <!-- Slide Indicators -->
+                    <div class="slide-indicators">
+                        <div class="indicator active" onclick="currentSlide(1)"></div>
+                        <div class="indicator" onclick="currentSlide(2)"></div>
+                        <div class="indicator" onclick="currentSlide(3)"></div>
+                        <div class="indicator" onclick="currentSlide(4)"></div>
+                        <div class="indicator" onclick="currentSlide(5)"></div>
+                        <div class="indicator" onclick="currentSlide(6)"></div>
+                    </div>
+                </div>
+
+                <p class="text-black">
+                    A comprehensive Disaster Risk Reduction Management System designed for Barangay 170, Caloocan City.
+                    This full-stack application integrates IoT sensors and real-time monitoring capabilities.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Technologies Used:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• Full-Stack Web Development</li>
+                            <li>• IoT Integration</li>
+                            <li>• Real-time Data Processing</li>
+                            <li>• Emergency Response System</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Key Features:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• Disaster Risk Assessment</li>
+                            <li>• Community Alert System</li>
+                            <li>• Resource Management</li>
+                            <li>• Real-time Monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VetFlow Modal with Slideshow -->
+    <div id="vetflow-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-red-600">VetFlow</h3>
+                <button onclick="closeModal('vetflow')" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Slideshow Container -->
+                <div class="slideshow-container rounded-xl relative">
+                    <!-- Navigation Buttons -->
+                    <button class="nav-button prev" onclick="changeVetFlowSlide(-1)">❮</button>
+                    <button class="nav-button next" onclick="changeVetFlowSlide(1)">❯</button>
+
+                    <!-- Play/Pause Button (hidden by CSS) -->
+                    <button class="play-pause-btn" onclick="toggleVetFlowAutoplay()">
+                        <span id="vetflow-play-pause-text">Pause</span>
+                    </button>
+
+                    <!-- Slides -->
+                    <div class="slide active">
+                        <img src="images/vetflow_1.PNG" alt="VetFlow Main Interface"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div class="slide">
+                        <img src="images/vetflow_2.PNG" alt="VetFlow Dashboard"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div class="slide">
+                        <img src="images/vetflow_3.PNG" alt="VetFlow Management"
+                            class="w-full h-full object-cover rounded-xl">
+                    </div>
+
+                    <!-- Slide Indicators (hidden by CSS) -->
+                    <div class="slide-indicators">
+                        <div class="indicator active" onclick="currentVetFlowSlide(1)"></div>
+                        <div class="indicator" onclick="currentVetFlowSlide(2)"></div>
+                        <div class="indicator" onclick="currentVetFlowSlide(3)"></div>
+                    </div>
+                </div>
+
+                <p class="text-black">
+                    A comprehensive Point-of-Sale and Inventory Management System developed for Shepherd Animal Clinic.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Technologies Used:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• PHP Backend</li>
+                            <li>• MySQL Database</li>
+                            <li>• HTML/CSS/JavaScript</li>
+                            <li>• Bootstrap Framework</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Key Features:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• Point of Sale System</li>
+                            <li>• Inventory Management</li>
+                            <li>• Customer Records</li>
+                            <li>• Sales Analytics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SALBAG Modal -->
+    <div id="salbag-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-3xl font-bold text-red-600">SALBAG</h3>
+                <button onclick="closeModal('salbag')" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div class="rounded-xl overflow-hidden">
+                    <img src="images/salbag_3d representation.png" alt="SALBAG"
+                        class="w-full h-auto object-contain rounded-xl">
+                </div>
+                <div class="space-y-6">
+                    <p class="text-black text-lg">
+                        Smart Anti-Theft Device with Raspberry Pi 4B-Based IoT implementation featuring real-time face
+                        detection,
+                        GPS tracking, and panic alarm functionality.
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-red-600 mb-2 text-lg">Technologies Used:</h4>
+                            <ul class="text-base text-black space-y-1">
+                                <li>• Raspberry Pi 4B</li>
+                                <li>• OpenCV Face Detection</li>
+                                <li>• GPS Module</li>
+                                <li>• IoT Communication</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-red-600 mb-2 text-lg">Key Features:</h4>
+                            <ul class="text-base text-black space-y-1">
+                                <li>• Real-time Face Detection</li>
+                                <li>• GPS Location Tracking</li>
+                                <li>• Panic Alarm System</li>
+                                <li>• IoT Connectivity</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 pt-2">
+                        <button onclick="openModal('salbag-docs')"
+                            class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-glow">
+                            Documentation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SALBAG Documentation Modal -->
+    <div id="salbag-docs-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-red-600">Documentation (SALBAG - Smart Anti-Theft Device)</h3>
+                <button onclick="closeModal('salbag-docs')"
+                    class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="space-y-12 text-black text-justify">
+
+                <!-- Abstract -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Abstract</h4>
+                    <p class="mb-4 leading-relaxed">
+                        This paper presents the development of a <strong class="text-black">Smart Anti-Theft Device
+                            (SALBAG)</strong>
+                        aimed at addressing the increasing crime cases in the Philippines. The device enhances security
+                        and provides
+                        substantial evidence in theft incidents through <strong class="text-black">real-time GPS
+                            tracking, face detection,
+                            and panic alarm functionality</strong>, all managed via a mobile application.
+                    </p>
+                    <p class="mb-4 leading-relaxed">
+                        The device uses a Raspberry Pi 4B, CMOS camera, and OpenCV library for face detection. Upon
+                        activation,
+                        it sends real-time updates and images to designated email addresses for evidence collection. The
+                        project
+                        aligns with <strong class="text-black">Sustainable Development Goal 9: Industry, Innovation, and
+                            Infrastructure</strong>.
+                    </p>
+                </div>
+
+                <!-- Problem Statement -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Problem Statement</h4>
+                    <p class="mb-4 leading-relaxed">
+                        The Philippines continues to face rampant cases of <strong class="text-black">theft and
+                            kidnapping</strong>,
+                        with many crimes going unresolved due to lack of surveillance and poor evidence collection.
+                    </p>
+                    <p class="mb-4 leading-relaxed">
+                        Key challenges include rising theft incidents nationwide, lack of effective monitoring systems,
+                        and inadequate quality evidence collection.
+                    </p>
+                </div>
+
+                <!-- Objectives -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Project Objectives</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                1</div>
+                            <div>
+                                <h5 class="font-semibold text-black mb-1">Hardware Innovation</h5>
+                                <p class="text-sm text-black">Develop an anti-theft bag equipped with real-time GPS
+                                    module and image detection camera.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                2</div>
+                            <div>
+                                <h5 class="font-semibold text-black mb-1">Mobile Application</h5>
+                                <p class="text-sm text-black">Create an intuitive mobile app with navigation, real-time
+                                    tracking, and email notifications.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                3</div>
+                            <div>
+                                <h5 class="font-semibold text-black mb-1">Evidence Collection</h5>
+                                <p class="text-sm text-black">Provide clear and substantial evidence to aid in theft and
+                                    kidnapping investigations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Specifications -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Technical Specifications</h4>
+
+                    <p class="mb-4 leading-relaxed">
+                        <strong class="text-orange-600">Hardware Components:</strong> Raspberry Pi 4B (central
+                        controller), GPS NEO8MV2 Module (real-time navigation), CMOS Camera Module (evidence
+                        collection), SanDisk Ultra 32GB MicroSD (data storage), Raspberry Pi 4B+ Case (protection),
+                        Active Buzzer & Button (panic alarm).
+                    </p>
+
+                    <!-- Software Environment -->
+                    <div class="mb-6">
+                        <h5 class="text-lg font-semibold text-black mb-3">Software Environment</h5>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="rounded-lg p-4 border border-orange-600">
+                                <h6 class="font-semibold text-orange-600 mb-2">Development Platform</h6>
+                                <div class="space-y-2 text-sm">
+                                    <div><strong class="text-black">OS:</strong> Raspberry Pi OS</div>
+                                    <div><strong class="text-black">Language:</strong> Python</div>
+                                    <div><strong class="text-black">IDE:</strong> Thonny IDE 4.1.4</div>
+                                </div>
+                            </div>
+                            <div class="rounded-lg p-4 border border-orange-600">
+                                <h6 class="font-semibold text-orange-600 mb-2">Key Libraries</h6>
+                                <div class="space-y-2 text-sm">
+                                    <div><strong class="text-black">OpenCV:</strong> Face detection & image processing
+                                    </div>
+                                    <div><strong class="text-black">GPSD:</strong> GPS data parsing</div>
+                                    <div><strong class="text-black">SMTP:</strong> Email notifications</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scope and Limitations -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Scope and Limitations</h4>
+                    <p class="mb-4 leading-relaxed">
+                        <strong class="text-orange-600">Scope & Limitations:</strong> The project scope includes
+                        integration of Raspberry Pi 4B with GPS and camera modules, OpenCV face detection, mobile
+                        application development, and panic alarm system. Limitations include exclusion of additional
+                        sensors, GSM/WiFi modules, and reliance on external power sources.
+                    </p>
+                </div>
+
+                <!-- Impact and Significance -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Project Impact</h4>
+                    <p class="mb-4 leading-relaxed">
+                        Benefits the general public through enhanced safety and reduced anxiety, supports security
+                        sectors with improved crime prevention and evidence collection, and serves as a foundation for
+                        future IoT security innovations and scalable safety solutions.
+                    </p>
+                </div>
+
+
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-orange-200">
+                <button onclick="closeModal('salbag-docs')"
+                    class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-glow">
+                    Close Documentation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pet Grooming Modal -->
+    <div id="petgrooming-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-red-600">Animates</h3>
+                <button onclick="closeModal('petgrooming')"
+                    class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="space-y-4">
+                <div
+                    class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center mb-4">
+                    <img src="images/animates.png" alt="Animates" class="w-full h-full object-cover rounded-xl">
+                </div>
+                <p class="text-black">
+                    Web-Based RFID Pet Grooming Management System for Animates, featuring automated pet identification
+                    and grooming service management.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Technologies Used:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• Web-Based Interface</li>
+                            <li>• RFID Technology</li>
+                            <li>• Database Management</li>
+                            <li>• Real-time Processing</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Key Features:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• RFID Pet Identification</li>
+                            <li>• Grooming Schedule Management</li>
+                            <li>• Customer Database</li>
+                            <li>• Service Tracking</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-6">
+                    <a href="https://animates.infinityfree.me/animates/html/auth.html" target="_blank"
+                        rel="noopener noreferrer">
+                        <button
+                            class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-glow">
+                            View Project
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confession Wall Modal -->
+    <div id="confession-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-red-600">Confession Wall</h3>
+                <button onclick="closeModal('confession')"
+                    class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="space-y-4">
+                <div
+                    class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
+                    <img src="images/confession_wall_gdsc.png" alt="Confession Wall"
+                        class="w-full h-full object-cover rounded-xl">
+                </div>
+                <p class="text-black">
+                    Interactive Valentine's Day Confession Wall developed for the Google Developer Student Clubs
+                    community.
+                    Assisted in frontend development creating an engaging user experience.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Technologies Used:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• Frontend Development</li>
+                            <li>• Interactive UI/UX</li>
+                            <li>• Responsive Design</li>
+                            <li>• Community Platform</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Key Features:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• Anonymous Confessions</li>
+                            <li>• Interactive Wall Display</li>
+                            <li>• Valentine's Theme</li>
+                            <li>• Community Engagement</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-6">
+                    <a href="https://confession-wall-ctso-gdscnufv.vercel.app/?fbclid=IwAR2sCNihfOp89v97_57PqzJ3juxaqMJS7XB4R8MSJ5k6IS-VlX9TM5DSBDE"
+                        target="_blank" rel="noopener noreferrer">
+                        <button
+                            class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-glow">
+                            View Project
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- XOXO Modal -->
+    <div id="xoxo-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-red-600">XOXO - TicTacToe</h3>
+                <button onclick="closeModal('xoxo')" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="space-y-4">
+                <div
+                    class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
+                    <img src="images/XOXO-landing.png" alt="XOXO TicTacToe"
+                        class="w-full h-full object-cover rounded-xl">
+                </div>
+                <p class="text-black">
+                    A multiplayer and AI-powered TicTacToe game where users can log in, play PvP or vs AI (Easy–Expert),
+                    and track scores on the leaderboard.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Technologies Used:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• PHP Backend</li>
+                            <li>• MySQL Database</li>
+                            <li>• HTML/CSS/JavaScript</li>
+                            <li>• Bootstrap Framework</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Key Features:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• Multiplayer Gameplay</li>
+                            <li>• AI Opponents (Easy-Expert)</li>
+                            <li>• User Authentication</li>
+                            <li>• Score Leaderboard</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-6">
+                    <a href="https://tictactoe-game.infinityfree.me/TICTACTOE/index.php" target="_blank"
+                        rel="noopener noreferrer">
+                        <button
+                            class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-glow">
+                            View Project
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Safety Heroes Modal -->
+    <div id="safetyheroes-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-red-600">Safety Heroes</h3>
+                <button onclick="closeModal('safetyheroes')"
+                    class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="space-y-4">
+                <div
+                    class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
+                    <img src="images/SafetyHeroes.png" alt="Safety Heroes"
+                        class="w-full h-full object-cover rounded-xl">
+                </div>
+                <p class="text-black">
+                    Disaster Preparedness Learning App for Children built during the Caffeine.AI Manila Hackathon —
+                    Technical Category, October 28, 2025.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Technologies Used:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• Hackathon Project</li>
+                            <li>• Educational App</li>
+                            <li>• Child-Friendly Interface</li>
+                            <li>• Disaster Preparedness</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2">Key Features:</h4>
+                        <ul class="text-sm text-black space-y-1">
+                            <li>• Interactive Learning</li>
+                            <li>• Safety Education</li>
+                            <li>• Emergency Scenarios</li>
+                            <li>• Child Engagement</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-6">
+                    <a href="https://safetyheroes-rb1.caffeine.xyz/?fbclid=IwY2xjawNxIhdleHRuA2FlbQIxMQABHuqAkBhDVDBSBBLKoKd-rHUqHsxUDWwJ2Bk-BZxm0nvU90IEkhpIqAID7gT4_aem_lhQq-lVGeBVi6fhdtggwFQ"
+                        target="_blank" rel="noopener noreferrer">
+                        <button
+                            class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-glow">
+                            View Project
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arduino Modal -->
+    <div id="arduino-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-3xl font-bold text-red-600">Smart Distancing Belt</h3>
+                <button onclick="closeModal('arduino')" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            <div class="space-y-6">
+                <div class="rounded-xl overflow-hidden">
+                    <img src="images/arduino_belt_1.png" alt="Smart Distancing Belt"
+                        class="w-full h-auto object-contain rounded-xl">
+                </div>
+                <p class="text-black text-lg">
+                    Arduino-based Modified Waist Belt with incorporated Passive Infrared and Ultrasonic Sensors
+                    designed for social distancing during the COVID-19 pandemic. Research project for Practical Research
+                    1.
+                </p>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2 text-lg">Technologies Used:</h4>
+                        <ul class="text-base text-black space-y-1">
+                            <li>• Arduino Programming</li>
+                            <li>• PIR Sensors</li>
+                            <li>• Ultrasonic Sensors</li>
+                            <li>• Embedded Systems</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-600 mb-2 text-lg">Key Features:</h4>
+                        <ul class="text-base text-black space-y-1">
+                            <li>• Distance Measurement</li>
+                            <li>• Motion Detection</li>
+                            <li>• Alert System</li>
+                            <li>• Wearable Design</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex space-x-4 pt-2">
+                    <button onclick="openModal('arduino-docs')"
+                        class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-glow">
+                        Documentation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arduino Documentation Modal -->
+    <div id="arduino-docs-modal" class="modal">
+        <div class="glass rounded-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto dark-scrollbar">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-red-600">Documentation (Smart Distancing Belt)</h3>
+                <button onclick="closeModal('arduino-docs')"
+                    class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="space-y-12 text-black text-justify">
+
+                <!-- Abstract -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Abstract</h4>
+                    <p class="mb-4 leading-relaxed">
+                        This paper presents the development of an <strong class="text-black">Arduino-based Modified
+                            Waist Belt</strong>
+                        with incorporated Passive Infrared and Ultrasonic sensors designed to maintain safe physical
+                        distancing
+                        during the COVID-19 pandemic. The device provides <strong class="text-black">real-time motion
+                            detection,
+                            distance monitoring, and audio-visual alerts</strong> to help individuals maintain at least
+                        1 meter of social distance.
+                    </p>
+                    <p class="mb-4 leading-relaxed">
+                        The belt uses Arduino Nano microcontroller, PIR motion sensor, and ultrasonic distance sensor
+                        with LED and buzzer
+                        feedback systems. The project offers practical support for <strong class="text-black">students,
+                            frontliners,
+                            and people with disabilities</strong>, contributing to reduced virus transmission in crowded
+                        areas.
+                    </p>
+                </div>
+
+                <!-- Problem Statement -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Problem Statement</h4>
+                    <p class="mb-4 leading-relaxed">
+                        The COVID-19 pandemic highlighted the critical need for <strong class="text-black">maintaining
+                            safe physical distances</strong>
+                        to prevent virus transmission. Many individuals, especially vulnerable populations, struggled to
+                        consistently
+                        maintain proper distancing protocols. This project addresses:
+                    </p>
+                    <div class="rounded-lg p-4">
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div class="text-center">
+                                <div class="text-orange-600 font-semibold mb-2">Distance Awareness</div>
+                                <div>Difficulty maintaining 1-meter safe distance</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-orange-600 font-semibold mb-2">Vulnerable Groups</div>
+                                <div>PWDs and elderly need assistive technology</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-orange-600 font-semibold mb-2">Compliance</div>
+                                <div>Inconsistent adherence to distancing protocols</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objectives -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Project Objectives</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                1</div>
+                            <div>
+                                <h5 class="font-semibold text-black mb-1">Wearable Device Development</h5>
+                                <p class="text-sm text-black">Design an Arduino-based wearable belt with PIR and
+                                    ultrasonic sensors for distance monitoring.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                2</div>
+                            <div>
+                                <h5 class="font-semibold text-black mb-1">Alert System Integration</h5>
+                                <p class="text-sm text-black">Implement LED and buzzer alerts when social distancing
+                                    protocols are breached.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                3</div>
+                            <div>
+                                <h5 class="font-semibold text-black mb-1">Assistive Technology</h5>
+                                <p class="text-sm text-black">Provide practical support for students, frontliners, and
+                                    people with disabilities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Specifications -->
+                <div class="pl-6">
+                    <h4 class="text-xl font-semibold text-orange-600 mb-4">Technical Specifications</h4>
+
+                    <!-- Hardware Components -->
+                    <div class="mb-6">
+                        <h5 class="text-lg font-semibold text-black mb-3">Hardware Components</h5>
+                        <div class="border border-black rounded-lg p-4">
+                            <p class="text-sm text-black leading-relaxed">
+                                The device utilizes Arduino Nano as the central microcontroller for sensor integration
+                                and logic processing, PIR Motion Sensor for detecting human movement and presence within
+                                sensor range, Ultrasonic Sensor for measuring distance to objects using ultrasonic
+                                waves, 3V Piezo Buzzer for audio alert system for distance breach notifications, Red LED
+                                for visual indicator for social distancing violations, Nylon Strap & Buckle for wearable
+                                belt structure with adjustable fitting, Plastic Enclosure Box for protection housing for
+                                electronic components, and Supporting Components including breadboard, jumper wires,
+                                resistors, battery holder, and 9V battery.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Device Assembly Diagram -->
+                    <div class="mb-6">
+                        <h5 class="text-lg font-semibold text-orange-600 mb-3">Device Assembly</h5>
+                        <div class="rounded-lg p-6 text-center">
+                            <img src="images/assembled_distancing.png"
+                                alt="Arduino Compartments inside Plastic Enclosure connected to Belt"
+                                class="w-full max-w-md mx-auto rounded-lg">
+                            <div class="text-sm text-black">Arduino Compartments inside Plastic Enclosure connected to
+                                Belt</div>
+                        </div>
+                    </div>
+
+                    <!-- Software Environment -->
+                    <div class="mb-6">
+                        <h5 class="text-lg font-semibold text-orange-600 mb-3">Software Environment</h5>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="rounded-lg p-4 border border-orange-600">
+                                <h6 class="font-semibold text-orange-600 mb-2">Development Platform</h6>
+                                <div class="space-y-2 text-sm">
+                                    <div><strong class="text-black">IDE:</strong> Arduino IDE</div>
+                                    <div><strong class="text-black">Language:</strong> C/C++ (Arduino)</div>
+                                    <div><strong class="text-black">Simulation:</strong> Tinkercad</div>
+                                </div>
+                            </div>
+                            <div class="rounded-lg p-4 border border-orange-600">
+                                <h6 class="font-semibold text-orange-600 mb-2">System Logic</h6>
+                                <div class="space-y-2 text-sm">
+                                    <div><strong class="text-black">Input:</strong> PIR sensor, Ultrasonic sensor</div>
+                                    <div><strong class="text-black">Output:</strong> LED indicator, Buzzer alarm</div>
+                                    <div><strong class="text-black">Trigger:</strong> Distance < 1m OR motion
+                                            detected</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Scope and Limitations -->
+                    <div class="pl-6">
+                        <h4 class="text-xl font-semibold text-orange-600 mb-4">Scope and Limitations</h4>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="rounded-lg p-4">
+                                <h5 class="font-semibold text-orange-600 mb-3">Project Scope</h5>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            1</div>
+                                        <div>Arduino-based prototype with PIR and ultrasonic sensors</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            2</div>
+                                        <div>LED and buzzer alert system for distance violations</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            3</div>
+                                        <div>Wearable belt design with plastic enclosure protection</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            4</div>
+                                        <div>Statistical validation through comprehensive testing</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rounded-lg p-4">
+                                <h5 class="font-semibold text-orange-600 mb-3">Limitations</h5>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            1</div>
+                                        <div>Does not consider external factors (airflow, density, facemasks)</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            2</div>
+                                        <div>Limited to prototype design and testing phase</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            3</div>
+                                        <div>Remote work constraints due to pandemic restrictions</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            4</div>
+                                        <div>No advanced connectivity features (Bluetooth, WiFi)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Project Impact -->
+                    <div class="pl-6">
+                        <h4 class="text-xl font-semibold text-orange-600 mb-4">Project Impact</h4>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="rounded-lg p-4 border border-orange-600 text-center">
+                                <h5 class="font-semibold text-orange-600 mb-2">Target Beneficiaries</h5>
+                                <div class="text-sm space-y-1">
+                                    <div>Students in educational settings</div>
+                                    <div>Healthcare frontliners</div>
+                                    <div>People with disabilities</div>
+                                </div>
+                            </div>
+                            <div class="rounded-lg p-4 border border-orange-600 text-center">
+                                <h5 class="font-semibold text-orange-600 mb-2">Health Benefits</h5>
+                                <div class="text-sm space-y-1">
+                                    <div>Reduced virus transmission risk</div>
+                                    <div>Enhanced compliance monitoring</div>
+                                    <div>Improved safety awareness</div>
+                                </div>
+                            </div>
+                            <div class="rounded-lg p-4 border border-orange-600 text-center">
+                                <h5 class="font-semibold text-orange-600 mb-2">Technology Advancement</h5>
+                                <div class="text-sm space-y-1">
+                                    <div>Assistive wearable technology</div>
+                                    <div>Arduino-based innovations</div>
+                                    <div>Future enhancement reference</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="pl-6">
+                        <h4 class="text-xl font-semibold text-orange-600 mb-4">Future Recommendations</h4>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="rounded-lg p-4">
+                                <h5 class="font-semibold text-orange-600 mb-3">Hardware Enhancements</h5>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            1</div>
+                                        <div>Add power switch for extended battery life</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            2</div>
+                                        <div>Implement soldered connections for durability</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            3</div>
+                                        <div>Integrate haptic feedback (vibration motors)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rounded-lg p-4">
+                                <h5 class="font-semibold text-orange-600 mb-3">Feature Expansions</h5>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            1</div>
+                                        <div>Bluetooth companion mobile application</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            2</div>
+                                        <div>Alternative wearable forms (watches, ID badges)</div>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div
+                                            class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            3</div>
+                                        <div>Enhanced accessibility for PWDs research</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="mt-8">
+                    <button onclick="closeModal('arduino-docs')"
+                        class="bg-gradient-to-r from-orange-400 to-orange-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-glow">
+                        Close Documentation
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // ALERTPOINT MODAL JS START
+            let currentSlideIndex = 0;
+            let isAutoplay = true;
+            let autoplayInterval;
+
+            function initializeAlertPointModal() {
+                const slides = document.querySelectorAll('#alertpoint-modal .slide');
+                const indicators = document.querySelectorAll('#alertpoint-modal .indicator');
+                const totalSlides = slides.length;
+
+                function showSlide(index) {
+                    // Hide all slides
+                    slides.forEach(slide => slide.classList.remove('active'));
+                    indicators.forEach(indicator => indicator.classList.remove('active'));
+
+                    // Show current slide
+                    if (slides[index] && indicators[index]) {
+                        slides[index].classList.add('active');
+                        indicators[index].classList.add('active');
+                    }
+                }
+
+                function nextSlide() {
+                    currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+                    showSlide(currentSlideIndex);
+                }
+
+                function prevSlide() {
+                    currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+                    showSlide(currentSlideIndex);
+                }
+
+                // Make these functions global for the modal (ORIGINAL FUNCTIONS PRESERVED)
+                window.changeSlide = function (direction) {
+                    if (direction === 1) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                };
+
+                window.currentSlide = function (index) {
+                    currentSlideIndex = index - 1;
+                    showSlide(currentSlideIndex);
+                };
+
+                function startAutoplay() {
+                    if (isAutoplay) {
+                        autoplayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+                    }
+                }
+
+                function stopAutoplay() {
+                    clearInterval(autoplayInterval);
+                }
+
+                window.toggleAutoplay = function () {
+                    const playPauseText = document.getElementById('play-pause-text');
+
+                    if (isAutoplay) {
+                        stopAutoplay();
+                        isAutoplay = false;
+                        if (playPauseText) playPauseText.textContent = 'Play';
+                    } else {
+                        startAutoplay();
+                        isAutoplay = true;
+                        if (playPauseText) playPauseText.textContent = 'Pause';
+                    }
+                };
+
+                // ORIGINAL openModal and closeModal functions - but made specific for AlertPoint
+                window.openAlertPointModal = function () {
+                    const modal = document.getElementById('alertpoint-modal');
+                    if (modal) {
+                        modal.classList.add('show');
+                        document.body.style.overflow = 'hidden';
+                        startAutoplay();
+                    }
+                };
+
+                window.closeAlertPointModal = function () {
+                    const modal = document.getElementById('alertpoint-modal');
+                    if (modal) {
+                        modal.classList.remove('show');
+                        document.body.style.overflow = 'auto';
+                        stopAutoplay();
+                    }
+                };
+
+                // ORIGINAL EVENT LISTENERS PRESERVED
+                const slideshowContainer = document.querySelector('#alertpoint-modal .slideshow-container');
+                if (slideshowContainer) {
+                    // Pause autoplay when user hovers over slideshow
+                    slideshowContainer.addEventListener('mouseenter', stopAutoplay);
+                    slideshowContainer.addEventListener('mouseleave', () => {
+                        if (isAutoplay) startAutoplay();
+                    });
+                }
+
+                // ORIGINAL Keyboard navigation
+                document.addEventListener('keydown', function (e) {
+                    const modal = document.getElementById('alertpoint-modal');
+                    if (modal && modal.classList.contains('show')) {
+                        if (e.key === 'ArrowLeft') {
+                            window.changeSlide(-1);
+                        } else if (e.key === 'ArrowRight') {
+                            window.changeSlide(1);
+                        } else if (e.key === 'Escape') {
+                            window.closeAlertPointModal();
+                        } else if (e.key === ' ') {
+                            e.preventDefault();
+                            window.toggleAutoplay();
+                        }
+                    }
+                });
+
+                // ORIGINAL Close modal when clicking outside
+                const alertPointModal = document.getElementById('alertpoint-modal');
+                if (alertPointModal) {
+                    alertPointModal.addEventListener('click', function (e) {
+                        if (e.target === this) {
+                            window.closeAlertPointModal();
+                        }
+                    });
+                }
+            }
+
+            // Initialize when DOM is loaded
+            document.addEventListener('DOMContentLoaded', initializeAlertPointModal);
+
+            // ALERTPOINT MODAL JS END
+
+            // VETFLOW MODAL JS START
+            let vetflowCurrentSlideIndex = 0;
+            let vetflowIsAutoplay = true;
+            let vetflowAutoplayInterval;
+
+            function initializeVetFlowModal() {
+                const slides = document.querySelectorAll('#vetflow-modal .slide');
+                const indicators = document.querySelectorAll('#vetflow-modal .indicator');
+                const totalSlides = slides.length;
+
+                function showVetFlowSlide(index) {
+                    slides.forEach(slide => slide.classList.remove('active'));
+                    indicators.forEach(indicator => indicator.classList.remove('active'));
+
+                    if (slides[index]) {
+                        slides[index].classList.add('active');
+                    }
+                    if (indicators[index]) {
+                        indicators[index].classList.add('active');
+                    }
+                }
+
+                function nextVetFlowSlide() {
+                    vetflowCurrentSlideIndex = (vetflowCurrentSlideIndex + 1) % totalSlides;
+                    showVetFlowSlide(vetflowCurrentSlideIndex);
+                }
+
+                function prevVetFlowSlide() {
+                    vetflowCurrentSlideIndex = (vetflowCurrentSlideIndex - 1 + totalSlides) % totalSlides;
+                    showVetFlowSlide(vetflowCurrentSlideIndex);
+                }
+
+                window.changeVetFlowSlide = function (direction) {
+                    if (direction === 1) {
+                        nextVetFlowSlide();
+                    } else {
+                        prevVetFlowSlide();
+                    }
+                };
+
+                window.currentVetFlowSlide = function (index) {
+                    vetflowCurrentSlideIndex = index - 1;
+                    showVetFlowSlide(vetflowCurrentSlideIndex);
+                };
+
+                function startVetFlowAutoplay() {
+                    if (vetflowIsAutoplay) {
+                        vetflowAutoplayInterval = setInterval(nextVetFlowSlide, 3000);
+                    }
+                }
+
+                function stopVetFlowAutoplay() {
+                    clearInterval(vetflowAutoplayInterval);
+                }
+
+                window.toggleVetFlowAutoplay = function () {
+                    const playPauseText = document.getElementById('vetflow-play-pause-text');
+                    if (vetflowIsAutoplay) {
+                        stopVetFlowAutoplay();
+                        vetflowIsAutoplay = false;
+                        if (playPauseText) playPauseText.textContent = 'Play';
+                    } else {
+                        startVetFlowAutoplay();
+                        vetflowIsAutoplay = true;
+                        if (playPauseText) playPauseText.textContent = 'Pause';
+                    }
+                };
+
+                window.vetflowStartAutoplay = startVetFlowAutoplay;
+                window.vetflowStopAutoplay = stopVetFlowAutoplay;
+
+                const slideshowContainer = document.querySelector('#vetflow-modal .slideshow-container');
+                if (slideshowContainer) {
+                    slideshowContainer.addEventListener('mouseenter', stopVetFlowAutoplay);
+                    slideshowContainer.addEventListener('mouseleave', () => {
+                        if (vetflowIsAutoplay) startVetFlowAutoplay();
+                    });
+                }
+
+                document.addEventListener('keydown', function (e) {
+                    const modal = document.getElementById('vetflow-modal');
+                    if (modal && modal.classList.contains('show')) {
+                        if (e.key === 'ArrowLeft') {
+                            window.changeVetFlowSlide(-1);
+                        } else if (e.key === 'ArrowRight') {
+                            window.changeVetFlowSlide(1);
+                        } else if (e.key === ' ') {
+                            e.preventDefault();
+                            window.toggleVetFlowAutoplay();
+                        }
+                    }
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', initializeVetFlowModal);
+            // VETFLOW MODAL JS END
+
+            // JS CODE FOR WHOLE CODE - GENERAL (ORIGINAL CODE PRESERVED)
+
+            // Mobile menu toggle (ORIGINAL)
+            document.addEventListener('DOMContentLoaded', function () {
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.addEventListener('click', function () {
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (mobileMenu) {
+                            mobileMenu.classList.toggle('hidden');
+                        }
+                    });
+                }
+            });
+
+            function openModal(modalId) {
+                // Special handling for AlertPoint modal
+                if (modalId === 'alertpoint') {
+                    window.openAlertPointModal();
+                    return;
+                }
+                if (modalId === 'vetflow') {
+                    const modal = document.getElementById('vetflow-modal');
+                    if (modal) {
+                        modal.classList.add('show');
+                        document.body.style.overflow = 'hidden';
+                        if (typeof window.vetflowStartAutoplay === 'function') {
+                            window.vetflowStartAutoplay();
+                        }
+                    }
+                    return;
+                }
+
+                // ORIGINAL general modal code
+                const modal = document.getElementById(modalId + '-modal');
+                if (modal) {
+                    modal.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            // MODIFIED: Enhanced closeModal to handle AlertPoint specifically  
+            function closeModal(modalId) {
+                // Handle AlertPoint modal specifically
+                if (!modalId) {
+                    // Check if AlertPoint modal is open
+                    const alertPointModal = document.getElementById('alertpoint-modal');
+                    if (alertPointModal && alertPointModal.classList.contains('show')) {
+                        window.closeAlertPointModal();
+                        return;
+                    }
+                    const vetflowModalEl = document.getElementById('vetflow-modal');
+                    if (vetflowModalEl && vetflowModalEl.classList.contains('show')) {
+                        vetflowModalEl.classList.remove('show');
+                        document.body.style.overflow = 'auto';
+                        if (typeof window.vetflowStopAutoplay === 'function') {
+                            window.vetflowStopAutoplay();
+                        }
+                        return;
+                    }
+                } else if (modalId === 'alertpoint') {
+                    window.closeAlertPointModal();
+                    return;
+                } else if (modalId === 'vetflow') {
+                    const modal = document.getElementById('vetflow-modal');
+                    if (modal) {
+                        modal.classList.remove('show');
+                        document.body.style.overflow = 'auto';
+                        if (typeof window.vetflowStopAutoplay === 'function') {
+                            window.vetflowStopAutoplay();
+                        }
+                    }
+                    return;
+                }
+
+                // ORIGINAL general modal code
+                if (modalId) {
+                    const modal = document.getElementById(modalId + '-modal');
+                    if (modal) {
+                        modal.classList.remove('show');
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            }
+
+            // ORIGINAL Smooth scrolling for navigation links
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                        // Close mobile menu if open
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (mobileMenu) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // ORIGINAL Parallax effect
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelectorAll('.parallax');
+
+                parallax.forEach(element => {
+                    const speed = element.dataset.speed || 0.5;
+                    const yPos = -(scrolled * speed);
+                    element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                });
+            });
+
+            // ORIGINAL Close modal when clicking outside (for general modals)
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    // Skip AlertPoint modal as it has its own handler
+                    if (modal.id !== 'alertpoint-modal') {
+                        modal.addEventListener('click', function (e) {
+                            if (e.target === this) {
+                                this.classList.remove('show');
+                                document.body.style.overflow = 'auto';
+                            }
+                        });
+                    }
+                });
+            });
+
+
+            // Form validation
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.getElementById('contactForm');
+                const submitBtn = document.getElementById('sendBtn');
+
+                // Function to validate form
+                function validateForm() {
+                    const name = form.name.value.trim();
+
+                    const subject = form.subject.value.trim();
+                    const message = form.message.value.trim();
+
+
+
+                    const isValid = name.length >= 2 &&
+
+                        subject.length >= 3 &&
+                        message.length >= 10;
+
+                    submitBtn.disabled = !isValid;
+                    submitBtn.style.opacity = isValid ? '1' : '0.5';
+                    return isValid;
+                }
+
+                // Add validation listeners
+                form.name.addEventListener('input', validateForm);
+
+                form.subject.addEventListener('input', validateForm);
+                form.message.addEventListener('input', validateForm);
+
+                // Initial validation
+                validateForm();
+            });
+
+            // PHP form submission
+            function sendEmail(event) {
+                event.preventDefault();
+
+                const submitBtn = document.getElementById('sendBtn');
+                const originalText = submitBtn.textContent;
+
+                // Show loading state
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+
+                // Create FormData object
+                const formData = new FormData(event.target);
+
+                // Send to PHP backend
+                fetch('contact.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            submitBtn.textContent = 'Message Sent! ✓';
+                            // Reset form after success
+                            setTimeout(() => {
+                                event.target.reset();
+                                submitBtn.textContent = originalText;
+                                submitBtn.disabled = true;
+                                submitBtn.style.opacity = '0.5';
+                            }, 2000);
+                        } else {
+                            submitBtn.textContent = 'Failed to Send ✗';
+                            setTimeout(() => {
+                                submitBtn.textContent = originalText;
+                                submitBtn.disabled = false;
+                                submitBtn.style.opacity = '1';
+                            }, 3000);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        submitBtn.textContent = 'Failed to Send ✗';
+                        setTimeout(() => {
+                            submitBtn.textContent = originalText;
+                            submitBtn.disabled = false;
+                            submitBtn.style.opacity = '1';
+                        }, 3000);
+                    });
+            }
+
+            // ORIGINAL Add scroll-based animations
+            document.addEventListener('DOMContentLoaded', function () {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        } else {
+                            entry.target.style.opacity = '0';
+                            entry.target.style.transform = 'translateY(30px)';
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe elements for animation
+                const animatedSelectors = '.reveal, .skill-card, .timeline-item, .cert-item';
+                document.querySelectorAll(animatedSelectors).forEach(el => {
+                    el.style.transition = 'all 0.6s ease-out';
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    observer.observe(el);
+                });
+            });
+
+            // ORIGINAL Typing animation reset
+            function resetTypingAnimation() {
+                const typingElement = document.querySelector('.typing-animation');
+                if (typingElement) {
+                    typingElement.style.animation = 'none';
+                    setTimeout(() => {
+                        typingElement.style.animation = 'typing 3s steps(40, end), blink-caret 0.75s step-end infinite';
+                    }, 100);
+                }
+            }
+
+            // ORIGINAL Reset typing animation on scroll to home
+            document.addEventListener('DOMContentLoaded', function () {
+                let homeInView = false;
+                const homeObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !homeInView) {
+                            homeInView = true;
+                            setTimeout(resetTypingAnimation, 500);
+                        } else if (!entry.isIntersecting) {
+                            homeInView = false;
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                const homeElement = document.getElementById('home');
+                if (homeElement) {
+                    homeObserver.observe(homeElement);
+                }
+            });
+
+            // ORIGINAL Add some interactive effects
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.skill-card').forEach(card => {
+                    card.addEventListener('mouseenter', function () {
+                        this.style.transform = 'scale(1.05) rotateY(5deg)';
+                    });
+
+                    card.addEventListener('mouseleave', function () {
+                        this.style.transform = 'scale(1) rotateY(0deg)';
+                    });
+                });
+            });
+
+            // Modern cursor-following hover effect
+            function updateMousePosition(event, element) {
+                const rect = element.getBoundingClientRect();
+                const x = ((event.clientX - rect.left) / rect.width) * 100;
+                const y = ((event.clientY - rect.top) / rect.height) * 100;
+                element.style.setProperty('--mouse-x', x + '%');
+                element.style.setProperty('--mouse-y', y + '%');
+            }
+
+            // ORIGINAL Keyboard navigation for accessibility 
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    // Handle AlertPoint modal first
+                    const alertPointModal = document.getElementById('alertpoint-modal');
+                    if (alertPointModal && alertPointModal.classList.contains('show')) {
+                        window.closeAlertPointModal();
+                        return;
+                    }
+
+                    // ORIGINAL code for other modals
+                    document.querySelectorAll('.modal.show').forEach(modal => {
+                        if (modal.id !== 'alertpoint-modal') {
+                            modal.classList.remove('show');
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                }
+            });
+
+            // Dynamic year update
+            document.addEventListener('DOMContentLoaded', function () {
+                const currentYearElement = document.getElementById('currentYear');
+                if (currentYearElement) {
+                    currentYearElement.textContent = new Date().getFullYear();
+                }
+            });
+
+            // ORIGINAL console log
+            console.log('🚀 Portfolio loaded successfully! Welcome to the future.');
+        </script>
+</body>
+
+</html>
