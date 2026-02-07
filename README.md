@@ -1,16 +1,57 @@
-# React + Vite
+# Bryant Melliza | Software Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Portfolio Preview](public/logo/bim_italic_white.png)
 
-Currently, two official plugins are available:
+> **Personal portfolio website built with React, Vite, and Tailwind CSS featuring a modern glassmorphism design.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project showcases my work as a Full-Stack Developer, including my projects in IoT, Web Development, and Hardware Integration.
 
-## React Compiler
+## 🚀 Live Demo
+[View Live Portfolio](https://portfolio-bry.vercel.app/) *(Replace with your actual Vercel link if different)*
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
+- **Framework:** React 19 + Vite
+- **Styling:** Tailwind CSS + CSS Modules
+- **Animations:** Framer Motion
+- **Icons:** Material Symbols & Devicon
+- **Deployment:** Vercel
 
-## Expanding the ESLint configuration
+## 💻 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Follow these steps to run the project locally on your machine.
+
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/brybryson/portfolio.git
+   cd portfolio
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+   Open http://localhost:5173 (or the port shown in your terminal) to view it in the browser.
+
+## 🏗️ Building for Production
+
+To create a production-ready build:
+
+```bash
+npm run build
+```
+
+The output will be in the `dist` folder, ready for deployment.
+
+## 📄 License
+© 2026 Bryant Melliza. All Rights Reserved.
