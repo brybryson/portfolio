@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="flex flex-col md:flex-row items-center justify-between w-full pt-20 pb-16 mt-24 border-t border-white/5 gap-8">
             <div className="flex items-center gap-3 opacity-50">
                 <div className="size-10 flex items-center justify-center">
-                    <img src="/bryant-portfolio/logo/bim_italic_white.png" alt="BIM Logo" className="w-full h-auto object-contain" />
+                    <img src="/logo/bim_italic_white.png" alt="BIM Logo" className="w-full h-auto object-contain" />
                 </div>
                 <p className="text-gray-400 text-sm font-bold">
                     © 2026 Bryant Melliza Portfolio. All Rights Reserved.

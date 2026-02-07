@@ -6,7 +6,7 @@ const Header = () => {
             <div className="flex items-center gap-4 group cursor-pointer transition-transform hover:scale-105 active:scale-95 duration-300">
                 <div className="relative size-16 flex items-center justify-center">
                     <img
-                        src="/bryant-portfolio/logo/bim_italic_white.png"
+                        src="/logo/bim_italic_white.png"
                         alt="BIM Logo"
                         className="w-full h-auto object-contain transition-all duration-300"
                     />
