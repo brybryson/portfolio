@@ -7,7 +7,7 @@ const Hero = () => {
                 <div className="absolute -top-24 -left-24 size-96 bg-royal-blue/20 rounded-full blur-[100px]"></div>
                 <div className="relative z-20 max-w-xl text-left">
                     <span className="inline-block px-4 py-2 rounded-full bg-royal-blue/10 text-royal-blue text-xs font-black uppercase tracking-[0.2em] mb-8 border border-royal-blue/20">
-                        Open to Work
+                        Hired
                     </span>
                     <h1 className="text-white text-5xl md:text-7xl font-black leading-[1.1] tracking-tight mb-8">
                         Engineering <span className="text-royal-blue italic">scalable</span> digital solutions.
@@ -16,9 +16,9 @@ const Hero = () => {
                         Software Developer specialized in modern full-stack development, building resilient and high-performance applications with React, Next.js, and Prisma.
                     </p>
                     <div className="flex flex-wrap items-center gap-5">
-                        <a href="resume/Bryant_Melliza_Resume.pdf" download="Bryant_Melliza_Resume.pdf" className="flex items-center gap-2 px-10 py-5 bg-royal-blue text-white rounded-2xl font-black hover:bg-blue-600 transition-all active:scale-95 shadow-xl shadow-royal-blue/30">
+                        <button disabled className="flex items-center gap-2 px-10 py-5 bg-royal-blue/50 text-white/50 rounded-2xl font-black cursor-not-allowed transition-all shadow-none">
                             Download Resume <span className="material-symbols-outlined text-sm">download</span>
-                        </a>
+                        </button>
                         <a href="#contact" className="flex items-center gap-2 px-10 py-5 bg-white/5 text-white rounded-2xl font-black border border-white/10 hover:bg-white/10 transition-all">
                             Get In Touch
                         </a>
