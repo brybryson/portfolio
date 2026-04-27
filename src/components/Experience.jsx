@@ -17,7 +17,7 @@ const Experience = () => {
                                 <p className="text-royal-blue font-bold mt-1 text-left">JLabs Innovatech Inc.</p>
                             </div>
                             <span className="text-royal-blue text-xs font-black bg-royal-blue/10 px-4 py-2 rounded-full uppercase tracking-widest border border-royal-blue/20 self-start">
-                                March 2026 - Present
+                                March 2026 - April 2026
                             </span>
                         </div>
                         <p className="text-gray-400 text-lg leading-relaxed text-left">
