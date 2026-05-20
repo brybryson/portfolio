@@ -1,5 +1,26 @@
 export const projects = [
     {
+        id: "solacepoint",
+        title: "Solace Point",
+        year: "2026",
+        description: "High-end digital insurance platform engineered with React, Vite, and Tailwind CSS, featuring sophisticated typography, fluid scroll animations, and interactive quote validation.",
+        image: "images/solacepoint/heropage.png",
+        tags: ["React JS", "Tailwind CSS", "Vite"],
+        category: "Web Application",
+        quote: "Premium digital experience for non-life insurance.",
+        slideshow: ["images/solacepoint/heropage.png"],
+        challenge: "Developing a digital presence for a modern non-life insurance agency under OneNetworx Marketing, aiming to bridge the gap between traditional policy models and high-end digital consumers.",
+        solution: "Engineered a high-performance web interface featuring fluid GSAP-style scroll animations, modular UI structures, semantic layouts, and real-time form validation for automated quote generation.",
+        features: [
+            { name: "React JS", icon: "code" },
+            { name: "Tailwind CSS", icon: "css" },
+            { name: "Vite Build", icon: "speed" },
+            { name: "Live Site", icon: "public" }
+        ],
+        demoUrl: "https://solacepoint.vercel.app/SolacePoint/Home",
+        icon: "shield"
+    },
+    {
         id: "portfolio",
         title: "Personal Portfolio",
         year: "2026",
