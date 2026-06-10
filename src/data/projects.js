@@ -2,7 +2,7 @@ export const projects = [
     {
         id: "solacepoint",
         title: "Solace Point",
-        year: "2026",
+        year: "June 2026",
         description: "High-end digital insurance platform engineered with React, Vite, and Tailwind CSS, featuring sophisticated typography, fluid scroll animations, and interactive quote validation.",
         image: "images/solacepoint/heropage.png",
         tags: ["React JS", "Tailwind CSS", "Vite"],
@@ -23,7 +23,7 @@ export const projects = [
     {
         id: "portfolio",
         title: "Personal Portfolio",
-        year: "2026",
+        year: "June 2026",
         description: "Modern digital showcase built with React and Tailwind CSS, featuring high-fidelity glassmorphism.",
         image: "images/portfolio/updated-portfolio.png",
         tags: ["React JS", "Tailwind CSS"],
@@ -42,7 +42,7 @@ export const projects = [
     {
         id: "custodian",
         title: "Property Custodian",
-        year: "2026",
+        year: "February 2026",
         description: "Resource management system with predictive algorithms for institutional asset tracking.",
         image: "images/custodian/Screenshot 2026-02-06 at 8.34.47 PM.png",
         tags: ["Power Platform", "PHP"],
@@ -79,7 +79,7 @@ export const projects = [
     {
         id: "prefect",
         title: "Prefect System",
-        year: "2026",
+        year: "February 2026",
         description: "Rule-based decision support system for managing student infractions and sanctions.",
         image: "images/prefect/Screenshot 2026-02-06 at 8.25.21 PM.png",
         tags: ["Rule-Based AI", "PHP/MySQL"],
@@ -115,7 +115,7 @@ export const projects = [
     {
         id: "safetyheroes",
         title: "Safety Heroes",
-        year: "2025",
+        year: "October 2025",
         description: "AI-driven disaster preparedness platform for children built during a hackathon.",
         image: "images/SafetyHeroes.png",
         tags: ["AI Learning", "UI Design"],
@@ -134,7 +134,7 @@ export const projects = [
     {
         id: "petgrooming",
         title: "PetSense",
-        year: "2025",
+        year: "October 2025",
         description: "Web-Based RFID Pet Grooming Management System with automated tracking.",
         image: "animates/1 - title.png",
         tags: ["RFID", "IoT"],
@@ -163,7 +163,7 @@ export const projects = [
     {
         id: "alertpoint",
         title: "AlertPoint",
-        year: "2025",
+        year: "October 2025",
         description: "Disaster Risk Reduction Management System with integrated hardware monitoring.",
         image: "alertpoint/1 - alertpoint.png",
         tags: ["Full-Stack", "IoT"],
@@ -202,7 +202,7 @@ export const projects = [
     {
         id: "vetflow",
         title: "VetFlow",
-        year: "2024",
+        year: "February 2025",
         description: "Point-of-Sale and Inventory Management System for animal clinics.",
         image: "vetflow/1-vetflow_1.PNG",
         tags: ["PHP", "MySQL"],
@@ -237,7 +237,7 @@ export const projects = [
     {
         id: "salbag",
         title: "SALBAG",
-        year: "2024",
+        year: "June 2024",
         description: "Smart Anti-Theft Device with IoT, Face Detection & GPS Tracking.",
         image: "images/salbag_3d representation.png",
         tags: ["Raspberry Pi", "AI/ML"],
@@ -280,7 +280,7 @@ export const projects = [
     {
         id: "confession",
         title: "Confession Wall",
-        year: "2024",
+        year: "May 2024",
         description: "Community wall for anonymous confessions built for Google Developer Student Clubs.",
         image: "images/confession_wall_gdsc.png",
         tags: ["JavaScript", "Firebase"],
@@ -300,7 +300,7 @@ export const projects = [
     {
         id: "xoxo",
         title: "XOXO TicTacToe",
-        year: "2024",
+        year: "March 2024",
         description: "Multiplayer and AI-powered game with leaderboard and scoring system.",
         image: "tictactoe/1 -XOXO-landing.png",
         tags: ["PHP", "MySQL"],

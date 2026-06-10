@@ -18,11 +18,11 @@ const ProjectCard = ({ project, onClick }) => {
                     />
                 </div>
                 <div className="px-2">
-                    <div className="flex justify-between items-center mb-3">
-                        <h4 className="text-white font-black text-2xl tracking-tight">{project.title}</h4>
+                    <div className="flex flex-col items-start mb-3 gap-2">
                         <span className="text-[10px] font-black text-royal-blue bg-royal-blue/10 px-3 py-1 rounded-full border border-royal-blue/20 uppercase tracking-widest text-left">
                             {project.year}
                         </span>
+                        <h4 className="text-white font-black text-2xl tracking-tight">{project.title}</h4>
                     </div>
                     <p className="text-gray-400 text-base leading-relaxed mb-6 text-left">{project.description}</p>
                     <div className="flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-widest text-left">
