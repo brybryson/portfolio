@@ -21,7 +21,7 @@ const Experience = () => {
                             </span>
                         </div>
                         <p className="text-gray-400 text-lg leading-relaxed text-left">
-                            Architecting the company’s new non-life insurance digital platforms from scratch. I handle the entire lifecycle across web and mobile ecosystems, translating business requirements into high-end UI/UX designs and engineering full-stack production solutions for direct market deployment.
+                            Architected Solace Point, the company's core non-life insurance digital sales platform, from scratch. Engineered the full-stack web and database ecosystem, transforming traditional offline workflows into a premium, high-conversion UI/UX designed to drive customer acquisition and boost overall agency sales.
                         </p>
                     </div>
                 </div>
