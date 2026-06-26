@@ -13,9 +13,9 @@ const Hero = () => {
                         Software Developer specialized in modern full-stack development, building resilient and high-performance applications with React, Next.js, and Prisma.
                     </p>
                     <div className="flex flex-wrap items-center gap-5">
-                        <a href="/resume/Bryant_Melliza_Resume.pdf" download className="flex items-center gap-2 px-10 py-5 bg-royal-blue text-white rounded-2xl font-black hover:bg-royal-blue/80 transition-all shadow-lg shadow-royal-blue/20">
+                        {/* <a href="/resume/Bryant_Melliza_Resume.pdf" download className="flex items-center gap-2 px-10 py-5 bg-royal-blue text-white rounded-2xl font-black hover:bg-royal-blue/80 transition-all shadow-lg shadow-royal-blue/20">
                             Download Resume <span className="material-symbols-outlined text-sm">download</span>
-                        </a>
+                        </a> */}
                         <a href="#contact" className="flex items-center gap-2 px-10 py-5 bg-white/5 text-white rounded-2xl font-black border border-white/10 hover:bg-white/10 transition-all">
                             Get In Touch
                         </a>
