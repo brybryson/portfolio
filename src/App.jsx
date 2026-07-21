@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SectionReveal from './components/SectionReveal'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -15,6 +15,17 @@ import './App.css'
 function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    fetch('https://iverson.app.n8n.cloud/webhook/fe9a0d1d-484c-4997-97b7-0fb419dc91bb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        page: window.location.pathname,
+        referrer: document.referrer,
+      })
+    }).catch(() => {});
+  }, []);
 
   const openModal = (project) => {
     setSelectedProject(project);
