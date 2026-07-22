@@ -94,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/images/experience/portfolio logo.png", type: "image/png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -128,14 +128,14 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   useEffect(() => {
-    fetch('https://iverson.app.n8n.cloud/webhook/fe9a0d1d-484c-4997-97b7-0fb419dc91bb', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("https://iverson.app.n8n.cloud/webhook/fe9a0d1d-484c-4997-97b7-0fb419dc91bb", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         page: window.location.pathname,
         referrer: document.referrer,
-      })
+      }),
     }).catch(() => {});
   }, []);
 

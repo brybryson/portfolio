@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import bryantImg from "@/assets/bryant.jpg";
+import togaImg from "@/assets/toga.jpg";
 import {
   Command,
   CommandEmpty,
@@ -27,6 +28,11 @@ import {
   Phone,
   Send,
   Terminal,
+  FileText,
+  GitBranch,
+  Cpu,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -52,7 +58,7 @@ export const Route = createFileRoute("/")({
    DATA
    ============================================================ */
 
-type Category = "web" | "system" | "ai";
+type Category = "web" | "system" | "ai" | "iot";
 
 const CATEGORY_META: Record<
   Category,
@@ -61,6 +67,7 @@ const CATEGORY_META: Record<
   web: { label: "Web Applications", color: "var(--signal)", icon: Layers },
   system: { label: "Systems", color: "var(--flow)", icon: Boxes },
   ai: { label: "AI & Automation", color: "var(--pulse-c)", icon: Bot },
+  iot: { label: "Hardware & IoT", color: "#06b6d4", icon: Cpu },
 };
 
 type Project = {
@@ -73,7 +80,9 @@ type Project = {
   solution: string;
   outcome: string;
   stack: string[];
-  image: string;
+  image: string | string[];
+  demoUrl?: string;
+  githubUrl?: string;
 };
 
 const PROJECTS: Project[] = [
@@ -82,146 +91,269 @@ const PROJECTS: Project[] = [
     name: "Solace Point",
     date: "2026.06",
     category: "web",
-    summary: "Full-stack digital insurance platform for OneNetworx Marketing.",
+    summary:
+      "Full-stack digital insurance platform for OneNetworx Marketing, streamlining customer onboarding and quotation requests.",
     problem:
-      "Offline sales workflows and low digital conversion for a non-life insurance provider.",
+      "Developing a high-impact digital platform to replace traditional, offline insurance pipelines and accelerate lead generation.",
     solution:
-      "Architected a premium, high-conversion web platform from scratch with React, Tailwind and Vite.",
-    outcome: "Shipped the company's core digital sales channel driving client acquisition.",
-    stack: ["React", "Tailwind CSS", "Vite"],
-    image: "/images/projects/solace-point.jpg",
+      "Engineered a full-stack sales portal featuring real-time automated quote generation, secure database registration, and a high-fidelity UI.",
+    outcome:
+      "Converted visitors into active policyholders and optimized user journeys to significantly improve customer engagement.",
+    stack: ["React", "Vite", "Tailwind CSS", "PostgreSQL", "Supabase", "Node.js"],
+    image: "/images/solacepoint/heropage.png",
+    demoUrl: "https://solacepoint.vercel.app/SolacePoint/Home",
   },
   {
     slug: "personal-portfolio",
-    name: "Personal Portfolio",
+    name: "Personal Portfolio (v2)",
     date: "2026.06",
     category: "web",
     summary: "Modern digital showcase with a system-styled interface.",
-    problem: "Needed a distinctive engineering-first presence for hiring managers.",
-    solution: "Built a componentised, accessible React site with a documentation-grade layout.",
-    outcome: "Serves as the primary channel for recruiter and client inbound.",
-    stack: ["React", "Tailwind CSS"],
-    image: "/images/projects/personal-portfolio.jpg",
+    problem:
+      "I lacked a dedicated platform to thoroughly exhibit my complex engineering projects, automations, and systems in a way that standard templates couldn't handle.",
+    solution:
+      "Designed a custom React application featuring a high-fidelity 'Glassmorphism' aesthetic, bento-grid layouts, and performant animations.",
+    outcome:
+      "Delivered a distinctive engineering-first showcase that perfectly highlights my technical capabilities and systems architecture to hiring managers.",
+    stack: ["React", "TypeScript", "Tailwind CSS", "Vite", "Lucide", "TanStack Router"],
+    image: "/images/portfolio/VERSION2-PORTFOLIO.png",
+    demoUrl: "https://bryant-melliza.vercel.app/",
   },
   {
     slug: "confession-wall",
     name: "Confession Wall",
     date: "2024.05",
     category: "web",
-    summary: "Anonymous community wall built for GDSC.",
-    problem: "Student community lacked a safe anonymous expression channel.",
-    solution: "JavaScript + Firebase realtime wall with moderation-friendly schema.",
-    outcome: "Launched and adopted by the university GDSC chapter.",
-    stack: ["JavaScript", "Firebase"],
-    image: "/images/projects/confession-wall.jpg",
+    summary: "Anonymous Valentine's Day confession wall built for GDSC.",
+    problem:
+      "The student community needed a safe, anonymous digital outlet to share messages and foster community engagement.",
+    solution:
+      "Leveraged Firebase for semi-real-time data synchronization, ensuring new confessions appear instantly across all active client sessions without manual refreshes.",
+    outcome:
+      "Successfully deployed for the Google Developer Student Clubs, creating a highly adopted digital expression platform for the university chapter.",
+    stack: ["HTML", "CSS", "Bootstrap", "JavaScript", "Firebase", "Vite"],
+    image: "/images/CONFESSION WALL.png",
+    demoUrl: "https://confession-wall-ctso-gdscnufv.vercel.app/",
   },
   {
     slug: "xoxo-tictactoe",
     name: "XOXO TicTacToe",
     date: "2024.03",
     category: "web",
-    summary: "Multiplayer & AI TicTacToe with leaderboard.",
-    problem: "Classroom needed a competitive, scored take on a classic game.",
-    solution: "PHP/MySQL multiplayer with AI opponent and persistent scoreboard.",
-    outcome: "Awarded Best Web Game Design; used as a class case study.",
-    stack: ["PHP", "MySQL"],
-    image: "/images/projects/xoxo-tictactoe.jpg",
+    summary: "Multiplayer & AI TicTacToe built for Web Programming (2nd term, 2023-2024).",
+    problem:
+      "Developed as the final output for Web Programming (2nd Term, A.Y. 2023-2024), the challenge was to breathe new life into Tic-Tac-Toe with local multiplayer, AI challenge modes, and a global leaderboard.",
+    solution:
+      "Designed with a retro-neon arcade theme, utilizing CSS transitions and AJAX for fluid, state-driven gameplay without page reloads.",
+    outcome:
+      "Awarded Best Web Game Design; served as an exemplary class case study for the Web Programming course.",
+    stack: ["PHP", "MySQL", "JavaScript", "AJAX", "CSS"],
+    image: [
+      "/tictactoe/1 -XOXO-landing.png",
+      "/tictactoe/2.png",
+      "/tictactoe/3.png",
+      "/tictactoe/4.png",
+      "/tictactoe/5.png",
+      "/tictactoe/6.png",
+    ],
+    githubUrl: "https://github.com/brybryson/TicTacToeGame2",
   },
   {
     slug: "property-custodian",
-    name: "Property Custodian",
+    name: "Property Custodian Management System",
     date: "2026.02",
     category: "system",
-    summary: "Resource management with predictive algorithms.",
-    problem: "Institutional asset tracking was manual, error-prone, and reactive.",
-    solution: "Built a Power Platform + PHP system with predictive utilisation insights.",
-    outcome: "Automated custody workflows and forecasting for internal operations.",
-    stack: ["Power Platform", "PHP"],
-    image: "/images/projects/property-custodian.jpg",
+    summary: "Custom asset management platform with predictive lifecycle monitoring.",
+    problem:
+      "Institutions struggle with manual asset tracking and equipment lifecycle management, leading to significant resource loss and inventory discrepancies.",
+    solution:
+      "A specialized system using predictive algorithms to track asset health, automate procurement schedules, and generate real-time inventory audits with high accuracy.",
+    outcome:
+      "Implemented predictive inventory forecasting and reporting workflows that improved asset visibility and significantly reduced manual audit processes.",
+    stack: ["Microsoft Power Platform", "PHP", "JavaScript", "Tailwind CSS", "MySQL Database"],
+    image: [
+      "/images/custodian/1-login.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.34.47 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.34.59 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.35.18 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.35.36 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.35.48 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.36.00 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.37.11 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.37.23 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.37.36 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.37.52 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.38.07 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.38.29 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.38.37 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.38.46 PM.png",
+      "/images/custodian/Screenshot 2026-02-06 at 8.38.57 PM.png",
+    ],
+    demoUrl: "https://properties.bcps4core.com/login/index.php",
   },
   {
     slug: "prefect-system",
-    name: "Prefect System",
+    name: "Prefect Disciplinary Action System",
     date: "2026.02",
     category: "system",
-    summary: "Rule-based decision support for student infractions.",
-    problem: "Discipline records were inconsistent and hard to escalate fairly.",
-    solution: "Rule-based engine over PHP/MySQL to standardise sanction logic.",
-    outcome: "Deterministic, auditable disciplinary decisions.",
-    stack: ["Rule-Based AI", "PHP", "MySQL"],
-    image: "/images/projects/prefect-system.jpg",
+    summary: "Rule-based AI decision support system for school disciplinary management.",
+    problem:
+      "To centralize student behavior records, enabling school administrators to manage sanctions fairly and transparently while providing counselors with actionable insights for student guidance.",
+    solution:
+      "Engineered a disciplinary management platform featuring a rule-based decision support system that automatically categorizes infractions and recommends handbook-compliant actions.",
+    outcome:
+      "Designed database structures and workflow automation to streamline administrative case handling, ensuring consistency across all disciplinary cases.",
+    stack: ["Business Logic Systems", "PHP", "JavaScript", "Tailwind CSS", "MySQL Database"],
+    image: [
+      "/images/prefect/Screenshot 2026-02-06 at 8.24.32 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.25.21 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.27.01 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.27.18 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.27.52 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.28.02 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.28.28 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.29.09 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.29.23 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.29.43 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.30.37 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.30.52 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.31.10 PM.png",
+      "/images/prefect/Screenshot 2026-02-06 at 8.32.04 PM.png",
+    ],
+    demoUrl: "https://prefect.bcps4core.com/pages/login.html",
   },
   {
     slug: "petsense",
-    name: "PetSense",
+    name: "PetSense: RFID Grooming Management System",
     date: "2025.10",
     category: "system",
-    summary: "RFID pet grooming management with automated tracking.",
-    problem: "Grooming shops manually tracked pets, appointments, and status.",
-    solution: "Web app tied to RFID readers for automated check-in and status flow.",
-    outcome: "Reduced manual logging and improved throughput at the front desk.",
-    stack: ["RFID", "IoT", "Web"],
-    image: "/images/projects/petsense.jpg",
+    summary: "Web-based pet grooming management system integrated with RFID technology.",
+    problem:
+      "To digitize the pet grooming experience at Animates through RFID integration, automating pet identification and tracking service history for improved customer loyalty and operation efficiency.",
+    solution:
+      "Implemented a seamless RFID checking system that instantly retrieves a pet's medical and grooming history, allowing groomers to provide personalized care based on historical data.",
+    outcome:
+      "Improved operational efficiency by reducing manual record management and enabling real-time service monitoring.",
+    stack: ["RFID Integration", "PHP", "HTML", "Tailwind CSS", "JavaScript", "Database Management"],
+    image: [
+      "/animates/1 - title.png",
+      "/animates/2 - next.png",
+      "/animates/3 - process.png",
+      "/animates/4 - next.png",
+      "/animates/5 - next.png",
+      "/animates/6 - next.png",
+      "/animates/7 - next.png",
+      "/animates/8 - next.png",
+    ],
+    githubUrl: "https://github.com/brybryson/AnimatesSystem",
   },
   {
     slug: "vetflow",
     name: "VetFlow",
     date: "2025.02",
     category: "system",
-    summary: "POS and inventory system for animal clinics.",
-    problem: "Small clinics juggled sales, stock, and patient records on paper.",
-    solution: "PHP + MySQL POS with integrated inventory and clinic workflows.",
-    outcome: "Consolidated clinic operations behind a single system.",
-    stack: ["PHP", "MySQL"],
-    image: "/images/projects/vetflow.jpg",
+    summary: "Custom POS & Inventory Management System for veterinary clinics.",
+    problem:
+      "Providing a robust POS and Inventory system for veterinary clinics to handle high-volume patient traffic without missing critical medical records or stock updates.",
+    solution:
+      "Developed a centralized solution featuring automated medical certificate generation and patient history tracking that syncs directly with the inventory system.",
+    outcome:
+      "Digitized inventory tracking, transaction processing, and reporting workflows, completely replacing manual operations.",
+    stack: ["PHP", "MySQL", "JavaScript", "HTML", "Tailwind CSS"],
+    image: [
+      "/vetflow/1-vetflow_1.PNG",
+      "/vetflow/Add New Products.PNG",
+      "/vetflow/Add New Services.PNG",
+      "/vetflow/Data Management (1).PNG",
+      "/vetflow/Item Preview.PNG",
+      "/vetflow/Item Stockks.PNG",
+      "/vetflow/Item Stocks.PNG",
+      "/vetflow/Ordered Items.PNG",
+      "/vetflow/POS Terminal (Services).PNG",
+      "/vetflow/Print Invoice.PNG",
+      "/vetflow/Reports.PNG",
+      "/vetflow/Sales History.PNG",
+      "/vetflow/Supplier.PNG",
+      "/vetflow/User Management.PNG",
+    ],
+    githubUrl: "https://github.com/brybryson/VetFlow",
   },
   {
     slug: "safety-heroes",
     name: "Safety Heroes",
     date: "2025.10",
-    category: "ai",
-    summary: "AI-driven disaster preparedness platform for children.",
-    problem: "Young learners lacked engaging, localised disaster-response training.",
-    solution: "Hackathon prototype pairing AI learning paths with playful UI.",
-    outcome: "Delivered a functioning prototype within the hackathon window.",
-    stack: ["AI Learning", "UI Design"],
-    image: "/images/projects/safety-heroes.jpg",
+    category: "web",
+    summary:
+      "Disaster preparedness learning app for children, built during the Caffeine.AI Manila Hackathon.",
+    problem:
+      "Young learners needed an engaging, interactive way to learn emergency response and disaster preparedness.",
+    solution:
+      "Designed and prototyped an AI-assisted educational platform focused on child-friendly interactive scenarios, built entirely on Caffeine AI.",
+    outcome:
+      "Collaborated under strict time constraints to successfully deliver a functional application within a three-hour hackathon environment.",
+    stack: ["Caffeine AI", "AI Prototyping", "UI/UX Design", "Prompting"],
+    image: "/images/SAFETYHEROES2.png",
+    demoUrl: "https://safetyheroes-rb1.caffeine.xyz/",
   },
   {
     slug: "alertpoint",
-    name: "AlertPoint",
+    name: "AlertPoint: Disaster Risk Reduction System",
     date: "2025.10",
-    category: "ai",
-    summary: "DRRM system with automated hardware monitoring.",
-    problem: "Barangay DRRM lacked live sensing tied to a central dashboard.",
-    solution: "Full-stack app ingesting IoT hardware telemetry into an operator UI.",
-    outcome: "Live monitoring surface for early risk response.",
-    stack: ["Full-Stack", "IoT"],
-    image: "/images/projects/alertpoint.jpg",
+    category: "system",
+    summary:
+      "Award-winning disaster response platform integrating IoT sensors and mobile broadcasting.",
+    problem:
+      "Disaster-prone communities often lack localized, real-time warning systems, relying on delayed national broadcasts that may not reflect immediate local conditions.",
+    solution:
+      "AlertPoint uses localized IoT sensors for floods and fires, delivering instant alerts via a centralized web dashboard and public notification system to reduce response times.",
+    outcome:
+      "Won Best in IoT-Cross Platform Award. Enabled real-time monitoring and rapid dissemination of alerts for disaster preparedness and community safety initiatives.",
+    stack: [
+      "IoT Sensors",
+      "Mobile Application",
+      "PHP",
+      "Tailwind CSS",
+      "JavaScript",
+      "MySQL Database",
+      "Firebase",
+    ],
+    image: [
+      "/alertpoint/1 - alertpoint.png",
+      "/alertpoint/1 - hardware.png",
+      "/alertpoint/1 - hardwaree.png",
+      "/alertpoint/2 - alert.png",
+      "/alertpoint/3 - environmental.png",
+      "/alertpoint/4 - environ.png",
+      "/alertpoint/5 - environ.png",
+      "/alertpoint/6 - water.png",
+      "/alertpoint/7 - water.png",
+      "/alertpoint/8 - water.png",
+      "/alertpoint/9 - barangay.png",
+      "/alertpoint/10 -barangay.png",
+      "/alertpoint/11 - maps.png",
+      "/alertpoint/12- maps.png",
+      "/alertpoint/13 - maps.png",
+      "/alertpoint/14 - logs.png",
+      "/alertpoint/15 - admin logs.png",
+      "/alertpoint/16 - system logs.png",
+    ],
+    demoUrl: "https://alert-point-demo.vercel.app/html/login.html",
   },
   {
     slug: "salbag",
-    name: "SALBAG",
+    name: "SALBAG: Smart Anti-Theft IoT Device",
     date: "2024.06",
-    category: "ai",
-    summary: "Smart anti-theft device with face detection & GPS.",
-    problem: "Bag theft in transit had no personal-scale deterrent.",
-    solution: "Raspberry Pi wearable with vision-based owner recognition and GPS.",
-    outcome: "Working prototype demonstrating owner-lock behaviour and tracking.",
-    stack: ["Raspberry Pi", "AI/ML", "GPS"],
-    image: "/images/projects/salbag.jpg",
-  },
-  {
-    slug: "distancing-belt",
-    name: "Distancing Belt",
-    date: "2022",
-    category: "ai",
-    summary: "Wearable with PIR/ultrasonic sensors for safe distancing.",
-    problem: "Pandemic-era distancing was hard to self-monitor in public.",
-    solution: "Arduino belt combining PIR and ultrasonic feedback with alerts.",
-    outcome: "Functional wearable prototype for close-proximity warnings.",
-    stack: ["Arduino", "Sensors"],
-    image: "/images/projects/distancing-belt.jpg",
+    category: "iot",
+    summary: "Raspberry Pi-based anti-theft solution featuring computer vision and GPS tracking.",
+    problem:
+      "Bag theft in transit lacked a personal-scale deterrent, requiring an automated, hardware-integrated solution to secure personal belongings.",
+    solution:
+      "Engineered a Raspberry Pi (Core Engine) wearable featuring a CMOS Camera (Face ID), GPS NEO8MV2 (Live Tracking), and an automated Panic Alarm synced to the cloud.",
+    outcome:
+      "Managed project planning, hardware integration, software development (Python/OpenCV & Flutter), and system testing to deliver a robust prototype.",
+    stack: ["Raspberry Pi", "Python", "Computer Vision", "GPS Tracking", "Flutter", "SMTP"],
+    image: "/images/salbag_3d representation.png",
+    githubUrl: "https://github.com/brybryson/SALBAG.project",
   },
 ];
 
@@ -237,82 +369,164 @@ type Experience = {
 
 const EXPERIENCE: Experience[] = [
   {
+    hash: "e2c8a9f",
+    type: "feat",
+    role: "Freelance Full-Stack Developer",
+    company: "Self-Employed",
+    logo: "/images/experience/portfolio logo.png",
+    period: "Jun 2024 → Present",
+    body: "Architected and developed end-to-end custom web and mobile applications. Engineered scalable full-stack systems using React, Next.js, TypeScript, PostgreSQL, and REST APIs. Translated client requirements into high-performance frontends and managed the full software development lifecycle while utilizing modern AI-assisted workflows to accelerate delivery.",
+  },
+  {
     hash: "a1f9c02",
     type: "feat",
     role: "Intern Developer",
     company: "OneNetworx Marketing",
-    logo: "/images/logos/onenetworx.png",
+    logo: "/images/experience/OneNetworx Logo.jpg",
     period: "May 2026 → Jun 2026",
-    body: "Architected Solace Point, the company's core non-life insurance digital sales platform, from scratch. Engineered the full-stack web and database ecosystem, transforming offline workflows into a premium, high-conversion UI/UX.",
+    body: "Engineered responsive insurance marketing platforms using React, Vite, and Tailwind CSS. Implemented complex multi-step form workflows and migrated email infrastructure to the Gmail REST API via OAuth2. Architected serverless backend workflows using Supabase (PostgreSQL) for secure, real-time data synchronization.",
   },
   {
     hash: "7d3ba81",
     type: "feat",
     role: "Intern Developer",
     company: "JLabs Innovatech Inc.",
-    logo: "/images/logos/jlabs.png",
+    logo: "/images/experience/JLABS-LOGO.png",
     period: "Mar 2026 → Apr 2026",
-    body: "Contributed to high-quality web and mobile solutions. Collaborated with designers and PMs, implemented UI/UX, and participated in the full SDLC under Agile methodologies.",
+    body: "Contributed to cross-platform mobile solutions using React Native, Expo, and TypeScript. Integrated AI functionality using the Anthropic API and implemented Zod-based validation. Resolved complex bugs related to real-time data flows and collaborated within Agile development cycles using ClickUp and Git workflows.",
   },
   {
     hash: "4c1e2f6",
     type: "feat",
-    role: "Software Developer",
+    role: "Software Developer Intern",
     company: "NLP Business Development Services",
-    logo: "/images/logos/nlp-bds.png",
+    logo: "/images/experience/NLP LOGO.png",
     period: "Nov 2025 → Feb 2026",
-    body: "Engineered responsive web applications using React 19, Next.js, and Prisma (PostgreSQL). Led rapid redesign of internal modules, optimised data schemas, and integrated AI-assisted tooling to accelerate delivery.",
+    body: "Developed business applications using React, Next.js, PostgreSQL, and Prisma ORM while maintaining legacy PHP/CodeIgniter systems. Led rapid UI/UX modernization of internal modules and optimized backend data schemas. Accelerated feature delivery by integrating AI-assisted tooling into the daily Bitbucket development workflow.",
   },
 ];
 
 const EDUCATION = [
   {
     school: "National University — Fairview",
-    logo: "/images/logos/national-university.png",
-    degree: "BS Information Technology",
-    detail: "Specialization in Mobile & Internet Technologies",
-    period: "2022 — 2026 (In Progress)",
-    honors: ["Blue Scholar — 100% Full Merit Scholarship", "Consistent First Honor"],
+    logo: "/images/education/NU LOGO.png",
+    degree:
+      "Bachelor of Science in Information Technology Specialization in Mobile and Internet Technologies",
+    detail: "College",
+    period: "2022 — 2026",
+    honors: [
+      "Summa Cum Laude",
+      "Academic Excellence Award (2025-2026)",
+      "Consistent Blue Scholar (100% Full Merit Scholarship)",
+      "Consistent First Honor Dean's Lister",
+      "Former Chief Creative Officer, GDSC",
+      "Champion – UI/UX Design Competition",
+      "Champion – Networking Competition",
+      "Sole Awardee – Best Web Game Design (XOXO)",
+    ],
   },
   {
     school: "Caloocan National Science & Technology High School",
-    logo: "/images/logos/cnsths.png",
-    degree: "STEM Strand",
+    logo: "/images/education/CNSTHS.png",
+    degree: "Science, Technology, Engineering, and Mathematics (STEM) Strand",
     detail: "Senior High School",
     period: "Graduated 2022",
-    honors: ["High Honors"],
+    honors: [
+      "With High Honors",
+      "Silver Seal of Excellence",
+      "Special Citation in Journalism (Photojournalism - English Category)",
+    ],
   },
 ];
 
-const AWARDS = [
-  { title: "100% Full Merit Scholarship — Blue Scholar", year: "2022 — Present" },
-  { title: "Exemplary Performance — Internal Pursuit", year: "Jul 2025" },
-  { title: "Champion — UI/UX Design Competition", year: "Dec 2024" },
-  { title: "Champion — Networking Competition", year: "Dec 2024" },
-  { title: "Sole Awardee — Best Web Game Design", year: "Mar 2024" },
+const CERTIFICATES = [
+  {
+    title: "Essentials: Your First Workflows",
+    issuer: "n8n Academy",
+    date: "July 22, 2026",
+    image: "/certificates/Essentials- Your First Workflows n8n.png",
+  },
 ];
 
 const SKILLS: { group: string; items: string[] }[] = [
-  { group: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Vite", "TypeScript"] },
   {
-    group: "Backend / Database",
-    items: ["Node.js", "Prisma", "PostgreSQL", "PHP", "MySQL", "Firebase"],
+    group: "Frontend",
+    items: [
+      "JavaScript",
+      "TypeScript",
+      "HTML5",
+      "CSS3",
+      "React",
+      "Next.js",
+      "React Native",
+      "Tailwind CSS",
+      "Bootstrap",
+      "ShadCN/UI",
+      "Vite",
+    ],
   },
   {
-    group: "AI / Automation",
-    items: ["AI-Assisted Tooling", "Rule-Based Systems", "Power Platform"],
+    group: "Backend",
+    items: [
+      "PHP",
+      "SQL",
+      "Laravel",
+      "PostgreSQL",
+      "MySQL",
+      "Prisma ORM",
+      "Firebase",
+      "Supabase",
+      "CodeIgniter",
+      "Zod",
+    ],
   },
-  { group: "IoT / Hardware", items: ["Raspberry Pi", "Arduino", "RFID", "Sensor Integration"] },
-  { group: "Tools", items: ["Git", "Agile / Scrum", "Figma", "REST APIs"] },
+  {
+    group: "Automation & Integrations",
+    items: [
+      "Python",
+      "Automation Engineering",
+      "n8n / Workflow Automation",
+      "LLM Integration",
+      "API Integration",
+      "Full-Stack Notifications",
+    ],
+  },
+  {
+    group: "Tools & Design",
+    items: [
+      "Git",
+      "GitHub",
+      "Bitbucket",
+      "Docker",
+      "Jira",
+      "ClickUp",
+      "Figma",
+      "Adobe Photoshop",
+      "Cursor",
+      "Claude Code",
+      "WordPress",
+      "Elementor",
+    ],
+  },
+  {
+    group: "Other",
+    items: [
+      "Software Testing",
+      "Debugging",
+      "Responsive UI Development",
+      "Agile Development",
+      "Basic Linux CLI",
+    ],
+  },
 ];
 
 const SECTIONS = [
   { id: "hero", label: "home", hint: "Top of page" },
   { id: "projects", label: "projects", hint: "Pipeline graph" },
   { id: "demo", label: "demo", hint: "Live agent" },
-  { id: "experience", label: "experience", hint: "Commit log" },
+  { id: "experience", label: "experiences", hint: "Commit log" },
   { id: "education", label: "education", hint: "Schools & honors" },
-  { id: "awards", label: "awards", hint: "Recognition" },
+  { id: "certificates", label: "certificates", hint: "Badges & Credentials" },
   { id: "skills", label: "skills", hint: "Stack" },
   { id: "contact", label: "contact", hint: "Get in touch" },
 ];
@@ -352,12 +566,12 @@ function Portfolio() {
       <TopStrip onOpenPalette={() => setPaletteOpen(true)} />
       <main className="mx-auto max-w-[1440px] px-6 md:px-10">
         <Hero onOpenPalette={() => setPaletteOpen(true)} />
+        <Skills />
         <Projects active={activeProject} setActive={setActiveProject} />
         <LiveDemo />
         <ExperienceLog />
         <Education />
-        <Awards />
-        <Skills />
+        <Certificates />
         <Contact />
       </main>
       <Footer />
@@ -375,10 +589,11 @@ function TopStrip({ onOpenPalette }: { onOpenPalette: () => void }) {
     <div className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-6 py-2.5 text-mono text-[11px] uppercase tracking-wider text-muted-foreground md:px-10">
         <div className="flex items-center gap-2">
-          <span className="relative inline-flex h-1.5 w-1.5 items-center justify-center">
-            <span className="absolute h-1.5 w-1.5 rounded-full bg-pulse ring-pulse" />
-            <span className="relative h-1.5 w-1.5 rounded-full bg-pulse" />
-          </span>
+          <img
+            src="/images/experience/portfolio logo.png"
+            alt="Logo"
+            className="h-5 w-5 object-contain"
+          />
           <span className="text-foreground">bryant.melliza</span>
           <span className="hidden sm:inline">/</span>
           <span className="hidden sm:inline">available for work</span>
@@ -392,7 +607,7 @@ function TopStrip({ onOpenPalette }: { onOpenPalette: () => void }) {
           </a>
           <span>Metro Manila, PH</span>
           <a
-            href="https://github.com/"
+            href="https://github.com/brybryson"
             target="_blank"
             rel="noreferrer"
             className="hover:text-foreground"
@@ -400,7 +615,7 @@ function TopStrip({ onOpenPalette }: { onOpenPalette: () => void }) {
             github
           </a>
           <a
-            href="https://linkedin.com/"
+            href="https://www.linkedin.com/in/bryant-iverson-melliza-6759b8292"
             target="_blank"
             rel="noreferrer"
             className="hover:text-foreground"
@@ -432,7 +647,7 @@ function TopStrip({ onOpenPalette }: { onOpenPalette: () => void }) {
 
 function Hero({ onOpenPalette }: { onOpenPalette: () => void }) {
   return (
-    <section id="hero" className="relative overflow-hidden pt-12 pb-24 md:pt-16 md:pb-28">
+    <section id="hero" className="relative pt-6 pb-24 md:pt-8 md:pb-28">
       <HeroBackdrop />
       <SectionLabel index="00" label="identity" hint="hello, world" />
 
@@ -473,9 +688,10 @@ function Hero({ onOpenPalette }: { onOpenPalette: () => void }) {
           </h1>
 
           <p className="mt-6 max-w-xl text-[15px] leading-6 text-muted-foreground md:text-base">
-            Full-stack development with{" "}
-            <span className="text-foreground">React, Next.js, and Prisma</span> — plus AI-assisted
-            automation that turns messy workflows into working systems.
+            Mobile and web development with{" "}
+            <span className="text-foreground">React & React Native</span> — plus powerful
+            AI-assisted automation via <span className="text-foreground">n8n</span> that turns messy
+            workflows into seamless systems.
           </p>
 
           <TerminalReadout />
@@ -599,10 +815,37 @@ function HeroBackdrop() {
   );
 }
 
+function TiledImage({
+  topSrc,
+  bottomSrc,
+  alt,
+  className,
+}: {
+  topSrc: string;
+  bottomSrc: string;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    <div className={`relative overflow-hidden group ${className || ""}`}>
+      <img
+        src={bottomSrc}
+        alt={alt}
+        className="absolute inset-0 h-full w-full object-cover object-[center_30%]"
+      />
+      <img
+        src={topSrc}
+        alt={alt}
+        className="absolute inset-0 h-full w-full object-cover object-[40%_25%] transition-all duration-75 ease-in-out group-hover:opacity-0 group-hover:blur-sm"
+      />
+    </div>
+  );
+}
+
 function PhotoCard() {
   return (
     <div className="h-full w-full">
-      <div className="relative mx-auto w-full max-w-[420px] md:ml-auto md:mr-0 md:max-w-[480px] sticky top-24">
+      <div className="relative mx-auto mt-2 w-full max-w-[420px] md:ml-auto md:mr-0 md:max-w-[480px] md:mt-6 sticky top-24">
         {/* corner brackets */}
         <span className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-signal" />
         <span className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-signal" />
@@ -610,33 +853,34 @@ function PhotoCard() {
         <span className="absolute -bottom-2 -right-2 h-4 w-4 border-b border-r border-signal" />
 
         <div className="float-y overflow-hidden rounded-sm border border-border-strong bg-card shadow-[0_1px_0_var(--border-strong),_0_20px_40px_-24px_rgba(0,0,0,0.25)]">
-        <div className="flex items-center justify-between border-b border-border bg-surface-2 px-3 py-1.5 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          <span className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-signal pulse-dot" />
-            bryant.jpg
-          </span>
-          <span>320×320</span>
-        </div>
-        <div className="relative aspect-square w-full overflow-hidden bg-graph">
-          <img
-            src={bryantImg}
-            alt="Bryant Melliza"
-            className="h-full w-full object-cover"
-          />
-          {/* subtle grid overlay */}
-          <div className="pointer-events-none absolute inset-0 mix-blend-multiply opacity-40 bg-dotgrid" />
-          {/* corner readout tag */}
-          <div className="absolute bottom-2 left-2 rounded-sm border border-border-strong bg-background/85 px-2 py-1 text-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
-            <span className="text-signal">●</span> bryant · 21 · ph
+          <div className="flex items-center justify-between border-b border-border bg-surface-2 px-3 py-1.5 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            <span className="flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-signal pulse-dot" />
+              bryant.jpg
+            </span>
+            <span>320×320</span>
+          </div>
+          <div className="relative aspect-square w-full overflow-hidden bg-graph">
+            <TiledImage
+              topSrc={togaImg}
+              bottomSrc={bryantImg}
+              alt="Bryant Melliza"
+              className="h-full w-full"
+            />
+            {/* subtle grid overlay */}
+            <div className="pointer-events-none absolute inset-0 mix-blend-multiply opacity-40 bg-dotgrid" />
+            {/* corner readout tag */}
+            <div className="absolute bottom-2 left-2 rounded-sm border border-border-strong bg-background/85 px-2 py-1 text-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
+              <span className="text-signal">●</span> bryant iverson melliza
+            </div>
+          </div>
+          <div className="grid grid-cols-3 divide-x divide-border border-t border-border text-mono text-[10.5px]">
+            <StatCell label="role" value="software dev" />
+            <StatCell label="focus" value="fs & automation" />
+            <StatCell label="status" value="available" />
           </div>
         </div>
-        <div className="grid grid-cols-3 divide-x divide-border border-t border-border text-mono text-[10.5px]">
-          <StatCell label="role" value="dev" />
-          <StatCell label="focus" value="fullstack" />
-          <StatCell label="tz" value="utc+8" />
-        </div>
       </div>
-    </div>
     </div>
   );
 }
@@ -652,13 +896,13 @@ function StatCell({ label, value }: { label: string; value: string }) {
 
 function HeroStats() {
   const stats = [
-    { k: "projects shipped", v: "12", c: "var(--signal)" },
-    { k: "roles / internships", v: "03", c: "var(--flow)" },
-    { k: "primary stack", v: "react · next · prisma", c: "var(--pulse-c)" },
-    { k: "scholarship", v: "100% blue scholar", c: "var(--signal)" },
+    { k: "Dev Experience", v: "2+ Years", c: "var(--signal)" },
+    { k: "Applications Shipped", v: "12+", c: "var(--flow)" },
+    { k: "Software Internships", v: "03 Roles", c: "var(--pulse-c)" },
+    { k: "Certifications & Awards", v: "05+ Badges", c: "var(--signal)" },
   ];
   return (
-    <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-border-strong bg-border md:grid-cols-4">
+    <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-border-strong bg-border md:grid-cols-4">
       {stats.map((s) => (
         <div key={s.k} className="flex flex-col gap-1 bg-card px-4 py-4">
           <div className="flex items-center gap-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -677,8 +921,8 @@ function TerminalReadout() {
     () => [
       "$ status --dev bryant.melliza",
       "  → 12 projects shipped · 3 internships",
-      "  → stack: react · next.js · prisma · postgres",
-      "  → automation: ai-assisted tooling online",
+      "  → stack: react · react native · typescript",
+      "  → automation: n8n · ai-assisted tooling",
       "  → uptime: available for work",
     ],
     [],
@@ -717,10 +961,17 @@ function TerminalReadout() {
 
   return (
     <div className="mt-8 overflow-hidden rounded-sm border border-border-strong bg-surface/80 backdrop-blur">
-      <div className="flex items-center justify-between border-b border-border bg-surface-2 px-3 py-1.5 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-        <div className="flex items-center gap-2">
-          <Terminal className="h-3 w-3" />
-          <span>~/portfolio · system readout</span>
+      <div className="flex items-center justify-between border-b border-border bg-surface-2 px-3 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        <div className="flex items-center gap-4">
+          <div className="flex gap-1.5">
+            <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+            <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+            <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+          </div>
+          <div className="flex items-center gap-2">
+            <Terminal className="h-3 w-3" />
+            <span>~/portfolio · system readout</span>
+          </div>
         </div>
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-signal pulse-dot" />
@@ -743,21 +994,21 @@ function TerminalReadout() {
 
 function SectionLabel({ index, label, hint }: { index: string; label: string; hint?: string }) {
   return (
-    <div className="flex items-center gap-3 border-t border-border pt-6">
-      <span className="text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+    <div className="flex items-center gap-3 border-t border-border pt-8">
+      <span className="text-mono text-[12px] uppercase tracking-widest text-muted-foreground">
         [{index}]
       </span>
-      <span className="text-mono text-[10px] uppercase tracking-widest text-foreground">
+      <span className="text-mono text-[12px] uppercase tracking-widest text-foreground">
         {label}
       </span>
       {hint && (
-        <span className="text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        <span className="text-mono text-[12px] uppercase tracking-widest text-muted-foreground">
           — {hint}
         </span>
       )}
-      <span className="ml-auto text-mono text-[10px] text-muted-foreground">
-        <span className="inline-block h-1 w-1 -translate-y-0.5 rounded-full bg-pulse align-middle" />{" "}
-        ok
+      <span className="ml-auto text-mono text-[12px] uppercase tracking-widest text-muted-foreground">
+        <span className="inline-block h-1.5 w-1.5 -translate-y-0.5 rounded-full bg-pulse align-middle" />{" "}
+        sys.ready
       </span>
     </div>
   );
@@ -778,10 +1029,10 @@ function Projects({
 
   return (
     <section id="projects" className="py-20">
-      <SectionLabel index="01" label="projects" hint="web · systems · ai automation" />
-      <div className="mt-8">
-        <PipelineCanvas active={active} setActive={setActive} />
-        <div className="mt-6">
+      <SectionLabel index="02" label="projects" hint="web · systems · ai automation" />
+      <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-[280px_1fr] lg:gap-8">
+        <DirectoryExplorer active={active} setActive={setActive} />
+        <div className="sticky top-24">
           <CaseStudy project={current} />
         </div>
       </div>
@@ -789,102 +1040,47 @@ function Projects({
   );
 }
 
-function PipelineCanvas({
+function DirectoryExplorer({
   active,
   setActive,
 }: {
   active: string | null;
   setActive: (s: string) => void;
 }) {
-  const cats: Category[] = ["web", "system", "ai"];
+  const cats: Category[] = ["web", "system", "ai", "iot"];
   return (
-    <div className="relative overflow-hidden rounded-sm border border-border-strong bg-surface/70 bg-graph">
-      <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-        <span>pipeline.canvas · {PROJECTS.length} nodes</span>
-        <span className="flex items-center gap-3">
-          {cats.map((c) => (
-            <span key={c} className="flex items-center gap-1.5">
-              <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ background: CATEGORY_META[c].color }}
-              />
-              {CATEGORY_META[c].label.toLowerCase()}
-            </span>
-          ))}
-        </span>
+    <div className="relative flex h-[600px] flex-col overflow-hidden rounded-sm border border-border-strong bg-graph bg-surface/70">
+      <div className="flex shrink-0 items-center justify-between border-b border-border bg-surface-2 px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        <div className="flex items-center gap-4">
+          <div className="flex gap-1.5 shrink-0">
+            <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+            <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+            <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+          </div>
+          <div className="flex items-center gap-2">
+            <Terminal className="h-3 w-3" />
+            <span className="uppercase tracking-widest">EXPLORER</span>
+          </div>
+        </div>
       </div>
 
-      <div className="relative grid grid-cols-1 gap-6 p-5 md:grid-cols-3 md:gap-8">
-        {/* Flowing connectors overlay (desktop only) */}
-        <FlowConnectors />
-
-        {cats.map((c) => (
-          <PipelineColumn
-            key={c}
-            category={c}
-            nodes={PROJECTS.filter((p) => p.category === c)}
-            active={active}
-            setActive={setActive}
-          />
-        ))}
+      <div
+        className="flex-1 overflow-y-auto p-4"
+        style={{ scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) transparent" }}
+      >
+        <div className="flex flex-col gap-8">
+          {cats.map((c) => (
+            <PipelineColumn
+              key={c}
+              category={c}
+              nodes={PROJECTS.filter((p) => p.category === c)}
+              active={active}
+              setActive={setActive}
+            />
+          ))}
+        </div>
       </div>
     </div>
-  );
-}
-
-function FlowConnectors() {
-  // Decorative animated flows connecting the three category clusters.
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 900 400"
-      preserveAspectRatio="none"
-      className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
-    >
-      <defs>
-        <path id="cf1" d="M 150 60 C 280 60, 320 200, 450 200" />
-        <path id="cf2" d="M 450 200 C 580 200, 620 340, 750 340" />
-        <path id="cf3" d="M 150 340 C 300 340, 350 220, 450 200" />
-        <path id="cf4" d="M 450 200 C 600 180, 660 80, 750 60" />
-      </defs>
-      {[
-        ["cf1", "var(--signal)"],
-        ["cf2", "var(--flow)"],
-        ["cf3", "var(--pulse-c)"],
-        ["cf4", "var(--signal)"],
-      ].map(([id, color], i) => (
-        <g key={id}>
-          <use href={`#${id}`} stroke={color} strokeOpacity="0.35" fill="none" strokeWidth="1" />
-          <use
-            href={`#${id}`}
-            stroke={color}
-            fill="none"
-            strokeWidth="1.5"
-            className="flow-dash"
-            style={{ animationDelay: `${-i * 0.9}s` }}
-          />
-          <circle
-            r="3"
-            fill={color}
-            className="packet"
-            style={
-              {
-                offsetPath: `path('${
-                  i === 0
-                    ? "M 150 60 C 280 60, 320 200, 450 200"
-                    : i === 1
-                      ? "M 450 200 C 580 200, 620 340, 750 340"
-                      : i === 2
-                        ? "M 150 340 C 300 340, 350 220, 450 200"
-                        : "M 450 200 C 600 180, 660 80, 750 60"
-                }')`,
-                animationDelay: `${-i * 1.1}s`,
-              } as React.CSSProperties
-            }
-          />
-        </g>
-      ))}
-    </svg>
   );
 }
 
@@ -959,14 +1155,33 @@ function PipelineColumn({
 
 function CaseStudy({ project }: { project: Project }) {
   const meta = CATEGORY_META[project.category];
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    setActiveSlide(0);
+  }, [project.slug]);
+
+  const isArray = Array.isArray(project.image);
+  const images = isArray ? (project.image as string[]) : [project.image as string];
+
   return (
     <article
       key={project.slug}
-      className="animate-fade-in overflow-hidden rounded-sm border border-border-strong bg-card"
+      className="animate-fade-in flex h-[600px] flex-col overflow-hidden rounded-sm border border-border-strong bg-card"
       style={{ borderTopColor: meta.color, borderTopWidth: 2 }}
     >
-      <div className="flex items-center justify-between border-b border-border px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-        <span>case-study/{project.slug}.md</span>
+      <div className="flex shrink-0 items-center justify-between border-b border-border px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        <div className="flex items-center gap-4">
+          <div className="flex gap-1.5">
+            <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+            <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+            <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+          </div>
+          <div className="flex items-center gap-2">
+            <FileText className="h-3 w-3" />
+            <span className="uppercase tracking-widest">CASE-STUDY/{project.slug}.MD</span>
+          </div>
+        </div>
         <span className="flex items-center gap-3">
           <span className="flex items-center gap-1.5" style={{ color: meta.color }}>
             <span className="h-1.5 w-1.5 rounded-full" style={{ background: meta.color }} />
@@ -975,38 +1190,100 @@ function CaseStudy({ project }: { project: Project }) {
           <span>{project.date}</span>
         </span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr]">
-        <div className="aspect-[16/10] w-full overflow-hidden border-b border-border bg-graph md:border-b-0 md:border-r">
+      <div
+        className="flex flex-1 flex-col overflow-y-auto"
+        style={{ scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) transparent" }}
+      >
+        <div className="group relative w-full border-b border-border bg-graph">
           <img
-            src={project.image}
-            alt={project.name}
-            className="h-full w-full object-cover"
+            src={images[activeSlide]}
+            alt={`${project.name} slide ${activeSlide + 1}`}
+            className="h-auto w-full object-contain"
+            style={{ display: "block" }}
             onError={(e) => {
               const el = e.currentTarget as HTMLImageElement;
               el.style.display = "none";
             }}
           />
+          {isArray && images.length > 1 && (
+            <>
+              <button
+                onClick={() =>
+                  setActiveSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+                }
+                className="absolute left-4 top-1/2 -translate-y-1/2 rounded-sm border border-border bg-surface/80 p-2 text-muted-foreground opacity-0 backdrop-blur-sm transition hover:text-foreground group-hover:opacity-100"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={() =>
+                  setActiveSlide((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+                }
+                className="absolute right-4 top-1/2 -translate-y-1/2 rounded-sm border border-border bg-surface/80 p-2 text-muted-foreground opacity-0 backdrop-blur-sm transition hover:text-foreground group-hover:opacity-100"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+              <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-1.5">
+                {images.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveSlide(idx)}
+                    className={`h-1.5 rounded-full transition-all ${idx === activeSlide ? "w-4 bg-signal" : "w-1.5 bg-border-strong hover:bg-muted-foreground"}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
-        <div className="p-5">
-          <h3 className="text-2xl font-semibold tracking-tight">{project.name}</h3>
-          <p className="mt-1 text-sm text-muted-foreground">{project.summary}</p>
+        <div className="flex flex-col gap-8 p-6 md:p-8">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+            <div>
+              <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">{project.name}</h3>
+              <p className="mt-2 text-sm text-muted-foreground md:text-base">{project.summary}</p>
+            </div>
 
-          <dl className="mt-5 grid grid-cols-1 gap-4 text-sm">
-            <FieldBlock label="problem" body={project.problem} />
-            <FieldBlock label="solution" body={project.solution} />
-            <FieldBlock label="outcome" body={project.outcome} />
-          </dl>
+            <div className="flex flex-wrap items-center gap-3">
+              {project.demoUrl && (
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-border-strong bg-foreground px-5 py-2.5 text-mono text-[11px] uppercase tracking-wider text-background shadow-sm transition hover:border-signal hover:bg-signal hover:text-white"
+                >
+                  <ArrowUpRight className="h-3.5 w-3.5" /> view live project
+                </a>
+              )}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-border-strong bg-surface px-5 py-2.5 text-mono text-[11px] uppercase tracking-wider text-foreground shadow-sm transition hover:bg-foreground hover:text-background"
+                >
+                  <Github className="h-3.5 w-3.5" /> view on github
+                </a>
+              )}
+            </div>
+          </div>
 
-          <div className="mt-5 flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5">
             {project.stack.map((s) => (
               <span
                 key={s}
-                className="rounded-sm border border-border bg-surface px-2 py-0.5 text-mono text-[10.5px] text-foreground"
+                className="rounded-sm border border-border bg-surface px-2.5 py-1 text-mono text-[10.5px] text-foreground shadow-sm"
               >
                 {s}
               </span>
             ))}
           </div>
+
+          <div className="h-px w-full bg-border" />
+
+          <dl className="grid grid-cols-1 gap-4 text-sm md:grid-cols-3 md:gap-6">
+            <FieldBlock label="problem" body={project.problem} />
+            <FieldBlock label="solution" body={project.solution} />
+            <FieldBlock label="outcome" body={project.outcome} />
+          </dl>
         </div>
       </div>
     </article>
@@ -1015,11 +1292,12 @@ function CaseStudy({ project }: { project: Project }) {
 
 function FieldBlock({ label, body }: { label: string; body: string }) {
   return (
-    <div>
-      <dt className="text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+    <div className="flex flex-col gap-2 rounded-sm border border-border/50 bg-surface/30 p-4">
+      <dt className="flex items-center gap-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        <div className="h-1.5 w-1.5 rounded-full bg-border-strong" />
         {label}
       </dt>
-      <dd className="mt-1 text-[13.5px] leading-6 text-foreground">{body}</dd>
+      <dd className="text-[13px] leading-relaxed text-foreground/90">{body}</dd>
     </div>
   );
 }
@@ -1087,12 +1365,19 @@ function LiveDemo() {
 
   return (
     <section id="demo" className="py-20">
-      <SectionLabel index="02" label="live demo" hint="resume q&a agent" />
+      <SectionLabel index="03" label="live demo" hint="resume q&a agent" />
       <div className="mt-8 overflow-hidden rounded-sm border border-border-strong bg-card">
         <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-pulse pulse-dot" />
-            <span>agent.resume · running</span>
+          <div className="flex items-center gap-4">
+            <div className="flex gap-1.5">
+              <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+              <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+              <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+            </div>
+            <div className="flex items-center gap-2">
+              <Bot className="h-3 w-3" />
+              <span className="uppercase tracking-widest">AGENT.RESUME · RUNNING</span>
+            </div>
           </div>
           <span>rules-based · latency ~260ms</span>
         </div>
@@ -1103,11 +1388,21 @@ function LiveDemo() {
           {messages.map((m, i) => (
             <div key={i} className="flex gap-3">
               <span
-                className={`shrink-0 uppercase tracking-widest ${m.from === "agent" ? "text-signal" : "text-muted-foreground"}`}
+                className={`shrink-0 uppercase tracking-widest ${
+                  m.from === "agent" ? "text-signal font-semibold" : "text-muted-foreground"
+                }`}
               >
                 {m.from === "agent" ? "agent >" : "you   >"}
               </span>
-              <span className="text-foreground">{m.text}</span>
+              <span
+                className={
+                  m.from === "agent"
+                    ? "text-foreground opacity-90"
+                    : "text-foreground font-semibold"
+                }
+              >
+                {m.text}
+              </span>
             </div>
           ))}
         </div>
@@ -1157,40 +1452,44 @@ function LiveDemo() {
 function ExperienceLog() {
   return (
     <section id="experience" className="py-20">
-      <SectionLabel index="03" label="experience" hint="git log --reverse-chronological" />
-      <div className="mt-8 overflow-hidden rounded-sm border border-border-strong bg-card">
-        <div className="border-b border-border bg-surface-2 px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          $ git log --oneline main
-        </div>
-        <ul className="divide-y divide-border">
+      <SectionLabel index="04" label="experiences" />
+      <div className="mt-12 relative before:absolute before:inset-y-0 before:left-[19.5px] before:w-px before:bg-signal/20 md:before:left-[27.5px]">
+        <div className="flex flex-col gap-10">
           {EXPERIENCE.map((e) => (
-            <li
-              key={e.hash}
-              className="grid grid-cols-[auto_1fr] gap-4 px-4 py-5 md:grid-cols-[auto_auto_1fr]"
-            >
-              <div className="hidden h-10 w-10 shrink-0 overflow-hidden rounded-sm border border-border bg-surface md:block">
+            <div key={e.hash} className="relative flex items-start gap-6 md:gap-8 group">
+              {/* NEON PULSING NODE */}
+              <div className="absolute left-[16px] top-[18px] md:left-[24px] z-10">
+                <span className="relative inline-flex h-2.5 w-2.5 shrink-0 items-center justify-center">
+                  <span className="absolute inline-flex h-2.5 w-2.5 rounded-full ring-pulse bg-signal" />
+                  <span className="relative h-2 w-2 rounded-full bg-signal ring-4 ring-background" />
+                </span>
+              </div>
+
+              <div className="hidden h-[54px] w-[54px] shrink-0 overflow-hidden rounded-md border border-border bg-surface md:block z-10 shadow-sm">
                 <img
                   src={e.logo}
                   alt={`${e.company} logo`}
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-contain p-1"
                   onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
                 />
               </div>
-              <div className="text-mono text-[11px] text-muted-foreground">
-                <span className="text-signal">{e.hash}</span>
-                <div className="mt-1 text-[10.5px] uppercase tracking-widest">{e.period}</div>
-              </div>
-              <div>
-                <div className="text-mono text-[12.5px]">
-                  <span className="text-signal">{e.type}:</span>{" "}
-                  <span className="text-foreground">{e.role}</span>{" "}
-                  <span className="text-muted-foreground">@ {e.company}</span>
+              <div className="flex-1 rounded-md border border-border-strong bg-card p-6 shadow-sm ml-[38px] md:ml-0">
+                <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
+                      {e.role}
+                    </h3>
+                    <div className="text-[14px] font-medium text-signal/80 mt-1">{e.company}</div>
+                  </div>
+                  <div className="mt-2 inline-flex self-start items-center rounded-full border border-border bg-surface px-3 py-1 text-mono text-[10.5px] uppercase tracking-widest text-muted-foreground md:mt-0">
+                    {e.period}
+                  </div>
                 </div>
-                <p className="mt-2 max-w-3xl text-[14px] leading-6 text-foreground">{e.body}</p>
+                <p className="mt-5 text-[14.5px] leading-relaxed text-muted-foreground">{e.body}</p>
               </div>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
@@ -1199,7 +1498,7 @@ function ExperienceLog() {
 function Education() {
   return (
     <section id="education" className="py-20">
-      <SectionLabel index="04" label="education" />
+      <SectionLabel index="05" label="education" />
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
         {EDUCATION.map((e) => (
           <div key={e.school} className="rounded-sm border border-border-strong bg-card p-5">
@@ -1241,25 +1540,134 @@ function Education() {
   );
 }
 
-function Awards() {
+function Certificates() {
+  const [active, setActive] = useState(CERTIFICATES[0].title);
+  const activeCert = CERTIFICATES.find((c) => c.title === active) || CERTIFICATES[0];
+
   return (
-    <section id="awards" className="py-20">
-      <SectionLabel index="05" label="awards & recognition" />
-      <ul className="mt-8 divide-y divide-border rounded-sm border border-border-strong bg-card">
-        {AWARDS.map((a) => (
-          <li key={a.title} className="flex items-center gap-4 px-4 py-4 md:px-5">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-border bg-surface">
-              <Award className="h-4 w-4 text-signal" />
+    <section id="certificates" className="py-20">
+      <SectionLabel index="06" label="certificates & badges" />
+      <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-[280px_minmax(0,1fr)] lg:grid-cols-[340px_minmax(0,1fr)]">
+        {/* LEFT SIDEBAR: Explorer */}
+        <div className="relative flex flex-col overflow-hidden rounded-sm border border-border-strong bg-graph bg-surface/70 h-[500px]">
+          <div className="flex shrink-0 items-center justify-between border-b border-border bg-surface-2 px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            <div className="flex items-center gap-4">
+              <div className="flex gap-1.5 shrink-0">
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+              </div>
+              <div className="flex items-center gap-2">
+                <Terminal className="h-3 w-3" />
+                <span className="uppercase tracking-widest">BADGE_LOG</span>
+              </div>
             </div>
-            <div className="min-w-0 flex-1">
-              <div className="text-[14px] text-foreground">{a.title}</div>
+          </div>
+          <div
+            className="flex-1 overflow-y-auto p-4"
+            style={{ scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) transparent" }}
+          >
+            <div className="flex flex-col gap-2">
+              {CERTIFICATES.map((c) => {
+                const isActive = c.title === active;
+                return (
+                  <button
+                    key={c.title}
+                    onClick={() => setActive(c.title)}
+                    className={`group relative flex w-full items-center gap-3 rounded-sm border px-2.5 py-3 text-left text-mono transition ${
+                      isActive
+                        ? "border-transparent bg-card text-foreground"
+                        : "border-border bg-background/70 text-muted-foreground hover:border-border-strong hover:text-foreground"
+                    }`}
+                    style={
+                      isActive
+                        ? {
+                            borderColor: "var(--signal)",
+                            boxShadow: `inset 0 0 0 1px var(--signal), 0 8px 20px -14px var(--signal)`,
+                          }
+                        : undefined
+                    }
+                  >
+                    {/* node dot */}
+                    <span className="relative inline-flex h-2.5 w-2.5 shrink-0 items-center justify-center">
+                      {isActive && (
+                        <span className="absolute inline-flex h-2.5 w-2.5 rounded-full ring-pulse bg-signal" />
+                      )}
+                      <span
+                        className="relative h-2 w-2 rounded-full"
+                        style={{ background: isActive ? "var(--signal)" : "var(--border-strong)" }}
+                      />
+                    </span>
+                    <div className="flex flex-col min-w-0 flex-1 gap-1">
+                      <span className="truncate text-[11.5px] leading-tight text-foreground">
+                        {c.title}
+                      </span>
+                      <span className="truncate text-[10px] uppercase tracking-widest text-signal">
+                        {c.issuer}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
-            <div className="text-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-              {a.year}
+          </div>
+        </div>
+
+        {/* RIGHT PANE: Detail View */}
+        <article
+          key={activeCert.title}
+          className="animate-fade-in flex h-[500px] flex-col overflow-hidden rounded-sm border border-border-strong border-t-2 border-t-signal bg-card"
+        >
+          <div className="flex shrink-0 items-center justify-between border-b border-border px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            <div className="flex items-center gap-4">
+              <div className="flex gap-1.5">
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+              </div>
+              <div className="flex items-center gap-2">
+                <FileText className="h-3 w-3" />
+                <span className="uppercase tracking-widest truncate max-w-[120px] md:max-w-[200px]">
+                  CERT/{activeCert.title.replace(/\s+/g, "_")}.PNG
+                </span>
+              </div>
             </div>
-          </li>
-        ))}
-      </ul>
+            <span className="flex items-center gap-3">
+              <span className="flex items-center gap-1.5 text-signal">
+                <span className="h-1.5 w-1.5 rounded-full bg-signal" />
+                BADGE
+              </span>
+              <span className="hidden md:inline">{activeCert.date}</span>
+            </span>
+          </div>
+
+          <div
+            className="flex-1 overflow-y-auto flex flex-col"
+            style={{ scrollbarWidth: "thin", scrollbarColor: "var(--border) transparent" }}
+          >
+            <div className="flex-1 min-h-0 border-b border-border bg-surface p-6 flex items-center justify-center">
+              <img
+                src={activeCert.image}
+                alt={activeCert.title}
+                className="h-full w-full object-contain max-h-[420px]"
+                onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
+              />
+            </div>
+
+            <div className="p-6 md:p-8 shrink-0 bg-card">
+              <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+                {activeCert.title}
+              </h3>
+              <div className="text-[14px] font-medium text-signal mt-1.5">
+                Issued by {activeCert.issuer} · {activeCert.date}
+              </div>
+              <div className="mt-2 inline-block md:hidden text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                Acquired: {activeCert.date}
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
   );
 }
@@ -1273,13 +1681,13 @@ function Skills() {
     "var(--flow)",
   ];
   return (
-    <section id="skills" className="py-20">
-      <SectionLabel index="06" label="skills" hint="stack.grouped" />
+    <section id="skills" className="pb-20 pt-2 md:pt-4">
+      <SectionLabel index="01" label="skills" hint="stack.grouped" />
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {SKILLS.map((s, i) => (
           <div key={s.group} className="rounded-sm border border-border-strong bg-card p-5">
             <div
-              className="flex items-center gap-2 text-mono text-[10px] uppercase tracking-widest"
+              className="flex items-center gap-2 text-mono text-xs font-semibold uppercase tracking-widest"
               style={{ color: accents[i] }}
             >
               <span className="h-1.5 w-1.5 rounded-full" style={{ background: accents[i] }} />
@@ -1289,7 +1697,7 @@ function Skills() {
               {s.items.map((it) => (
                 <span
                   key={it}
-                  className="rounded-sm border border-border bg-surface px-2 py-0.5 text-mono text-[11px] text-foreground"
+                  className="rounded-sm border border-border bg-surface px-2.5 py-1 text-mono text-[13px] text-foreground"
                 >
                   {it}
                 </span>
@@ -1307,25 +1715,41 @@ function Contact() {
     <section id="contact" className="py-20">
       <SectionLabel index="07" label="contact" />
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-[1.4fr_1fr]">
-        <div className="rounded-sm border border-border-strong bg-card p-6">
-          <h3 className="text-2xl font-semibold tracking-tight">Let's build something.</h3>
-          <p className="mt-2 max-w-lg text-sm text-muted-foreground">
-            Open to Web Developer, Frontend, and AI Automation roles — full-time, contract, or
-            freelance.
-          </p>
-          <div className="mt-5 flex flex-wrap items-center gap-2">
-            <a
-              href="mailto:bryantiversonmelliza03@gmail.com"
-              className="inline-flex items-center gap-2 rounded-sm border border-foreground bg-foreground px-4 py-2 text-mono text-xs uppercase tracking-wider text-background hover:bg-signal hover:border-signal"
-            >
-              <Mail className="h-3.5 w-3.5" /> email me
-            </a>
-            <a
-              href="/resume.pdf"
-              className="inline-flex items-center gap-2 rounded-sm border border-border-strong px-4 py-2 text-mono text-xs uppercase tracking-wider text-foreground hover:border-signal hover:text-signal"
-            >
-              <Download className="h-3.5 w-3.5" /> download resume
-            </a>
+        <div className="overflow-hidden rounded-sm border border-border-strong bg-card">
+          <div className="flex items-center gap-4 border-b border-border bg-surface-2 px-4 py-2">
+            <div className="flex gap-1.5 shrink-0">
+              <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+              <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+              <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+            </div>
+            <div className="flex items-center gap-2">
+              <Send className="h-3 w-3 text-muted-foreground" />
+              <span className="text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                CONTACT.EXE
+              </span>
+            </div>
+          </div>
+          <div className="p-6">
+            <h3 className="text-2xl font-semibold tracking-tight">Let's build something.</h3>
+            <p className="mt-2 max-w-lg text-sm text-muted-foreground">
+              Open to Web Developer, Frontend, and AI Automation roles — full-time, contract, or
+              freelance.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <a
+                href="mailto:bryantiversonmelliza03@gmail.com"
+                className="inline-flex items-center gap-2 rounded-sm border border-foreground bg-foreground px-4 py-2 text-mono text-xs uppercase tracking-wider text-background hover:bg-signal hover:border-signal"
+              >
+                <Mail className="h-3.5 w-3.5" /> email me
+              </a>
+              <a
+                href="/resume/Bryant_Melliza_Resume.pdf"
+                download
+                className="inline-flex items-center gap-2 rounded-sm border border-border-strong px-4 py-2 text-mono text-xs uppercase tracking-wider text-foreground hover:border-signal hover:text-signal"
+              >
+                <Download className="h-3.5 w-3.5" /> download resume
+              </a>
+            </div>
           </div>
         </div>
         <ul className="grid grid-cols-1 gap-2 text-mono text-[12.5px]">
@@ -1339,10 +1763,10 @@ function Contact() {
             Metro Manila, PH
           </ContactRow>
           <ContactRow icon={<Github className="h-3.5 w-3.5" />} label="github">
-            github.com/bryantmelliza
+            github.com/brybryson
           </ContactRow>
           <ContactRow icon={<Linkedin className="h-3.5 w-3.5" />} label="linkedin">
-            linkedin.com/in/bryantmelliza
+            linkedin.com/in/bryant-iverson-melliza-6759b8292
           </ContactRow>
         </ul>
       </div>
@@ -1403,7 +1827,10 @@ function PaletteDialog({
 }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="overflow-hidden p-0 sm:max-w-lg">
+      <DialogContent
+        withoutOverlay
+        className="overflow-hidden p-0 sm:max-w-none bottom-0 top-auto left-0 right-0 translate-x-0 translate-y-0 w-full max-h-[80vh] rounded-t-lg rounded-b-none sm:rounded-t-lg sm:rounded-b-none"
+      >
         <Command className="rounded-sm">
           <CommandInput placeholder="jump to a section — projects, experience, contact..." />
           <CommandList>
@@ -1438,7 +1865,12 @@ function PaletteDialog({
                 value="resume download pdf"
                 onSelect={() => {
                   onOpenChange(false);
-                  window.open("/resume.pdf", "_blank");
+                  const a = document.createElement("a");
+                  a.href = "/resume/Bryant_Melliza_Resume.pdf";
+                  a.download = "Bryant_Melliza_Resume.pdf";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
                 }}
               >
                 <Download className="mr-2 h-3.5 w-3.5 text-signal" />
