@@ -357,6 +357,30 @@ const PROJECTS: Project[] = [
     image: "/images/salbag_3d representation.png",
     githubUrl: "https://github.com/brybryson/SALBAG.project",
   },
+  {
+    slug: "bug-triage-assistant",
+    name: "ClickUp AI Bug Triage Assistant",
+    date: "2026.07",
+    category: "ai",
+    summary:
+      "Autonomous event-driven AI agent pipeline built on n8n and LLaMA 3.1 that ingests, triages, prioritizes, and reports ClickUp bug tickets.",
+    problem:
+      "Engineering teams waste significant time manually triaging ClickUp bug reports, determining priority, and routing tasks to owning teams—causing delayed response times, duplicate runs, and inconsistent task categorization.",
+    solution:
+      "Engineered an event-driven 5-phase n8n workflow pipeline with Ollama LLaMA 3.1 LLM, featuring webhook payload ingestion, a JS idempotency guard against duplicate runs, structured JSON schema enforcement (severity, owning team, summary, action items), automatic ClickUp priority mapping, and direct markdown QA comment reporting.",
+    outcome:
+      "Automated end-to-end bug triage pipeline. Prevents duplicate processing, automatically sets ClickUp priority levels, and posts comprehensive AI QA reports directly onto task tickets in seconds.",
+    stack: [
+      "n8n Workflow Engine",
+      "Ollama (LLaMA 3.1)",
+      "ClickUp Webhooks & REST API",
+      "JavaScript (Code Nodes)",
+      "ngrok Tunneling",
+      "JSON Schema Enforcement",
+    ],
+    image: "/automation/bug triage assistant.gif",
+    githubUrl: "https://github.com/brybryson/clickup-ai-bug-triage",
+  },
 ];
 
 type Experience = {
@@ -1024,7 +1048,7 @@ function StatCell({ label, value }: { label: string; value: string }) {
 function HeroStats() {
   const stats = [
     { k: "Dev Experience", v: "2+ Years", c: "var(--signal)" },
-    { k: "Applications Shipped", v: "12+", c: "var(--flow)" },
+    { k: "Applications Shipped", v: "13+", c: "var(--flow)" },
     { k: "Software Internships", v: "03 Roles", c: "var(--pulse-c)" },
     { k: "Certifications & Awards", v: "15 Badges", c: "var(--signal)" },
   ];
@@ -1047,7 +1071,7 @@ function TerminalReadout() {
   const lines = useMemo(
     () => [
       "$ status --dev bryant.melliza",
-      "  → 12 projects shipped · 3 internships",
+      "  → 13 projects shipped · 3 internships",
       "  → stack: react · react native · typescript",
       "  → automation: n8n · ai-assisted tooling",
       "  → uptime: available for work",
