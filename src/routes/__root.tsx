@@ -130,7 +130,6 @@ function RootComponent() {
   useEffect(() => {
     fetch("https://iverson.app.n8n.cloud/webhook/fe9a0d1d-484c-4997-97b7-0fb419dc91bb", {
       method: "POST",
-      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         page: window.location.pathname,
