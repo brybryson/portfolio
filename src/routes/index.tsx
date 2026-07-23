@@ -415,7 +415,7 @@ const PROJECTS: Project[] = [
     problem:
       "Traditional web analytics rely on intrusive third-party cookies, expose PII (Personally Identifiable Information) in team channels, and suffer from high bot noise and server downtime during API outages.",
     solution:
-      "Engineered an event-driven telemetry pipeline featuring 15+ pattern bot filtering, rolling 15-minute in-memory IP deduplication via n8n global memory state, automated primary/secondary API failover (ipwho.is → ip-api.com), corporate ISP/ASN VIP tagging, anonymous Telegram alert formatting for privacy compliance, and structured visit logging to Supabase (PostgreSQL).",
+      "Engineered an event-driven telemetry pipeline featuring 15+ pattern bot filtering, rolling 15-minute in-memory IP deduplication via n8n global memory state, automated primary/secondary API failover (ipwho.is → ip-api.com), anonymous Telegram alert formatting for privacy compliance, and structured visit logging to Supabase (PostgreSQL).",
     outcome:
       "Achieved 100% fault-tolerant tracking, eliminated 95%+ crawler noise, protected visitor privacy by obscuring IP/PII in public broadcast channels, and persisted structured visitor metrics for real-time analytics.",
     stack: [
