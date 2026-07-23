@@ -128,7 +128,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   useEffect(() => {
-    fetch("https://iveson.app.n8n.cloud/assistant/4d973115-b015-4698-bc86-2e0963be3278", {
+    fetch("https://iverson.app.n8n.cloud/webhook/fe9a0d1d-484c-4997-97b7-0fb419dc91bb", {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "application/json" },
