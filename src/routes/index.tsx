@@ -412,6 +412,7 @@ type Experience = {
   type: "feat" | "chore";
   role: string;
   company: string;
+  companyUrl?: string;
   logo: string;
   period: string;
   body: string;
@@ -423,6 +424,7 @@ const EXPERIENCE: Experience[] = [
     type: "feat",
     role: "Freelance Full-Stack Developer",
     company: "Self-Employed",
+    companyUrl: "https://www.linkedin.com/in/bryant-iverson-melliza-6759b8292",
     logo: "/images/experience/portfolio logo.png",
     period: "Jun 2024 → Present",
     body: "Architected and developed end-to-end custom web and mobile applications. Engineered scalable full-stack systems using React, Next.js, TypeScript, PostgreSQL, and REST APIs. Translated client requirements into high-performance frontends and managed the full software development lifecycle while utilizing modern AI-assisted workflows to accelerate delivery.",
@@ -432,6 +434,7 @@ const EXPERIENCE: Experience[] = [
     type: "feat",
     role: "Intern Developer",
     company: "OneNetworx Marketing",
+    companyUrl: "https://www.onenetworxinsurance.com/",
     logo: "/images/experience/OneNetworx Logo.jpg",
     period: "May 2026 → Jun 2026",
     body: "Engineered responsive insurance marketing platforms using React, Vite, and Tailwind CSS. Implemented complex multi-step form workflows and migrated email infrastructure to the Gmail REST API via OAuth2. Architected serverless backend workflows using Supabase (PostgreSQL) for secure, real-time data synchronization.",
@@ -441,6 +444,7 @@ const EXPERIENCE: Experience[] = [
     type: "feat",
     role: "Intern Developer",
     company: "JLabs Innovatech Inc.",
+    companyUrl: "https://jlabs.team/",
     logo: "/images/experience/JLABS-LOGO.png",
     period: "Mar 2026 → Apr 2026",
     body: "Contributed to cross-platform mobile solutions using React Native, Expo, and TypeScript. Integrated AI functionality using the Anthropic API and implemented Zod-based validation. Resolved complex bugs related to real-time data flows and collaborated within Agile development cycles using ClickUp and Git workflows.",
@@ -450,6 +454,7 @@ const EXPERIENCE: Experience[] = [
     type: "feat",
     role: "Software Developer Intern",
     company: "NLP Business Development Services",
+    companyUrl: "https://www.facebook.com/nlpbussdevtservices/",
     logo: "/images/experience/NLP LOGO.png",
     period: "Nov 2025 → Feb 2026",
     body: "Developed business applications using React, Next.js, PostgreSQL, and Prisma ORM while maintaining legacy PHP/CodeIgniter systems. Led rapid UI/UX modernization of internal modules and optimized backend data schemas. Accelerated feature delivery by integrating AI-assisted tooling into the daily Bitbucket development workflow.",
@@ -1640,21 +1645,50 @@ function ExperienceLog() {
                 </span>
               </div>
 
-              <div className="hidden h-[54px] w-[54px] shrink-0 overflow-hidden rounded-md border border-border bg-surface md:block z-10 shadow-sm">
-                <img
-                  src={e.logo}
-                  alt={`${e.company} logo`}
-                  className="h-full w-full object-contain p-1"
-                  onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
-                />
-              </div>
+              {e.companyUrl ? (
+                <a
+                  href={e.companyUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hidden h-[54px] w-[54px] shrink-0 overflow-hidden rounded-md border border-border bg-surface md:block z-10 shadow-sm transition-all hover:border-signal hover:scale-105"
+                  title={`Visit ${e.company}`}
+                >
+                  <img
+                    src={e.logo}
+                    alt={`${e.company} logo`}
+                    className="h-full w-full object-contain p-1"
+                    onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
+                  />
+                </a>
+              ) : (
+                <div className="hidden h-[54px] w-[54px] shrink-0 overflow-hidden rounded-md border border-border bg-surface md:block z-10 shadow-sm">
+                  <img
+                    src={e.logo}
+                    alt={`${e.company} logo`}
+                    className="h-full w-full object-contain p-1"
+                    onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
+                  />
+                </div>
+              )}
               <div className="flex-1 rounded-md border border-border-strong bg-card p-6 shadow-sm ml-[38px] md:ml-0">
                 <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                   <div>
                     <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
                       {e.role}
                     </h3>
-                    <div className="text-[14px] font-medium text-signal/80 mt-1">{e.company}</div>
+                    {e.companyUrl ? (
+                      <a
+                        href={e.companyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-[14px] font-medium text-signal/90 hover:text-signal hover:underline mt-1 group/link"
+                      >
+                        <span>{e.company}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 opacity-70 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
+                      </a>
+                    ) : (
+                      <div className="text-[14px] font-medium text-signal/80 mt-1">{e.company}</div>
+                    )}
                   </div>
                   <div className="mt-2 inline-flex self-start items-center rounded-full border border-border bg-surface px-3 py-1 text-mono text-[10.5px] uppercase tracking-widest text-muted-foreground md:mt-0">
                     {e.period}
