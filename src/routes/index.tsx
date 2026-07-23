@@ -2400,15 +2400,21 @@ function ContactRow({
 function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-3 px-6 py-6 text-mono text-[11px] uppercase tracking-widest text-muted-foreground md:flex-row md:items-center md:px-10">
-        <div>© {new Date().getFullYear()} bryant melliza · built in react + tailwind</div>
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-pulse pulse-dot" /> system operational
-          </span>
-          <a href="#hero" className="hover:text-foreground">
-            back to top
-          </a>
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-6 text-mono text-[11px] tracking-widest text-muted-foreground md:px-10">
+        <div className="flex flex-col items-start justify-between gap-3 uppercase md:flex-row md:items-center">
+          <div>© {new Date().getFullYear()} bryant melliza · built in react + tailwind</div>
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-pulse pulse-dot" /> system operational
+            </span>
+            <a href="#hero" className="hover:text-foreground transition-colors">
+              back to top
+            </a>
+          </div>
+        </div>
+        <div className="border-t border-border/60 pt-3 text-[10px] normal-case text-muted-foreground/75 leading-relaxed">
+          <span className="text-signal/90 font-mono font-medium uppercase">priv.notice — </span>
+          Basic server & visitor telemetry (including IP address, page path, and HTTP referrer) are temporarily processed for analytics, performance, and security.
         </div>
       </div>
     </footer>
