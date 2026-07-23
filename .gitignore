@@ -7,12 +7,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Build outputs & caches
 node_modules
 dist
 dist-ssr
 .output
 .vinxi
-.tanstack/**
+.tanstack
 .nitro
 *.local
 
