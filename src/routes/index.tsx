@@ -381,6 +381,30 @@ const PROJECTS: Project[] = [
     image: "/automation/bug triage assistant.gif",
     githubUrl: "https://github.com/brybryson/clickup-ai-bug-triage",
   },
+  {
+    slug: "bug-triage-backfill-sweep",
+    name: "ClickUp AI Bug Triage — Scheduled Backfill Engine",
+    date: "2026.07",
+    category: "ai",
+    summary:
+      "Scheduled self-healing reconciliation cron workflow in n8n that periodically sweeps, triages, and resolves untriaged ClickUp bug tickets.",
+    problem:
+      "Real-time webhook automations can occasionally miss events during network outages, server maintenance, or rate-limiting spikes, leaving orphaned, untriaged bug tickets in the queue.",
+    solution:
+      "Engineered a self-healing hourly reconciliation engine in n8n that automatically fetches all active ClickUp tickets, filters for untriaged issues lacking priority ratings, feeds them through a local LLaMA 3.1 LLM via REST API, and applies automated triage reports in bulk.",
+    outcome:
+      "Guaranteed 100% triage coverage across all engineering tickets, eliminated human oversight risks, and established enterprise-grade fault tolerance for the AI triage pipeline.",
+    stack: [
+      "n8n Workflow Engine",
+      "Ollama (LLaMA 3.1)",
+      "ClickUp API",
+      "ngrok Tunneling",
+      "Cron / Schedule Triggers",
+      "JavaScript (ES6+)",
+    ],
+    image: "/automation/bug triage assistant hourly.gif",
+    githubUrl: "https://github.com/brybryson/clickup-ai-bug-triage",
+  },
 ];
 
 type Experience = {
@@ -1048,7 +1072,7 @@ function StatCell({ label, value }: { label: string; value: string }) {
 function HeroStats() {
   const stats = [
     { k: "Dev Experience", v: "2+ Years", c: "var(--signal)" },
-    { k: "Applications Shipped", v: "13+", c: "var(--flow)" },
+    { k: "Applications Shipped", v: "14+", c: "var(--flow)" },
     { k: "Software Internships", v: "03 Roles", c: "var(--pulse-c)" },
     { k: "Certifications & Awards", v: "15 Badges", c: "var(--signal)" },
   ];
@@ -1071,7 +1095,7 @@ function TerminalReadout() {
   const lines = useMemo(
     () => [
       "$ status --dev bryant.melliza",
-      "  → 13 projects shipped · 3 internships",
+      "  → 14 projects shipped · 3 internships",
       "  → stack: react · react native · typescript",
       "  → automation: n8n · ai-assisted tooling",
       "  → uptime: available for work",
