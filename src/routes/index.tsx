@@ -706,7 +706,7 @@ function Portfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-paper text-foreground">
+    <div className="min-h-screen bg-paper text-foreground overflow-x-hidden w-full max-w-full">
       <TopStrip onOpenPalette={() => setPaletteOpen(true)} />
       <main className="mx-auto max-w-[1440px] px-6 md:px-10">
         <Hero onOpenPalette={() => setPaletteOpen(true)} />

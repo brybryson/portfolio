@@ -103,11 +103,18 @@
     font-family: var(--font-sans);
     font-feature-settings: "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   ::-webkit-scrollbar {
     width: 6px;
-    height: 6px;
+    height: 0px;
+  }
+
+  ::-webkit-scrollbar:horizontal {
+    height: 0px;
+    display: none;
   }
 
   ::-webkit-scrollbar-track {
