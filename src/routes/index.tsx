@@ -44,7 +44,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Full-stack developer specialising in React, Next.js, and Prisma. Engineering scalable digital solutions from Metro Manila.",
+          "Portfolio of Bryant Melliza — full-stack developer (React, Next.js, Prisma) engineering scalable digital solutions from Caloocan City, PH.",
       },
       { property: "og:title", content: "Bryant Melliza — Software Developer" },
       {
@@ -802,7 +802,7 @@ function TopStrip({ onOpenPalette }: { onOpenPalette: () => void }) {
           <a href="tel:+639398170375" className="hover:text-foreground">
             +63 939 817 0375
           </a>
-          <span>Metro Manila, PH</span>
+          <span>Caloocan City, PH</span>
           <a
             href="https://github.com/brybryson"
             target="_blank"
@@ -1530,7 +1530,7 @@ const QA_BANK: QA[] = [
   },
   {
     q: "location",
-    a: "Metro Manila, Philippines. Open to remote and hybrid roles across APAC and beyond.",
+    a: "Caloocan City, Philippines. Open to remote and hybrid roles across APAC and beyond.",
   },
   {
     q: "roles",
@@ -2356,7 +2356,7 @@ function Contact() {
             +63 939 817 0375
           </ContactRow>
           <ContactRow icon={<MapPin className="h-3.5 w-3.5" />} label="location">
-            Metro Manila, PH
+            Caloocan City, PH
           </ContactRow>
           <ContactRow
             icon={<Github className="h-3.5 w-3.5" />}

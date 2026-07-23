@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Portfolio of Bryant Melliza — full-stack developer (React, Next.js, Prisma) engineering scalable digital solutions. Based in Metro Manila, PH.",
+          "Portfolio of Bryant Melliza — full-stack developer (React, Next.js, Prisma) engineering scalable digital solutions. Based in Caloocan City, PH.",
       },
       { name: "author", content: "Bryant Melliza" },
       { property: "og:title", content: "Bryant Melliza — Software Developer" },
