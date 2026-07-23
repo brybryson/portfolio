@@ -426,7 +426,7 @@ const PROJECTS: Project[] = [
       "JavaScript (ES6+)",
       "Privacy-by-Design (GDPR-Aligned)",
     ],
-    image: "/automation/bug triage assistant.gif",
+    image: "/automation/Live Traffic Telegram Notifier.gif",
     githubUrl: "https://github.com/brybryson/Live-Traffic-Telegram-Notifier",
   },
 ];
