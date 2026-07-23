@@ -405,6 +405,30 @@ const PROJECTS: Project[] = [
     image: "/automation/bug triage assistant hourly.gif",
     githubUrl: "https://github.com/brybryson/clickup-ai-bug-triage",
   },
+  {
+    slug: "live-traffic-telegram-notifier",
+    name: "Live Traffic Telegram Notifier",
+    date: "2026.07",
+    category: "ai",
+    summary:
+      "Enterprise-grade real-time portfolio telemetry and privacy-conscious Telegram alert engine built on n8n, Supabase, and REST APIs.",
+    problem:
+      "Traditional web analytics rely on intrusive third-party cookies, expose PII (Personally Identifiable Information) in team channels, and suffer from high bot noise and server downtime during API outages.",
+    solution:
+      "Engineered an event-driven telemetry pipeline featuring 15+ pattern bot filtering, rolling 15-minute in-memory IP deduplication via n8n global memory state, automated primary/secondary API failover (ipwho.is → ip-api.com), corporate ISP/ASN VIP tagging, anonymous Telegram alert formatting for privacy compliance, and structured visit logging to Supabase (PostgreSQL).",
+    outcome:
+      "Achieved 100% fault-tolerant tracking, eliminated 95%+ crawler noise, protected visitor privacy by obscuring IP/PII in public broadcast channels, and persisted structured visitor metrics for real-time analytics.",
+    stack: [
+      "n8n Workflow Engine",
+      "Supabase (PostgreSQL)",
+      "Telegram Bot API",
+      "ipwho.is & ip-api.com REST APIs",
+      "JavaScript (ES6+)",
+      "Privacy-by-Design (GDPR-Aligned)",
+    ],
+    image: "/automation/bug triage assistant.gif",
+    githubUrl: "https://github.com/brybryson/Live-Traffic-Telegram-Notifier",
+  },
 ];
 
 type Experience = {
@@ -1077,7 +1101,7 @@ function StatCell({ label, value }: { label: string; value: string }) {
 function HeroStats() {
   const stats = [
     { k: "Dev Experience", v: "2+ Years", c: "var(--signal)" },
-    { k: "Applications Shipped", v: "14+", c: "var(--flow)" },
+    { k: "Applications Shipped", v: "15+", c: "var(--flow)" },
     { k: "Software Internships", v: "03 Roles", c: "var(--pulse-c)" },
     { k: "Certifications & Awards", v: "15 Badges", c: "var(--signal)" },
   ];
@@ -1100,7 +1124,7 @@ function TerminalReadout() {
   const lines = useMemo(
     () => [
       "$ status --dev bryant.melliza",
-      "  → 14 projects shipped · 3 internships",
+      "  → 15 projects shipped · 3 internships",
       "  → stack: react · react native · typescript",
       "  → automation: n8n · ai-assisted tooling",
       "  → uptime: available for work",
