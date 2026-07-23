@@ -33,6 +33,8 @@ import {
   Cpu,
   ChevronLeft,
   ChevronRight,
+  Maximize2,
+  X,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -67,7 +69,7 @@ const CATEGORY_META: Record<
   web: { label: "Web Applications", color: "var(--signal)", icon: Layers },
   system: { label: "Systems", color: "var(--flow)", icon: Boxes },
   ai: { label: "AI & Automation", color: "var(--pulse-c)", icon: Bot },
-  iot: { label: "Hardware & IoT", color: "#06b6d4", icon: Cpu },
+  iot: { label: "Hardware & IoT", color: "#22C55E", icon: Cpu },
 };
 
 type Project = {
@@ -355,6 +357,54 @@ const PROJECTS: Project[] = [
     image: "/images/salbag_3d representation.png",
     githubUrl: "https://github.com/brybryson/SALBAG.project",
   },
+  {
+    slug: "bug-triage-assistant",
+    name: "ClickUp AI Bug Triage Assistant",
+    date: "2026.07",
+    category: "ai",
+    summary:
+      "Autonomous event-driven AI agent pipeline built on n8n and LLaMA 3.1 that ingests, triages, prioritizes, and reports ClickUp bug tickets.",
+    problem:
+      "Engineering teams waste significant time manually triaging ClickUp bug reports, determining priority, and routing tasks to owning teams—causing delayed response times, duplicate runs, and inconsistent task categorization.",
+    solution:
+      "Engineered an event-driven 5-phase n8n workflow pipeline with Ollama LLaMA 3.1 LLM, featuring webhook payload ingestion, a JS idempotency guard against duplicate runs, structured JSON schema enforcement (severity, owning team, summary, action items), automatic ClickUp priority mapping, and direct markdown QA comment reporting.",
+    outcome:
+      "Automated end-to-end bug triage pipeline. Prevents duplicate processing, automatically sets ClickUp priority levels, and posts comprehensive AI QA reports directly onto task tickets in seconds.",
+    stack: [
+      "n8n Workflow Engine",
+      "Ollama (LLaMA 3.1)",
+      "ClickUp Webhooks & REST API",
+      "JavaScript (Code Nodes)",
+      "ngrok Tunneling",
+      "JSON Schema Enforcement",
+    ],
+    image: "/automation/bug triage assistant.gif",
+    githubUrl: "https://github.com/brybryson/clickup-ai-bug-triage",
+  },
+  {
+    slug: "bug-triage-backfill-sweep",
+    name: "ClickUp AI Bug Triage — Scheduled Backfill Engine",
+    date: "2026.07",
+    category: "ai",
+    summary:
+      "Scheduled self-healing reconciliation cron workflow in n8n that periodically sweeps, triages, and resolves untriaged ClickUp bug tickets.",
+    problem:
+      "Real-time webhook automations can occasionally miss events during network outages, server maintenance, or rate-limiting spikes, leaving orphaned, untriaged bug tickets in the queue.",
+    solution:
+      "Engineered a self-healing hourly reconciliation engine in n8n that automatically fetches all active ClickUp tickets, filters for untriaged issues lacking priority ratings, feeds them through a local LLaMA 3.1 LLM via REST API, and applies automated triage reports in bulk.",
+    outcome:
+      "Guaranteed 100% triage coverage across all engineering tickets, eliminated human oversight risks, and established enterprise-grade fault tolerance for the AI triage pipeline.",
+    stack: [
+      "n8n Workflow Engine",
+      "Ollama (LLaMA 3.1)",
+      "ClickUp API",
+      "ngrok Tunneling",
+      "Cron / Schedule Triggers",
+      "JavaScript (ES6+)",
+    ],
+    image: "/automation/bug triage assistant hourly.gif",
+    githubUrl: "https://github.com/brybryson/clickup-ai-bug-triage",
+  },
 ];
 
 type Experience = {
@@ -362,6 +412,7 @@ type Experience = {
   type: "feat" | "chore";
   role: string;
   company: string;
+  companyUrl?: string;
   logo: string;
   period: string;
   body: string;
@@ -373,6 +424,7 @@ const EXPERIENCE: Experience[] = [
     type: "feat",
     role: "Freelance Full-Stack Developer",
     company: "Self-Employed",
+    companyUrl: "https://www.linkedin.com/in/bryant-iverson-melliza-6759b8292",
     logo: "/images/experience/portfolio logo.png",
     period: "Jun 2024 → Present",
     body: "Architected and developed end-to-end custom web and mobile applications. Engineered scalable full-stack systems using React, Next.js, TypeScript, PostgreSQL, and REST APIs. Translated client requirements into high-performance frontends and managed the full software development lifecycle while utilizing modern AI-assisted workflows to accelerate delivery.",
@@ -382,6 +434,7 @@ const EXPERIENCE: Experience[] = [
     type: "feat",
     role: "Intern Developer",
     company: "OneNetworx Marketing",
+    companyUrl: "https://www.onenetworxinsurance.com/",
     logo: "/images/experience/OneNetworx Logo.jpg",
     period: "May 2026 → Jun 2026",
     body: "Engineered responsive insurance marketing platforms using React, Vite, and Tailwind CSS. Implemented complex multi-step form workflows and migrated email infrastructure to the Gmail REST API via OAuth2. Architected serverless backend workflows using Supabase (PostgreSQL) for secure, real-time data synchronization.",
@@ -391,6 +444,7 @@ const EXPERIENCE: Experience[] = [
     type: "feat",
     role: "Intern Developer",
     company: "JLabs Innovatech Inc.",
+    companyUrl: "https://jlabs.team/",
     logo: "/images/experience/JLABS-LOGO.png",
     period: "Mar 2026 → Apr 2026",
     body: "Contributed to cross-platform mobile solutions using React Native, Expo, and TypeScript. Integrated AI functionality using the Anthropic API and implemented Zod-based validation. Resolved complex bugs related to real-time data flows and collaborated within Agile development cycles using ClickUp and Git workflows.",
@@ -400,6 +454,7 @@ const EXPERIENCE: Experience[] = [
     type: "feat",
     role: "Software Developer Intern",
     company: "NLP Business Development Services",
+    companyUrl: "https://www.facebook.com/nlpbussdevtservices/",
     logo: "/images/experience/NLP LOGO.png",
     period: "Nov 2025 → Feb 2026",
     body: "Developed business applications using React, Next.js, PostgreSQL, and Prisma ORM while maintaining legacy PHP/CodeIgniter systems. Led rapid UI/UX modernization of internal modules and optimized backend data schemas. Accelerated feature delivery by integrating AI-assisted tooling into the daily Bitbucket development workflow.",
@@ -410,8 +465,8 @@ const EDUCATION = [
   {
     school: "National University — Fairview",
     logo: "/images/education/NU LOGO.png",
-    degree:
-      "Bachelor of Science in Information Technology Specialization in Mobile and Internet Technologies",
+    degree: "Bachelor of Science in Information Technology",
+    specialization: "Specialization in Mobile and Internet Technologies",
     detail: "College",
     period: "2022 — 2026",
     honors: [
@@ -428,7 +483,8 @@ const EDUCATION = [
   {
     school: "Caloocan National Science & Technology High School",
     logo: "/images/education/CNSTHS.png",
-    degree: "Science, Technology, Engineering, and Mathematics (STEM) Strand",
+    degree: "STEM Strand",
+    specialization: "Science, Technology, Engineering, and Mathematics",
     detail: "Senior High School",
     period: "Graduated 2022",
     honors: [
@@ -439,12 +495,129 @@ const EDUCATION = [
   },
 ];
 
-const CERTIFICATES = [
+const CERTIFICATE_CATEGORIES = [
+  "All",
+  "Automation & AI",
+  "Software Dev & API",
+  "Project Management & Agile",
+  "Testing & QA",
+  "Soft Skills & Leadership",
+  "Data Privacy & Governance",
+] as const;
+
+interface CertificateItem {
+  title: string;
+  issuer: string;
+  date: string;
+  category: string;
+  image: string;
+}
+
+const CERTIFICATES: CertificateItem[] = [
   {
     title: "Essentials: Your First Workflows",
     issuer: "n8n Academy",
     date: "July 22, 2026",
+    category: "Automation & AI",
     image: "/certificates/Essentials- Your First Workflows n8n.png",
+  },
+  {
+    title: "Integrations: APIs & Connected Workflows",
+    issuer: "n8n Academy",
+    date: "July 23, 2026",
+    category: "Automation & AI",
+    image: "/certificates/integrations - apis and connected workflows.png",
+  },
+  {
+    title: "In Practice: AI, Testing & Best Practices",
+    issuer: "n8n Academy",
+    date: "July 23, 2026",
+    category: "Automation & AI",
+    image: "/certificates/in practice-ai, testing, best practices.png",
+  },
+  {
+    title: "AI in Risk Management and Fraud Detection",
+    issuer: "LinkedIn Learning",
+    date: "August 8, 2025",
+    category: "Automation & AI",
+    image: "/certificates/ai in risk management and fraud detection.png",
+  },
+  {
+    title: "Introducing Postman",
+    issuer: "LinkedIn Learning",
+    date: "September 13, 2025",
+    category: "Software Dev & API",
+    image: "/certificates/introducing postman.png",
+  },
+  {
+    title: "Postman Essential Training",
+    issuer: "LinkedIn Learning",
+    date: "September 13, 2025",
+    category: "Software Dev & API",
+    image: "/certificates/postman essential training.png",
+  },
+  {
+    title: "Software Design: Developing Effective Requirements",
+    issuer: "LinkedIn Learning",
+    date: "August 8, 2025",
+    category: "Software Dev & API",
+    image: "/certificates/software design-developing effective requirements.png",
+  },
+  {
+    title: "Agile Software Development",
+    issuer: "LinkedIn Learning",
+    date: "September 13, 2025",
+    category: "Project Management & Agile",
+    image: "/certificates/agile software dev.png",
+  },
+  {
+    title: "Getting Started with Professional Scrum",
+    issuer: "LinkedIn Learning",
+    date: "August 15, 2026",
+    category: "Project Management & Agile",
+    image: "/certificates/getting started with professional scrum.png",
+  },
+  {
+    title: "Programming Foundations: Software Testing/QA",
+    issuer: "LinkedIn Learning",
+    date: "August 9, 2025",
+    category: "Testing & QA",
+    image: "/certificates/qa.png",
+  },
+  {
+    title: "Understanding Manual Testing",
+    issuer: "LinkedIn Learning",
+    date: "August 9, 2025",
+    category: "Testing & QA",
+    image: "/certificates/understanding manual testing.png",
+  },
+  {
+    title: "Google Developer Student Club Core Team Member",
+    issuer: "Google Developer Student Club",
+    date: "AY 2023 - 2024",
+    category: "Soft Skills & Leadership",
+    image: "/certificates/GDSC CERTIFICATE OFCOMPLETION.png",
+  },
+  {
+    title: "Leadership Skills for the Future",
+    issuer: "LinkedIn Learning",
+    date: "August 8, 2025",
+    category: "Soft Skills & Leadership",
+    image: "/certificates/leadership skills for the future.png",
+  },
+  {
+    title: "Leading with a Growth Mindset",
+    issuer: "LinkedIn Learning",
+    date: "August 8, 2025",
+    category: "Soft Skills & Leadership",
+    image: "/certificates/leading with a growth mindset.png",
+  },
+  {
+    title: "CIC Academy Webinar Course VII x NPC Privacy",
+    issuer: "Credit Information Corp. & NPC",
+    date: "October 4, 2024",
+    category: "Data Privacy & Governance",
+    image: "/certificates/CIC Academy webinar.png",
   },
 ];
 
@@ -562,7 +735,7 @@ function Portfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-paper text-foreground">
+    <div className="min-h-screen bg-paper text-foreground overflow-x-hidden w-full max-w-full">
       <TopStrip onOpenPalette={() => setPaletteOpen(true)} />
       <main className="mx-auto max-w-[1440px] px-6 md:px-10">
         <Hero onOpenPalette={() => setPaletteOpen(true)} />
@@ -826,8 +999,13 @@ function TiledImage({
   alt: string;
   className?: string;
 }) {
+  const [isRevealed, setIsRevealed] = useState(false);
+
   return (
-    <div className={`relative overflow-hidden group ${className || ""}`}>
+    <div
+      onClick={() => setIsRevealed((prev) => !prev)}
+      className={`relative overflow-hidden group cursor-pointer select-none ${className || ""}`}
+    >
       <img
         src={bottomSrc}
         alt={alt}
@@ -836,7 +1014,9 @@ function TiledImage({
       <img
         src={topSrc}
         alt={alt}
-        className="absolute inset-0 h-full w-full object-cover object-[40%_25%] transition-all duration-75 ease-in-out group-hover:opacity-0 group-hover:blur-sm"
+        className={`absolute inset-0 h-full w-full object-cover object-[40%_25%] transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:blur-sm ${
+          isRevealed ? "opacity-0 blur-sm" : ""
+        }`}
       />
     </div>
   );
@@ -847,10 +1027,10 @@ function PhotoCard() {
     <div className="h-full w-full">
       <div className="relative mx-auto mt-2 w-full max-w-[420px] md:ml-auto md:mr-0 md:max-w-[480px] md:mt-6 sticky top-24">
         {/* corner brackets */}
-        <span className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-signal" />
-        <span className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-signal" />
-        <span className="absolute -bottom-2 -left-2 h-4 w-4 border-b border-l border-signal" />
-        <span className="absolute -bottom-2 -right-2 h-4 w-4 border-b border-r border-signal" />
+        <span className="absolute -left-2 -top-2 h-4 w-4 border-l border-t border-signal pointer-events-none" />
+        <span className="absolute -right-2 -top-2 h-4 w-4 border-r border-t border-signal pointer-events-none" />
+        <span className="absolute -bottom-2 -left-2 h-4 w-4 border-b border-l border-signal pointer-events-none" />
+        <span className="absolute -bottom-2 -right-2 h-4 w-4 border-b border-r border-signal pointer-events-none" />
 
         <div className="float-y overflow-hidden rounded-sm border border-border-strong bg-card shadow-[0_1px_0_var(--border-strong),_0_20px_40px_-24px_rgba(0,0,0,0.25)]">
           <div className="flex items-center justify-between border-b border-border bg-surface-2 px-3 py-1.5 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -858,7 +1038,7 @@ function PhotoCard() {
               <span className="h-1.5 w-1.5 rounded-full bg-signal pulse-dot" />
               bryant.jpg
             </span>
-            <span>320×320</span>
+            <span className="text-[9.5px]">tap / hover to flip</span>
           </div>
           <div className="relative aspect-square w-full overflow-hidden bg-graph">
             <TiledImage
@@ -870,7 +1050,7 @@ function PhotoCard() {
             {/* subtle grid overlay */}
             <div className="pointer-events-none absolute inset-0 mix-blend-multiply opacity-40 bg-dotgrid" />
             {/* corner readout tag */}
-            <div className="absolute bottom-2 left-2 rounded-sm border border-border-strong bg-background/85 px-2 py-1 text-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
+            <div className="absolute bottom-2 left-2 rounded-sm border border-border-strong bg-background/85 px-2 py-1 text-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur pointer-events-none">
               <span className="text-signal">●</span> bryant iverson melliza
             </div>
           </div>
@@ -897,9 +1077,9 @@ function StatCell({ label, value }: { label: string; value: string }) {
 function HeroStats() {
   const stats = [
     { k: "Dev Experience", v: "2+ Years", c: "var(--signal)" },
-    { k: "Applications Shipped", v: "12+", c: "var(--flow)" },
+    { k: "Applications Shipped", v: "14+", c: "var(--flow)" },
     { k: "Software Internships", v: "03 Roles", c: "var(--pulse-c)" },
-    { k: "Certifications & Awards", v: "05+ Badges", c: "var(--signal)" },
+    { k: "Certifications & Awards", v: "15 Badges", c: "var(--signal)" },
   ];
   return (
     <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-border-strong bg-border md:grid-cols-4">
@@ -920,7 +1100,7 @@ function TerminalReadout() {
   const lines = useMemo(
     () => [
       "$ status --dev bryant.melliza",
-      "  → 12 projects shipped · 3 internships",
+      "  → 14 projects shipped · 3 internships",
       "  → stack: react · react native · typescript",
       "  → automation: n8n · ai-assisted tooling",
       "  → uptime: available for work",
@@ -994,19 +1174,19 @@ function TerminalReadout() {
 
 function SectionLabel({ index, label, hint }: { index: string; label: string; hint?: string }) {
   return (
-    <div className="flex items-center gap-3 border-t border-border pt-8">
-      <span className="text-mono text-[12px] uppercase tracking-widest text-muted-foreground">
+    <div className="flex items-center gap-2 sm:gap-3 border-t border-border pt-8">
+      <span className="text-mono text-[12px] uppercase tracking-widest text-muted-foreground shrink-0">
         [{index}]
       </span>
-      <span className="text-mono text-[12px] uppercase tracking-widest text-foreground">
+      <span className="text-mono text-[12px] uppercase tracking-widest text-foreground shrink-0 font-medium">
         {label}
       </span>
       {hint && (
-        <span className="text-mono text-[12px] uppercase tracking-widest text-muted-foreground">
+        <span className="hidden sm:inline text-mono text-[12px] uppercase tracking-widest text-muted-foreground truncate">
           — {hint}
         </span>
       )}
-      <span className="ml-auto text-mono text-[12px] uppercase tracking-widest text-muted-foreground">
+      <span className="ml-auto text-mono text-[12px] uppercase tracking-widest text-muted-foreground shrink-0">
         <span className="inline-block h-1.5 w-1.5 -translate-y-0.5 rounded-full bg-pulse align-middle" />{" "}
         sys.ready
       </span>
@@ -1123,7 +1303,7 @@ function PipelineColumn({
                 isActive
                   ? {
                       borderColor: meta.color,
-                      boxShadow: `inset 0 0 0 1px ${meta.color}, 0 8px 20px -14px ${meta.color}`,
+                      boxShadow: `0 4px 14px -8px ${meta.color}`,
                     }
                   : undefined
               }
@@ -1168,7 +1348,7 @@ function CaseStudy({ project }: { project: Project }) {
     <article
       key={project.slug}
       className="animate-fade-in flex h-[600px] flex-col overflow-hidden rounded-sm border border-border-strong bg-card"
-      style={{ borderTopColor: meta.color, borderTopWidth: 2 }}
+      style={{ borderTopColor: meta.color, borderTopWidth: 1 }}
     >
       <div className="flex shrink-0 items-center justify-between border-b border-border px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
         <div className="flex items-center gap-4">
@@ -1465,21 +1645,50 @@ function ExperienceLog() {
                 </span>
               </div>
 
-              <div className="hidden h-[54px] w-[54px] shrink-0 overflow-hidden rounded-md border border-border bg-surface md:block z-10 shadow-sm">
-                <img
-                  src={e.logo}
-                  alt={`${e.company} logo`}
-                  className="h-full w-full object-contain p-1"
-                  onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
-                />
-              </div>
+              {e.companyUrl ? (
+                <a
+                  href={e.companyUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hidden h-[54px] w-[54px] shrink-0 overflow-hidden rounded-md border border-border bg-surface md:block z-10 shadow-sm transition-all hover:border-signal hover:scale-105"
+                  title={`Visit ${e.company}`}
+                >
+                  <img
+                    src={e.logo}
+                    alt={`${e.company} logo`}
+                    className="h-full w-full object-contain p-1"
+                    onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
+                  />
+                </a>
+              ) : (
+                <div className="hidden h-[54px] w-[54px] shrink-0 overflow-hidden rounded-md border border-border bg-surface md:block z-10 shadow-sm">
+                  <img
+                    src={e.logo}
+                    alt={`${e.company} logo`}
+                    className="h-full w-full object-contain p-1"
+                    onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
+                  />
+                </div>
+              )}
               <div className="flex-1 rounded-md border border-border-strong bg-card p-6 shadow-sm ml-[38px] md:ml-0">
                 <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                   <div>
                     <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
                       {e.role}
                     </h3>
-                    <div className="text-[14px] font-medium text-signal/80 mt-1">{e.company}</div>
+                    {e.companyUrl ? (
+                      <a
+                        href={e.companyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-[14px] font-medium text-signal/90 hover:text-signal hover:underline mt-1 group/link"
+                      >
+                        <span>{e.company}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 opacity-70 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all" />
+                      </a>
+                    ) : (
+                      <div className="text-[14px] font-medium text-signal/80 mt-1">{e.company}</div>
+                    )}
                   </div>
                   <div className="mt-2 inline-flex self-start items-center rounded-full border border-border bg-surface px-3 py-1 text-mono text-[10.5px] uppercase tracking-widest text-muted-foreground md:mt-0">
                     {e.period}
@@ -1496,60 +1705,305 @@ function ExperienceLog() {
 }
 
 function Education() {
+  const college = EDUCATION[0];
+  const highSchool = EDUCATION[1];
+
   return (
     <section id="education" className="py-20">
-      <SectionLabel index="05" label="education" />
-      <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {EDUCATION.map((e) => (
-          <div key={e.school} className="rounded-sm border border-border-strong bg-card p-5">
-            <div className="flex items-start gap-3">
-              <div className="h-10 w-10 shrink-0 overflow-hidden rounded-sm border border-border bg-surface">
-                <img
-                  src={e.logo}
-                  alt={`${e.school} logo`}
-                  className="h-full w-full object-contain"
-                  onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
-                />
+      <SectionLabel index="05" label="education & credentials" />
+
+      <div className="mt-8 flex flex-col gap-6">
+        {/* COLLEGE CREDENTIAL TERMINAL */}
+        <div className="overflow-hidden rounded-sm border border-border-strong bg-card shadow-lg">
+          {/* Terminal Window Header */}
+          <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-xs">
+            <div className="flex items-center gap-3">
+              <div className="flex gap-1.5 shrink-0">
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
               </div>
-              <div className="min-w-0 flex-1">
-                <div className="text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                  {e.period}
+              <div className="flex items-center gap-2 text-foreground font-semibold tracking-wider">
+                <GraduationCap className="h-3.5 w-3.5 text-signal" />
+                <span>ACADEMIC_RECORD.SYS — HIGHER EDUCATION</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:inline-block rounded border border-signal/30 bg-signal/10 px-2 py-0.5 text-[10px] uppercase tracking-widest text-signal font-medium">
+                {college.detail}
+              </span>
+              <span className="rounded border border-border bg-surface px-2.5 py-0.5 text-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
+                {college.period}
+              </span>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="p-6 md:p-8">
+            {/* Header Details */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-6">
+              <div className="flex items-center gap-4">
+                <div className="h-14 w-14 shrink-0 overflow-hidden rounded-sm border border-border bg-surface p-1.5 shadow-sm">
+                  <img
+                    src={college.logo}
+                    alt={`${college.school} logo`}
+                    className="h-full w-full object-contain"
+                  />
                 </div>
-                <h3 className="mt-1 flex items-center gap-2 text-base font-semibold">
-                  <GraduationCap className="h-4 w-4 text-signal" />
-                  {e.degree}
-                </h3>
-                <div className="text-[13px] text-muted-foreground">{e.school}</div>
-                <div className="mt-1 text-[13px]">{e.detail}</div>
-                <ul className="mt-3 space-y-1">
-                  {e.honors.map((h) => (
-                    <li
-                      key={h}
-                      className="flex items-center gap-2 text-mono text-[11.5px] text-foreground"
-                    >
-                      <span className="h-1 w-1 rounded-full bg-pulse" /> {h}
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold tracking-tight text-foreground">
+                    {college.school}
+                  </h3>
+                  <div className="mt-1 flex flex-wrap items-center gap-2">
+                    <span className="text-base font-semibold text-signal">
+                      {college.degree}
+                    </span>
+                  </div>
+                  {college.specialization && (
+                    <div className="mt-1.5 inline-block text-xs font-mono text-muted-foreground">
+                      — {college.specialization}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Honors & Accolades Matrix */}
+            <div className="mt-6">
+              <div className="flex items-center gap-2 text-mono text-[11px] uppercase tracking-widest text-muted-foreground mb-4 font-semibold">
+                <Award className="h-3.5 w-3.5 text-signal" />
+                <span>Honors, Scholarships & Awards ({college.honors.length})</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {college.honors.map((honor, i) => (
+                  <div
+                    key={honor}
+                    className="flex items-start gap-3 rounded-sm border border-border bg-surface/60 p-3 text-mono text-[12px] text-foreground transition-all hover:border-signal/50 hover:bg-card"
+                  >
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-signal/10 text-[9.5px] text-signal font-bold border border-signal/20 mt-0.5">
+                      0{i + 1}
+                    </span>
+                    <span className="leading-snug">{honor}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        ))}
+        </div>
+
+        {/* HIGH SCHOOL CREDENTIAL TERMINAL */}
+        <div className="overflow-hidden rounded-sm border border-border-strong bg-card shadow-sm">
+          {/* Terminal Window Header */}
+          <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-xs">
+            <div className="flex items-center gap-3">
+              <div className="flex gap-1.5 shrink-0">
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+              </div>
+              <div className="flex items-center gap-2 text-foreground font-semibold tracking-wider">
+                <GraduationCap className="h-3.5 w-3.5 text-flow" />
+                <span>SECONDARY_RECORD.SYS — STEM STRAND</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:inline-block rounded border border-flow/30 bg-flow/10 px-2 py-0.5 text-[10px] uppercase tracking-widest text-flow font-medium">
+                {highSchool.detail}
+              </span>
+              <span className="rounded border border-border bg-surface px-2.5 py-0.5 text-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
+                {highSchool.period}
+              </span>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="p-6 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-5">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 shrink-0 overflow-hidden rounded-sm border border-border bg-surface p-1 shadow-sm">
+                  <img
+                    src={highSchool.logo}
+                    alt={`${highSchool.school} logo`}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-base md:text-lg font-bold tracking-tight text-foreground">
+                    {highSchool.school}
+                  </h3>
+                  <div className="mt-1 text-mono text-xs font-semibold text-flow">
+                    {highSchool.degree} — {highSchool.specialization}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* High School Honors Chips */}
+            <div className="mt-5 flex flex-wrap gap-2.5">
+              {highSchool.honors.map((honor) => (
+                <div
+                  key={honor}
+                  className="inline-flex items-center gap-2 rounded-sm border border-border bg-surface px-3 py-1.5 text-mono text-[11.5px] text-foreground"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-flow" />
+                  <span>{honor}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
+function CertificateImage({
+  src,
+  alt,
+  title,
+  issuer,
+  date,
+  category,
+  className,
+}: {
+  src: string;
+  alt: string;
+  title: string;
+  issuer: string;
+  date: string;
+  category: string;
+  className?: string;
+}) {
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [src]);
+
+  if (imgError) {
+    return (
+      <div className="relative flex flex-col items-center justify-center p-6 md:p-10 bg-surface-2/90 rounded-sm border border-border-strong text-center shadow-inner overflow-hidden w-full max-w-[560px] aspect-[16/10] my-auto">
+        {/* Subtle decorative background grid */}
+        <div className="absolute inset-0 bg-dotgrid opacity-25 pointer-events-none" />
+
+        {/* Decorative corner accents */}
+        <span className="absolute top-3 left-3 h-3.5 w-3.5 border-l-2 border-t-2 border-signal" />
+        <span className="absolute top-3 right-3 h-3.5 w-3.5 border-r-2 border-t-2 border-signal" />
+        <span className="absolute bottom-3 left-3 h-3.5 w-3.5 border-l-2 border-b-2 border-signal" />
+        <span className="absolute bottom-3 right-3 h-3.5 w-3.5 border-r-2 border-b-2 border-signal" />
+
+        <div className="relative z-10 flex flex-col items-center max-w-md gap-2.5">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-signal/40 bg-signal/10 text-signal shadow-sm">
+            <Award className="h-6 w-6" />
+          </div>
+
+          <div className="text-mono text-[10px] uppercase tracking-widest text-signal">
+            {category} · Credential Placeholder
+          </div>
+
+          <h4 className="text-base md:text-lg font-bold tracking-tight text-foreground leading-snug">
+            {title}
+          </h4>
+
+          <p className="text-xs text-muted-foreground">
+            Issued by <span className="text-foreground font-medium">{issuer}</span>
+          </p>
+
+          <div className="mt-1 inline-flex items-center gap-2 rounded border border-border bg-background/80 px-3 py-1 text-mono text-[10.5px] text-muted-foreground">
+            <span>Verified Issued Date: {date}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      onError={() => setImgError(true)}
+    />
+  );
+}
+
+const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
+  All: { color: "#22C55E", bg: "rgba(34, 197, 94, 0.12)" },
+  "Automation & AI": { color: "#FF6B00", bg: "rgba(255, 107, 0, 0.12)" },
+  "Software Dev & API": { color: "#06B6D4", bg: "rgba(6, 182, 212, 0.12)" },
+  "Project Management & Agile": { color: "#A855F7", bg: "rgba(168, 85, 247, 0.12)" },
+  "Testing & QA": { color: "#F43F5E", bg: "rgba(244, 63, 94, 0.12)" },
+  "Soft Skills & Leadership": { color: "#F59E0B", bg: "rgba(245, 158, 11, 0.12)" },
+  "Data Privacy & Governance": { color: "#3B82F6", bg: "rgba(59, 130, 246, 0.12)" },
+};
+
 function Certificates() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const filteredCertificates = useMemo(() => {
+    if (selectedCategory === "All") return CERTIFICATES;
+    return CERTIFICATES.filter((c) => c.category === selectedCategory);
+  }, [selectedCategory]);
+
   const [active, setActive] = useState(CERTIFICATES[0].title);
-  const activeCert = CERTIFICATES.find((c) => c.title === active) || CERTIFICATES[0];
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  const activeCert = useMemo(() => {
+    return (
+      filteredCertificates.find((c) => c.title === active) ||
+      filteredCertificates[0] ||
+      CERTIFICATES[0]
+    );
+  }, [filteredCertificates, active]);
+
+  const activeCatTheme = CATEGORY_COLORS[activeCert.category] || CATEGORY_COLORS.All;
 
   return (
     <section id="certificates" className="py-20">
-      <SectionLabel index="06" label="certificates & badges" />
-      <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-[280px_minmax(0,1fr)] lg:grid-cols-[340px_minmax(0,1fr)]">
+      <SectionLabel
+        index="06"
+        label="certificates & badges"
+        hint="automation · project management · software dev · testing & qa · leadership"
+      />
+
+      {/* Category filter tabs */}
+      <div className="mt-6 flex flex-wrap items-center gap-2">
+        {CERTIFICATE_CATEGORIES.map((cat) => {
+          const count =
+            cat === "All"
+              ? CERTIFICATES.length
+              : CERTIFICATES.filter((c) => c.category === cat).length;
+          const isSelected = selectedCategory === cat;
+          const catTheme = CATEGORY_COLORS[cat] || CATEGORY_COLORS.All;
+          return (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 text-mono text-[11px] uppercase tracking-wider transition ${
+                isSelected
+                  ? "font-medium shadow-sm"
+                  : "border-border bg-surface text-muted-foreground hover:border-border-strong hover:text-foreground"
+              }`}
+              style={
+                isSelected
+                  ? {
+                      borderColor: catTheme.color,
+                      backgroundColor: catTheme.bg,
+                      color: catTheme.color,
+                    }
+                  : undefined
+              }
+            >
+              <span>{cat}</span>
+              <span className="text-[10px] opacity-75">({count})</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-[300px_minmax(0,1fr)] lg:grid-cols-[360px_minmax(0,1fr)]">
         {/* LEFT SIDEBAR: Explorer */}
-        <div className="relative flex flex-col overflow-hidden rounded-sm border border-border-strong bg-graph bg-surface/70 h-[500px]">
+        <div className="relative flex flex-col overflow-hidden rounded-sm border border-border-strong bg-graph bg-surface/70 h-[480px] md:h-[540px]">
           <div className="flex shrink-0 items-center justify-between border-b border-border bg-surface-2 px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
             <div className="flex items-center gap-4">
               <div className="flex gap-1.5 shrink-0">
@@ -1559,22 +2013,25 @@ function Certificates() {
               </div>
               <div className="flex items-center gap-2">
                 <Terminal className="h-3 w-3" />
-                <span className="uppercase tracking-widest">BADGE_LOG</span>
+                <span className="uppercase tracking-widest">
+                  BADGE_LOG ({filteredCertificates.length})
+                </span>
               </div>
             </div>
           </div>
           <div
-            className="flex-1 overflow-y-auto p-4"
+            className="flex-1 overflow-y-auto p-3"
             style={{ scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) transparent" }}
           >
             <div className="flex flex-col gap-2">
-              {CERTIFICATES.map((c) => {
-                const isActive = c.title === active;
+              {filteredCertificates.map((c) => {
+                const isActive = c.title === activeCert.title;
+                const catTheme = CATEGORY_COLORS[c.category] || CATEGORY_COLORS.All;
                 return (
                   <button
                     key={c.title}
                     onClick={() => setActive(c.title)}
-                    className={`group relative flex w-full items-center gap-3 rounded-sm border px-2.5 py-3 text-left text-mono transition ${
+                    className={`group relative flex w-full items-center gap-3 rounded-sm border px-3 py-2.5 text-left text-mono transition ${
                       isActive
                         ? "border-transparent bg-card text-foreground"
                         : "border-border bg-background/70 text-muted-foreground hover:border-border-strong hover:text-foreground"
@@ -1582,8 +2039,8 @@ function Certificates() {
                     style={
                       isActive
                         ? {
-                            borderColor: "var(--signal)",
-                            boxShadow: `inset 0 0 0 1px var(--signal), 0 8px 20px -14px var(--signal)`,
+                            borderColor: catTheme.color,
+                            boxShadow: `0 4px 14px -8px ${catTheme.color}`,
                           }
                         : undefined
                     }
@@ -1591,20 +2048,29 @@ function Certificates() {
                     {/* node dot */}
                     <span className="relative inline-flex h-2.5 w-2.5 shrink-0 items-center justify-center">
                       {isActive && (
-                        <span className="absolute inline-flex h-2.5 w-2.5 rounded-full ring-pulse bg-signal" />
+                        <span
+                          className="absolute inline-flex h-2.5 w-2.5 rounded-full ring-pulse opacity-75"
+                          style={{ backgroundColor: catTheme.color }}
+                        />
                       )}
                       <span
                         className="relative h-2 w-2 rounded-full"
-                        style={{ background: isActive ? "var(--signal)" : "var(--border-strong)" }}
+                        style={{ background: isActive ? catTheme.color : "var(--border-strong)" }}
                       />
                     </span>
-                    <div className="flex flex-col min-w-0 flex-1 gap-1">
-                      <span className="truncate text-[11.5px] leading-tight text-foreground">
+                    <div className="flex flex-col min-w-0 flex-1 gap-0.5">
+                      <span className="truncate text-[11.5px] font-medium leading-tight text-foreground">
                         {c.title}
                       </span>
-                      <span className="truncate text-[10px] uppercase tracking-widest text-signal">
-                        {c.issuer}
-                      </span>
+                      <div className="flex items-center justify-between gap-1 text-[9.5px] text-muted-foreground">
+                        <span
+                          className="truncate uppercase tracking-wider font-medium"
+                          style={{ color: catTheme.color }}
+                        >
+                          {c.issuer}
+                        </span>
+                        <span className="shrink-0">{c.date}</span>
+                      </div>
                     </div>
                   </button>
                 );
@@ -1616,9 +2082,11 @@ function Certificates() {
         {/* RIGHT PANE: Detail View */}
         <article
           key={activeCert.title}
-          className="animate-fade-in flex h-[500px] flex-col overflow-hidden rounded-sm border border-border-strong border-t-2 border-t-signal bg-card"
+          className="animate-fade-in flex flex-col h-[480px] md:h-[540px] overflow-hidden rounded-sm border border-border-strong bg-card"
+          style={{ borderTop: `1px solid ${activeCatTheme.color}` }}
         >
-          <div className="flex shrink-0 items-center justify-between border-b border-border px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+          {/* Header Bar */}
+          <div className="flex shrink-0 items-center justify-between border-b border-border px-4 py-2.5 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
             <div className="flex items-center gap-4">
               <div className="flex gap-1.5">
                 <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
@@ -1626,48 +2094,144 @@ function Certificates() {
                 <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
               </div>
               <div className="flex items-center gap-2">
-                <FileText className="h-3 w-3" />
-                <span className="uppercase tracking-widest truncate max-w-[120px] md:max-w-[200px]">
-                  CERT/{activeCert.title.replace(/\s+/g, "_")}.PNG
+                <FileText className="h-3.5 w-3.5" style={{ color: activeCatTheme.color }} />
+                <span className="uppercase tracking-widest truncate max-w-[120px] md:max-w-[240px]">
+                  CERT/{activeCert.title.replace(/[\s:-]+/g, "_")}.PNG
                 </span>
               </div>
             </div>
             <span className="flex items-center gap-3">
-              <span className="flex items-center gap-1.5 text-signal">
-                <span className="h-1.5 w-1.5 rounded-full bg-signal" />
-                BADGE
+              <span
+                className="hidden sm:inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-medium"
+                style={{ color: activeCatTheme.color }}
+              >
+                <span
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{ backgroundColor: activeCatTheme.color }}
+                />
+                {activeCert.category}
               </span>
-              <span className="hidden md:inline">{activeCert.date}</span>
+              <button
+                onClick={() => setLightboxOpen(true)}
+                className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider hover:underline font-medium"
+                style={{ color: activeCatTheme.color }}
+              >
+                <Maximize2 className="h-3 w-3" />
+                <span>Full View</span>
+              </button>
             </span>
           </div>
 
+          {/* Certificate Image & Details — SCROLLABLE CONTAINER */}
           <div
-            className="flex-1 overflow-y-auto flex flex-col"
+            className="flex-1 overflow-y-auto flex flex-col justify-between"
             style={{ scrollbarWidth: "thin", scrollbarColor: "var(--border) transparent" }}
           >
-            <div className="flex-1 min-h-0 border-b border-border bg-surface p-6 flex items-center justify-center">
-              <img
-                src={activeCert.image}
-                alt={activeCert.title}
-                className="h-full w-full object-contain max-h-[420px]"
-                onError={(ev) => ((ev.currentTarget as HTMLImageElement).style.display = "none")}
-              />
+            {/* Image Preview Box — CLEAN (no black hover overlay) */}
+            <div
+              onClick={() => setLightboxOpen(true)}
+              className="relative flex flex-1 min-h-[300px] cursor-pointer items-center justify-center border-b border-border bg-surface-2/40 p-4 md:p-6 overflow-hidden"
+              title="Click to view full size certificate"
+            >
+              <div className="relative flex w-full items-center justify-center">
+                <CertificateImage
+                  src={activeCert.image}
+                  alt={activeCert.title}
+                  title={activeCert.title}
+                  issuer={activeCert.issuer}
+                  date={activeCert.date}
+                  category={activeCert.category}
+                  className="h-auto max-h-[360px] w-full object-contain rounded-sm border border-border/60 shadow-lg"
+                />
+              </div>
             </div>
 
+            {/* Certificate Details Footer */}
             <div className="p-6 md:p-8 shrink-0 bg-card">
-              <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                {activeCert.title}
-              </h3>
-              <div className="text-[14px] font-medium text-signal mt-1.5">
-                Issued by {activeCert.issuer} · {activeCert.date}
-              </div>
-              <div className="mt-2 inline-block md:hidden text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                Acquired: {activeCert.date}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <div
+                    className="inline-block rounded border px-2 py-0.5 text-mono text-[10px] uppercase tracking-widest mb-1.5 font-medium"
+                    style={{
+                      borderColor: `${activeCatTheme.color}50`,
+                      backgroundColor: activeCatTheme.bg,
+                      color: activeCatTheme.color,
+                    }}
+                  >
+                    {activeCert.category}
+                  </div>
+                  <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+                    {activeCert.title}
+                  </h3>
+                  <div className="text-[14px] font-medium mt-1" style={{ color: activeCatTheme.color }}>
+                    Issued by {activeCert.issuer} · {activeCert.date}
+                  </div>
+                </div>
+                <button
+                  onClick={() => setLightboxOpen(true)}
+                  className="mt-2 md:mt-0 inline-flex items-center gap-2 rounded-sm border border-border-strong bg-surface px-3 py-1.5 text-mono text-xs uppercase tracking-wider text-foreground hover:border-signal hover:text-signal transition-colors self-start md:self-auto shrink-0"
+                >
+                  <Maximize2 className="h-3.5 w-3.5" style={{ color: activeCatTheme.color }} /> Expand Certificate
+                </button>
               </div>
             </div>
           </div>
         </article>
       </div>
+
+      {/* Lightbox / Full view Modal */}
+      {lightboxOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-3 sm:p-6 md:p-8 backdrop-blur-md animate-fade-in"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <div
+            className="relative flex max-h-[94vh] max-w-[96vw] flex-col overflow-hidden rounded-sm border border-border-strong bg-card shadow-2xl"
+            style={{ borderTop: `2px solid ${activeCatTheme.color}` }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-xs">
+              <div className="flex items-center gap-2 max-w-[85%] truncate">
+                <span
+                  className="hidden sm:inline-block rounded px-2 py-0.5 text-[9.5px] uppercase tracking-widest font-medium"
+                  style={{
+                    backgroundColor: activeCatTheme.bg,
+                    color: activeCatTheme.color,
+                  }}
+                >
+                  {activeCert.category}
+                </span>
+                <span className="font-semibold text-foreground truncate">
+                  {activeCert.title}
+                </span>
+                <span className="hidden md:inline text-muted-foreground">
+                  — {activeCert.issuer} ({activeCert.date})
+                </span>
+              </div>
+              <button
+                onClick={() => setLightboxOpen(false)}
+                className="rounded-sm p-1 text-muted-foreground hover:bg-surface hover:text-foreground transition-colors shrink-0"
+                aria-label="Close modal"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            {/* Full Resolution Image or Placeholder — NO SCROLLBARS */}
+            <div className="flex flex-1 items-center justify-center p-3 sm:p-6 bg-black/60 overflow-hidden">
+              <CertificateImage
+                src={activeCert.image}
+                alt={activeCert.title}
+                title={activeCert.title}
+                issuer={activeCert.issuer}
+                date={activeCert.date}
+                category={activeCert.category}
+                className="max-h-[82vh] w-auto max-w-full object-contain rounded-sm shadow-2xl select-none"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -1752,21 +2316,37 @@ function Contact() {
             </div>
           </div>
         </div>
-        <ul className="grid grid-cols-1 gap-2 text-mono text-[12.5px]">
-          <ContactRow icon={<Mail className="h-3.5 w-3.5" />} label="email">
+        <ul className="grid grid-cols-1 gap-2.5 text-mono text-[12.5px]">
+          <ContactRow
+            icon={<Mail className="h-3.5 w-3.5" />}
+            label="email"
+            href="mailto:bryantiversonmelliza03@gmail.com"
+          >
             bryantiversonmelliza03@gmail.com
           </ContactRow>
-          <ContactRow icon={<Phone className="h-3.5 w-3.5" />} label="phone">
+          <ContactRow
+            icon={<Phone className="h-3.5 w-3.5" />}
+            label="phone"
+            href="tel:+639398170375"
+          >
             +63 939 817 0375
           </ContactRow>
           <ContactRow icon={<MapPin className="h-3.5 w-3.5" />} label="location">
             Metro Manila, PH
           </ContactRow>
-          <ContactRow icon={<Github className="h-3.5 w-3.5" />} label="github">
-            github.com/brybryson
+          <ContactRow
+            icon={<Github className="h-3.5 w-3.5" />}
+            label="github"
+            href="https://github.com/brybryson"
+          >
+            brybryson
           </ContactRow>
-          <ContactRow icon={<Linkedin className="h-3.5 w-3.5" />} label="linkedin">
-            linkedin.com/in/bryant-iverson-melliza-6759b8292
+          <ContactRow
+            icon={<Linkedin className="h-3.5 w-3.5" />}
+            label="linkedin"
+            href="https://www.linkedin.com/in/bryant-iverson-melliza-6759b8292"
+          >
+            Bryant Iverson Melliza
           </ContactRow>
         </ul>
       </div>
@@ -1777,21 +2357,44 @@ function Contact() {
 function ContactRow({
   icon,
   label,
+  href,
   children,
 }: {
   icon: React.ReactNode;
   label: string;
+  href?: string;
   children: React.ReactNode;
 }) {
-  return (
-    <li className="flex items-center gap-3 rounded-sm border border-border bg-card px-3 py-2">
-      <span className="text-signal">{icon}</span>
+  const content = (
+    <li className="flex items-center gap-3 rounded-sm border border-border bg-card px-3 py-2.5 transition-all hover:border-signal/60 group cursor-pointer">
+      <span className="text-signal group-hover:scale-110 transition-transform">{icon}</span>
       <span className="w-16 shrink-0 text-[10px] uppercase tracking-widest text-muted-foreground">
         {label}
       </span>
-      <span className="truncate text-foreground">{children}</span>
+      <span className="truncate text-foreground font-medium group-hover:text-signal transition-colors flex items-center gap-1.5 min-w-0">
+        <span className="truncate">{children}</span>
+        {href && (
+          <ArrowUpRight className="h-3 w-3 shrink-0 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+        )}
+      </span>
     </li>
   );
+
+  if (href) {
+    const isExternal = href.startsWith("http");
+    return (
+      <a
+        href={href}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noreferrer" : undefined}
+        className="block focus:outline-none"
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return content;
 }
 
 function Footer() {
