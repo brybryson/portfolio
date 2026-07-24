@@ -2438,7 +2438,7 @@ function Footer() {
         </div>
         <div className="border-t border-border/60 pt-3 text-[10px] normal-case text-muted-foreground/75 leading-relaxed">
           <span className="text-signal/90 font-mono font-medium uppercase">priv.notice — </span>
-          Basic server & visitor telemetry (including IP address, page path, and HTTP referrer) are temporarily processed for analytics, performance, and security.
+          Anonymous visitor telemetry (country, page, referrer & timestamp) processed for analytics & security. No IP addresses collected.
         </div>
       </div>
     </footer>
