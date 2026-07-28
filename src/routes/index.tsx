@@ -429,6 +429,35 @@ const PROJECTS: Project[] = [
     image: "/automation/Live Traffic Telegram Notifier.gif",
     githubUrl: "https://github.com/brybryson/Live-Traffic-Telegram-Notifier",
   },
+  {
+    slug: "knowledge-base-sync-rag",
+    name: "Knowledge Base Sync (RAG Vector Ingestion)",
+    date: "2026.07",
+    category: "ai",
+    summary:
+      "Autonomous RAG memory engine built on n8n, Google Gemini Embeddings, and Supabase pgvector that ingests, cleans, chunks, and synchronizes company documentation.",
+    problem:
+      "AI customer support and triage models suffer from hallucinations, inaccurate answers, or outdated information when enterprise product catalogs, compliance guides, and internal policy documents are frequently updated or replaced in cloud storage.",
+    solution:
+      "Engineered an event-driven RAG ingestion pipeline in n8n triggered by Google Drive file creations and updates. The workflow automatically streams PDF documents, extracts raw text content, and attaches structural JSON metadata (file_id, file_name, modified_time). To prevent database bloat and memory contamination, it executes an automated SQL purge in Supabase (Delete Old Chunks) to eliminate stale vector records matching the file_id. It then splits the document into 500-character segments with a 50-character overlap using a Recursive Character Text Splitter to preserve semantic boundary context, generates high-dimensional vector embeddings via Google Gemini, and upserts the processed chunks into Supabase pgvector.",
+    outcome:
+      "Guaranteed real-time, single-source-of-truth knowledge synchronization for downstream AI support models, completely eliminating duplicate or conflicting vector memory while maintaining optimal vector database search performance.",
+    stack: [
+      "n8n Workflow Engine",
+      "Google Gemini Vector Embeddings",
+      "Supabase (PostgreSQL / pgvector)",
+      "Google Drive API",
+      "JavaScript (Code Nodes)",
+      "Recursive Character Text Splitter",
+      "LangChain Document Loaders",
+      "SQL Vector Purging",
+    ],
+    image: [
+      "/automation/Knowledge Base Sync (RAG Ingestion) - client.gif",
+      "/automation/Knowledge Base Sync (RAG Ingestion) - n8n workflow.gif",
+    ],
+    githubUrl: "#",
+  },
 ];
 
 type Experience = {
