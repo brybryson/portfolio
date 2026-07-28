@@ -361,6 +361,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "bug-triage-assistant",
+    series: { name: "ClickUp AI Bug Triage Pipeline", part: 1, total: 2 },
     name: "ClickUp AI Bug Triage Assistant",
     date: "2026.07",
     category: "ai",
@@ -385,6 +386,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "bug-triage-backfill-sweep",
+    series: { name: "ClickUp AI Bug Triage Pipeline", part: 2, total: 2 },
     name: "ClickUp AI Bug Triage — Scheduled Backfill Engine",
     date: "2026.07",
     category: "ai",
@@ -433,7 +435,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "knowledge-base-sync-rag",
-    series: { name: "Enterprise AI Email Pipeline", part: 1, total: 2 },
+    series: { name: "Enterprise AI Email Pipeline", part: 1, total: 3 },
     name: "Knowledge Base Sync (RAG Vector Ingestion)",
     date: "2026.07",
     category: "ai",
@@ -463,7 +465,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "inbound-email-triage-router",
-    series: { name: "Enterprise AI Email Pipeline", part: 2, total: 2 },
+    series: { name: "Enterprise AI Email Pipeline", part: 2, total: 3 },
     name: "Inbound Email Triage & Support/Sales Router",
     date: "2026.07",
     category: "ai",
@@ -492,6 +494,30 @@ const PROJECTS: Project[] = [
       "/automation/Email Triage Support Draft & Lead Routing.gif",
       "/automation/Sales Lead Branch (Lead Routing).gif",
     ],
+    githubUrl: "#",
+  },
+  {
+    slug: "error-handler-reliability-engine",
+    series: { name: "Enterprise AI Email Pipeline", part: 3, total: 3 },
+    name: "Global System Error Handler & Reliability Engine",
+    date: "2026.07",
+    category: "ai",
+    summary:
+      "Centralized fault-tolerance sub-workflow providing instant error logging, failure payload generation, self-healing retries, and real-time team notifications.",
+    problem:
+      "API rate limits, transient network drops, expired OAuth tokens, or third-party service downtime can cause background automations to fail silently, resulting in missed customer emails, untracked sales leads, or stalled vector ingestion without developer awareness.",
+    solution:
+      "Architected a centralized system error handler sub-workflow connected globally across all production pipelines via n8n Error Triggers, paired with native retryOnFail exponential backoff policies across all primary API nodes for self-healing transient glitches. Upon an unhandled runtime failure, the engine dynamically constructs a diagnostic error payload—extracting the workflow name, failing node ID, error message, execution timestamp, and direct execution URL—and broadcasts an urgent alert card to Slack #alerts-prod-errors.",
+    outcome:
+      "Achieved zero silent failures across production automations, establishing enterprise-grade uptime monitoring, rapid incident response, and self-healing resilience against transient API rate limits and network drops.",
+    stack: [
+      "n8n Workflow Engine (Global Error Triggers)",
+      "Slack API / Webhooks",
+      "Exponential Backoff Retries (retryOnFail)",
+      "JSON Error Payloads",
+      "Incident Management",
+    ],
+    image: "/automation/Error Handler & Reliability Engine.gif",
     githubUrl: "#",
   },
 ];
