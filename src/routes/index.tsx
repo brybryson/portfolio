@@ -458,6 +458,38 @@ const PROJECTS: Project[] = [
     ],
     githubUrl: "#",
   },
+  {
+    slug: "inbound-email-triage-router",
+    name: "Inbound Email Triage & Support/Sales Router",
+    date: "2026.07",
+    category: "ai",
+    summary:
+      "Autonomous multi-branch email processing system that classifies intent, executes hybrid vector search, generates grounded support drafts, logs CRM tickets, and alerts cross-functional teams.",
+    problem:
+      "Support and sales teams waste hundreds of hours manually categorizing inbound emails, sifting through spam, searching internal PDF documentation for accurate answers, and creating tickets in CRMs—causing delayed lead response times, duplicate effort, and human error.",
+    solution:
+      "Engineered an automated email orchestration engine polling Gmail every minute. Uses Google Gemini 3.1 Flash Lite with strict system prompts and minified JSON schema enforcement to deterministically classify inbound emails into SUPPORT, LEAD, or SPAM_OR_OFF_TOPIC. SUPPORT Path: Runs a semantic vector search query against Supabase pgvector using Gemini embeddings to retrieve top matching knowledge base chunks, generates a context-grounded AI reply draft, creates a thread-bound Gmail Draft, logs a structured ClickUp support ticket, and dispatches a Slack alert to #alerts-support. LEAD Path: Extracts customer intent and urgency ratings, automatically creates a sales opportunity task in ClickUp, and posts an alert card to Slack #leads-sales. SPAM_OR_OFF_TOPIC Path: Applies the SPAM label in Gmail, stripping INBOX and UNREAD labels to automatically archive marketing pitches and troll messages into the Gmail Spam folder.",
+    outcome:
+      "Reduced support triage and reply drafting time from hours to under 30 seconds. Achieved 100% human-in-the-loop review safety (no unreviewed AI auto-sends), completely eliminated spam noise, and enabled instant CRM routing for high-value sales inquiries.",
+    stack: [
+      "n8n Workflow Engine",
+      "Google Gemini 3.1 Flash Lite",
+      "RAG (Retrieval-Augmented Generation)",
+      "Supabase pgvector (Semantic Search)",
+      "Gemini Embeddings",
+      "Gmail API (OAuth 2.0)",
+      "ClickUp REST API",
+      "Slack API",
+      "JSON Schema Enforcement",
+      "Human-in-the-Loop Architecture",
+    ],
+    image: [
+      "/automation/Engine & Router (n8n Canvas + Spam Defense).gif",
+      "/automation/Email Triage Support Draft & Lead Routing.gif",
+      "/automation/Sales Lead Branch (Lead Routing).gif",
+    ],
+    githubUrl: "#",
+  },
 ];
 
 type Experience = {
