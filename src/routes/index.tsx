@@ -1452,19 +1452,19 @@ function CaseStudy({ project }: { project: Project }) {
       className="animate-fade-in flex h-[600px] flex-col overflow-hidden rounded-sm border border-border-strong bg-card"
       style={{ borderTopColor: meta.color, borderTopWidth: 1 }}
     >
-      <div className="flex shrink-0 items-center justify-between border-b border-border px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-        <div className="flex items-center gap-4">
-          <div className="flex gap-1.5">
+      <div className="flex shrink-0 items-center justify-between border-b border-border px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground overflow-hidden">
+        <div className="flex items-center gap-4 min-w-0">
+          <div className="flex gap-1.5 shrink-0">
             <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
             <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
             <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
           </div>
-          <div className="flex items-center gap-2">
-            <FileText className="h-3 w-3" />
-            <span className="uppercase tracking-widest">CASE-STUDY/{project.slug}.MD</span>
+          <div className="flex items-center gap-2 min-w-0">
+            <FileText className="h-3 w-3 shrink-0" />
+            <span className="uppercase tracking-widest truncate">CASE-STUDY/{project.slug}.MD</span>
           </div>
         </div>
-        <span className="flex items-center gap-3">
+        <span className="flex items-center gap-3 shrink-0 ml-3">
           <span className="flex items-center gap-1.5" style={{ color: meta.color }}>
             <span className="h-1.5 w-1.5 rounded-full" style={{ background: meta.color }} />
             {meta.label}
