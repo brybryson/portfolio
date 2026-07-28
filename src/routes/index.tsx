@@ -35,6 +35,7 @@ import {
   ChevronRight,
   Maximize2,
   X,
+  Link2,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -85,6 +86,7 @@ type Project = {
   image: string | string[];
   demoUrl?: string;
   githubUrl?: string;
+  series?: { name: string; part: number; total: number };
 };
 
 const PROJECTS: Project[] = [
@@ -431,6 +433,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "knowledge-base-sync-rag",
+    series: { name: "Enterprise AI Email Pipeline", part: 1, total: 2 },
     name: "Knowledge Base Sync (RAG Vector Ingestion)",
     date: "2026.07",
     category: "ai",
@@ -460,6 +463,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "inbound-email-triage-router",
+    series: { name: "Enterprise AI Email Pipeline", part: 2, total: 2 },
     name: "Inbound Email Triage & Support/Sales Router",
     date: "2026.07",
     category: "ai",
@@ -1407,7 +1411,20 @@ function PipelineColumn({
                 />
               </span>
               <span className="truncate">{p.name}</span>
-              <span className="ml-auto text-[10px] uppercase tracking-widest text-muted-foreground">
+              {p.series && (
+                <span
+                  className="ml-auto mr-2 inline-flex shrink-0 items-center gap-1 rounded-full border px-1.5 py-0.5 text-mono text-[8px] uppercase tracking-wider"
+                  style={{
+                    borderColor: `${meta.color}40`,
+                    background: `${meta.color}12`,
+                    color: meta.color,
+                  }}
+                >
+                  <Link2 className="h-2 w-2" />
+                  {p.series.part}/{p.series.total}
+                </span>
+              )}
+              <span className={`${p.series ? '' : 'ml-auto'} text-[10px] uppercase tracking-widest text-muted-foreground shrink-0`}>
                 {p.date}
               </span>
             </button>
@@ -1503,6 +1520,19 @@ function CaseStudy({ project }: { project: Project }) {
         <div className="flex flex-col gap-8 p-6 md:p-8">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div>
+              {project.series && (
+                <span
+                  className="mb-2 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-mono text-[10px] uppercase tracking-wider"
+                  style={{
+                    borderColor: `${meta.color}40`,
+                    background: `${meta.color}10`,
+                    color: meta.color,
+                  }}
+                >
+                  <Link2 className="h-3 w-3" />
+                  {project.series.name} — Part {project.series.part} of {project.series.total}
+                </span>
+              )}
               <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">{project.name}</h3>
               <p className="mt-2 text-sm text-muted-foreground md:text-base">{project.summary}</p>
             </div>
