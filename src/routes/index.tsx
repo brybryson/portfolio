@@ -61,15 +61,15 @@ export const Route = createFileRoute("/")({
    DATA
    ============================================================ */
 
-type Category = "web" | "system" | "ai" | "iot";
+type Category = "ai" | "web" | "system" | "iot";
 
 const CATEGORY_META: Record<
   Category,
   { label: string; color: string; icon: React.ComponentType<{ className?: string }> }
 > = {
+  ai: { label: "AI & Automation", color: "var(--pulse-c)", icon: Bot },
   web: { label: "Web Applications", color: "var(--signal)", icon: Layers },
   system: { label: "Systems", color: "var(--flow)", icon: Boxes },
-  ai: { label: "AI & Automation", color: "var(--pulse-c)", icon: Bot },
   iot: { label: "Hardware & IoT", color: "#22C55E", icon: Cpu },
 };
 
@@ -490,8 +490,8 @@ const PROJECTS: Project[] = [
       "Human-in-the-Loop Architecture",
     ],
     image: [
-      "/automation/Engine & Router (n8n Canvas + Spam Defense).gif",
       "/automation/Email Triage Support Draft & Lead Routing.gif",
+      "/automation/Engine & Router (n8n Canvas + Spam Defense).gif",
       "/automation/Sales Lead Branch (Lead Routing).gif",
     ],
     githubUrl: "#",
@@ -519,6 +519,38 @@ const PROJECTS: Project[] = [
     ],
     image: "/automation/Error Handler & Reliability Engine.gif",
     githubUrl: "#",
+  },
+  {
+    slug: "cafe-ops-telegram-automation-suite",
+    name: "Café Operations Telegram Automation & AI RAG Suite",
+    date: "2026.08",
+    category: "ai",
+    summary:
+      "Autonomous 5-workflow Telegram operational system combining real-time inventory monitoring, Google Drive SOP RAG knowledge retrieval, Llama 3.1 intent routing, scheduled staff reminders, and private executive error DMs.",
+    problem:
+      "Café operations faced frequent ingredient stockouts, delayed shift handovers, cluttered group chats with manual manager reminders, repetitive staff SOP questions, and untracked automation errors.",
+    solution:
+      "Engineered an enterprise 5-workflow n8n automation suite: (1) Inventory Monitor running 4x daily with unit sanitization and 🔴/🟠/🟡 severity digests, (2) Google Drive SOP RAG Ingestion chunking PDFs into Supabase pgvector, (3) Llama 3.1 Conversational Agent & Intent Router answering staff questions and scheduling tasks with a -55s time offset calculation, (4) Scheduled Reminder Dispatcher polling tasks every 60s with idempotency state locks, and (5) Central Error Handler silently routing node failure stack traces directly to the manager's private Telegram DM.",
+    outcome:
+      "Eliminated stockouts via 4x daily digests, reduced staff SOP answer latency to seconds via vector RAG, guaranteed 100% on-time reminder pings, and achieved total group anti-spam isolation for technical error logs.",
+    stack: [
+      "n8n Workflow Engine",
+      "Telegram Bot API",
+      "Groq API (Llama 3.1)",
+      "Supabase pgvector (Vector Store)",
+      "Google Gemini Embeddings",
+      "Google Sheets & Drive APIs",
+      "Recursive Character Text Splitter",
+      "Idempotent Dispatch & Error Routing",
+    ],
+    image: [
+      "/automation/cafe bot/39.png",
+      "/automation/cafe bot/40.png",
+      "/automation/cafe bot/41.png",
+      "/automation/cafe bot/42.png",
+      "/automation/cafe bot/43.png",
+    ],
+    demoUrl: "https://drive.google.com/file/d/1T5IKOOaFuTXqngxqMSXE7ASvuaKj7ll-/view?usp=sharing",
   },
 ];
 
@@ -1324,7 +1356,7 @@ function Projects({
 
   return (
     <section id="projects" className="py-20">
-      <SectionLabel index="02" label="projects" hint="web · systems · ai automation" />
+      <SectionLabel index="02" label="projects" hint="ai automation · web · systems" />
       <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-[280px_1fr] lg:gap-8">
         <DirectoryExplorer active={active} setActive={setActive} />
         <div className="sticky top-24">
@@ -1342,7 +1374,7 @@ function DirectoryExplorer({
   active: string | null;
   setActive: (s: string) => void;
 }) {
-  const cats: Category[] = ["web", "system", "ai", "iot"];
+  const cats: Category[] = ["ai", "web", "system", "iot"];
   return (
     <div className="relative flex h-[600px] flex-col overflow-hidden rounded-sm border border-border-strong bg-graph bg-surface/70">
       <div className="flex shrink-0 items-center justify-between border-b border-border bg-surface-2 px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -1571,7 +1603,10 @@ function CaseStudy({ project }: { project: Project }) {
                   rel="noreferrer"
                   className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-border-strong bg-foreground px-5 py-2.5 text-mono text-[11px] uppercase tracking-wider text-background shadow-sm transition hover:border-signal hover:bg-signal hover:text-white"
                 >
-                  <ArrowUpRight className="h-3.5 w-3.5" /> view live project
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                  {project.demoUrl.includes("drive.google.com") || project.demoUrl.includes("youtube.com")
+                    ? "watch video walkthrough"
+                    : "view live project"}
                 </a>
               )}
               {project.githubUrl && (
