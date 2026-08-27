@@ -3,6 +3,7 @@ import { Bot, RotateCcw, Send, Sparkles, Terminal, User } from "lucide-react";
 import { SectionLabel } from "@/components/common/SectionLabel";
 import { OwleyAvatar } from "@/components/common/OwleyAvatar";
 import { queryBrysonKnowledge } from "@/data/agentKnowledge";
+import { FormattedMessage } from "@/components/ai/OwleyFloatingWidget";
 
 interface ChatMessage {
   id: string;
@@ -16,10 +17,13 @@ export function LiveDemo() {
     {
       id: "init",
       from: "owley",
-      text: `Meow! 🐾 I am Owley AI — Bryant's personalized cyber-cat companion & portfolio assistant.
-I am indexed with Bryant's complete verified background: 20 shipped systems (including Lumina Dental Studio and Lumi), tech stack, 3 developer internships, Summa Cum Laude credentials, and client services.
+      text: `Hi there! I'm **Owley** — Bryant's favorite cat. 🐾
 
-Feel free to ask me anything about Bryant!`,
+I'm usually very quiet and gentle. Bryant adopted me after someone threw me into their backyard, and now I keep him company while he codes late into the night.
+
+As his AI companion, I'm here to answer any questions about his **20 shipped projects** (like Lumina Dental Studio and Lumi), tech stack, and experience.
+
+**Meow! What can I help you with today?**`,
       timestamp: "Just now",
     },
   ]);
@@ -27,8 +31,8 @@ Feel free to ask me anything about Bryant!`,
   const [isTyping, setIsTyping] = useState(false);
   const [quickReplies, setQuickReplies] = useState<string[]>([
     "Tell me about Lumina Dental Studio",
+    "Tell me about Lumi the chatbot",
     "What is Bryant's tech stack?",
-    "What services does he offer?",
     "Is Bryant available for hire?",
   ]);
 
@@ -55,20 +59,16 @@ Feel free to ask me anything about Bryant!`,
 
     setTimeout(() => {
       const { reply, quickReplies: newReplies } = queryBrysonKnowledge(q);
-      const owleyReply = reply
-        .replace(/Bryson AI/g, "Owley AI 🐾")
-        .replace(/I am Bryson/g, "I am Owley");
-
       const botMsg: ChatMessage = {
         id: `o-${Date.now()}`,
         from: "owley",
-        text: owleyReply,
+        text: reply,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
       setMessages((prev) => [...prev, botMsg]);
       setQuickReplies(newReplies);
       setIsTyping(false);
-    }, 400);
+    }, 380);
   };
 
   const handleReset = () => {
@@ -80,17 +80,11 @@ Feel free to ask me anything about Bryant!`,
         timestamp: "Just now",
       },
     ]);
-    setQuickReplies([
-      "Tell me about Lumina Dental Studio",
-      "What is Bryant's tech stack?",
-      "What services does he offer?",
-      "How to contact Bryant?",
-    ]);
   };
 
   return (
     <section id="demo" className="py-20">
-      <SectionLabel index="04" label="ai companion" hint="owley.ai // cyber-cat rag assistant" />
+      <SectionLabel index="04" label="ai companion" hint="owley.ai // cyber-cat assistant" />
 
       <div className="mt-8 flex flex-col gap-4">
         <div className="flex flex-col gap-2 max-w-3xl">
@@ -102,19 +96,19 @@ Feel free to ask me anything about Bryant!`,
             Owley AI — Interactive Portfolio & Resume Assistant
           </h2>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-            Meet Owley (named after Bryant's cat!) — an interactive AI assistant grounded in Bryant's 20 shipped projects, CV, and client deliverables.
+            Meet Owley (named after Bryant's adopted cat!) — an interactive companion grounded in Bryant's 20 shipped projects, CV, and client deliverables.
           </p>
         </div>
 
         {/* Terminal Chat Arena */}
         <div className="mt-4 overflow-hidden rounded-sm border border-border-strong bg-card/95 backdrop-blur shadow-xl">
-          {/* Header */}
+          {/* Clean Header */}
           <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-xs uppercase tracking-wider text-muted-foreground">
             <div className="flex items-center gap-3">
               <OwleyAvatar size="sm" isThinking={isTyping} />
               <div className="flex items-center gap-2">
-                <span className="font-bold text-foreground">OWLEY_AI // CYBER-CAT AGENT v2.4</span>
-                <span className="text-signal text-[11px] font-semibold">🐾</span>
+                <span className="font-bold text-foreground">OWLEY</span>
+                <span className="text-muted-foreground text-[11px]">· AI CAT BOT</span>
               </div>
             </div>
 
@@ -136,7 +130,7 @@ Feel free to ask me anything about Bryant!`,
           {/* Message Stream */}
           <div
             ref={scrollRef}
-            className="flex h-[340px] flex-col gap-4 overflow-y-auto p-4 md:p-6 text-mono text-xs md:text-[13px] leading-relaxed"
+            className="flex h-[360px] flex-col gap-4 overflow-y-auto p-4 md:p-6 text-mono text-xs md:text-[13px] leading-relaxed"
             style={{ scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) transparent" }}
           >
             {messages.map((m) => {
@@ -159,19 +153,19 @@ Feel free to ask me anything about Bryant!`,
                   </span>
 
                   <div
-                    className={`flex max-w-[85%] flex-col gap-1 rounded-sm p-3.5 shadow-sm ${
+                    className={`flex max-w-[85%] flex-col gap-1 rounded-sm p-4 shadow-sm break-words ${
                       isUser
                         ? "bg-signal/15 border border-signal/40 text-foreground"
-                        : "bg-surface/80 border border-border text-foreground"
+                        : "bg-surface/80 border border-border text-foreground/90"
                     }`}
                   >
-                    <div className="flex items-center justify-between text-[10px] uppercase text-muted-foreground pb-1 mb-1 border-b border-border/50">
+                    <div className="flex items-center justify-between text-[10px] uppercase text-muted-foreground pb-1.5 mb-1 border-b border-border/50">
                       <span className="font-bold text-signal">
-                        {isUser ? "YOU" : "OWLEY AI 🐾"}
+                        {isUser ? "YOU" : "OWLEY AI"}
                       </span>
                       <span>{m.timestamp}</span>
                     </div>
-                    <p className="whitespace-pre-line leading-relaxed">{m.text}</p>
+                    <FormattedMessage text={m.text} />
                   </div>
                 </div>
               );
@@ -180,14 +174,14 @@ Feel free to ask me anything about Bryant!`,
             {isTyping && (
               <div className="flex items-center gap-2 text-signal text-xs">
                 <OwleyAvatar size="sm" isThinking={true} />
-                <span className="animate-pulse">Owley is querying vector memory... 🐾</span>
+                <span className="animate-pulse">Owley is querying vector memory...</span>
               </div>
             )}
           </div>
 
           {/* Quick Queries Suggestion Ribbon */}
           {quickReplies.length > 0 && (
-            <div className="flex flex-wrap items-center gap-1.5 border-t border-border/60 bg-surface-2/60 px-4 py-2 text-mono text-xs">
+            <div className="flex flex-wrap items-center gap-1.5 border-t border-border/60 bg-surface-2/60 px-4 py-2.5 text-mono text-xs">
               <span className="text-muted-foreground text-[10.5px] uppercase mr-1 font-semibold">
                 SUGGESTED:
               </span>
@@ -215,7 +209,7 @@ Feel free to ask me anything about Bryant!`,
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Owley anything (e.g. Lumina Dental Studio, tech stack, services, experience)..."
+              placeholder="Ask Owley anything (e.g. Lumina Dental Studio, Lumi, tech stack, experience)..."
               className="flex-1 bg-transparent text-mono text-xs md:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             />
             <button
