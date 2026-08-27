@@ -14,7 +14,7 @@ export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex h-13 max-w-[1440px] items-center justify-between px-6 text-mono text-xs md:px-10">
+      <div className="mx-auto flex h-13 max-w-[1536px] items-center justify-between px-6 sm:px-10 lg:px-14 text-mono text-xs">
         {/* Brand / Logo */}
         <div className="flex items-center gap-3">
           <Link

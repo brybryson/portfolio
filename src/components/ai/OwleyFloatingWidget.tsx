@@ -91,7 +91,7 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end">
+    <div className="fixed bottom-8 right-6 md:bottom-10 md:right-8 z-50 flex flex-col items-end">
       {/* Expanded Floating Chat Dialog */}
       {isOpen && (
         <div className="animate-in fade-in zoom-in-95 duration-200 flex h-[520px] w-[350px] sm:w-[410px] flex-col overflow-hidden rounded-sm border border-border-strong bg-card/95 backdrop-blur-xl shadow-2xl">

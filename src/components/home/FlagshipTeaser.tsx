@@ -35,7 +35,10 @@ export function FlagshipTeaser() {
               Lumina Dental Studio — Smart Healthcare Suite
             </h2>
             <p className="text-sm md:text-base text-muted-foreground mt-2 max-w-3xl leading-relaxed">
-              An enterprise healthcare platform uniting a **Next.js 15 Patient & Staff Web Suite** with an **8-Workflow Autonomous Clinical RAG Engine** and **Lumi**, the 24/7 AI Dental Companion.
+              An enterprise healthcare platform uniting a{" "}
+              <strong className="text-foreground font-bold">Next.js 15 Patient &amp; Staff Web Suite</strong> with an{" "}
+              <strong className="text-foreground font-bold">8-Workflow Autonomous Clinical RAG Engine</strong> and{" "}
+              <strong className="text-foreground font-bold">Lumi</strong>, the 24/7 AI Dental Companion.
             </p>
           </div>
 
