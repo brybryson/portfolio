@@ -78,6 +78,7 @@ type Project = {
   name: string;
   date: string;
   category: Category;
+  role?: string;
   summary: string;
   problem: string;
   solution: string;
@@ -90,6 +91,33 @@ type Project = {
 };
 
 const PROJECTS: Project[] = [
+  {
+    slug: "lumina-dental-studio",
+    name: "Lumina Dental Studio — Smart Healthcare Management & Automated Patient Care Suite",
+    date: "2026.08",
+    category: "web",
+    role: "Full-Stack Developer & UI/UX Architect",
+    summary:
+      "Modern, luxury dental healthcare platform featuring a high-converting 4-step dynamic booking funnel, a secure staff administrative portal with RBAC/JWT authentication, frame-accurate canvas animation streams, and automated medical intake compliance.",
+    problem:
+      "Traditional dental practices suffer from severe administrative friction: manual telephone scheduling bottlenecks, high no-show rates (~18%), physical paperwork cluttering the waiting room, and lack of real-time schedule locking between online visitors and clinic staff.",
+    solution:
+      "4-Step Patient Booking Funnel: Built with dynamic date/time slot validation and real-time database locks preventing double-bookings. Enterprise Staff Portal: Secure admin dashboard featuring role-based access control (Admin / Doctor / Receptionist), patient intake inspection with high-contrast medical alert warning badges, and instant appointment status lifecycle management. Frame-Accurate Canvas Animation Engine: Custom HTML5 Canvas implementation using the modern ImageDecoder WebP streaming API with global ArrayBuffer caching for interactive 0ms-latency hover/pause effects. Defensive API Architecture: Robust pre-flight regex sanitizers blocking SQL injection, XSS, and malicious payloads before reaching the database.",
+    outcome:
+      "Reduced in-clinic front-desk intake paperwork time by ~80% via pre-appointment digital tokens. 100% pass rate across automated end-to-end Playwright and visual regression test suites. Atomic schedule locks eliminating 100% of conflicting appointment requests.",
+    stack: [
+      "Next.js 15 (App Router)",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Supabase (PostgreSQL)",
+      "Radix UI",
+      "HTML5 Canvas (ImageDecoder API)",
+      "Playwright E2E",
+    ],
+    image: "/automation/LUMINA WORKFLOW (PORTFOLIO)/LUMINA WEBSITE .png",
+    demoUrl: "https://luminadentalcarestudio.vercel.app/",
+  },
   {
     slug: "solace-point",
     name: "Solace Point",
@@ -358,6 +386,42 @@ const PROJECTS: Project[] = [
     stack: ["Raspberry Pi", "Python", "Computer Vision", "GPS Tracking", "Flutter", "SMTP"],
     image: "/images/salbag_3d representation.png",
     githubUrl: "https://github.com/brybryson/SALBAG.project",
+  },
+  {
+    slug: "lumina-clinical-orchestration-rag",
+    name: "Lumina Dental Studio — Autonomous Clinical Orchestration & RAG Engine",
+    date: "2026.08",
+    category: "ai",
+    role: "AI Automation Specialist & Systems Architect",
+    summary:
+      "Enterprise 8-workflow autonomous clinical orchestration system in n8n integrating Google Gemini RAG, Supabase pgvector, Slack Block Kit, and Google Workspace to automate 100% of patient lifecycle operations, urgent allergy escalations, and clinic knowledge ingestion.",
+    problem:
+      "Clinical operations face severe operational hazards: critical medical allergies (e.g., Penicillin, Latex) buried in physical charts failing to reach surgical teams prior to anesthesia, lost revenue from uncontacted booking drop-offs, repetitive front-desk FAQ inquiries, and silent background automation failures.",
+    solution:
+      "Architected an end-to-end 8-workflow autonomous pipeline in n8n backed by a centralized fault-tolerance engine: (1) Pre-Appointment Digital Intake Dispatch via Gmail OAuth2 / Resend with debounce guards; (2) Clinical Allergy & High-Risk Escalation routing interactive Block Kit alert cards to Slack #clinical-urgent-alerts (3-hour escalation timeout); (3) 2-Way Google Calendar Synchronization (Asia/Manila +08:00); (4) Timed Post-Op Recovery Sequence dispatching care guidelines at 2h and 24h intervals with attached PDF medical guidelines; (5) 6-Month Preventive Hygiene Recall Engine via weekly cron (>180 days); (6) Abandoned Lead Recovery Engine (24h follow-ups); (7) 24/7 RAG AI Dental Companion (Lumi) using vector similarity search (text-embedding-004, 768-dim) against verified clinical SOPs; (8) Automated Knowledge Ingestion Pipeline with Google Drive PDF parsing and human-in-the-loop Slack approval gates; and Central Error Handler & Telemetry with Slack deep-link diagnostics.",
+    outcome:
+      "<3 second instant triage for critical medical alerts delivered directly to surgical teams. Estimated ~70% drop in repetitive front-desk phone inquiries and patient no-shows. 0 silent failures across all clinical automation pipelines with unified Slack diagnostic telemetry.",
+    stack: [
+      "n8n Workflow Automation",
+      "Google Gemini 1.5 Flash",
+      "Groq (LLaMA 3.3 70B)",
+      "Supabase pgvector (768-dim)",
+      "Slack Block Kit API",
+      "Gmail OAuth2 / Resend API",
+      "Google Calendar API",
+      "Google Drive API",
+    ],
+    image: [
+      "/automation/LUMINA WORKFLOW (PORTFOLIO)/45.png",
+      "/automation/LUMINA WORKFLOW (PORTFOLIO)/46.png",
+      "/automation/LUMINA WORKFLOW (PORTFOLIO)/47.png",
+      "/automation/LUMINA WORKFLOW (PORTFOLIO)/48.png",
+      "/automation/LUMINA WORKFLOW (PORTFOLIO)/49.png",
+      "/automation/LUMINA WORKFLOW (PORTFOLIO)/50.png",
+      "/automation/LUMINA WORKFLOW (PORTFOLIO)/51.png",
+      "/automation/LUMINA WORKFLOW (PORTFOLIO)/52.png",
+      "/automation/LUMINA WORKFLOW (PORTFOLIO)/53.png",
+    ],
   },
   {
     slug: "bug-triage-assistant",
@@ -1224,7 +1288,7 @@ function StatCell({ label, value }: { label: string; value: string }) {
 function HeroStats() {
   const stats = [
     { k: "Dev Experience", v: "2+ Years", c: "var(--signal)" },
-    { k: "Applications Shipped", v: "15+", c: "var(--flow)" },
+    { k: "Applications Shipped", v: "20+", c: "var(--flow)" },
     { k: "Software Internships", v: "03 Roles", c: "var(--pulse-c)" },
     { k: "Certifications & Awards", v: "15 Badges", c: "var(--signal)" },
   ];
@@ -1247,7 +1311,7 @@ function TerminalReadout() {
   const lines = useMemo(
     () => [
       "$ status --dev bryant.melliza",
-      "  → 15 projects shipped · 3 internships",
+      "  → 20 projects shipped · 3 internships",
       "  → stack: react · react native · typescript",
       "  → automation: n8n · ai-assisted tooling",
       "  → uptime: available for work",
@@ -1592,6 +1656,14 @@ function CaseStudy({ project }: { project: Project }) {
                 </span>
               )}
               <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">{project.name}</h3>
+              {project.role && (
+                <div className="mt-2 flex items-center gap-2 text-mono text-[11px] text-muted-foreground">
+                  <span className="rounded-sm border border-border px-1.5 py-0.5 uppercase tracking-wider text-[9.5px] text-foreground bg-surface-2">
+                    Role
+                  </span>
+                  <span className="text-foreground">{project.role}</span>
+                </div>
+              )}
               <p className="mt-2 text-sm text-muted-foreground md:text-base">{project.summary}</p>
             </div>
 
@@ -1674,7 +1746,7 @@ const QA_BANK: QA[] = [
   },
   {
     q: "projects",
-    a: "12 shipped projects across web, systems, and AI automation. Most recent: Solace Point — a full-stack insurance platform for OneNetworx Marketing.",
+    a: "20 shipped projects across web, systems, and AI automation. Most recent: Lumina Dental Studio — Smart Healthcare Management & Automated Patient Care Suite, and Autonomous Clinical Orchestration & RAG Engine.",
   },
   {
     q: "education",
