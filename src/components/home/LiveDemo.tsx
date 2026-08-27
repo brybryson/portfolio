@@ -1,152 +1,235 @@
 import { useEffect, useRef, useState } from "react";
-import { Bot, Send, Terminal, Sparkles } from "lucide-react";
+import { Bot, CheckCircle2, RotateCcw, Send, Sparkles, Terminal, User } from "lucide-react";
 import { SectionLabel } from "@/components/common/SectionLabel";
+import { queryBrysonKnowledge } from "@/data/agentKnowledge";
 
-type QA = { q: string; a: string };
-const QA_BANK: QA[] = [
-  {
-    q: "stack",
-    a: "Primary: React 19, Next.js 15, TypeScript, Tailwind CSS v4, Prisma, PostgreSQL + Supabase. AI & Automation: n8n, Google Gemini 1.5/3.1, Groq (Llama 3.3), pgvector (768-dim RAG), Slack Block Kit, REST APIs.",
-  },
-  {
-    q: "experience",
-    a: "3 developer internships across 2025–2026: OneNetworx Marketing, JLabs Innovatech, and NLP Business Development Services, plus freelance full-stack client deliveries.",
-  },
-  {
-    q: "projects",
-    a: "20 shipped projects across web, systems, and AI automation. Flagship systems: Lumina Dental Studio (Full-Stack Management Suite + Autonomous Clinical Orchestration RAG), Enterprise AI Email Triage, and Café Operations Telegram AI Suite.",
-  },
-  {
-    q: "education",
-    a: "BS Information Technology at National University Fairview. Summa Cum Laude, 100% Full Merit Blue Scholar, consistent First Honor Dean's Lister. Graduating 2026.",
-  },
-  {
-    q: "location",
-    a: "Caloocan City, Philippines (UTC+08:00). Available for remote and hybrid roles globally across APAC, US, and EU timezones.",
-  },
-  {
-    q: "roles",
-    a: "Actively positioning for Full-Stack Developer, Frontend Engineer, and AI Automation Specialist roles.",
-  },
-  {
-    q: "contact",
-    a: "Email: bryantiversonmelliza03@gmail.com | Phone: +63 939 817 0375 | LinkedIn: /in/bryant-iverson-melliza-6759b8292",
-  },
-];
-
-const SUGGESTED = ["stack", "experience", "projects", "education", "roles", "contact"];
+interface ChatMessage {
+  id: string;
+  from: "user" | "bryson";
+  text: string;
+  timestamp: string;
+}
 
 export function LiveDemo() {
-  const [messages, setMessages] = useState<{ from: "user" | "agent"; text: string }[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>([
     {
-      from: "agent",
-      text: "resume-agent v2 online. Ask me about Bryant's stack, experience, projects, education, roles, or contact info.",
+      id: "init",
+      from: "bryson",
+      text: `Hello! I am Bryson AI — Bryant's autonomous portfolio companion and RAG assistant.
+I am indexed with Bryant's complete verified background: 20 shipped systems (including Lumina Dental Studio and Lumi), tech stack, 3 developer internships, Summa Cum Laude credentials, and client services.
+
+Feel free to ask me anything!`,
+      timestamp: "Just now",
     },
   ]);
   const [input, setInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const [quickReplies, setQuickReplies] = useState<string[]>([
+    "Tell me about Lumina Dental Studio",
+    "What is Bryant's tech stack?",
+    "What services does he offer?",
+    "Is Bryant available for hire?",
+  ]);
+
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
-  }, [messages]);
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+  }, [messages, isTyping]);
 
-  const answer = (raw: string) => {
-    const q = raw.trim();
+  const handleSend = (queryText: string) => {
+    const q = queryText.trim();
     if (!q) return;
-    setMessages((m) => [...m, { from: "user", text: q }]);
-    const key = q.toLowerCase();
-    const hit = QA_BANK.find((x) => key.includes(x.q));
-    const reply =
-      hit?.a ??
-      "No exact match found. Try typing: stack, experience, projects, education, roles, or contact.";
-    setTimeout(() => setMessages((m) => [...m, { from: "agent", text: reply }]), 240);
+
+    const userMsg: ChatMessage = {
+      id: `u-${Date.now()}`,
+      from: "user",
+      text: q,
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    };
+
+    setMessages((prev) => [...prev, userMsg]);
     setInput("");
+    setIsTyping(true);
+
+    setTimeout(() => {
+      const { reply, quickReplies: newReplies } = queryBrysonKnowledge(q);
+      const botMsg: ChatMessage = {
+        id: `b-${Date.now()}`,
+        from: "bryson",
+        text: reply,
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      };
+      setMessages((prev) => [...prev, botMsg]);
+      setQuickReplies(newReplies);
+      setIsTyping(false);
+    }, 400);
+  };
+
+  const handleReset = () => {
+    setMessages([
+      {
+        id: "reset",
+        from: "bryson",
+        text: "Conversation reset. What would you like to know about Bryant's projects or experience?",
+        timestamp: "Just now",
+      },
+    ]);
+    setQuickReplies([
+      "Tell me about Lumina Dental Studio",
+      "What is Bryant's tech stack?",
+      "What services does he offer?",
+      "How to contact Bryant?",
+    ]);
   };
 
   return (
-    <section id="demo" className="py-16">
-      <SectionLabel index="02" label="interactive agent" hint="rag-style resume simulator" />
-      <div className="mt-8 overflow-hidden rounded-sm border border-border-strong bg-card shadow-sm">
-        {/* Agent Header */}
-        <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          <div className="flex items-center gap-3">
-            <div className="flex gap-1.5">
-              <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
-              <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
-              <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+    <section id="demo" className="py-20">
+      <SectionLabel index="04" label="ai assistant" hint="bryson.ai // resume rag engine" />
+
+      <div className="mt-8 flex flex-col gap-4">
+        <div className="flex flex-col gap-2 max-w-3xl">
+          <div className="flex items-center gap-2 text-mono text-xs text-signal font-semibold uppercase tracking-wider">
+            <Sparkles className="h-4 w-4" />
+            <span>KNOWLEDGE-GROUNDED PORTFOLIO COMPANION</span>
+          </div>
+          <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+            Bryson AI — Interactive Portfolio & Resume Assistant
+          </h2>
+          <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+            Test Bryant's custom AI assistant indexed on his latest CV, 20 shipped projects, and production engineering workflows.
+          </p>
+        </div>
+
+        {/* Terminal Chat Arena */}
+        <div className="mt-4 overflow-hidden rounded-sm border border-border-strong bg-card/95 backdrop-blur shadow-xl">
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-xs uppercase tracking-wider text-muted-foreground">
+            <div className="flex items-center gap-3">
+              <div className="flex gap-1.5">
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+              </div>
+              <div className="flex items-center gap-2">
+                <Bot className="h-4 w-4 text-signal" />
+                <span className="font-bold text-foreground">BRYSON_AI // RAG AGENT v2.4</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Bot className="h-3.5 w-3.5 text-signal" />
-              <span className="font-semibold text-foreground">AGENT.RESUME // RAG SIMULATOR</span>
+
+            <div className="flex items-center gap-4 text-[11px]">
+              <span className="hidden sm:inline text-signal font-semibold">
+                ● SUPABASE PGVECTOR MEMORY
+              </span>
+              <button
+                onClick={handleReset}
+                className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition"
+                title="Reset conversation"
+              >
+                <RotateCcw className="h-3 w-3" />
+                <span>Reset</span>
+              </button>
             </div>
           </div>
-          <span className="hidden sm:inline">Deterministic Rules Engine · Latency ~240ms</span>
-        </div>
 
-        {/* Message Log */}
-        <div
-          ref={scrollRef}
-          className="flex h-[260px] flex-col gap-3 overflow-y-auto p-4 text-mono text-xs leading-relaxed"
-          style={{ scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) transparent" }}
-        >
-          {messages.map((m, idx) => (
-            <div
-              key={idx}
-              className={`flex items-start gap-2.5 ${
-                m.from === "user" ? "text-foreground" : "text-muted-foreground"
+          {/* Message Stream */}
+          <div
+            ref={scrollRef}
+            className="flex h-[340px] flex-col gap-4 overflow-y-auto p-4 md:p-6 text-mono text-xs md:text-[13px] leading-relaxed"
+            style={{ scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) transparent" }}
+          >
+            {messages.map((m) => {
+              const isUser = m.from === "user";
+              return (
+                <div
+                  key={m.id}
+                  className={`flex items-start gap-3 ${
+                    isUser ? "flex-row-reverse" : "flex-row"
+                  }`}
+                >
+                  <span
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-sm text-xs font-bold ${
+                      isUser
+                        ? "bg-signal text-background shadow-sm"
+                        : "border border-border bg-surface-2 text-signal"
+                    }`}
+                  >
+                    {isUser ? <User className="h-3.5 w-3.5" /> : <Bot className="h-3.5 w-3.5" />}
+                  </span>
+
+                  <div
+                    className={`flex max-w-[85%] flex-col gap-1 rounded-sm p-3.5 shadow-sm ${
+                      isUser
+                        ? "bg-signal/15 border border-signal/40 text-foreground"
+                        : "bg-surface/80 border border-border text-foreground"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between text-[10px] uppercase text-muted-foreground pb-1 mb-1 border-b border-border/50">
+                      <span className="font-bold text-signal">
+                        {isUser ? "YOU" : "BRYSON AI"}
+                      </span>
+                      <span>{m.timestamp}</span>
+                    </div>
+                    <p className="whitespace-pre-line leading-relaxed">{m.text}</p>
+                  </div>
+                </div>
+              );
+            })}
+
+            {isTyping && (
+              <div className="flex items-center gap-2 text-signal text-xs">
+                <Bot className="h-3.5 w-3.5 animate-pulse" />
+                <span className="animate-pulse">Bryson AI is querying vector memory...</span>
+              </div>
+            )}
+          </div>
+
+          {/* Quick Queries Suggestion Ribbon */}
+          {quickReplies.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5 border-t border-border/60 bg-surface-2/60 px-4 py-2 text-mono text-xs">
+              <span className="text-muted-foreground text-[10.5px] uppercase mr-1 font-semibold">
+                SUGGESTED:
+              </span>
+              {quickReplies.map((qr, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSend(qr)}
+                  className="rounded-sm border border-border bg-card px-2.5 py-1 text-[11.5px] text-muted-foreground hover:border-signal hover:text-signal transition shadow-sm"
+                >
+                  {qr}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Input Form */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSend(input);
+            }}
+            className="flex items-center gap-2 border-t border-border bg-surface p-3"
+          >
+            <Terminal className="h-4 w-4 text-signal ml-2" />
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask Bryson AI anything (e.g. Lumina Dental Studio, tech stack, services, experience)..."
+              className="flex-1 bg-transparent text-mono text-xs md:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={!input.trim() || isTyping}
+              className={`flex items-center gap-1.5 rounded-sm px-4 py-2 text-mono text-xs font-bold uppercase tracking-wider transition ${
+                input.trim() && !isTyping
+                  ? "bg-signal text-background hover:bg-signal/90 shadow-md"
+                  : "bg-surface-2 text-muted-foreground cursor-not-allowed border border-border"
               }`}
             >
-              <span
-                className={`rounded px-1.5 py-0.5 text-[9px] uppercase font-bold shrink-0 ${
-                  m.from === "user"
-                    ? "bg-signal text-background font-bold"
-                    : "bg-surface-2 border border-border text-signal"
-                }`}
-              >
-                {m.from === "user" ? "YOU" : "AGENT"}
-              </span>
-              <p className="whitespace-pre-line">{m.text}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Input Bar */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            answer(input);
-          }}
-          className="flex items-center gap-2 border-t border-border bg-surface p-2.5"
-        >
-          <Terminal className="h-4 w-4 text-muted-foreground ml-2" />
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type a question (e.g. stack, experience, projects, education)..."
-            className="flex-1 bg-transparent text-mono text-xs text-foreground placeholder:text-muted-foreground focus:outline-none"
-          />
-          <button
-            type="submit"
-            className="flex items-center gap-1 rounded-sm bg-signal px-3 py-1.5 text-mono text-xs font-semibold text-background transition hover:bg-signal/90"
-          >
-            <Send className="h-3 w-3" />
-            <span>Send</span>
-          </button>
-        </form>
-
-        {/* Quick Suggestion Pills */}
-        <div className="flex flex-wrap items-center gap-1.5 border-t border-border/60 bg-surface-2 px-4 py-2 text-mono text-[10.5px]">
-          <span className="text-muted-foreground text-[10px] mr-1 uppercase">QUICK QUERIES:</span>
-          {SUGGESTED.map((s) => (
-            <button
-              key={s}
-              type="button"
-              onClick={() => answer(s)}
-              className="rounded border border-border bg-surface px-2 py-0.5 text-muted-foreground hover:border-signal hover:text-signal transition"
-            >
-              {s}
+              <Send className="h-3.5 w-3.5" />
+              <span>Ask</span>
             </button>
-          ))}
+          </form>
         </div>
       </div>
     </section>
