@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   AlertTriangle,
   ArrowUpRight,
@@ -314,12 +315,20 @@ export function ProjectShowcase({
               </div>
 
               <div className="flex flex-wrap items-center gap-3 shrink-0">
+                <Link
+                  to="/projects/$slug"
+                  params={{ slug: activeProject.slug }}
+                  className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-signal bg-signal/15 px-5 py-3.5 text-mono text-xs uppercase tracking-wider text-signal shadow-md transition hover:bg-signal hover:text-background font-bold"
+                >
+                  <span>Architecture Case Study</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
                 {activeProject.demoUrl && (
                   <a
                     href={activeProject.demoUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-border-strong bg-foreground px-6 py-3.5 text-mono text-xs uppercase tracking-wider text-background shadow-md transition hover:border-signal hover:bg-signal hover:text-white font-bold"
+                    className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-border-strong bg-foreground px-5 py-3.5 text-mono text-xs uppercase tracking-wider text-background shadow-md transition hover:border-signal hover:bg-signal hover:text-white font-bold"
                   >
                     <ArrowUpRight className="h-4 w-4" />
                     {activeProject.demoUrl.includes("drive.google.com") ||
@@ -333,7 +342,7 @@ export function ProjectShowcase({
                     href={activeProject.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-border-strong bg-surface px-6 py-3.5 text-mono text-xs uppercase tracking-wider text-foreground shadow-sm transition hover:bg-foreground hover:text-background font-bold"
+                    className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-border-strong bg-surface px-5 py-3.5 text-mono text-xs uppercase tracking-wider text-foreground shadow-sm transition hover:bg-foreground hover:text-background font-bold"
                   >
                     <Github className="h-4 w-4" /> view on github
                   </a>
