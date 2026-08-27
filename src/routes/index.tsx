@@ -1,27 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Hero } from "@/components/home/Hero";
-import { ProjectShowcase } from "@/components/projects/ProjectShowcase";
+import { ServicesSection } from "@/components/home/ServicesSection";
+import { InteractiveSkills } from "@/components/home/InteractiveSkills";
+import { FlagshipTeaser } from "@/components/home/FlagshipTeaser";
 import { LiveDemo } from "@/components/home/LiveDemo";
-import { ExperienceLog } from "@/components/home/ExperienceLog";
-import { Education } from "@/components/home/Education";
-import { CertificatesSection } from "@/components/home/CertificatesSection";
-import { SkillsSection } from "@/components/home/SkillsSection";
 import { ContactSection } from "@/components/home/ContactSection";
-import { SectionLabel } from "@/components/common/SectionLabel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Bryant Melliza — Software Developer" },
+      { title: "Bryant Melliza — Software Developer & AI Systems Architect" },
       {
         name: "description",
         content:
-          "Portfolio of Bryant Melliza — full-stack developer (React, Next.js, Prisma) engineering scalable digital solutions from Caloocan City, PH.",
+          "Portfolio of Bryant Melliza — Full-Stack Developer & AI Systems Architect specializing in autonomous n8n workflows, Next.js 15 platforms, and custom enterprise tools.",
       },
-      { property: "og:title", content: "Bryant Melliza — Software Developer" },
+      { property: "og:title", content: "Bryant Melliza — Software Developer & AI Systems Architect" },
       {
         property: "og:description",
-        content: "Engineering scalable digital solutions. React · Next.js · Prisma.",
+        content: "Autonomous AI Workflows, Next.js 15 Web Platforms & Custom Enterprise Systems.",
       },
     ],
   }),
@@ -35,31 +32,22 @@ function HomePage() {
 
   return (
     <div className="mx-auto max-w-[1440px] px-6 md:px-10">
-      {/* Hero Section */}
+      {/* 00 Hero Identity — original precious hero */}
       <Hero onOpenPalette={handleOpenPalette} />
 
-      {/* Skills / Toolkit Section */}
-      <SkillsSection />
+      {/* 01 What I Offer & Client Deliverables (4 Core Services) */}
+      <ServicesSection />
 
-      {/* Projects Showcase — Full-Width Expansive Architecture */}
-      <section id="projects" className="py-20">
-        <SectionLabel index="01" label="projects" hint="ai automation · web · systems" />
-        <div className="mt-8">
-          <ProjectShowcase />
-        </div>
-      </section>
+      {/* 02 Interactive Animated Technical Stack */}
+      <InteractiveSkills />
 
-      {/* Live Demo Agent */}
+      {/* 03 Flagship Spotlight Teaser */}
+      <FlagshipTeaser />
+
+      {/* 04 Interactive Live Demo Agent */}
       <LiveDemo />
 
-      {/* Career Experience & Credentials */}
-      <ExperienceLog />
-      <Education />
-
-      {/* Certificates & Badges (Initial 6 + Show More) */}
-      <CertificatesSection showFilter={true} />
-
-      {/* Contact Section */}
+      {/* 05 Connect & Channels */}
       <ContactSection />
     </div>
   );
