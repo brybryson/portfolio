@@ -133,7 +133,7 @@ export function CertificatesSection({ showFilter = true }: { showFilter?: boolea
               className="flex items-center gap-2 rounded-sm border border-border-strong bg-surface px-7 py-3 text-mono text-xs font-bold text-foreground uppercase tracking-wider transition hover:border-signal hover:bg-surface-2 hover:text-signal shadow-sm"
             >
               <ChevronUp className="h-4 w-4 text-signal" />
-              <span>Show Less (Collapse to {INITIAL_COUNT})</span>
+              <span>Show Less</span>
             </button>
           ) : (
             <button
@@ -141,9 +141,7 @@ export function CertificatesSection({ showFilter = true }: { showFilter?: boolea
               className="flex items-center gap-2 rounded-sm border border-signal/60 bg-signal/15 px-7 py-3 text-mono text-xs font-bold text-signal uppercase tracking-wider transition hover:bg-signal hover:text-background shadow-md"
             >
               <ChevronDown className="h-4 w-4" />
-              <span>
-                Show More (+{Math.min(STEP_COUNT, remainingCount)} of {remainingCount} Remaining)
-              </span>
+              <span>Show More</span>
             </button>
           )}
         </div>
