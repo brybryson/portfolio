@@ -86,7 +86,7 @@ export function FlagshipTeaser() {
                 </div>
 
                 <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  Next.js 15 Patient Booking & Staff Portal
+                  Lumina Core — Patient Booking &amp; Healthcare Operations Platform
                 </h3>
 
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">

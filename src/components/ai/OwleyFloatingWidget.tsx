@@ -17,7 +17,6 @@ interface Message {
 
 export function OwleyFloatingWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasUnread, setHasUnread] = useState(true);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "init",
@@ -45,7 +44,6 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
 
   useEffect(() => {
     if (isOpen) {
-      setHasUnread(false);
       scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
     }
   }, [isOpen, messages, isTyping]);
@@ -223,30 +221,23 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
         </div>
       )}
 
-      {/* Floating Cyber Cat Toggle Button (HIDDEN when chat is open) */}
+      {/* Floating Cyber Cat Toggle Button (Bigger, Clean & No Blue Pulse) */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="group animate-in fade-in slide-in-from-bottom-2 duration-200 relative flex items-center gap-2.5 rounded-full border border-border-strong bg-card/95 py-2 pl-2 pr-4 shadow-xl backdrop-blur-md transition-all hover:border-signal hover:scale-105"
+          className="group animate-in fade-in slide-in-from-bottom-2 duration-200 relative flex items-center gap-3 rounded-full border border-border-strong bg-card/95 py-2.5 pl-3 pr-5 shadow-2xl backdrop-blur-md transition-all hover:border-signal hover:scale-105"
           aria-label="Open Owley AI Assistant"
         >
-          <OwleyAvatar size="sm" />
+          <OwleyAvatar size="md" />
           <div className="flex flex-col text-left">
-            <div className="flex items-center gap-1 text-mono text-xs font-bold text-foreground">
+            <div className="flex items-center gap-1.5 text-mono text-sm font-bold text-foreground">
               <span>Owley</span>
-              <span className="text-[10px] text-muted-foreground font-normal">· AI Cat Bot</span>
+              <span className="text-[11px] text-muted-foreground font-normal">· AI Bot</span>
             </div>
-            <span className="text-mono text-[9px] text-signal font-medium">
+            <span className="text-mono text-[10.5px] text-signal font-semibold">
               Ask about Bryant
             </span>
           </div>
-
-          {hasUnread && (
-            <span className="absolute -top-1 -right-1 flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-75" />
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-signal" />
-            </span>
-          )}
         </button>
       )}
     </div>
@@ -262,7 +253,6 @@ export function FormattedMessage({ text }: { text: string }) {
       {lines.map((line, idx) => {
         if (!line.trim()) return <div key={idx} className="h-1" />;
 
-        // Format bold and links
         const formatted = renderMarkdownSpans(line);
 
         if (line.startsWith("• ") || line.startsWith("- ")) {
@@ -295,7 +285,6 @@ export function FormattedMessage({ text }: { text: string }) {
 }
 
 function renderMarkdownSpans(text: string): React.ReactNode {
-  // Parse markdown links [text](url) and **bold**
   const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
   const parts: React.ReactNode[] = [];
   let lastIdx = 0;

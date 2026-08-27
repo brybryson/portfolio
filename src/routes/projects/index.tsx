@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Boxes, Sparkles } from "lucide-react";
-import { PROJECTS } from "@/data/projects";
+import { Boxes } from "lucide-react";
 import { ProjectShowcase } from "@/components/projects/ProjectShowcase";
 import { ArchiveTable } from "@/components/projects/ArchiveTable";
+import { PROJECTS } from "@/data/projects";
 
 export const Route = createFileRoute("/projects/")({
   head: () => ({
@@ -42,19 +42,23 @@ function ProjectsPage() {
         <ProjectShowcase />
       </div>
 
-      {/* Specialized Lumina Dental Studio Feature Box */}
-      <section className="mt-20 rounded-sm border border-signal/40 bg-surface/60 p-6 sm:p-8 shadow-sm">
+      {/* Historical Archive Table (Placed BEFORE Flagship Spotlight) */}
+      <div className="mt-16">
+        <ArchiveTable projects={PROJECTS.filter((p) => p.tier === "archive")} />
+      </div>
+
+      {/* Specialized Lumina Dental Studio Feature Box (Icon Removed) */}
+      <section className="mt-16 rounded-sm border border-signal/40 bg-surface/60 p-6 sm:p-8 shadow-sm">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-border/80 pb-6">
           <div>
-            <div className="flex items-center gap-2 text-mono text-xs text-signal font-semibold uppercase tracking-wider">
-              <Sparkles className="h-4 w-4" />
-              <span>SPECIALIZED FLAGSHIP SPOTLIGHT</span>
+            <div className="text-mono text-xs text-signal font-semibold uppercase tracking-wider">
+              SPECIALIZED FLAGSHIP SPOTLIGHT
             </div>
             <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl mt-1">
               Lumina Dental Studio — Ecosystem Overview
             </h2>
             <p className="text-xs text-muted-foreground mt-1">
-              Dual-architecture deployment: Next.js 15 Web Platform + 8-Workflow n8n Clinical AI Engine
+              Dual-architecture deployment: Lumina Web Platform + 8-Workflow n8n Clinical AI Engine
             </p>
           </div>
 
@@ -78,24 +82,19 @@ function ProjectsPage() {
 
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 text-xs">
           <div className="flex flex-col gap-2 rounded border border-border bg-card/60 p-4">
-            <h4 className="font-bold text-foreground">Next.js 15 Patient & Staff Suite</h4>
+            <h4 className="font-bold text-foreground">Lumina Core — Patient Booking &amp; Clinic Operations Platform</h4>
             <p className="text-muted-foreground leading-relaxed">
               4-step real-time patient booking funnel with atomic slot locking, role-based staff administrative portal, ImageDecoder canvas streaming, and 100% Playwright test pass rate.
             </p>
           </div>
           <div className="flex flex-col gap-2 rounded border border-border bg-card/60 p-4">
-            <h4 className="font-bold text-foreground">8-Workflow n8n Autonomous RAG Engine</h4>
+            <h4 className="font-bold text-foreground">8-Workflow n8n Autonomous RAG Engine &amp; Lumi</h4>
             <p className="text-muted-foreground leading-relaxed">
-              Google Gemini 1.5 Flash + Supabase pgvector RAG companion, automated Google Calendar sync, timed post-op recovery sequences, 6-month recall cron, and Slack Block Kit urgent triage.
+              Google Gemini 1.5 Flash + Supabase pgvector RAG companion (Lumi), automated Google Calendar sync, timed post-op recovery sequences, 6-month recall cron, and Slack Block Kit urgent triage.
             </p>
           </div>
         </div>
       </section>
-
-      {/* Historical Archive Table */}
-      <div className="mt-20">
-        <ArchiveTable projects={PROJECTS.filter((p) => p.tier === "archive")} />
-      </div>
     </div>
   );
 }

@@ -13,27 +13,20 @@ export function OwleyAvatar({
 
   const sizeMap = {
     sm: "w-8 h-8",
-    md: "w-10 h-10",
+    md: "w-11 h-11",
     lg: "w-14 h-14",
     xl: "w-20 h-20",
   };
 
   return (
     <div className={`relative inline-flex items-center justify-center shrink-0 ${sizeMap[size]} ${className}`}>
-      {/* Ambient Glowing Halo */}
-      <span
-        className={`absolute inset-0 rounded-full bg-signal/25 ${
-          isThinking ? "animate-ping opacity-80" : "animate-pulse opacity-40"
-        }`}
-      />
-
-      {/* Render Image Avatar or SVG Fallback */}
+      {/* Render Image Avatar or SVG Fallback (No Blue Pulse) */}
       {!imgError ? (
         <img
           src="/images/owley-avatar.png"
           alt="Owley AI Cat Mascot"
           onError={() => setImgError(true)}
-          className={`relative h-full w-full rounded-full object-cover border border-signal/50 bg-card shadow-sm transition-transform duration-300 ${
+          className={`relative h-full w-full rounded-full object-cover border border-signal/40 bg-card shadow-sm transition-transform duration-300 ${
             isThinking ? "scale-105" : "hover:scale-105"
           }`}
         />
@@ -120,7 +113,7 @@ export function OwleyAvatar({
         </svg>
       )}
 
-      {/* Online Status Pulse Dot */}
+      {/* Online Status Dot */}
       <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-card bg-[#27C93F] shadow-sm" />
     </div>
   );
