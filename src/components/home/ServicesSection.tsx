@@ -1,157 +1,172 @@
-import { ArrowUpRight, Bot, Boxes, CheckCircle2, Cpu, Database, Layers, Sparkles, Workflow, Zap } from "lucide-react";
+import { useState, useRef } from "react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Bot, Boxes, CheckCircle2, Cpu, Layers, Sparkles } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { SectionLabel } from "@/components/common/SectionLabel";
 
-const SERVICES = [
+const CAPABILITIES = [
   {
-    id: "ai-automation",
     index: "01",
     icon: Bot,
     title: "Autonomous AI & Workflow Automation",
-    subtitle: "Eliminate repetitive operations & manual data entry with self-healing AI pipelines.",
-    color: "var(--pulse-c)",
-    deliverables: [
-      "Custom n8n & Python multi-branch orchestration engines",
-      "Semantic RAG vector memory (Supabase pgvector / Gemini Embeddings)",
-      "Intelligent inbound email & lead triage with JSON schema validation",
-      "Slack / Telegram operations bots & automated executive escalation",
-      "Zero-silent-failure error telemetry & self-healing retry policies",
+    summary: "Self-healing n8n & Python pipelines that eliminate manual operations, data entry, and triage.",
+    points: [
+      "Multi-branch n8n orchestration engines",
+      "Semantic RAG vector memory (pgvector)",
+      "Smart email & lead triage with JSON schemas",
+      "Slack / Telegram operations & escalation bots",
     ],
-    highlight: "<3s Real-Time Triage · 100% Fault Tolerant",
-    tag: "High ROI Automation",
+    metric: "<3s Real-Time Triage",
   },
   {
-    id: "fullstack-saas",
     index: "02",
     icon: Layers,
-    title: "Full-Stack Web & SaaS Application Engineering",
-    subtitle: "High-converting, scalable digital products with frame-accurate responsiveness.",
-    color: "var(--signal)",
-    deliverables: [
-      "Modern Next.js 15 (App Router) & React 19 web platforms",
-      "Atomic booking funnels & conflict-free scheduling locks",
-      "Enterprise staff administrative portals with RBAC/JWT security",
-      "HTML5 Canvas & ImageDecoder high-performance media streams",
-      "Playwright automated E2E testing & CI/CD deployment pipelines",
+    title: "Full-Stack Web & SaaS Applications",
+    summary: "High-performance Next.js 15 & React 19 digital platforms with atomic data validation.",
+    points: [
+      "Next.js 15 App Router & React 19 architecture",
+      "Atomic booking funnels & slot locks",
+      "Enterprise staff portals with RBAC/JWT",
+      "Frame-accurate Canvas animation engines",
     ],
-    highlight: "100% E2E Coverage · 0ms ArrayBuffer Streams",
-    tag: "Production Ready",
+    metric: "100% Playwright Pass",
   },
   {
-    id: "enterprise-systems",
     index: "03",
     icon: Boxes,
-    title: "Custom Enterprise Systems & POS Platforms",
-    subtitle: "Bespoke internal business tools designed for high-volume operational workflows.",
-    color: "var(--flow)",
-    deliverables: [
-      "Custom inventory tracking & automated stockout warning digests",
-      "Automated invoice & medical certificate PDF generation",
-      "Rule-based decision support & hand-book compliance systems",
-      "Robust PostgreSQL & MySQL relational schema design",
-      "Role-based access control with comprehensive audit logging",
+    title: "Custom Enterprise & POS Systems",
+    summary: "Bespoke internal management platforms designed for high-volume inventory and workflows.",
+    points: [
+      "Custom inventory & stockout warning digests",
+      "Automated invoice & document PDF generation",
+      "Rule-based decision support logic",
+      "Relational database & audit logging",
     ],
-    highlight: "80% Time Saved · Centralized Database",
-    tag: "Mission Critical",
+    metric: "80% Time Saved",
   },
   {
-    id: "rag-hardware",
     index: "04",
     icon: Cpu,
-    title: "AI Knowledge Ingestion & IoT Systems",
-    subtitle: "Turn messy company documents into 24/7 AI assistants & sensory IoT networks.",
-    color: "#22C55E",
-    deliverables: [
-      "Automated Google Drive / PDF knowledge chunking & vector sync",
-      "24/7 customer support RAG AI companion grounded in company SOPs",
-      "IoT sensor nodes (flood, environmental, anti-theft tracking)",
-      "Real-time event broadcasting via WebSockets & Firebase",
-      "Privacy-first GDPR-aligned client telemetry & bot filtering",
+    title: "Knowledge Ingestion & IoT Systems",
+    summary: "Transform documentation into 24/7 AI assistants and real-time sensory hardware networks.",
+    points: [
+      "Google Drive PDF chunking & vector sync",
+      "24/7 SOP-grounded RAG AI companion",
+      "IoT sensor nodes (environmental & anti-theft)",
+      "Real-time event sync via WebSockets",
     ],
-    highlight: "Vector Search · IoT Sensor Integration",
-    tag: "Specialized Engineering",
+    metric: "24/7 Autonomous Sync",
   },
 ];
 
 export function ServicesSection() {
-  return (
-    <section id="services" className="py-20">
-      <SectionLabel index="01" label="what i deliver" hint="solutions & client offerings" />
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-      <div className="mt-8 flex flex-col gap-4">
-        <div className="flex flex-col gap-2 max-w-3xl">
-          <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-            Engineering High-Impact Systems That Solve Real Operational Bottlenecks
-          </h2>
-          <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-            Whether you need autonomous AI pipelines to run your business in the background, a high-converting web platform, or a custom internal operating system — here is exactly what I build and deliver.
-          </p>
+  const checkScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const offset = direction === "left" ? -380 : 380;
+      scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <section id="services" className="py-16">
+      <SectionLabel index="01" label="what i deliver" hint="solutions & capabilities" />
+
+      <div className="mt-6 flex flex-col gap-6">
+        {/* Header & Controls */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              Engineered Solutions & Deliverables
+            </h2>
+            <p className="mt-1 text-xs md:text-sm text-muted-foreground">
+              Production-ready architectures built for automation, scale, and operational efficiency.
+            </p>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => scroll("left")}
+              disabled={!canScrollLeft}
+              className={`rounded-sm border border-border bg-surface p-2 text-foreground transition ${
+                !canScrollLeft ? "opacity-30 cursor-not-allowed" : "hover:border-signal hover:text-signal"
+              }`}
+              aria-label="Previous capability"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              disabled={!canScrollRight}
+              className={`rounded-sm border border-border bg-surface p-2 text-foreground transition ${
+                !canScrollRight ? "opacity-30 cursor-not-allowed" : "hover:border-signal hover:text-signal"
+              }`}
+              aria-label="Next capability"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
-        {/* 4 Service Cards Grid */}
-        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {SERVICES.map((srv) => {
-            const Icon = srv.icon;
+        {/* Smooth Horizontal Slide Container */}
+        <div
+          ref={scrollRef}
+          onScroll={checkScroll}
+          className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory"
+          style={{ scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) transparent" }}
+        >
+          {CAPABILITIES.map((cap) => {
+            const Icon = cap.icon;
             return (
               <div
-                key={srv.id}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-sm border border-border-strong bg-card/85 p-6 md:p-8 backdrop-blur transition-all duration-300 hover:border-signal/80 hover:shadow-xl"
-                style={{ borderTopColor: srv.color, borderTopWidth: 2 }}
+                key={cap.index}
+                className="group flex min-w-[300px] sm:min-w-[360px] max-w-[400px] shrink-0 snap-start flex-col justify-between rounded-sm border border-border-strong bg-card p-6 transition-all duration-300 hover:border-signal hover:shadow-lg"
               >
-                {/* Header info */}
                 <div>
-                  <div className="flex items-center justify-between border-b border-border/80 pb-4 text-mono">
+                  <div className="flex items-center justify-between border-b border-border/80 pb-3 text-mono">
                     <div className="flex items-center gap-2">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-sm bg-surface-2 border border-border text-foreground">
-                        <Icon className="h-4 w-4" style={{ color: srv.color }} />
+                      <span className="flex h-7 w-7 items-center justify-center rounded border border-border bg-surface-2 text-signal">
+                        <Icon className="h-4 w-4" />
                       </span>
-                      <span className="text-xs font-bold text-foreground">[{srv.index}]</span>
+                      <span className="text-xs font-semibold text-foreground">[{cap.index}]</span>
                     </div>
-                    <span
-                      className="rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
-                      style={{
-                        borderColor: `${srv.color}40`,
-                        background: `${srv.color}15`,
-                        color: srv.color,
-                      }}
-                    >
-                      {srv.tag}
+                    <span className="text-[10px] uppercase text-signal font-mono">
+                      {cap.metric}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-xl font-bold tracking-tight text-foreground md:text-2xl group-hover:text-signal transition-colors">
-                    {srv.title}
+                  <h3 className="mt-4 text-lg font-bold tracking-tight text-foreground group-hover:text-signal transition">
+                    {cap.title}
                   </h3>
-                  <p className="mt-2 text-xs md:text-sm text-muted-foreground leading-relaxed">
-                    {srv.subtitle}
+                  <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
+                    {cap.summary}
                   </p>
 
-                  {/* Deliverables List */}
-                  <div className="mt-5 flex flex-col gap-2">
-                    <span className="text-mono text-[10.5px] uppercase tracking-widest text-muted-foreground font-semibold">
-                      WHAT I BUILD & DELIVER:
-                    </span>
-                    <ul className="flex flex-col gap-2 text-xs text-foreground/90 font-mono">
-                      {srv.deliverables.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5 text-signal" />
-                          <span className="leading-snug">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <ul className="mt-4 flex flex-col gap-1.5 text-[11.5px] text-foreground/90 font-mono">
+                    {cap.points.map((pt, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <span className="h-1 w-1 rounded-full bg-signal" />
+                        <span className="truncate">{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Bottom Highlight & CTA */}
-                <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-border/80 pt-4 text-mono text-xs">
-                  <div className="flex items-center gap-1.5 text-muted-foreground text-[11px]">
-                    <Sparkles className="h-3.5 w-3.5 text-signal" />
-                    <span className="font-semibold text-foreground">{srv.highlight}</span>
-                  </div>
-
+                <div className="mt-6 border-t border-border/80 pt-3 text-mono text-xs">
                   <Link
                     to="/projects"
-                    className="inline-flex items-center gap-1 font-bold text-signal hover:underline"
+                    className="inline-flex items-center gap-1 font-semibold text-foreground hover:text-signal transition"
                   >
                     <span>View Proven Systems</span>
                     <ArrowUpRight className="h-3.5 w-3.5" />
