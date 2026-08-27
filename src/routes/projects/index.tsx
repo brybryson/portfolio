@@ -1,21 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Bot,
-  Boxes,
-  Cpu,
-  Filter,
-  Layers,
-  Sparkles,
-  Zap,
-} from "lucide-react";
-import { Category, CATEGORY_META, PROJECTS, Project, ProjectTier } from "@/data/projects";
-import { DirectoryExplorer } from "@/components/projects/DirectoryExplorer";
-import { CaseStudy } from "@/components/projects/CaseStudy";
+import { ArrowRight, Boxes, Sparkles } from "lucide-react";
+import { PROJECTS } from "@/data/projects";
+import { ProjectShowcase } from "@/components/projects/ProjectShowcase";
 import { ArchiveTable } from "@/components/projects/ArchiveTable";
-import { SectionLabel } from "@/components/common/SectionLabel";
 
 export const Route = createFileRoute("/projects/")({
   head: () => ({
@@ -31,54 +18,7 @@ export const Route = createFileRoute("/projects/")({
   component: ProjectsPage,
 });
 
-type FilterType = "all" | "pinned" | Category;
-
 function ProjectsPage() {
-  const [filter, setFilter] = useState<FilterType>("all");
-  const [activeSlug, setActiveSlug] = useState<string>(PROJECTS[0].slug);
-
-  const filteredProjects = PROJECTS.filter((p) => {
-    if (filter === "all") return p.tier !== "archive";
-    if (filter === "pinned") return p.tier === "pinned";
-    return p.category === filter;
-  });
-
-  const activeProject =
-    PROJECTS.find((p) => p.slug === activeSlug) ?? filteredProjects[0] ?? PROJECTS[0];
-
-  const filterOptions: { id: FilterType; label: string; count: number }[] = [
-    {
-      id: "all",
-      label: "All Active Systems",
-      count: PROJECTS.filter((p) => p.tier !== "archive").length,
-    },
-    {
-      id: "pinned",
-      label: "★ Flagships",
-      count: PROJECTS.filter((p) => p.tier === "pinned").length,
-    },
-    {
-      id: "ai",
-      label: "AI & Automation",
-      count: PROJECTS.filter((p) => p.category === "ai").length,
-    },
-    {
-      id: "web",
-      label: "Web Apps",
-      count: PROJECTS.filter((p) => p.category === "web").length,
-    },
-    {
-      id: "system",
-      label: "Enterprise Systems",
-      count: PROJECTS.filter((p) => p.category === "system").length,
-    },
-    {
-      id: "iot",
-      label: "Hardware & IoT",
-      count: PROJECTS.filter((p) => p.category === "iot").length,
-    },
-  ];
-
   return (
     <div className="mx-auto max-w-[1440px] px-6 py-8 md:px-10">
       {/* Header */}
@@ -97,49 +37,12 @@ function ProjectsPage() {
         </p>
       </div>
 
-      {/* Filter Segment Bar */}
-      <div className="mt-8 flex flex-wrap items-center gap-2 text-mono text-xs">
-        <span className="text-muted-foreground text-[11px] mr-1 hidden sm:inline uppercase">
-          FILTER BY:
-        </span>
-        {filterOptions.map((opt) => (
-          <button
-            key={opt.id}
-            onClick={() => {
-              setFilter(opt.id);
-              const firstMatch =
-                opt.id === "all"
-                  ? PROJECTS.find((p) => p.tier !== "archive")
-                  : opt.id === "pinned"
-                  ? PROJECTS.find((p) => p.tier === "pinned")
-                  : PROJECTS.find((p) => p.category === opt.id);
-              if (firstMatch) setActiveSlug(firstMatch.slug);
-            }}
-            className={`flex items-center gap-1.5 rounded-sm border px-3 py-1.5 transition ${
-              filter === opt.id
-                ? "border-signal bg-signal/15 text-signal font-semibold shadow-sm"
-                : "border-border bg-surface text-muted-foreground hover:border-border-strong hover:text-foreground"
-            }`}
-          >
-            <span>{opt.label}</span>
-            <span className="text-[10px] opacity-75">({opt.count})</span>
-          </button>
-        ))}
+      {/* Main Full-Width Project Showcase System */}
+      <div className="mt-8">
+        <ProjectShowcase />
       </div>
 
-      {/* Interactive Explorer & Deep-Dive Canvas */}
-      <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-[300px_1fr] lg:gap-8">
-        <DirectoryExplorer
-          projects={filteredProjects}
-          active={activeSlug}
-          setActive={setActiveSlug}
-        />
-        <div className="sticky top-20">
-          <CaseStudy project={activeProject} />
-        </div>
-      </div>
-
-      {/* Dedicated Lumina Dental Studio Feature Box */}
+      {/* Specialized Lumina Dental Studio Feature Box */}
       <section className="mt-20 rounded-sm border border-signal/40 bg-surface/60 p-6 sm:p-8 shadow-sm">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-border/80 pb-6">
           <div>
@@ -159,54 +62,40 @@ function ProjectsPage() {
             <Link
               to="/projects/$slug"
               params={{ slug: "lumina-dental-studio" }}
-              className="inline-flex items-center gap-1.5 rounded-sm bg-foreground px-4 py-2 text-mono text-xs font-semibold text-background hover:bg-signal hover:text-white transition"
+              className="rounded-sm border border-border-strong bg-card px-4 py-2 text-mono text-xs text-foreground hover:border-signal transition"
             >
-              <span>Web Platform View</span>
-              <ArrowRight className="h-3.5 w-3.5" />
+              1. Web Platform Breakdown →
             </Link>
             <Link
               to="/projects/$slug"
               params={{ slug: "lumina-clinical-orchestration-rag" }}
-              className="inline-flex items-center gap-1.5 rounded-sm border border-border bg-surface-2 px-4 py-2 text-mono text-xs font-semibold text-foreground hover:border-signal hover:text-signal transition"
+              className="rounded-sm bg-signal px-4 py-2 text-mono text-xs font-semibold text-background hover:bg-signal/90 transition"
             >
-              <span>AI Engine View</span>
-              <ArrowRight className="h-3.5 w-3.5" />
+              2. Clinical RAG Automation →
             </Link>
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 text-mono text-xs">
-          <div className="rounded border border-border bg-card p-4">
-            <span className="text-[10px] uppercase text-signal font-semibold">01. INTAKE DISPATCH</span>
-            <p className="mt-2 text-[11px] text-muted-foreground leading-relaxed">
-              Automated pre-appointment digital tokens reducing front-desk paperwork by ~80%.
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 text-xs">
+          <div className="flex flex-col gap-2 rounded border border-border bg-card/60 p-4">
+            <h4 className="font-bold text-foreground">Next.js 15 Patient & Staff Suite</h4>
+            <p className="text-muted-foreground leading-relaxed">
+              4-step real-time patient booking funnel with atomic slot locking, role-based staff administrative portal, ImageDecoder canvas streaming, and 100% Playwright test pass rate.
             </p>
           </div>
-          <div className="rounded border border-border bg-card p-4">
-            <span className="text-[10px] uppercase text-signal font-semibold">02. ALLERGY ESCALATION</span>
-            <p className="mt-2 text-[11px] text-muted-foreground leading-relaxed">
-              &lt;3s real-time Slack Block Kit alert cards routed directly to surgical theater teams.
-            </p>
-          </div>
-          <div className="rounded border border-border bg-card p-4">
-            <span className="text-[10px] uppercase text-signal font-semibold">03. 2-WAY SYNC</span>
-            <p className="mt-2 text-[11px] text-muted-foreground leading-relaxed">
-              ISO-8601 calendar synchronization in Asia/Manila (+08:00) with atomic schedule locks.
-            </p>
-          </div>
-          <div className="rounded border border-border bg-card p-4">
-            <span className="text-[10px] uppercase text-signal font-semibold">04. 24/7 LUMI RAG</span>
-            <p className="mt-2 text-[11px] text-muted-foreground leading-relaxed">
-              Supabase 768-dim vector embeddings answering clinical FAQs with &lt;500ms accuracy.
+          <div className="flex flex-col gap-2 rounded border border-border bg-card/60 p-4">
+            <h4 className="font-bold text-foreground">8-Workflow n8n Autonomous RAG Engine</h4>
+            <p className="text-muted-foreground leading-relaxed">
+              Google Gemini 1.5 Flash + Supabase pgvector RAG companion, automated Google Calendar sync, timed post-op recovery sequences, 6-month recall cron, and Slack Block Kit urgent triage.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Early Explorations / Legacy Archive (Tier 3) */}
-      <section className="mt-16">
-        <ArchiveTable projects={PROJECTS} />
-      </section>
+      {/* Historical Archive Table */}
+      <div className="mt-20">
+        <ArchiveTable projects={PROJECTS.filter((p) => p.tier === "archive")} />
+      </div>
     </div>
   );
 }
