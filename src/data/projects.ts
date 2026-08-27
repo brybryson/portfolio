@@ -118,6 +118,7 @@ export const PROJECTS: Project[] = [
       "/automation/LUMINA WORKFLOW (PORTFOLIO)/52.png",
       "/automation/LUMINA WORKFLOW (PORTFOLIO)/53.png",
     ],
+    demoUrl: "https://drive.google.com/file/d/1sEEmW5fjaorBb_zEMg2sUu4PP0W1_Jro/view?usp=sharing",
   },
   {
     slug: "solace-point",

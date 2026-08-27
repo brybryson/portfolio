@@ -148,9 +148,17 @@ export function FlagshipTeaser() {
                 >
                   Architecture & Breakdown →
                 </Link>
-                <span className="text-mono text-[10.5px] text-muted-foreground">
-                  Supabase pgvector RAG
-                </span>
+                {luminaAI.demoUrl && (
+                  <a
+                    href={luminaAI.demoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 font-semibold text-muted-foreground hover:text-foreground transition"
+                  >
+                    <span>Watch Walkthrough (Voiceover)</span>
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                )}
               </div>
             </div>
           )}
