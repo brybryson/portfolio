@@ -20,7 +20,7 @@ export const Route = createFileRoute("/experience")({
 
 function ExperiencePage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-[1440px] px-6 py-8 md:px-10">
       <div className="flex flex-col gap-3 border-b border-border-strong pb-8">
         <div className="flex items-center gap-2 text-mono text-xs text-signal font-semibold">
           <Briefcase className="h-4 w-4" />

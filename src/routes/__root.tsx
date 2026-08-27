@@ -11,7 +11,6 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PaletteDialog } from "@/components/layout/PaletteDialog";
-import { SideNavRail } from "@/components/layout/SideNavRail";
 
 import appCss from "../styles.css?url";
 
@@ -164,7 +163,6 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Navbar onOpenPalette={() => setPaletteOpen(true)} />
-      <SideNavRail />
       <main className="flex-1">
         <Outlet />
       </main>
