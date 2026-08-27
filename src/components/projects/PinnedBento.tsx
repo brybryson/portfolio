@@ -1,14 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Bot,
-  Boxes,
-  Cpu,
-  Layers,
-  Sparkles,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { CATEGORY_META, Project } from "@/data/projects";
 
 export function PinnedBento({ projects }: { projects: Project[] }) {
@@ -28,7 +19,7 @@ export function PinnedBento({ projects }: { projects: Project[] }) {
               idx === 0 ? "lg:col-span-2" : ""
             }`}
           >
-            {/* Top Bar with Badge & Category */}
+            {/* Top Bar */}
             <div className="flex items-center justify-between border-b border-border/80 pb-3 text-mono text-xs">
               <div className="flex items-center gap-2">
                 <span
@@ -38,11 +29,6 @@ export function PinnedBento({ projects }: { projects: Project[] }) {
                 <span className="uppercase text-[10px] tracking-wider" style={{ color: meta.color }}>
                   {meta.label}
                 </span>
-                {project.badge && (
-                  <span className="rounded border border-signal/30 bg-signal/10 px-1.5 py-0.5 text-[9px] font-semibold text-signal uppercase tracking-wider">
-                    {project.badge}
-                  </span>
-                )}
               </div>
               <span className="text-[10px] uppercase text-muted-foreground">
                 {project.date}
@@ -50,7 +36,11 @@ export function PinnedBento({ projects }: { projects: Project[] }) {
             </div>
 
             {/* Main Content Area */}
-            <div className={`mt-4 grid gap-6 ${idx === 0 ? "md:grid-cols-[1.2fr_1fr] md:items-center" : "grid-cols-1"}`}>
+            <div
+              className={`mt-4 grid gap-6 ${
+                idx === 0 ? "md:grid-cols-[1.2fr_1fr] md:items-center" : "grid-cols-1"
+              }`}
+            >
               {/* Text Information */}
               <div className="flex flex-col gap-3">
                 <h3 className="text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-signal">
@@ -106,7 +96,7 @@ export function PinnedBento({ projects }: { projects: Project[] }) {
               </div>
 
               {/* Media Preview Box */}
-              <div className="relative overflow-hidden rounded border border-border bg-graph min-h-[180px] max-h-[240px] flex items-center justify-center bg-background/50">
+              <div className="relative overflow-hidden rounded border border-border bg-graph min-h-[200px] max-h-[280px] flex items-center justify-center bg-background/50">
                 <img
                   src={heroImg}
                   alt={project.name}

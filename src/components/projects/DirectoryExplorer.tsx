@@ -13,8 +13,8 @@ export function DirectoryExplorer({
   categories?: Category[];
 }) {
   return (
-    <div className="relative flex h-[650px] flex-col overflow-hidden rounded-sm border border-border-strong bg-graph bg-surface/70 shadow-sm">
-      <div className="flex shrink-0 items-center justify-between border-b border-border bg-surface-2 px-4 py-2 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+    <div className="relative flex h-[640px] flex-col overflow-hidden rounded-sm border border-border-strong bg-graph bg-surface/70 shadow-sm">
+      <div className="flex shrink-0 items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
         <div className="flex items-center gap-4">
           <div className="flex gap-1.5 shrink-0">
             <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
@@ -23,9 +23,10 @@ export function DirectoryExplorer({
           </div>
           <div className="flex items-center gap-2">
             <Terminal className="h-3 w-3" />
-            <span className="uppercase tracking-widest">SYSTEM PIPELINE EXPLORER</span>
+            <span className="uppercase tracking-widest">EXPLORER // PIPELINE GRAPH</span>
           </div>
         </div>
+        <span>{projects.length} NODES</span>
       </div>
 
       <div
@@ -68,7 +69,7 @@ function PipelineColumn({
   return (
     <div className="relative">
       <div
-        className="mb-2.5 flex items-center gap-2 text-mono text-[10.5px] uppercase tracking-widest font-medium"
+        className="mb-2.5 flex items-center gap-2 text-mono text-[11px] uppercase tracking-widest font-semibold"
         style={{ color: meta.color }}
       >
         <Icon className="h-3.5 w-3.5" />
@@ -84,7 +85,7 @@ function PipelineColumn({
               onClick={() => setActive(p.slug)}
               className={`group relative flex w-full items-center gap-2.5 rounded-sm border px-2.5 py-2 text-left text-mono text-[11px] transition ${
                 isActive
-                  ? "border-transparent bg-card text-foreground"
+                  ? "border-transparent bg-card text-foreground font-medium"
                   : "border-border bg-background/70 text-muted-foreground hover:border-border-strong hover:text-foreground"
               }`}
               style={
@@ -96,7 +97,7 @@ function PipelineColumn({
                   : undefined
               }
             >
-              {/* node status dot */}
+              {/* status dot */}
               <span className="relative inline-flex h-2.5 w-2.5 shrink-0 items-center justify-center">
                 {isActive && (
                   <span
@@ -110,11 +111,6 @@ function PipelineColumn({
                 />
               </span>
               <span className="truncate">{p.name}</span>
-              {p.badge && (
-                <span className="hidden xl:inline-flex rounded border border-border px-1 py-0.2 text-[8px] uppercase text-muted-foreground shrink-0">
-                  {p.tier === "pinned" ? "★" : ""}
-                </span>
-              )}
               {p.series && (
                 <span
                   className="ml-auto mr-1 inline-flex shrink-0 items-center gap-1 rounded-full border px-1.5 py-0.5 text-mono text-[8px] uppercase tracking-wider"

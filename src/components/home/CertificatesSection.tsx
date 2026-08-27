@@ -1,15 +1,20 @@
 import { useMemo, useState } from "react";
-import { Award, ExternalLink, Filter } from "lucide-react";
-import { CERTIFICATE_CATEGORIES, CERTIFICATES, CertificateCategory } from "@/data/certificates";
+import { ChevronDown, ChevronUp, Filter } from "lucide-react";
+import { CERTIFICATE_CATEGORIES, CERTIFICATES } from "@/data/certificates";
 import { SectionLabel } from "@/components/common/SectionLabel";
 
 export function CertificatesSection({ showFilter = true }: { showFilter?: boolean }) {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [showAll, setShowAll] = useState(false);
 
   const filtered = useMemo(() => {
     if (selectedCategory === "All") return CERTIFICATES;
     return CERTIFICATES.filter((c) => c.category === selectedCategory);
   }, [selectedCategory]);
+
+  const INITIAL_COUNT = 6;
+  const displayed = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
+  const remainingCount = filtered.length - INITIAL_COUNT;
 
   return (
     <section id="certificates" className="py-16">
@@ -21,7 +26,10 @@ export function CertificatesSection({ showFilter = true }: { showFilter?: boolea
           {CERTIFICATE_CATEGORIES.map((cat) => (
             <button
               key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              onClick={() => {
+                setSelectedCategory(cat);
+                setShowAll(false);
+              }}
               className={`rounded-sm border px-2.5 py-1 transition ${
                 selectedCategory === cat
                   ? "border-signal bg-signal/15 text-signal font-semibold"
@@ -35,7 +43,7 @@ export function CertificatesSection({ showFilter = true }: { showFilter?: boolea
       )}
 
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((cert, idx) => (
+        {displayed.map((cert, idx) => (
           <div
             key={idx}
             className="group flex flex-col justify-between overflow-hidden rounded-sm border border-border-strong bg-card p-4 transition-all duration-300 hover:border-signal/80 shadow-sm"
@@ -70,6 +78,27 @@ export function CertificatesSection({ showFilter = true }: { showFilter?: boolea
           </div>
         ))}
       </div>
+
+      {filtered.length > INITIAL_COUNT && (
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="flex items-center gap-2 rounded-sm border border-border-strong bg-surface px-6 py-2.5 text-mono text-xs font-semibold text-foreground uppercase tracking-wider transition hover:border-signal hover:bg-surface-2 hover:text-signal shadow-sm"
+          >
+            {showAll ? (
+              <>
+                <ChevronUp className="h-4 w-4" />
+                <span>Show Less</span>
+              </>
+            ) : (
+              <>
+                <ChevronDown className="h-4 w-4" />
+                <span>Show More (+{remainingCount} Certificates)</span>
+              </>
+            )}
+          </button>
+        </div>
+      )}
     </section>
   );
 }

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Boxes, ChevronLeft, ChevronRight, Share2 } from "lucide-react";
-import { PROJECTS, Project } from "@/data/projects";
+import { ArrowLeft, ArrowRight, Boxes, ChevronLeft, ChevronRight } from "lucide-react";
+import { PROJECTS } from "@/data/projects";
 import { CaseStudy } from "@/components/projects/CaseStudy";
 
 export const Route = createFileRoute("/projects/$slug")({
@@ -39,7 +39,7 @@ function ProjectDetailPage() {
   const nextProject = currentIndex < PROJECTS.length - 1 ? PROJECTS[currentIndex + 1] : null;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Breadcrumb & Navigation Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border-strong pb-4 text-mono text-xs">
         <div className="flex items-center gap-2">
@@ -82,7 +82,7 @@ function ProjectDetailPage() {
 
       {/* Standalone Case Study View */}
       <div className="mt-6">
-        <CaseStudy project={project} isStandalonePage={true} />
+        <CaseStudy project={project} />
       </div>
 
       {/* Bottom Footer Navigation */}

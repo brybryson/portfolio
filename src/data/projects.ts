@@ -25,7 +25,6 @@ export type Project = {
   date: string;
   category: Category;
   tier: ProjectTier;
-  badge?: string;
   role?: string;
   summary: string;
   problem: string;
@@ -41,15 +40,48 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   // ==========================================
-  // TIER 1: PINNED / FLAGSHIP SYSTEMS
+  // LUMINA DENTAL STUDIO (NEWEST FLAGSHIP)
   // ==========================================
+  {
+    slug: "lumina-dental-studio",
+    name: "Lumina Dental Studio — Smart Healthcare Management & Automated Patient Care Suite",
+    date: "2026.08",
+    category: "web",
+    tier: "pinned",
+    role: "Full-Stack Developer & UI/UX Architect",
+    summary:
+      "Modern, luxury dental healthcare platform featuring a high-converting 4-step dynamic booking funnel, a secure staff administrative portal with RBAC/JWT authentication, frame-accurate canvas animation streams, and automated medical intake compliance.",
+    problem:
+      "Traditional dental practices suffer from severe administrative friction: manual telephone scheduling bottlenecks, high no-show rates (~18%), physical paperwork cluttering the waiting room, and lack of real-time schedule locking between online visitors and clinic staff.",
+    solution:
+      "4-Step Patient Booking Funnel: Built with dynamic date/time slot validation and real-time database locks preventing double-bookings. Enterprise Staff Portal: Secure admin dashboard featuring role-based access control (Admin / Doctor / Receptionist), patient intake inspection with high-contrast medical alert warning badges, and instant appointment status lifecycle management. Frame-Accurate Canvas Animation Engine: Custom HTML5 Canvas implementation using the modern ImageDecoder WebP streaming API with global ArrayBuffer caching for interactive 0ms-latency hover/pause effects. Defensive API Architecture: Robust pre-flight regex sanitizers blocking SQL injection, XSS, and malicious payloads before reaching the database.",
+    outcome:
+      "Reduced in-clinic front-desk intake paperwork time by ~80% via pre-appointment digital tokens. 100% pass rate across automated end-to-end Playwright and visual regression test suites. Atomic schedule locks eliminating 100% of conflicting appointment requests.",
+    metrics: [
+      { label: "Intake Time", value: "-80% via tokens" },
+      { label: "Playwright E2E", value: "100% Coverage" },
+      { label: "Canvas Stream", value: "0ms ArrayBuffer" },
+      { label: "Double-bookings", value: "0 Conflicts" },
+    ],
+    stack: [
+      "Next.js 15 (App Router)",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Supabase (PostgreSQL)",
+      "Radix UI",
+      "HTML5 Canvas (ImageDecoder API)",
+      "Playwright E2E",
+    ],
+    image: "/automation/LUMINA WORKFLOW (PORTFOLIO)/LUMINA WEBSITE .png",
+    demoUrl: "https://luminadentalcarestudio.vercel.app/",
+  },
   {
     slug: "lumina-clinical-orchestration-rag",
     name: "Lumina Dental Studio — Autonomous Clinical Orchestration & RAG Engine",
     date: "2026.08",
     category: "ai",
     tier: "pinned",
-    badge: "FLAGSHIP AI PIPELINE",
     role: "AI Automation Specialist & Systems Architect",
     summary:
       "Enterprise 8-workflow autonomous clinical orchestration system in n8n integrating Google Gemini RAG, Supabase pgvector, Slack Block Kit, and Google Workspace to automate 100% of patient lifecycle operations, urgent allergy escalations, and clinic knowledge ingestion.",
@@ -88,39 +120,27 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    slug: "lumina-dental-studio",
-    name: "Lumina Dental Studio — Smart Healthcare Management & Automated Patient Care Suite",
-    date: "2026.08",
+    slug: "solace-point",
+    name: "Solace Point",
+    date: "2026.06",
     category: "web",
     tier: "pinned",
-    badge: "FLAGSHIP ENTERPRISE WEB",
-    role: "Full-Stack Developer & UI/UX Architect",
     summary:
-      "Modern, luxury dental healthcare platform featuring a high-converting 4-step dynamic booking funnel, a secure staff administrative portal with RBAC/JWT authentication, frame-accurate canvas animation streams, and automated medical intake compliance.",
+      "Full-stack digital insurance platform for OneNetworx Marketing, streamlining customer onboarding and quotation requests.",
     problem:
-      "Traditional dental practices suffer from severe administrative friction: manual telephone scheduling bottlenecks, high no-show rates (~18%), physical paperwork cluttering the waiting room, and lack of real-time schedule locking between online visitors and clinic staff.",
+      "Developing a high-impact digital platform to replace traditional, offline insurance pipelines and accelerate lead generation.",
     solution:
-      "4-Step Patient Booking Funnel: Built with dynamic date/time slot validation and real-time database locks preventing double-bookings. Enterprise Staff Portal: Secure admin dashboard featuring role-based access control (Admin / Doctor / Receptionist), patient intake inspection with high-contrast medical alert warning badges, and instant appointment status lifecycle management. Frame-Accurate Canvas Animation Engine: Custom HTML5 Canvas implementation using the modern ImageDecoder WebP streaming API with global ArrayBuffer caching for interactive 0ms-latency hover/pause effects. Defensive API Architecture: Robust pre-flight regex sanitizers blocking SQL injection, XSS, and malicious payloads before reaching the database.",
+      "Engineered a full-stack sales portal featuring real-time automated quote generation, secure database registration, and a high-fidelity UI.",
     outcome:
-      "Reduced in-clinic front-desk intake paperwork time by ~80% via pre-appointment digital tokens. 100% pass rate across automated end-to-end Playwright and visual regression test suites. Atomic schedule locks eliminating 100% of conflicting appointment requests.",
+      "Converted visitors into active policyholders and optimized user journeys to significantly improve customer engagement.",
     metrics: [
-      { label: "Intake Processing Time", value: "-80% via tokens" },
-      { label: "Playwright E2E Pass", value: "100% Coverage" },
-      { label: "Canvas Stream Latency", value: "0ms ArrayBuffer" },
-      { label: "Schedule Conflicts", value: "0 Double-bookings" },
+      { label: "Client Deployment", value: "OneNetworx Marketing" },
+      { label: "Quote Generation", value: "Real-Time Automated" },
+      { label: "Stack Performance", value: "Vite + Supabase" },
     ],
-    stack: [
-      "Next.js 15 (App Router)",
-      "React 19",
-      "TypeScript",
-      "Tailwind CSS v4",
-      "Supabase (PostgreSQL)",
-      "Radix UI",
-      "HTML5 Canvas (ImageDecoder API)",
-      "Playwright E2E",
-    ],
-    image: "/automation/LUMINA WORKFLOW (PORTFOLIO)/LUMINA WEBSITE .png",
-    demoUrl: "https://luminadentalcarestudio.vercel.app/",
+    stack: ["React", "Vite", "Tailwind CSS", "PostgreSQL", "Supabase", "Node.js"],
+    image: "/images/solacepoint/heropage.png",
+    demoUrl: "https://solacepoint.vercel.app/SolacePoint/Home",
   },
   {
     slug: "inbound-email-triage-router",
@@ -129,7 +149,6 @@ export const PROJECTS: Project[] = [
     date: "2026.07",
     category: "ai",
     tier: "pinned",
-    badge: "ENTERPRISE AI PIPELINE",
     summary:
       "Autonomous multi-branch email processing system that classifies intent, executes hybrid vector search, generates grounded support drafts, logs CRM tickets, and alerts cross-functional teams.",
     problem:
@@ -167,7 +186,6 @@ export const PROJECTS: Project[] = [
     date: "2026.08",
     category: "ai",
     tier: "pinned",
-    badge: "PRODUCTION AI BOT",
     summary:
       "Autonomous 5-workflow Telegram operational system combining real-time inventory monitoring, Google Drive SOP RAG knowledge retrieval, Llama 3.1 intent routing, scheduled staff reminders, and private executive error DMs.",
     problem:
@@ -201,36 +219,11 @@ export const PROJECTS: Project[] = [
     demoUrl: "https://drive.google.com/file/d/1T5IKOOaFuTXqngxqMSXE7ASvuaKj7ll-/view?usp=sharing",
   },
   {
-    slug: "solace-point",
-    name: "Solace Point",
-    date: "2026.06",
-    category: "web",
-    tier: "pinned",
-    badge: "PRODUCTION CLIENT APP",
-    summary:
-      "Full-stack digital insurance platform for OneNetworx Marketing, streamlining customer onboarding and quotation requests.",
-    problem:
-      "Developing a high-impact digital platform to replace traditional, offline insurance pipelines and accelerate lead generation.",
-    solution:
-      "Engineered a full-stack sales portal featuring real-time automated quote generation, secure database registration, and a high-fidelity UI.",
-    outcome:
-      "Converted visitors into active policyholders and optimized user journeys to significantly improve customer engagement.",
-    metrics: [
-      { label: "Client Deployment", value: "OneNetworx Marketing" },
-      { label: "Quote Generation", value: "Real-Time Automated" },
-      { label: "Stack Performance", value: "Vite + Supabase" },
-    ],
-    stack: ["React", "Vite", "Tailwind CSS", "PostgreSQL", "Supabase", "Node.js"],
-    image: "/images/solacepoint/heropage.png",
-    demoUrl: "https://solacepoint.vercel.app/SolacePoint/Home",
-  },
-  {
     slug: "alertpoint",
     name: "AlertPoint: Disaster Risk Reduction System",
     date: "2025.10",
     category: "system",
     tier: "pinned",
-    badge: "BEST IN IOT AWARD",
     summary:
       "Award-winning disaster response platform integrating IoT sensors and mobile broadcasting.",
     problem:
@@ -277,7 +270,7 @@ export const PROJECTS: Project[] = [
   },
 
   // ==========================================
-  // TIER 2: CORE PRODUCTION SYSTEMS & FULL-STACK APPS
+  // CORE PRODUCTION SYSTEMS & FULL-STACK APPS
   // ==========================================
   {
     slug: "knowledge-base-sync-rag",
@@ -590,7 +583,7 @@ export const PROJECTS: Project[] = [
   },
 
   // ==========================================
-  // TIER 3: ARCHIVE / LEGACY WORK
+  // ARCHIVE / LEGACY WORK
   // ==========================================
   {
     slug: "confession-wall",
