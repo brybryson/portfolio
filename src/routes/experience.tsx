@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Award, Briefcase, GraduationCap, Sparkles, Terminal } from "lucide-react";
+import { Briefcase } from "lucide-react";
 import { ExperienceTimeline } from "@/components/experience/ExperienceTimeline";
 import { AcademicHonors } from "@/components/experience/AcademicHonors";
 
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/experience")({
 function ExperiencePage() {
   return (
     <div className="mx-auto max-w-[1536px] px-6 py-10 sm:px-10 lg:px-14 flex flex-col gap-14">
-      {/* Page Header */}
+      {/* Page Header (Clean & Non-Redundant) */}
       <div className="flex flex-col gap-4 border-b border-border-strong pb-8">
         <div className="flex items-center gap-2 text-mono text-xs text-signal font-semibold">
           <Briefcase className="h-4 w-4" />
@@ -32,14 +32,12 @@ function ExperiencePage() {
             <h1 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
               Professional Journey &amp; Academic Excellence
             </h1>
-            <p className="text-sm leading-relaxed text-muted-foreground md:text-base max-w-3xl mt-1.5">
-              Production engineering experience across 3 developer internships, freelance full-stack client platforms, and continuous academic honors including{" "}
-              <strong className="text-foreground font-bold">Summa Cum Laude</strong> and{" "}
-              <strong className="text-foreground font-bold">100% Full Merit Blue Scholar</strong>.
+            <p className="text-sm leading-relaxed text-muted-foreground md:text-base max-w-2xl mt-1.5">
+              Chronological engineering trajectory spanning 4 software developer roles, production client deliveries, and continuous university honors (2022 — 2026).
             </p>
           </div>
 
-          {/* Quick Stats Ticker */}
+          {/* Quick Verified Status Badges */}
           <div className="flex flex-wrap items-center gap-2 text-mono text-xs shrink-0">
             <span className="rounded border border-signal/40 bg-signal/10 px-3 py-1.5 font-bold text-signal">
               ● Summa Cum Laude
