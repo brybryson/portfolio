@@ -11,6 +11,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PaletteDialog } from "@/components/layout/PaletteDialog";
+import { OwleyFloatingWidget } from "@/components/ai/OwleyFloatingWidget";
 
 import appCss from "../styles.css?url";
 
@@ -168,6 +169,7 @@ function RootComponent() {
       </main>
       <Footer />
       <PaletteDialog open={paletteOpen} onOpenChange={setPaletteOpen} />
+      <OwleyFloatingWidget />
     </QueryClientProvider>
   );
 }

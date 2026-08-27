@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { Bot, CheckCircle2, RotateCcw, Send, Sparkles, Terminal, User } from "lucide-react";
+import { Bot, RotateCcw, Send, Sparkles, Terminal, User } from "lucide-react";
 import { SectionLabel } from "@/components/common/SectionLabel";
+import { OwleyAvatar } from "@/components/common/OwleyAvatar";
 import { queryBrysonKnowledge } from "@/data/agentKnowledge";
 
 interface ChatMessage {
   id: string;
-  from: "user" | "bryson";
+  from: "user" | "owley";
   text: string;
   timestamp: string;
 }
@@ -14,11 +15,11 @@ export function LiveDemo() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "init",
-      from: "bryson",
-      text: `Hello! I am Bryson AI — Bryant's autonomous portfolio companion and RAG assistant.
+      from: "owley",
+      text: `Meow! 🐾 I am Owley AI — Bryant's personalized cyber-cat companion & portfolio assistant.
 I am indexed with Bryant's complete verified background: 20 shipped systems (including Lumina Dental Studio and Lumi), tech stack, 3 developer internships, Summa Cum Laude credentials, and client services.
 
-Feel free to ask me anything!`,
+Feel free to ask me anything about Bryant!`,
       timestamp: "Just now",
     },
   ]);
@@ -54,10 +55,14 @@ Feel free to ask me anything!`,
 
     setTimeout(() => {
       const { reply, quickReplies: newReplies } = queryBrysonKnowledge(q);
+      const owleyReply = reply
+        .replace(/Bryson AI/g, "Owley AI 🐾")
+        .replace(/I am Bryson/g, "I am Owley");
+
       const botMsg: ChatMessage = {
-        id: `b-${Date.now()}`,
-        from: "bryson",
-        text: reply,
+        id: `o-${Date.now()}`,
+        from: "owley",
+        text: owleyReply,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
       setMessages((prev) => [...prev, botMsg]);
@@ -70,8 +75,8 @@ Feel free to ask me anything!`,
     setMessages([
       {
         id: "reset",
-        from: "bryson",
-        text: "Conversation reset. What would you like to know about Bryant's projects or experience?",
+        from: "owley",
+        text: "Meow! 🐾 Chat reset. What would you like to know about Bryant's projects, stack, or experience?",
         timestamp: "Just now",
       },
     ]);
@@ -85,19 +90,19 @@ Feel free to ask me anything!`,
 
   return (
     <section id="demo" className="py-20">
-      <SectionLabel index="04" label="ai assistant" hint="bryson.ai // resume rag engine" />
+      <SectionLabel index="04" label="ai companion" hint="owley.ai // cyber-cat rag assistant" />
 
       <div className="mt-8 flex flex-col gap-4">
         <div className="flex flex-col gap-2 max-w-3xl">
           <div className="flex items-center gap-2 text-mono text-xs text-signal font-semibold uppercase tracking-wider">
             <Sparkles className="h-4 w-4" />
-            <span>KNOWLEDGE-GROUNDED PORTFOLIO COMPANION</span>
+            <span>PERSONALIZED CYBER-CAT AI COMPANION</span>
           </div>
           <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-            Bryson AI — Interactive Portfolio & Resume Assistant
+            Owley AI — Interactive Portfolio & Resume Assistant
           </h2>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-            Test Bryant's custom AI assistant indexed on his latest CV, 20 shipped projects, and production engineering workflows.
+            Meet Owley (named after Bryant's cat!) — an interactive AI assistant grounded in Bryant's 20 shipped projects, CV, and client deliverables.
           </p>
         </div>
 
@@ -106,20 +111,16 @@ Feel free to ask me anything!`,
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-xs uppercase tracking-wider text-muted-foreground">
             <div className="flex items-center gap-3">
-              <div className="flex gap-1.5">
-                <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
-                <div className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
-                <div className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
-              </div>
+              <OwleyAvatar size="sm" isThinking={isTyping} />
               <div className="flex items-center gap-2">
-                <Bot className="h-4 w-4 text-signal" />
-                <span className="font-bold text-foreground">BRYSON_AI // RAG AGENT v2.4</span>
+                <span className="font-bold text-foreground">OWLEY_AI // CYBER-CAT AGENT v2.4</span>
+                <span className="text-signal text-[11px] font-semibold">🐾</span>
               </div>
             </div>
 
             <div className="flex items-center gap-4 text-[11px]">
               <span className="hidden sm:inline text-signal font-semibold">
-                ● SUPABASE PGVECTOR MEMORY
+                ● VECTOR MEMORY READY
               </span>
               <button
                 onClick={handleReset}
@@ -147,14 +148,14 @@ Feel free to ask me anything!`,
                     isUser ? "flex-row-reverse" : "flex-row"
                   }`}
                 >
-                  <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-sm text-xs font-bold ${
-                      isUser
-                        ? "bg-signal text-background shadow-sm"
-                        : "border border-border bg-surface-2 text-signal"
-                    }`}
-                  >
-                    {isUser ? <User className="h-3.5 w-3.5" /> : <Bot className="h-3.5 w-3.5" />}
+                  <span className="shrink-0 mt-0.5">
+                    {isUser ? (
+                      <span className="flex h-7 w-7 items-center justify-center rounded-sm bg-signal text-background text-xs font-bold shadow-sm">
+                        <User className="h-3.5 w-3.5" />
+                      </span>
+                    ) : (
+                      <OwleyAvatar size="sm" />
+                    )}
                   </span>
 
                   <div
@@ -166,7 +167,7 @@ Feel free to ask me anything!`,
                   >
                     <div className="flex items-center justify-between text-[10px] uppercase text-muted-foreground pb-1 mb-1 border-b border-border/50">
                       <span className="font-bold text-signal">
-                        {isUser ? "YOU" : "BRYSON AI"}
+                        {isUser ? "YOU" : "OWLEY AI 🐾"}
                       </span>
                       <span>{m.timestamp}</span>
                     </div>
@@ -178,8 +179,8 @@ Feel free to ask me anything!`,
 
             {isTyping && (
               <div className="flex items-center gap-2 text-signal text-xs">
-                <Bot className="h-3.5 w-3.5 animate-pulse" />
-                <span className="animate-pulse">Bryson AI is querying vector memory...</span>
+                <OwleyAvatar size="sm" isThinking={true} />
+                <span className="animate-pulse">Owley is querying vector memory... 🐾</span>
               </div>
             )}
           </div>
@@ -214,7 +215,7 @@ Feel free to ask me anything!`,
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Bryson AI anything (e.g. Lumina Dental Studio, tech stack, services, experience)..."
+              placeholder="Ask Owley anything (e.g. Lumina Dental Studio, tech stack, services, experience)..."
               className="flex-1 bg-transparent text-mono text-xs md:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             />
             <button
@@ -227,7 +228,7 @@ Feel free to ask me anything!`,
               }`}
             >
               <Send className="h-3.5 w-3.5" />
-              <span>Ask</span>
+              <span>Ask Owley</span>
             </button>
           </form>
         </div>
