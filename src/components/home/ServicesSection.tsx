@@ -5,6 +5,7 @@ import {
   ArrowUpRight,
   Bot,
   Boxes,
+  CheckCircle2,
   Cpu,
   Layers,
   MessageSquareCode,
@@ -19,66 +20,71 @@ const SERVICES = [
     index: "01",
     icon: Bot,
     title: "AI & Workflow Automation",
-    summary: "Self-healing backend pipelines that eliminate repetitive operations and manual data entry.",
+    tag: "High ROI Automation",
+    summary: "Self-healing backend pipelines that eliminate repetitive operations, manual triage, and data entry.",
     points: [
-      "Multi-branch n8n & Python pipelines",
-      "Inbound email triage & lead routing",
-      "Automated Slack & Telegram ops alerts",
-      "Zero-silent-failure error telemetry",
+      "Multi-branch n8n & Python pipelines with automated retries",
+      "Smart inbound email & lead triage with JSON schema validation",
+      "Slack / Telegram operations bots with real-time alerts",
+      "Zero-silent-failure central error handler & Slack telemetry",
     ],
-    metric: "n8n · Python · APIs",
+    metric: "n8n · Python · APIs · Webhooks",
   },
   {
     index: "02",
     icon: Palette,
     title: "UI/UX Design & Prototyping",
-    summary: "Modern, luxury developer interfaces and high-converting booking funnels.",
+    tag: "Design Systems",
+    summary: "Modern developer aesthetics, glassmorphism interfaces, and high-converting conversion funnels.",
     points: [
-      "Figma design systems & components",
-      "Glassmorphism & dark-mode aesthetics",
-      "Interactive click-through prototypes",
-      "Responsive mobile-first user journeys",
+      "Figma design systems, tokens, and reusable component libraries",
+      "Dark-mode first, glassmorphic UI with micro-animations",
+      "Interactive click-through prototypes for user validation",
+      "Responsive, mobile-optimized accessible layouts",
     ],
-    metric: "Figma · Design Systems",
+    metric: "Figma · Design Systems · UI/UX",
   },
   {
     index: "03",
     icon: Layers,
     title: "Full-Stack Web & SaaS Platforms",
-    summary: "Production web applications engineered with Next.js 15, React 19, and Supabase.",
+    tag: "Production Ready",
+    summary: "Enterprise web applications built with Next.js 15, React 19, TypeScript, and Supabase.",
     points: [
-      "Next.js 15 App Router & React 19",
-      "Dynamic booking funnels & atomic locks",
-      "Staff admin portals with RBAC/JWT",
-      "Playwright automated E2E testing",
+      "Next.js 15 App Router & React 19 server-side architecture",
+      "Dynamic booking funnels with atomic real-time slot locking",
+      "Secure staff admin portals with RBAC & JWT authentication",
+      "Playwright automated E2E testing & CI/CD deployment",
     ],
-    metric: "Next.js · React · TypeScript",
+    metric: "Next.js 15 · React 19 · TypeScript",
   },
   {
     index: "04",
     icon: MessageSquareCode,
     title: "AI Chatbots & RAG Companions",
+    tag: "RAG Vector Memory",
     summary: "24/7 intelligent conversational agents (like Lumi) grounded in verified business SOPs.",
     points: [
-      "24/7 RAG AI assistants (Gemini / LLaMA)",
-      "Supabase pgvector semantic search",
-      "Google Drive PDF knowledge ingestion",
-      "Automated lead capture & escalation",
+      "24/7 RAG AI assistants powered by Gemini & LLaMA",
+      "Supabase pgvector (768-dim) semantic vector similarity search",
+      "Google Drive automated PDF ingestion & chunking sync",
+      "Automated lead capture & urgent clinical/support escalation",
     ],
-    metric: "Gemini · pgvector · RAG",
+    metric: "Gemini · Supabase pgvector · RAG",
   },
   {
     index: "05",
     icon: Boxes,
     title: "Custom Enterprise & POS Systems",
-    summary: "Bespoke internal business tools for inventory, automated PDF reports, and compliance.",
+    tag: "Mission Critical",
+    summary: "Bespoke internal platforms for inventory, automated PDF report generation, and compliance.",
     points: [
-      "Inventory tracking & stockout digests",
-      "Automated invoice & medical cert PDFs",
-      "Rule-based decision support logic",
-      "RFID hardware sensor integration",
+      "Custom POS terminals & automated stockout warning digests",
+      "Automated medical certificate & invoice PDF generation",
+      "Rule-based AI decision support for handbook compliance",
+      "RFID hardware sensor integration for live tracking",
     ],
-    metric: "PHP · MySQL · PostgreSQL",
+    metric: "PostgreSQL · PHP · MySQL · Systems",
   },
 ];
 
@@ -97,57 +103,57 @@ export function ServicesSection() {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const offset = direction === "left" ? -360 : 360;
+      const offset = direction === "left" ? -460 : 460;
       scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
     }
   };
 
   return (
-    <section id="services" className="py-16">
-      <SectionLabel index="01" label="services" hint="what i can build for you" />
+    <section id="services" className="py-20">
+      <SectionLabel index="01" label="services" hint="solutions & client offerings" />
 
-      <div className="mt-6 flex flex-col gap-6">
-        {/* Header & Slide Controls */}
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+      <div className="mt-8 flex flex-col gap-6">
+        {/* Section Header & Controls */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between border-b border-border/80 pb-6">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
               Solutions & Client Offerings
             </h2>
-            <p className="mt-1 text-xs md:text-sm text-muted-foreground">
-              End-to-end development: from UI/UX design and full-stack web apps to AI chatbots and enterprise automation.
+            <p className="mt-2 text-sm md:text-base text-muted-foreground leading-relaxed">
+              End-to-end engineering: from luxury UI/UX design and full-stack web platforms to autonomous AI pipelines and custom enterprise operating systems.
             </p>
           </div>
 
-          {/* Navigation Controls */}
+          {/* Navigation Arrows */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
-              className={`rounded-sm border border-border bg-surface p-2 text-foreground transition ${
-                !canScrollLeft ? "opacity-30 cursor-not-allowed" : "hover:border-signal hover:text-signal"
+              className={`rounded-sm border border-border bg-surface p-3 text-foreground transition shadow-sm ${
+                !canScrollLeft ? "opacity-30 cursor-not-allowed" : "hover:border-signal hover:text-signal hover:bg-surface-2"
               }`}
               aria-label="Previous service"
             >
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="h-5 w-5" />
             </button>
             <button
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
-              className={`rounded-sm border border-border bg-surface p-2 text-foreground transition ${
-                !canScrollRight ? "opacity-30 cursor-not-allowed" : "hover:border-signal hover:text-signal"
+              className={`rounded-sm border border-border bg-surface p-3 text-foreground transition shadow-sm ${
+                !canScrollRight ? "opacity-30 cursor-not-allowed" : "hover:border-signal hover:text-signal hover:bg-surface-2"
               }`}
               aria-label="Next service"
             >
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-5 w-5" />
             </button>
           </div>
         </div>
 
-        {/* Smooth Horizontal Slide Container */}
+        {/* Standout Large Horizontal Cards Slider */}
         <div
           ref={scrollRef}
           onScroll={checkScroll}
-          className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory"
+          className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory pt-2"
           style={{ scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) transparent" }}
         >
           {SERVICES.map((srv) => {
@@ -155,45 +161,58 @@ export function ServicesSection() {
             return (
               <div
                 key={srv.index}
-                className="group flex min-w-[290px] sm:min-w-[340px] max-w-[370px] shrink-0 snap-start flex-col justify-between rounded-sm border border-border-strong bg-card p-5 md:p-6 transition-all duration-300 hover:border-signal hover:shadow-lg"
+                className="group flex min-w-[340px] sm:min-w-[420px] md:min-w-[480px] max-w-[520px] shrink-0 snap-start flex-col justify-between rounded-sm border border-border-strong bg-card p-7 sm:p-9 transition-all duration-300 hover:border-signal hover:shadow-2xl relative"
               >
                 <div>
-                  <div className="flex items-center justify-between border-b border-border/80 pb-3 text-mono">
-                    <div className="flex items-center gap-2">
-                      <span className="flex h-7 w-7 items-center justify-center rounded border border-border bg-surface-2 text-signal">
-                        <Icon className="h-4 w-4" />
+                  {/* Card Header */}
+                  <div className="flex items-center justify-between border-b border-border/80 pb-4 text-mono">
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-10 w-10 items-center justify-center rounded border border-border bg-surface-2 text-signal shadow-sm group-hover:border-signal transition">
+                        <Icon className="h-5 w-5" />
                       </span>
-                      <span className="text-xs font-semibold text-foreground">[{srv.index}]</span>
+                      <span className="text-sm font-bold text-foreground">[{srv.index}]</span>
                     </div>
-                    <span className="text-[10px] uppercase text-signal font-mono">
-                      {srv.metric}
+                    <span className="rounded-full border border-signal/30 bg-signal/10 px-3 py-1 text-xs font-semibold text-signal uppercase tracking-wider">
+                      {srv.tag}
                     </span>
                   </div>
 
-                  <h3 className="mt-3.5 text-base sm:text-lg font-bold tracking-tight text-foreground group-hover:text-signal transition">
+                  {/* Title & Summary */}
+                  <h3 className="mt-5 text-2xl font-bold tracking-tight text-foreground group-hover:text-signal transition">
                     {srv.title}
                   </h3>
-                  <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
+                  <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed">
                     {srv.summary}
                   </p>
 
-                  <ul className="mt-4 flex flex-col gap-1.5 text-[11.5px] text-foreground/90 font-mono">
-                    {srv.points.map((pt, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <span className="h-1 w-1 rounded-full bg-signal" />
-                        <span className="truncate">{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Deliverables List */}
+                  <div className="mt-6 flex flex-col gap-2.5">
+                    <span className="text-mono text-xs uppercase tracking-widest text-foreground font-semibold">
+                      WHAT I DELIVER:
+                    </span>
+                    <ul className="flex flex-col gap-2 text-xs sm:text-[13px] text-foreground/90 font-mono">
+                      {srv.points.map((pt, i) => (
+                        <li key={i} className="flex items-start gap-2.5">
+                          <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5 text-signal" />
+                          <span className="leading-snug">{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
 
-                <div className="mt-5 border-t border-border/80 pt-3 text-mono text-xs">
+                {/* Card Footer */}
+                <div className="mt-8 flex items-center justify-between border-t border-border/80 pt-4 text-mono text-xs">
+                  <span className="text-[11px] text-muted-foreground font-semibold uppercase">
+                    {srv.metric}
+                  </span>
+
                   <Link
                     to="/projects"
-                    className="inline-flex items-center gap-1 font-semibold text-foreground hover:text-signal transition"
+                    className="inline-flex items-center gap-1.5 font-bold text-signal hover:underline"
                   >
                     <span>View Proven Systems</span>
-                    <ArrowUpRight className="h-3.5 w-3.5" />
+                    <ArrowUpRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>

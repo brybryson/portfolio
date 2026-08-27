@@ -3,7 +3,6 @@ import { Hero } from "@/components/home/Hero";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { InteractiveSkills } from "@/components/home/InteractiveSkills";
 import { FlagshipTeaser } from "@/components/home/FlagshipTeaser";
-import { LiveDemo } from "@/components/home/LiveDemo";
 import { ContactSection } from "@/components/home/ContactSection";
 
 export const Route = createFileRoute("/")({
@@ -32,22 +31,19 @@ function HomePage() {
 
   return (
     <div className="mx-auto max-w-[1440px] px-6 md:px-10">
-      {/* 00 Hero Identity — original precious hero */}
+      {/* 00 Hero Identity */}
       <Hero onOpenPalette={handleOpenPalette} />
 
-      {/* 01 What I Offer & Client Deliverables (4 Core Services) */}
+      {/* 01 What I Offer & Client Deliverables (Standout Large Cards) */}
       <ServicesSection />
 
-      {/* 02 Interactive Animated Technical Stack */}
+      {/* 02 Interactive Technical Stack */}
       <InteractiveSkills />
 
-      {/* 03 Flagship Spotlight Teaser */}
+      {/* 03 Premier Flagship Showcase (Cinema-Grade Lumina Suite + Lumi) */}
       <FlagshipTeaser />
 
-      {/* 04 Interactive Live Demo Agent */}
-      <LiveDemo />
-
-      {/* 05 Connect & Channels */}
+      {/* 04 CONTACT.EXE */}
       <ContactSection />
     </div>
   );

@@ -14,7 +14,7 @@ import { SectionLabel } from "@/components/common/SectionLabel";
 export function ContactSection() {
   return (
     <section id="contact" className="py-20">
-      <SectionLabel index="05" label="contact" hint="channels & connect" />
+      <SectionLabel index="04" label="contact" hint="channels & connect" />
 
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-[1.4fr_1fr]">
         {/* Left macOS Box — CONTACT.EXE */}
