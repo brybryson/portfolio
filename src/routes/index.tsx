@@ -40,14 +40,17 @@ function HomePage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      {/* Hero Section — precious original restored */}
+    <div className="mx-auto max-w-[1440px] px-6 md:px-10">
+      {/* Hero Section */}
       <Hero onOpenPalette={handleOpenPalette} />
+
+      {/* Skills / Toolkit Section */}
+      <SkillsSection />
 
       {/* Projects Pipeline Canvas — Expansive & Wider */}
       <section id="projects" className="py-20">
         <SectionLabel index="01" label="projects" hint="ai automation · web · systems" />
-        <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-[300px_1fr] lg:gap-8">
+        <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-[320px_1fr] lg:gap-8">
           <DirectoryExplorer
             projects={PROJECTS.filter((p) => p.tier !== "archive")}
             active={activeSlug}
@@ -68,9 +71,6 @@ function HomePage() {
 
       {/* Certificates & Badges (Initial 6 + Show More) */}
       <CertificatesSection showFilter={true} />
-
-      {/* Technical Toolkit */}
-      <SkillsSection />
 
       {/* Contact Section */}
       <ContactSection />

@@ -1,10 +1,10 @@
-import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 export function Footer() {
   const commitHash = "e2c8a9f";
   return (
     <footer className="border-t border-border-strong bg-surface py-12 text-mono text-xs text-muted-foreground">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-6 px-6 md:px-10 sm:flex-row">
         <div className="flex flex-col items-center gap-1 sm:items-start">
           <div className="flex items-center gap-2 text-foreground font-medium">
             <span>Bryant Iverson Melliza</span>
