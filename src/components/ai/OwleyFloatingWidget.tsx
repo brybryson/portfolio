@@ -19,13 +19,11 @@ export function OwleyFloatingWidget() {
     {
       id: "init",
       from: "owley",
-      text: `Hi there! I'm **Owley** — Bryant's favorite cat. 🐾
+      text: `Hi there! I'm **Owley** 🐾 — Bryant's AI companion.
 
-I'm usually very quiet and gentle. Bryant adopted me after someone threw me into their backyard, and now I keep him company while he codes late into the night.
+Connected to his **RAG vector memory**, I can answer questions about his **20 shipped projects**, tech stack, and experience.
 
-As his AI companion connected to his **RAG vector memory**, I'm here to answer any questions about his **20 shipped projects** (like Lumina Dental Studio and Lumi), tech stack, and experience. 
-
-**Meow! What can I help you with today?**`,
+**What would you like to explore today?**`,
       timestamp: "Just now",
     },
   ]);
