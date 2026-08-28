@@ -95,7 +95,7 @@ I'm Bryant's cat and coding buddy. Ask me anything about his work, projects, or 
           {/* Clean Header Bar */}
           <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-xs">
             <div className="flex items-center gap-2.5">
-              <OwleyAvatar size="sm" isThinking={isTyping} />
+              <OwleyAvatar size="sm" />
               <div>
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
                   <span>Owley</span>

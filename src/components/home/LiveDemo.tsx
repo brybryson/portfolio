@@ -110,7 +110,7 @@ I'm Bryant's cat and coding buddy. Ask me anything about his work, projects, or 
           {/* Clean Header */}
           <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5 text-mono text-xs uppercase tracking-wider text-muted-foreground">
             <div className="flex items-center gap-3">
-              <OwleyAvatar size="sm" isThinking={isTyping} />
+              <OwleyAvatar size="sm" />
               <div className="flex items-center gap-2">
                 <span className="font-bold text-foreground">OWLEY</span>
                 <span className="text-muted-foreground text-[11px]">· AI CAT BOT</span>
