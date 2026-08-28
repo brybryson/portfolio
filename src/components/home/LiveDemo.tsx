@@ -28,14 +28,17 @@ I'm Bryant's cat and coding buddy. Ask me anything about his work, projects, or 
       timestamp: "Just now",
     },
   ]);
+  const DEFAULT_QUICK_REPLIES = [
+    "What is his tech stack?",
+    "How can I contact Bryant?",
+    "Who is Bryant?",
+    "What are his most prominent projects?",
+    "About Owley chatbot",
+  ];
+
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [quickReplies, setQuickReplies] = useState<string[]>([
-    "Tell me about Lumina Dental Studio",
-    "Tell me about Lumi the chatbot",
-    "What is Bryant's tech stack?",
-    "Is Bryant available for hire?",
-  ]);
+  const [quickReplies, setQuickReplies] = useState<string[]>(DEFAULT_QUICK_REPLIES);
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -84,6 +87,7 @@ I'm Bryant's cat and coding buddy. Ask me anything about his work, projects, or 
         timestamp: "Just now",
       },
     ]);
+    setQuickReplies(DEFAULT_QUICK_REPLIES);
   };
 
   return (

@@ -267,10 +267,11 @@ I have access to Bryant's complete verified background: 20 shipped projects (inc
 
 What would you like to know?`,
     quickReplies: [
-      "Tell me about Lumina Dental Studio",
-      "Tell me about Lumi the chatbot",
-      "What are Bryant's core skills?",
+      "What is his tech stack?",
       "How can I contact Bryant?",
+      "Who is Bryant?",
+      "What are his most prominent projects?",
+      "About Owley chatbot",
     ],
   };
 }
@@ -311,9 +312,11 @@ export async function queryOwleyRAG(
         return {
           reply: data.reply.trim(),
           quickReplies: [
-            "Tell me about Lumina Dental Studio",
             "What is his tech stack?",
             "How can I contact Bryant?",
+            "Who is Bryant?",
+            "What are his most prominent projects?",
+            "About Owley chatbot",
           ],
           source: "rag",
         };
