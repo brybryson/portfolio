@@ -25,11 +25,11 @@ import {
 import { PROJECTS } from "@/data/projects";
 
 const SECTIONS = [
-  { id: "hero", label: "00 // Hero Identity", hint: "Top of page", route: "/" },
-  { id: "services", label: "01 // Solutions & Offerings", hint: "5 Client Services", route: "/" },
-  { id: "skills", label: "02 // Technical Stack", hint: "Languages & Frameworks", route: "/" },
-  { id: "flagships", label: "03 // Flagship Showcase", hint: "Lumina Dental & Lumi", route: "/" },
-  { id: "contact", label: "04 // CONTACT.EXE", hint: "Get in touch", route: "/" },
+  { id: "hero", label: "00 // Hero Identity", hint: "Top of page", route: "/home" },
+  { id: "services", label: "01 // Solutions & Offerings", hint: "5 Client Services", route: "/home" },
+  { id: "skills", label: "02 // Technical Stack", hint: "Languages & Frameworks", route: "/home" },
+  { id: "flagships", label: "03 // Flagship Showcase", hint: "Lumina Dental & Lumi", route: "/home" },
+  { id: "contact", label: "04 // CONTACT.EXE", hint: "Get in touch", route: "/home" },
 ];
 
 const PAGES = [
@@ -67,7 +67,7 @@ export function PaletteDialog({
 
   const handleSelectSection = (sectionId: string) => {
     onOpenChange(false);
-    if (currentPath === "/") {
+    if (currentPath === "/" || currentPath === "/home") {
       const el = document.getElementById(sectionId);
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -75,7 +75,7 @@ export function PaletteDialog({
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     } else {
-      navigate({ to: "/" }).then(() => {
+      navigate({ to: "/home" }).then(() => {
         setTimeout(() => {
           const el = document.getElementById(sectionId);
           el?.scrollIntoView({ behavior: "smooth", block: "start" });

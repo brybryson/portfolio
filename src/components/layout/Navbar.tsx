@@ -6,7 +6,7 @@ export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
   const currentPath = routerState.location.pathname;
 
   const navLinks = [
-    { label: "Home", to: "/", icon: Home },
+    { label: "Home", to: "/home", icon: Home },
     { label: "Projects & Pipelines", to: "/projects", icon: Boxes },
     { label: "Experience", to: "/experience", icon: Briefcase },
     { label: "Certificates", to: "/certificates", icon: Award },
@@ -18,7 +18,7 @@ export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
         {/* Brand / Logo */}
         <div className="flex items-center gap-3">
           <Link
-            to="/"
+            to="/home"
             className="flex items-center gap-2 font-medium text-foreground hover:text-signal transition"
           >
             <img
@@ -43,7 +43,9 @@ export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
           {navLinks.map((link) => {
             const Icon = link.icon;
             const isActive =
-              link.to === "/" ? currentPath === "/" : currentPath.startsWith(link.to);
+              link.to === "/home"
+                ? currentPath === "/" || currentPath === "/home"
+                : currentPath.startsWith(link.to);
 
             return (
               <Link
