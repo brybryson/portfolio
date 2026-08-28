@@ -19,11 +19,11 @@ export function OwleyFloatingWidget() {
     {
       id: "init",
       from: "owley",
-      text: `Hi there! I'm **Owley** 🐾 — Bryant's AI companion.
+      text: `Hey there! I'm **Owley** 🐾
 
-Connected to his **RAG vector memory**, I can answer questions about his **20 shipped projects**, tech stack, and experience.
+I'm Bryant's cat and coding buddy. Ask me anything about his work, projects, or how to get in touch!
 
-**What would you like to explore today?**`,
+**What's on your mind?**`,
       timestamp: "Just now",
     },
   ]);
@@ -81,7 +81,7 @@ Connected to his **RAG vector memory**, I can answer questions about his **20 sh
       {
         id: "reset",
         from: "owley",
-        text: "Meow! 🐾 Chat reset. What would you like to ask about Bryant's projects, stack, or experience?",
+        text: "Meow! 🐾 Chat reset. What would you like to ask about Bryant?",
         timestamp: "Just now",
       },
     ]);
