@@ -1,6 +1,14 @@
 export interface KnowledgeChunk {
   id: string;
-  category: "identity" | "projects" | "stack" | "experience" | "education" | "services" | "contact" | "owley";
+  category:
+    | "identity"
+    | "projects"
+    | "stack"
+    | "experience"
+    | "education"
+    | "services"
+    | "contact"
+    | "owley";
   keywords: string[];
   title: string;
   content: string;
@@ -18,7 +26,11 @@ export const BRYSON_KNOWLEDGE_BASE: KnowledgeChunk[] = [
 I'm usually very quiet and gentle. Bryant adopted me after someone threw me into their backyard. Now, I keep him company while he codes late into the night. 
 
 As his personalized AI companion, I have full access to his verified portfolio, resume, and 20 shipped projects. **Meow! What can I help you with today?**`,
-    quickReplies: ["Tell me about Lumina Dental Studio", "What is Bryant's tech stack?", "What services does he offer?"],
+    quickReplies: [
+      "Tell me about Lumina Dental Studio",
+      "What is Bryant's tech stack?",
+      "What services does he offer?",
+    ],
   },
   {
     id: "identity",
@@ -30,12 +42,25 @@ As his personalized AI companion, I have full access to his verified portfolio, 
 • **Core Focus**: High-performance web applications (Next.js 15, React 19, TypeScript) and autonomous backend automation pipelines (n8n, Supabase pgvector RAG, Gemini, LLaMA).
 • **Academics**: Graduating **Summa Cum Laude** with a BS in Information Technology from National University Fairview (100% Full Merit Blue Scholar).
 • **Experience**: 3 software developer internships and 20 production systems shipped.`,
-    quickReplies: ["What projects has Bryant built?", "What is his tech stack?", "Is he open for work?"],
+    quickReplies: [
+      "What projects has Bryant built?",
+      "What is his tech stack?",
+      "Is he open for work?",
+    ],
   },
   {
     id: "services",
     category: "services",
-    keywords: ["services", "hire", "offer", "deliver", "freelance", "contract", "rates", "can you do"],
+    keywords: [
+      "services",
+      "hire",
+      "offer",
+      "deliver",
+      "freelance",
+      "contract",
+      "rates",
+      "can you do",
+    ],
     title: "Client Offerings & Services",
     content: `Bryant provides 5 specialized engineering solutions:
 
@@ -56,7 +81,11 @@ As his personalized AI companion, I have full access to his verified portfolio, 
 • **Web Management Platform**: Next.js 15 (App Router), React 19, Tailwind CSS v4, and Supabase. Features a 4-step dynamic booking funnel with real-time atomic slot locks, RBAC staff portal, and 0ms-latency HTML5 Canvas ImageDecoder WebP streaming.
 • **8-Workflow Autonomous RAG Engine**: Features **Lumi** (24/7 AI Dental Companion), timed post-op recovery sequences (2h/24h), <3s critical medical allergy triage to Slack, and Google Drive PDF knowledge ingestion.
 • **Links**: [View Live Web Platform ↗](https://luminadentalcarestudio.vercel.app/) · [Watch 3-min Walkthrough ↗](https://drive.google.com/file/d/1sEEmW5fjaorBb_zEMg2sUu4PP0W1_Jro/view?usp=sharing)`,
-    quickReplies: ["Tell me about Lumi the chatbot", "What stack does he use?", "View all 20 projects"],
+    quickReplies: [
+      "Tell me about Lumi the chatbot",
+      "What stack does he use?",
+      "View all 20 projects",
+    ],
   },
   {
     id: "lumi-bot",
@@ -68,24 +97,54 @@ As his personalized AI companion, I have full access to his verified portfolio, 
 • **Vector Memory**: Ingests clinical SOPs and post-op care guidelines into Supabase pgvector (768-dim embeddings via Google text-embedding-004).
 • **Triage & Safety**: Evaluates trauma severity vs routine queries, answering with grounded accuracy while alerting on-call doctors in Slack for high-risk dental allergies.
 • **Ingestion Pipeline**: Automatically parses new PDF SOPs from Google Drive with human-in-the-loop Slack approval.`,
-    quickReplies: ["Tell me about Lumina Suite", "What RAG stack does he use?", "View all projects"],
+    quickReplies: [
+      "Tell me about Lumina Suite",
+      "What RAG stack does he use?",
+      "View all projects",
+    ],
   },
   {
     id: "projects",
     category: "projects",
-    keywords: ["projects", "portfolio", "systems", "shipped", "built", "solace", "vetflow", "alertpoint"],
+    keywords: [
+      "projects",
+      "portfolio",
+      "systems",
+      "shipped",
+      "built",
+      "solace",
+      "vetflow",
+      "alertpoint",
+    ],
     title: "20 Shipped Production Systems",
     content: `Bryant has shipped 20 projects across 3 key domains:
 
 • **AI & Automation**: Lumina 8-Workflow Clinical Engine, Inbound Email Triage Router, Café Operations Telegram Suite, ClickUp Bug Triage Assistant, and Live Traffic Telegram Notifier.
 • **Web Platforms**: Lumina Dental Studio Web Suite, Solace Point (Insurance Portal for OneNetworx), Safety Heroes (Caffeine AI Manila Hackathon), and Personal Portfolio v2.
 • **Enterprise Systems & IoT**: AlertPoint (Best in IoT Award Winner), VetFlow (POS & Clinic Management), Property Custodian System, Prefect Disciplinary System, and PetSense RFID Grooming.`,
-    quickReplies: ["Tell me about Solace Point", "Tell me about AlertPoint", "How to contact Bryant?"],
+    quickReplies: [
+      "Tell me about Solace Point",
+      "Tell me about AlertPoint",
+      "How to contact Bryant?",
+    ],
   },
   {
     id: "stack",
     category: "stack",
-    keywords: ["stack", "tech", "skills", "technologies", "tools", "react", "next", "python", "n8n", "languages", "playwright", "selenium"],
+    keywords: [
+      "stack",
+      "tech",
+      "skills",
+      "technologies",
+      "tools",
+      "react",
+      "next",
+      "python",
+      "n8n",
+      "languages",
+      "playwright",
+      "selenium",
+    ],
     title: "Technical Stack & Ecosystem",
     content: `Bryant's core engineering toolkit:
 
@@ -93,12 +152,25 @@ As his personalized AI companion, I have full access to his verified portfolio, 
 • **Backend & Databases**: Node.js, PHP, PostgreSQL, Supabase, MySQL, Firebase, Prisma ORM, REST APIs.
 • **AI & Automation**: n8n, Google Gemini 1.5/3.1, Groq (LLaMA 3.3 70B), Supabase pgvector (768-dim), Slack Block Kit, Telegram Bot API, Google AI Studio.
 • **Testing & DevOps**: Playwright E2E, Selenium WebDriver, Git/GitHub, Docker, Linux CLI, ClickUp, Jira, Figma.`,
-    quickReplies: ["What experience does he have?", "What services does he offer?", "Download Resume"],
+    quickReplies: [
+      "What experience does he have?",
+      "What services does he offer?",
+      "Download Resume",
+    ],
   },
   {
     id: "experience",
     category: "experience",
-    keywords: ["experience", "internship", "work", "job", "career", "history", "onenetworx", "jlabs"],
+    keywords: [
+      "experience",
+      "internship",
+      "work",
+      "job",
+      "career",
+      "history",
+      "onenetworx",
+      "jlabs",
+    ],
     title: "Work & Internship Experience",
     content: `Bryant has completed 3 software development internships:
 
@@ -110,7 +182,17 @@ As his personalized AI companion, I have full access to his verified portfolio, 
   {
     id: "education",
     category: "education",
-    keywords: ["education", "degree", "university", "gpa", "scholar", "summa", "honors", "college", "school"],
+    keywords: [
+      "education",
+      "degree",
+      "university",
+      "gpa",
+      "scholar",
+      "summa",
+      "honors",
+      "college",
+      "school",
+    ],
     title: "Education & Honors",
     content: `Academic Credentials:
 
@@ -122,7 +204,17 @@ As his personalized AI companion, I have full access to his verified portfolio, 
   {
     id: "contact",
     category: "contact",
-    keywords: ["contact", "email", "phone", "hire", "reach", "message", "linkedin", "github", "resume"],
+    keywords: [
+      "contact",
+      "email",
+      "phone",
+      "hire",
+      "reach",
+      "message",
+      "linkedin",
+      "github",
+      "resume",
+    ],
     title: "Contact & Availability",
     content: `Bryant is available for **Full-Time, Contract, or Freelance** roles:
 
@@ -132,7 +224,11 @@ As his personalized AI companion, I have full access to his verified portfolio, 
 • **LinkedIn**: [linkedin.com/in/bryant-iverson-melliza ↗](https://www.linkedin.com/in/bryant-iverson-melliza-6759b8292)
 • **GitHub**: [github.com/brybryson ↗](https://github.com/brybryson)
 • **Resume**: [Download Resume (PDF) ↗](https://bryant-melliza.vercel.app/resume/Bryant_Melliza_Resume.pdf)`,
-    quickReplies: ["Send email to Bryant", "What projects has he built?", "What are his core skills?"],
+    quickReplies: [
+      "Send email to Bryant",
+      "What projects has he built?",
+      "What are his core skills?",
+    ],
   },
 ];
 
@@ -176,5 +272,64 @@ What would you like to know?`,
       "What are Bryant's core skills?",
       "How can I contact Bryant?",
     ],
+  };
+}
+
+export const N8N_OWLEY_WEBHOOK = "https://dummyaccountbry.app.n8n.cloud/webhook/portfolio-chat";
+
+export async function queryOwleyRAG(
+  userQuery: string,
+  sessionId?: string,
+): Promise<{ reply: string; quickReplies: string[]; source: "rag" | "local" }> {
+  const q = userQuery.trim();
+  if (!q) {
+    const fallback = queryBrysonKnowledge("");
+    return { ...fallback, source: "local" };
+  }
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
+
+    const response = await fetch(N8N_OWLEY_WEBHOOK, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: q,
+        sessionId: sessionId || `owley-session-${Date.now()}`,
+      }),
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (response.ok) {
+      const data = await response.json().catch(() => null);
+      if (data && typeof data.reply === "string" && data.reply.trim().length > 0) {
+        return {
+          reply: data.reply.trim(),
+          quickReplies: [
+            "Tell me about Lumina Dental Studio",
+            "What is his tech stack?",
+            "How can I contact Bryant?",
+          ],
+          source: "rag",
+        };
+      }
+    }
+  } catch (err) {
+    console.warn(
+      "[Owley AI] n8n RAG webhook unavailable or timed out. Gracefully switching to local verified knowledge base:",
+      err,
+    );
+  }
+
+  // Graceful instantaneous local fallback
+  const fallback = queryBrysonKnowledge(q);
+  return {
+    ...fallback,
+    source: "local",
   };
 }

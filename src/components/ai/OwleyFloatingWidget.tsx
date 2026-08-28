@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  RotateCcw,
-  Send,
-  User,
-  X,
-} from "lucide-react";
+import { RotateCcw, Send, User, X } from "lucide-react";
 import { OwleyAvatar } from "@/components/common/OwleyAvatar";
-import { queryBrysonKnowledge } from "@/data/agentKnowledge";
+import { queryOwleyRAG } from "@/data/agentKnowledge";
 
 interface Message {
   id: string;
@@ -17,6 +12,9 @@ interface Message {
 
 export function OwleyFloatingWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const sessionIdRef = useRef<string>(
+    `owley-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+  );
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "init",
@@ -25,7 +23,7 @@ export function OwleyFloatingWidget() {
 
 I'm usually very quiet and gentle. Bryant adopted me after someone threw me into their backyard, and now I keep him company while he codes late into the night.
 
-As his AI companion, I'm here to answer any questions about his **20 shipped projects** (like Lumina Dental Studio and Lumi), tech stack, and experience. 
+As his AI companion connected to his **RAG vector memory**, I'm here to answer any questions about his **20 shipped projects** (like Lumina Dental Studio and Lumi), tech stack, and experience. 
 
 **Meow! What can I help you with today?**`,
       timestamp: "Just now",
@@ -48,7 +46,7 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
     }
   }, [isOpen, messages, isTyping]);
 
-  const handleSend = (queryText: string) => {
+  const handleSend = async (queryText: string) => {
     const q = queryText.trim();
     if (!q) return;
 
@@ -63,8 +61,8 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
     setInput("");
     setIsTyping(true);
 
-    setTimeout(() => {
-      const { reply, quickReplies: newReplies } = queryBrysonKnowledge(q);
+    try {
+      const { reply, quickReplies: newReplies } = await queryOwleyRAG(q, sessionIdRef.current);
       const botMsg: Message = {
         id: `o-${Date.now()}`,
         from: "owley",
@@ -73,8 +71,11 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
       };
       setMessages((prev) => [...prev, botMsg]);
       setQuickReplies(newReplies);
+    } catch (err) {
+      console.error("Chat error:", err);
+    } finally {
       setIsTyping(false);
-    }, 350);
+    }
   };
 
   const handleReset = () => {
@@ -100,7 +101,9 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
               <div>
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
                   <span>Owley</span>
-                  <span className="text-[10px] font-normal text-muted-foreground">· AI Cat Bot</span>
+                  <span className="text-[10px] font-normal text-muted-foreground">
+                    · AI Cat Bot
+                  </span>
                 </div>
                 <div className="text-[9.5px] text-signal font-medium">
                   ● Verified Portfolio Memory
@@ -137,9 +140,7 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
               return (
                 <div
                   key={m.id}
-                  className={`flex items-start gap-2.5 ${
-                    isUser ? "flex-row-reverse" : "flex-row"
-                  }`}
+                  className={`flex items-start gap-2.5 ${isUser ? "flex-row-reverse" : "flex-row"}`}
                 >
                   <span className="shrink-0 mt-0.5">
                     {isUser ? (
@@ -225,16 +226,16 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="group animate-in fade-in slide-in-from-bottom-2 duration-200 relative flex items-center gap-3 rounded-full border border-border-strong bg-card/95 py-2.5 pl-3 pr-5 shadow-2xl backdrop-blur-md transition-all hover:border-signal hover:scale-105"
+          className="group animate-in fade-in slide-in-from-bottom-2 duration-200 relative flex items-center gap-3.5 rounded-full border border-border-strong bg-card/95 py-3 pl-3.5 pr-6 shadow-2xl backdrop-blur-md transition-all hover:border-signal hover:scale-105"
           aria-label="Open Owley AI Assistant"
         >
           <OwleyAvatar size="md" />
           <div className="flex flex-col text-left">
-            <div className="flex items-center gap-1.5 text-mono text-sm font-bold text-foreground">
+            <div className="flex items-center gap-1.5 text-mono text-sm md:text-base font-bold text-foreground">
               <span>Owley</span>
               <span className="text-[11px] text-muted-foreground font-normal">· AI Bot</span>
             </div>
-            <span className="text-mono text-[10.5px] text-signal font-semibold">
+            <span className="text-mono text-[11px] text-signal font-semibold">
               Ask about Bryant
             </span>
           </div>
@@ -305,7 +306,7 @@ function renderMarkdownSpans(text: string): React.ReactNode {
         className="text-signal underline hover:text-signal/80 transition font-semibold"
       >
         {linkText}
-      </a>
+      </a>,
     );
     lastIdx = match.index + match[0].length;
   }

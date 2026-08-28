@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Bot, RotateCcw, Send, Sparkles, Terminal, User } from "lucide-react";
 import { SectionLabel } from "@/components/common/SectionLabel";
 import { OwleyAvatar } from "@/components/common/OwleyAvatar";
-import { queryBrysonKnowledge } from "@/data/agentKnowledge";
+import { queryOwleyRAG } from "@/data/agentKnowledge";
 import { FormattedMessage } from "@/components/ai/OwleyFloatingWidget";
 
 interface ChatMessage {
@@ -13,6 +13,9 @@ interface ChatMessage {
 }
 
 export function LiveDemo() {
+  const sessionIdRef = useRef<string>(
+    `demo-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+  );
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "init",
@@ -21,7 +24,7 @@ export function LiveDemo() {
 
 I'm usually very quiet and gentle. Bryant adopted me after someone threw me into their backyard, and now I keep him company while he codes late into the night.
 
-As his AI companion, I'm here to answer any questions about his **20 shipped projects** (like Lumina Dental Studio and Lumi), tech stack, and experience.
+As his AI companion connected to his **RAG vector memory**, I'm here to answer any questions about his **20 shipped projects** (like Lumina Dental Studio and Lumi), tech stack, and experience.
 
 **Meow! What can I help you with today?**`,
       timestamp: "Just now",
@@ -42,7 +45,7 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, isTyping]);
 
-  const handleSend = (queryText: string) => {
+  const handleSend = async (queryText: string) => {
     const q = queryText.trim();
     if (!q) return;
 
@@ -57,8 +60,8 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
     setInput("");
     setIsTyping(true);
 
-    setTimeout(() => {
-      const { reply, quickReplies: newReplies } = queryBrysonKnowledge(q);
+    try {
+      const { reply, quickReplies: newReplies } = await queryOwleyRAG(q, sessionIdRef.current);
       const botMsg: ChatMessage = {
         id: `o-${Date.now()}`,
         from: "owley",
@@ -67,8 +70,11 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
       };
       setMessages((prev) => [...prev, botMsg]);
       setQuickReplies(newReplies);
+    } catch (err) {
+      console.error("Chat error:", err);
+    } finally {
       setIsTyping(false);
-    }, 380);
+    }
   };
 
   const handleReset = () => {
@@ -96,7 +102,8 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
             Owley AI — Interactive Portfolio & Resume Assistant
           </h2>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-            Meet Owley (named after Bryant's adopted cat!) — an interactive companion grounded in Bryant's 20 shipped projects, CV, and client deliverables.
+            Meet Owley (named after Bryant's adopted cat!) — an interactive companion grounded in
+            Bryant's 20 shipped projects, CV, and client deliverables.
           </p>
         </div>
 
@@ -138,9 +145,7 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
               return (
                 <div
                   key={m.id}
-                  className={`flex items-start gap-3 ${
-                    isUser ? "flex-row-reverse" : "flex-row"
-                  }`}
+                  className={`flex items-start gap-3 ${isUser ? "flex-row-reverse" : "flex-row"}`}
                 >
                   <span className="shrink-0 mt-0.5">
                     {isUser ? (
@@ -160,9 +165,7 @@ As his AI companion, I'm here to answer any questions about his **20 shipped pro
                     }`}
                   >
                     <div className="flex items-center justify-between text-[10px] uppercase text-muted-foreground pb-1.5 mb-1 border-b border-border/50">
-                      <span className="font-bold text-signal">
-                        {isUser ? "YOU" : "OWLEY AI"}
-                      </span>
+                      <span className="font-bold text-signal">{isUser ? "YOU" : "OWLEY AI"}</span>
                       <span>{m.timestamp}</span>
                     </div>
                     <FormattedMessage text={m.text} />
