@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { RotateCcw, Send, User, X } from "lucide-react";
+import { Minus, RotateCcw, Send, User, X } from "lucide-react";
 import { OwleyAvatar } from "@/components/common/OwleyAvatar";
 import { queryOwleyRAG } from "@/data/agentKnowledge";
 
@@ -40,12 +40,33 @@ I'm Bryant's cat and coding buddy. Ask me anything about his work, projects, or 
   const [quickReplies, setQuickReplies] = useState<string[]>(DEFAULT_QUICK_REPLIES);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  const widgetRef = useRef<HTMLDivElement>(null);
 
+  // Auto-scroll to bottom of messages
   useEffect(() => {
     if (isOpen) {
       scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
     }
   }, [isOpen, messages, isTyping]);
+
+  // Click outside to minimize without clearing conversation history
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+      if (widgetRef.current && !widgetRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, [isOpen]);
 
   const handleSend = async (queryText: string) => {
     const q = queryText.trim();
@@ -91,8 +112,13 @@ I'm Bryant's cat and coding buddy. Ask me anything about his work, projects, or 
     setQuickReplies(DEFAULT_QUICK_REPLIES);
   };
 
+  const handleCloseAndReset = () => {
+    handleReset();
+    setIsOpen(false);
+  };
+
   return (
-    <div className="fixed bottom-8 right-6 md:bottom-10 md:right-8 z-50 flex flex-col items-end">
+    <div ref={widgetRef} className="fixed bottom-8 right-6 md:bottom-10 md:right-8 z-50 flex flex-col items-end">
       {/* Expanded Floating Chat Dialog */}
       {isOpen && (
         <div className="animate-in fade-in zoom-in-95 duration-200 flex h-[520px] w-[350px] sm:w-[410px] flex-col overflow-hidden rounded-sm border border-border-strong bg-card/95 backdrop-blur-xl shadow-2xl">
@@ -124,7 +150,14 @@ I'm Bryant's cat and coding buddy. Ask me anything about his work, projects, or 
               <button
                 onClick={() => setIsOpen(false)}
                 className="rounded p-1 text-muted-foreground hover:bg-surface hover:text-foreground transition"
-                title="Close chat"
+                title="Minimize (keeps history)"
+              >
+                <Minus className="h-3.5 w-3.5" />
+              </button>
+              <button
+                onClick={handleCloseAndReset}
+                className="rounded p-1 text-muted-foreground hover:bg-surface hover:text-foreground transition"
+                title="Close and reset chat"
               >
                 <X className="h-4 w-4" />
               </button>

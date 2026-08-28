@@ -4,7 +4,7 @@ export function OwleyAvatar({
   isThinking = false,
   size = "md",
   className = "",
-  showStatus = true,
+  showStatus = false,
 }: {
   isThinking?: boolean;
   size?: "sm" | "md" | "lg" | "xl" | "2xl";
