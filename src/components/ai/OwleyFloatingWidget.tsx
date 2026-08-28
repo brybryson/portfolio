@@ -245,39 +245,76 @@ As his AI companion connected to his **RAG vector memory**, I'm here to answer a
   );
 }
 
-// Clean Formatter for Markdown, Hyperlinks, and Bullets
+// Clean Formatter for Markdown, Hyperlinks, Inline Code, and Bullets
 export function FormattedMessage({ text }: { text: string }) {
   const lines = text.split("\n");
 
   return (
-    <div className="space-y-1.5">
-      {lines.map((line, idx) => {
-        if (!line.trim()) return <div key={idx} className="h-1" />;
+    <div className="space-y-1.5 text-xs leading-relaxed text-foreground/90">
+      {lines.map((rawLine, idx) => {
+        const trimmed = rawLine.trim();
+        if (!trimmed) return <div key={idx} className="h-1" />;
 
-        const formatted = renderMarkdownSpans(line);
+        // Horizontal divider
+        if (/^(\-{3,}|\*{3,}|_{3,})$/.test(trimmed)) {
+          return <hr key={idx} className="border-border/60 my-2" />;
+        }
 
-        if (line.startsWith("• ") || line.startsWith("- ")) {
+        // Headings (###, ##, #)
+        const headingMatch = trimmed.match(/^(#{1,4})\s+(.+)/);
+        if (headingMatch) {
+          const headingText = headingMatch[2];
           return (
-            <div key={idx} className="flex items-start gap-2 pl-1">
-              <span className="text-signal mt-0.5">•</span>
-              <span className="flex-1">{formatted}</span>
+            <div key={idx} className="font-semibold text-foreground tracking-tight pt-1">
+              {renderMarkdownSpans(headingText)}
             </div>
           );
         }
 
-        if (/^\d+\.\s/.test(line)) {
-          const match = line.match(/^(\d+\.)\s(.*)/);
+        // Bullet lists: `- `, `* `, `• `, `+ `, or indented
+        const bulletMatch = rawLine.match(/^(\s*)([-*•+]|\u2022)\s*(.*)/);
+        if (bulletMatch) {
+          const indent = bulletMatch[1].length;
+          let content = bulletMatch[3];
+          // Strip secondary accidental leading dashes like "- Primary Email" after bullet
+          if (/^[-*•+]\s+/.test(content)) {
+            content = content.replace(/^[-*•+]\s+/, "");
+          }
+
           return (
-            <div key={idx} className="flex items-start gap-2 pl-1">
-              <span className="text-signal font-bold">{match?.[1]}</span>
-              <span className="flex-1">{renderMarkdownSpans(match?.[2] || "")}</span>
+            <div
+              key={idx}
+              className={`flex items-start gap-2 ${indent >= 2 ? "pl-4 text-[11px]" : "pl-1"}`}
+            >
+              <span className="text-signal mt-0.5 select-none font-bold">
+                {indent >= 2 ? "◦" : "•"}
+              </span>
+              <span className="flex-1">{renderMarkdownSpans(content)}</span>
+            </div>
+          );
+        }
+
+        // Numbered lists: `1. `, `2. `
+        const numberedMatch = rawLine.match(/^(\s*)(\d+\.)\s*(.*)/);
+        if (numberedMatch) {
+          const indent = numberedMatch[1].length;
+          const num = numberedMatch[2];
+          const content = numberedMatch[3];
+
+          return (
+            <div
+              key={idx}
+              className={`flex items-start gap-2 ${indent >= 2 ? "pl-4 text-[11px]" : "pl-1"}`}
+            >
+              <span className="text-signal font-mono font-semibold select-none">{num}</span>
+              <span className="flex-1">{renderMarkdownSpans(content)}</span>
             </div>
           );
         }
 
         return (
           <p key={idx} className="leading-relaxed">
-            {formatted}
+            {renderMarkdownSpans(trimmed)}
           </p>
         );
       })}
@@ -286,48 +323,72 @@ export function FormattedMessage({ text }: { text: string }) {
 }
 
 function renderMarkdownSpans(text: string): React.ReactNode {
-  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  // Regex to match markdown links [text](url), inline code `code`, bold **text**, italic *text*
+  const tokenRegex = /(\[[^\]]+\]\([^)]+\)|`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*)/g;
   const parts: React.ReactNode[] = [];
   let lastIdx = 0;
   let match: RegExpExecArray | null;
 
-  while ((match = linkRegex.exec(text)) !== null) {
+  while ((match = tokenRegex.exec(text)) !== null) {
     if (match.index > lastIdx) {
-      parts.push(parseBold(text.substring(lastIdx, match.index)));
+      parts.push(text.substring(lastIdx, match.index));
     }
-    const linkText = match[1];
-    const linkUrl = match[2];
-    parts.push(
-      <a
-        key={match.index}
-        href={linkUrl}
-        target="_blank"
-        rel="noreferrer"
-        className="text-signal underline hover:text-signal/80 transition font-semibold"
-      >
-        {linkText}
-      </a>,
-    );
-    lastIdx = match.index + match[0].length;
+
+    const token = match[0];
+
+    // 1. Markdown link [text](url)
+    if (token.startsWith("[") && token.includes("](")) {
+      const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+      if (linkMatch) {
+        parts.push(
+          <a
+            key={match.index}
+            href={linkMatch[2]}
+            target="_blank"
+            rel="noreferrer"
+            className="text-signal underline hover:text-signal/80 transition font-medium"
+          >
+            {linkMatch[1]}
+          </a>,
+        );
+      } else {
+        parts.push(token);
+      }
+    }
+    // 2. Inline code `code`
+    else if (token.startsWith("`") && token.endsWith("`")) {
+      parts.push(
+        <code
+          key={match.index}
+          className="rounded bg-surface-3 border border-border/70 px-1 py-0.5 font-mono text-[11px] text-signal select-all"
+        >
+          {token.slice(1, -1)}
+        </code>,
+      );
+    }
+    // 3. Bold **text**
+    else if (token.startsWith("**") && token.endsWith("**")) {
+      parts.push(
+        <strong key={match.index} className="text-foreground font-semibold">
+          {token.slice(2, -2)}
+        </strong>,
+      );
+    }
+    // 4. Italic *text*
+    else if (token.startsWith("*") && token.endsWith("*")) {
+      parts.push(
+        <em key={match.index} className="text-muted-foreground italic">
+          {token.slice(1, -1)}
+        </em>,
+      );
+    }
+
+    lastIdx = match.index + token.length;
   }
 
   if (lastIdx < text.length) {
-    parts.push(parseBold(text.substring(lastIdx)));
+    parts.push(text.substring(lastIdx));
   }
 
-  return parts.length > 0 ? parts : parseBold(text);
-}
-
-function parseBold(text: string): React.ReactNode {
-  const boldParts = text.split(/(\*\*[^*]+\*\*)/g);
-  return boldParts.map((part, idx) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return (
-        <strong key={idx} className="text-foreground font-bold">
-          {part.slice(2, -2)}
-        </strong>
-      );
-    }
-    return part;
-  });
+  return parts.length > 0 ? parts : text;
 }
