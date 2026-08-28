@@ -17,6 +17,7 @@ import {
   Filter,
   CheckCircle2,
 } from "lucide-react";
+import { VisitorWorldMap, type VisitorRecord } from "@/components/visitors/VisitorWorldMap";
 
 export const Route = createFileRoute("/profile-visitors")({
   head: () => ({
@@ -31,21 +32,6 @@ export const Route = createFileRoute("/profile-visitors")({
   component: ProfileVisitorsPage,
 });
 
-interface VisitorRecord {
-  id: number;
-  ip: string;
-  city: string | null;
-  region: string | null;
-  country: string | null;
-  country_code: string | null;
-  country_flag: string | null;
-  latitude: number | null;
-  longitude: number | null;
-  page_visited: string;
-  referrer: string;
-  visited_at: string;
-}
-
 const SUPABASE_URL = "https://liicdyqxbuzbobehaaux.supabase.co";
 const SUPABASE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxpaWNkeXF4YnV6Ym9iZWhhYXV4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Nzg5NzgyMCwiZXhwIjoyMTAzNDczODIwfQ.18TT3zCNDv2LyMdGXAYIm_WfzstoUr90GEnSN9aKIGE";
@@ -55,7 +41,7 @@ function formatRelativeTime(dateStr: string): string {
     const diffMs = Date.now() - new Date(dateStr).getTime();
     const diffSec = Math.floor(diffMs / 1000);
     if (diffSec < 60) return `${Math.max(1, diffSec)}s ago`;
-    const diffMin = Math.floor(diffSec / 60);
+    const diffMin = Math.floor(diffMs / 1000 / 60);
     if (diffMin < 60) return `${diffMin}m ago`;
     const diffHr = Math.floor(diffMin / 60);
     if (diffHr < 24) return `${diffHr}h ago`;
@@ -80,14 +66,6 @@ function formatManilaTime(dateStr: string): string {
   } catch {
     return dateStr;
   }
-}
-
-// Converts latitude (-90 to +90) and longitude (-180 to +180) to SVG percentage (0% to 100%)
-function getCoordinatesPercent(lat: number, lon: number): { x: number; y: number } {
-  // Equirectangular projection
-  const x = ((lon + 180) / 360) * 100;
-  const y = ((90 - lat) / 180) * 100;
-  return { x: Math.max(3, Math.min(97, x)), y: Math.max(3, Math.min(97, y)) };
 }
 
 export function ProfileVisitorsPage() {
@@ -154,35 +132,6 @@ export function ProfileVisitorsPage() {
       return matchesRoute && matchesQuery;
     });
   }, [visitors, selectedRoute, searchQuery]);
-
-  // Unique Geolocation Pins for the Map
-  const mapPins = useMemo(() => {
-    const valid = visitors.filter(
-      (v) => typeof v.latitude === "number" && typeof v.longitude === "number"
-    );
-
-    // Group by location key to avoid exact overlap stack
-    const grouped = new Map<string, { latest: VisitorRecord; count: number; visitors: VisitorRecord[] }>();
-    for (const v of valid) {
-      const key = `${v.latitude?.toFixed(2)},${v.longitude?.toFixed(2)}`;
-      const existing = grouped.get(key);
-      if (!existing) {
-        grouped.set(key, { latest: v, count: 1, visitors: [v] });
-      } else {
-        existing.count += 1;
-        existing.visitors.push(v);
-      }
-    }
-
-    return Array.from(grouped.values()).map((g) => {
-      const coords = getCoordinatesPercent(g.latest.latitude!, g.latest.longitude!);
-      return {
-        ...g,
-        x: coords.x,
-        y: coords.y,
-      };
-    });
-  }, [visitors]);
 
   // High-level Metrics
   const metrics = useMemo(() => {
@@ -332,150 +281,15 @@ export function ProfileVisitorsPage() {
           </div>
         </div>
 
-        {/* 🗺️ Interactive World Map Vector Radar */}
-        <div className="rounded-sm border border-border bg-card/90 backdrop-blur-md p-4 sm:p-6 shadow-sm">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-border/70">
-            <div className="flex items-center gap-2">
-              <Globe className="h-4 w-4 text-signal" />
-              <h2 className="text-xs sm:text-sm font-bold text-foreground tracking-wide">
-                GLOBAL VISITOR COORDINATE PROJECTION
-              </h2>
-            </div>
-            <div className="flex items-center gap-4 text-[11px] text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-signal inline-block animate-ping" />
-                <span>Live Active Coordinates</span>
-              </span>
-              <span>{mapPins.length} Geospatial Cluster{mapPins.length === 1 ? "" : "s"}</span>
-            </div>
-          </div>
-
-          {/* Map Canvas Area */}
-          <div className="relative w-full aspect-[2/1] min-h-[300px] sm:min-h-[420px] max-h-[560px] my-4 rounded-xs border border-border/80 bg-[#0a0f18] overflow-hidden select-none">
-            {/* Grid Coordinates Background */}
-            <svg
-              className="absolute inset-0 w-full h-full opacity-20 pointer-events-none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#22d3ee" strokeWidth="0.5" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-              {/* Equator & Meridian Guides */}
-              <line x1="0" y1="50%" x2="100%" y2="50%" stroke="#22d3ee" strokeWidth="1" strokeDasharray="4 4" />
-              <line x1="50%" y1="0" x2="50%" y2="100%" stroke="#22d3ee" strokeWidth="1" strokeDasharray="4 4" />
-            </svg>
-
-            {/* Stylized Minimalist World Continent Outlines */}
-            <svg
-              viewBox="0 0 1000 500"
-              className="absolute inset-0 w-full h-full opacity-40 fill-none stroke-signal/60 pointer-events-none"
-              strokeWidth="1.2"
-            >
-              {/* North America */}
-              <path d="M 150,90 Q 220,70 300,90 T 260,200 T 180,220 T 130,140 Z" fill="#132338" />
-              {/* South America */}
-              <path d="M 280,240 Q 350,260 330,380 T 270,440 T 260,300 Z" fill="#132338" />
-              {/* Europe */}
-              <path d="M 460,80 Q 550,70 570,140 T 480,180 T 440,120 Z" fill="#132338" />
-              {/* Africa */}
-              <path d="M 460,190 Q 560,200 550,330 T 490,400 T 440,240 Z" fill="#132338" />
-              {/* Asia */}
-              <path d="M 580,70 Q 820,60 850,190 T 730,280 T 600,180 Z" fill="#132338" />
-              {/* Australia */}
-              <path d="M 770,320 Q 870,310 860,390 T 780,410 T 750,350 Z" fill="#132338" />
-            </svg>
-
-            {/* Pulsing Pins for Each Geolocation */}
-            {mapPins.map((pin, idx) => {
-              const isHovered = activeHoverId === pin.latest.id || selectedPinId === pin.latest.id;
-
-              return (
-                <div
-                  key={idx}
-                  style={{
-                    left: `${pin.x}%`,
-                    top: `${pin.y}%`,
-                  }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 z-20 group cursor-pointer"
-                  onMouseEnter={() => setActiveHoverId(pin.latest.id)}
-                  onMouseLeave={() => setActiveHoverId(null)}
-                  onClick={() => setSelectedPinId(selectedPinId === pin.latest.id ? null : pin.latest.id)}
-                >
-                  {/* Radar Pulse Rings */}
-                  <div className="relative flex items-center justify-center">
-                    <span className="absolute h-8 w-8 rounded-full bg-signal/30 animate-ping opacity-75" />
-                    <span className="absolute h-5 w-5 rounded-full bg-signal/50 animate-pulse" />
-                    <span className="relative flex items-center justify-center h-3.5 w-3.5 rounded-full bg-signal border-2 border-background shadow-[0_0_12px_#22d3ee]">
-                      <span className="h-1 w-1 bg-background rounded-full" />
-                    </span>
-                  </div>
-
-                  {/* High-Tech Popover Tooltip */}
-                  <div
-                    className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 rounded-sm border border-signal/40 bg-card/95 backdrop-blur-xl shadow-2xl transition-all duration-150 pointer-events-none ${
-                      isHovered ? "opacity-100 scale-100 visible z-30" : "opacity-0 scale-95 invisible"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between border-b border-border/80 pb-1.5 mb-2">
-                      <span className="text-xs font-bold text-foreground flex items-center gap-1.5">
-                        <span className="text-base">{pin.latest.country_flag || "🌐"}</span>
-                        <span>{pin.latest.city || pin.latest.country || "Unknown Location"}</span>
-                      </span>
-                      <span className="rounded-xs bg-signal/20 px-1.5 py-0.5 text-[9px] font-bold text-signal">
-                        {pin.count} hit{pin.count === 1 ? "" : "s"}
-                      </span>
-                    </div>
-
-                    <div className="space-y-1 text-[11px] text-muted-foreground">
-                      <div className="flex justify-between">
-                        <span>IP Address:</span>
-                        <span className="font-mono text-foreground">{pin.latest.ip}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Last Route:</span>
-                        <span className="font-mono text-signal">{pin.latest.page_visited}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Referrer:</span>
-                        <span className="truncate max-w-[130px] text-foreground">
-                          {pin.latest.referrer || "Direct"}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Coords:</span>
-                        <span className="font-mono text-[10px]">
-                          {pin.latest.latitude?.toFixed(2)}°, {pin.latest.longitude?.toFixed(2)}°
-                        </span>
-                      </div>
-                      <div className="flex justify-between pt-1 border-t border-border/60 text-[10px] text-muted-foreground/70">
-                        <span>Last seen:</span>
-                        <span>{formatRelativeTime(pin.latest.visited_at)}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* Bottom HUD Legend */}
-            <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[10px] text-muted-foreground bg-background/80 px-3 py-1.5 rounded border border-border/60 backdrop-blur-xs">
-              <div className="flex items-center gap-3">
-                <span className="flex items-center gap-1">
-                  <span className="h-2 w-2 rounded-full bg-signal" />
-                  <span>Visitor Node</span>
-                </span>
-                <span className="hidden sm:inline">|</span>
-                <span className="hidden sm:inline">Equirectangular Coordinate Projection (1:1 WGS84)</span>
-              </div>
-              <div className="text-[10px] text-muted-foreground font-mono">
-                Lat: ±90° · Lon: ±180°
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* 🗺️ Actual Interactive World Map Component */}
+        <VisitorWorldMap
+          visitors={filteredVisitors}
+          selectedVisitorId={selectedPinId || activeHoverId}
+          onSelectVisitor={(id) => {
+            setSelectedPinId(id);
+            setActiveHoverId(id);
+          }}
+        />
 
         {/* 📋 Live Session Feed & Log Table */}
         <div className="rounded-sm border border-border bg-card p-4 sm:p-6 shadow-sm">
@@ -561,11 +375,13 @@ export function ProfileVisitorsPage() {
                     return (
                       <tr
                         key={v.id}
+                        onClick={() => setSelectedPinId(selectedPinId === v.id ? null : v.id)}
                         onMouseEnter={() => setActiveHoverId(v.id)}
                         onMouseLeave={() => setActiveHoverId(null)}
-                        className={`transition-colors cursor-default ${
+                        className={`transition-colors cursor-pointer ${
                           isSelected ? "bg-signal/10 text-foreground" : "hover:bg-surface/60 text-muted-foreground"
                         }`}
+                        title="Click to focus on World Map"
                       >
                         {/* ID */}
                         <td className="py-3 px-3 font-mono text-[11px] text-muted-foreground">
