@@ -31,7 +31,47 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   // ==========================================
-  // LUMINA DENTAL STUDIO (NEWEST FLAGSHIP)
+  // NORTHLANE STUDIO (FLAGSHIP E-COMMERCE & AI)
+  // ==========================================
+  {
+    slug: "northlane-studio",
+    name: "Northlane Studio — Autonomous AI-Driven Workspace Commerce Platform",
+    date: "2026.08",
+    category: "web",
+    tier: "pinned",
+    role: "Full-Stack Developer & AI Systems Architect",
+    summary:
+      "Modern, luxury Scandinavian e-commerce platform engineered with TanStack React Start, featuring a sub-second Groq Llama-3.3-70B AI shopping assistant, real-time inventory queries, autonomous order dispatch, and an executive analytics control center.",
+    problem:
+      "Traditional e-commerce storefronts suffer from high drop-offs due to rigid keyword search filters, slow monolith hydration, and heavy manual administrative overhead in order dispatch, customer support, and inventory tracking.",
+    solution:
+      "Architected a high-performance full-stack ecosystem: (1) Sub-Second Conversational AI Shopping Assistant powered by Groq (LLaMA-3.3-70B) for real-time natural language catalog search, product comparison, and direct 1-click cart adds; (2) Minimalist SSR Storefront built with TanStack React Start (Vite + Nitro) and Tailwind CSS v4 for instant edge-rendered page loads; (3) Autonomous Order Pipeline handling checkout intent in Supabase and auto-dispatching luxury Copenhagen HTML receipts with embedded brand assets via Nodemailer; (4) Executive Admin Intelligence Dashboard visualizing real-time revenue curves, inventory reorder safety buffers, and AI query trends via Recharts.",
+    outcome:
+      "Sub-second (<800ms) AI recommendation response time, 100% automated receipt dispatch pipeline, zero-friction 1-click bundle additions, and end-to-end type safety across the entire stack with TypeScript 5.8 and Zod validation.",
+    metrics: [
+      { label: "AI Latency", value: "<800ms via Groq" },
+      { label: "SSR Engine", value: "TanStack Start + Nitro" },
+      { label: "Design System", value: "Tailwind v4 + Radix" },
+      { label: "Order Pipeline", value: "100% Automated" },
+    ],
+    stack: [
+      "TanStack React Start",
+      "React 19",
+      "TypeScript 5.8",
+      "Tailwind CSS v4",
+      "Groq SDK (LLaMA 3.3 70B)",
+      "Supabase (PostgreSQL)",
+      "Express.js & Node (ESM)",
+      "Nodemailer (HTML/CID)",
+      "Recharts",
+      "Playwright E2E",
+    ],
+    image: "/northlane/northlane.png",
+    demoUrl: "https://northlane-studio.vercel.app/",
+    githubUrl: "https://github.com/brybryson/northlane-workspace",
+  },
+  // ==========================================
+  // LUMINA DENTAL STUDIO (FLAGSHIP)
   // ==========================================
   {
     slug: "lumina-dental-studio",
