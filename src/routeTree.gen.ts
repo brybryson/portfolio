@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CertificatesRouteImport } from './routes/certificates'
 import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as HomeRouteImport } from './routes/home'
+import { Route as ProfileVisitorsRouteImport } from './routes/profile-visitors'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects/$slug'
 
@@ -36,6 +37,11 @@ const HomeRoute = HomeRouteImport.update({
   path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileVisitorsRoute = ProfileVisitorsRouteImport.update({
+  id: '/profile-visitors',
+  path: '/profile-visitors',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/certificates': typeof CertificatesRoute
   '/experience': typeof ExperienceRoute
   '/home': typeof HomeRoute
+  '/profile-visitors': typeof ProfileVisitorsRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects/': typeof ProjectsIndexRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/certificates': typeof CertificatesRoute
   '/experience': typeof ExperienceRoute
   '/home': typeof HomeRoute
+  '/profile-visitors': typeof ProfileVisitorsRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects': typeof ProjectsIndexRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/certificates': typeof CertificatesRoute
   '/experience': typeof ExperienceRoute
   '/home': typeof HomeRoute
+  '/profile-visitors': typeof ProfileVisitorsRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects/': typeof ProjectsIndexRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/certificates'
     | '/experience'
     | '/home'
+    | '/profile-visitors'
     | '/projects/$slug'
     | '/projects/'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/certificates'
     | '/experience'
     | '/home'
+    | '/profile-visitors'
     | '/projects/$slug'
     | '/projects'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/certificates'
     | '/experience'
     | '/home'
+    | '/profile-visitors'
     | '/projects/$slug'
     | '/projects/'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   CertificatesRoute: typeof CertificatesRoute
   ExperienceRoute: typeof ExperienceRoute
   HomeRoute: typeof HomeRoute
+  ProfileVisitorsRoute: typeof ProfileVisitorsRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
@@ -138,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile-visitors': {
+      id: '/profile-visitors'
+      path: '/profile-visitors'
+      fullPath: '/profile-visitors'
+      preLoaderRoute: typeof ProfileVisitorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects/': {
       id: '/projects/'
       path: '/projects'
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   CertificatesRoute: CertificatesRoute,
   ExperienceRoute: ExperienceRoute,
   HomeRoute: HomeRoute,
+  ProfileVisitorsRoute: ProfileVisitorsRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
 }
