@@ -1,10 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import {
-  ArrowUpRight,
-  Command as CmdIcon,
-  Mail,
-  Terminal,
-} from "lucide-react";
+import { ArrowUpRight, Command as CmdIcon, Mail, Terminal } from "lucide-react";
 import bryantImg from "@/assets/bryant.jpg";
 import togaImg from "@/assets/toga.jpg";
 
@@ -291,7 +286,7 @@ function TerminalReadout() {
       "  → automation: n8n · ai-assisted tooling",
       "  → uptime: available for work",
     ],
-    []
+    [],
   );
   const [shown, setShown] = useState<string[]>([]);
   const [current, setCurrent] = useState("");

@@ -5,7 +5,7 @@ import { SectionLabel } from "@/components/common/SectionLabel";
 
 export function CertificatesSection({ showFilter = true }: { showFilter?: boolean }) {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  
+
   const INITIAL_COUNT = 6;
   const STEP_COUNT = 3;
   const [visibleCount, setVisibleCount] = useState<number>(INITIAL_COUNT);
@@ -62,7 +62,9 @@ export function CertificatesSection({ showFilter = true }: { showFilter?: boolea
                 <span>{cat}</span>
                 <span
                   className={`rounded-full px-1.5 py-0.2 text-[10px] font-mono ${
-                    isSelected ? "bg-signal text-background font-bold" : "bg-surface-2 text-muted-foreground"
+                    isSelected
+                      ? "bg-signal text-background font-bold"
+                      : "bg-surface-2 text-muted-foreground"
                   }`}
                 >
                   {count}

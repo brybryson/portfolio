@@ -82,8 +82,8 @@
   --signal-dim: oklch(0.75 0.15 200 / 0.15);
   --flow: oklch(0.7 0.15 300);
   --flow-dim: oklch(0.7 0.15 300 / 0.15);
-   --pulse-c: oklch(0.65 0.2 340);
-   --pulse-dim: oklch(0.65 0.2 340 / 0.15);
+  --pulse-c: oklch(0.65 0.2 340);
+  --pulse-dim: oklch(0.65 0.2 340 / 0.15);
 
   --scrollbar-thumb: var(--border);
   --scrollbar-thumb-hover: var(--muted-foreground);

@@ -33,9 +33,24 @@ const SECTIONS = [
 ];
 
 const PAGES = [
-  { label: "Projects & Pipelines Hub", hint: "20 Shipped Systems", route: "/projects", icon: Boxes },
-  { label: "Career Experience & Logs", hint: "Internships & Honors", route: "/experience", icon: Briefcase },
-  { label: "Certifications & Credentials", hint: "Badges & Degrees", route: "/certificates", icon: Award },
+  {
+    label: "Projects & Pipelines Hub",
+    hint: "20 Shipped Systems",
+    route: "/projects",
+    icon: Boxes,
+  },
+  {
+    label: "Career Experience & Logs",
+    hint: "Internships & Honors",
+    route: "/experience",
+    icon: Briefcase,
+  },
+  {
+    label: "Certifications & Credentials",
+    hint: "Badges & Degrees",
+    route: "/certificates",
+    icon: Award,
+  },
 ];
 
 export function PaletteDialog({
@@ -90,13 +105,19 @@ export function PaletteDialog({
             />
           </div>
 
-          <CommandList className="max-h-[280px] p-2.5 text-mono text-xs" style={{ scrollbarWidth: "thin" }}>
+          <CommandList
+            className="max-h-[280px] p-2.5 text-mono text-xs"
+            style={{ scrollbarWidth: "thin" }}
+          >
             <CommandEmpty className="p-3 text-center text-muted-foreground">
               no matching section found.
             </CommandEmpty>
 
             {/* SECTIONS & MODULES */}
-            <CommandGroup heading="SECTIONS & MODULES" className="text-[10px] uppercase text-muted-foreground">
+            <CommandGroup
+              heading="SECTIONS & MODULES"
+              className="text-[10px] uppercase text-muted-foreground"
+            >
               {SECTIONS.map((s) => (
                 <CommandItem
                   key={s.id}
@@ -114,7 +135,10 @@ export function PaletteDialog({
             </CommandGroup>
 
             {/* DEDICATED ROUTES */}
-            <CommandGroup heading="DEDICATED PAGES & DIRECTORIES" className="text-[10px] uppercase text-muted-foreground">
+            <CommandGroup
+              heading="DEDICATED PAGES & DIRECTORIES"
+              className="text-[10px] uppercase text-muted-foreground"
+            >
               {PAGES.map((p) => {
                 const Icon = p.icon;
                 return (
@@ -135,7 +159,10 @@ export function PaletteDialog({
             </CommandGroup>
 
             {/* FLAGSHIP DEEP DIVES */}
-            <CommandGroup heading="FLAGSHIP DEEP DIVES" className="text-[10px] uppercase text-muted-foreground">
+            <CommandGroup
+              heading="FLAGSHIP DEEP DIVES"
+              className="text-[10px] uppercase text-muted-foreground"
+            >
               {PROJECTS.filter((p) => p.tier === "pinned").map((p) => (
                 <CommandItem
                   key={p.slug}
@@ -156,7 +183,10 @@ export function PaletteDialog({
             </CommandGroup>
 
             {/* QUICK ACTIONS */}
-            <CommandGroup heading="QUICK ACTIONS" className="text-[10px] uppercase text-muted-foreground">
+            <CommandGroup
+              heading="QUICK ACTIONS"
+              className="text-[10px] uppercase text-muted-foreground"
+            >
               <CommandItem
                 value="email contact mail message"
                 onSelect={() => {
@@ -173,7 +203,10 @@ export function PaletteDialog({
                 value="resume cv download"
                 onSelect={() => {
                   onOpenChange(false);
-                  window.open("https://bryant-melliza.vercel.app/resume/Bryant_Melliza_Resume.pdf", "_blank");
+                  window.open(
+                    "https://bryant-melliza.vercel.app/resume/Bryant_Melliza_Resume.pdf",
+                    "_blank",
+                  );
                 }}
                 className="flex items-center gap-2 rounded px-2.5 py-1.5 cursor-pointer hover:bg-surface-2"
               >

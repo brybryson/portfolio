@@ -9,9 +9,7 @@ export const Route = createFileRoute("/projects/$slug")({
     return {
       meta: [
         {
-          title: project
-            ? `${project.name} — Bryant Melliza`
-            : "Case Study — Bryant Melliza",
+          title: project ? `${project.name} — Bryant Melliza` : "Case Study — Bryant Melliza",
         },
         {
           name: "description",

@@ -27,7 +27,9 @@ export function ProjectShowcase({
   initialProjects?: Project[];
 }) {
   const [selectedCategory, setSelectedCategory] = useState<"all" | Category>("all");
-  const [activeSlug, setActiveSlug] = useState<string>(initialProjects[0]?.slug ?? "lumina-dental-studio");
+  const [activeSlug, setActiveSlug] = useState<string>(
+    initialProjects[0]?.slug ?? "lumina-dental-studio",
+  );
   const [activeSlide, setActiveSlide] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"all" | "problem" | "solution" | "outcome">("all");
@@ -143,8 +145,14 @@ export function ProjectShowcase({
               }
             >
               <div className="flex items-center justify-between text-[10px] uppercase">
-                <span className="flex items-center gap-1.5 font-semibold" style={{ color: pMeta.color }}>
-                  <span className="h-2 w-2 rounded-full ring-pulse" style={{ background: pMeta.color }} />
+                <span
+                  className="flex items-center gap-1.5 font-semibold"
+                  style={{ color: pMeta.color }}
+                >
+                  <span
+                    className="h-2 w-2 rounded-full ring-pulse"
+                    style={{ background: pMeta.color }}
+                  />
                   {pMeta.label}
                 </span>
                 <span className="text-muted-foreground">{p.date}</span>
@@ -292,7 +300,8 @@ export function ProjectShowcase({
                     }}
                   >
                     <Link2 className="h-3.5 w-3.5" />
-                    {activeProject.series.name} — Part {activeProject.series.part} of {activeProject.series.total}
+                    {activeProject.series.name} — Part {activeProject.series.part} of{" "}
+                    {activeProject.series.total}
                   </span>
                 )}
 
@@ -305,7 +314,9 @@ export function ProjectShowcase({
                     <span className="rounded-sm border border-border px-2.5 py-0.5 uppercase text-[10.5px] text-foreground bg-surface-2 font-bold">
                       Role
                     </span>
-                    <span className="text-foreground font-semibold text-sm">{activeProject.role}</span>
+                    <span className="text-foreground font-semibold text-sm">
+                      {activeProject.role}
+                    </span>
                   </div>
                 )}
 

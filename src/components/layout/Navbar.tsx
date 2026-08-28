@@ -43,9 +43,7 @@ export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
           {navLinks.map((link) => {
             const Icon = link.icon;
             const isActive =
-              link.to === "/"
-                ? currentPath === "/"
-                : currentPath.startsWith(link.to);
+              link.to === "/" ? currentPath === "/" : currentPath.startsWith(link.to);
 
             return (
               <Link
@@ -57,7 +55,9 @@ export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
                     : "text-muted-foreground hover:bg-surface-2 hover:text-foreground border border-transparent"
                 }`}
               >
-                <Icon className={`h-3.5 w-3.5 ${isActive ? "text-signal" : "text-muted-foreground"}`} />
+                <Icon
+                  className={`h-3.5 w-3.5 ${isActive ? "text-signal" : "text-muted-foreground"}`}
+                />
                 <span>{link.label}</span>
                 {isActive && (
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 w-4 bg-signal rounded-full" />

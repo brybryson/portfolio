@@ -33,7 +33,8 @@ function ExperiencePage() {
               Professional Journey &amp; Academic Excellence
             </h1>
             <p className="text-sm leading-relaxed text-muted-foreground md:text-base max-w-2xl mt-1.5">
-              Chronological engineering trajectory spanning 4 software developer roles, production client deliveries, and continuous university honors (2022 — 2026).
+              Chronological engineering trajectory spanning 4 software developer roles, production
+              client deliveries, and continuous university honors (2022 — 2026).
             </p>
           </div>
 

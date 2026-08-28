@@ -19,7 +19,15 @@ export function ExperienceTimeline() {
         "Engineered scalable full-stack applications with React, Next.js 15, TypeScript, and Supabase/PostgreSQL.",
         "Implemented high-converting UI/UX conversion funnels and integrated modern AI tooling to accelerate delivery cycles.",
       ],
-      stack: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Supabase", "REST APIs", "Tailwind CSS"],
+      stack: [
+        "Next.js 15",
+        "React 19",
+        "TypeScript",
+        "PostgreSQL",
+        "Supabase",
+        "REST APIs",
+        "Tailwind CSS",
+      ],
     },
     {
       ...EXPERIENCE[1],
@@ -39,7 +47,15 @@ export function ExperienceTimeline() {
         "Debugged and optimized real-time state synchronization flows across mobile devices.",
         "Collaborated within fast-paced Agile sprint cycles utilizing ClickUp, Jira, and Git.",
       ],
-      stack: ["React Native", "Expo", "TypeScript", "Anthropic Claude API", "Zod", "ClickUp", "Git"],
+      stack: [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "Anthropic Claude API",
+        "Zod",
+        "ClickUp",
+        "Git",
+      ],
     },
     {
       ...EXPERIENCE[3],

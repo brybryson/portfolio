@@ -14,7 +14,10 @@ export const Route = createFileRoute("/")({
         content:
           "Portfolio of Bryant Melliza — Full-Stack Developer & AI Systems Architect specializing in autonomous n8n workflows, Next.js 15 platforms, and custom enterprise tools.",
       },
-      { property: "og:title", content: "Bryant Melliza — Software Developer & AI Systems Architect" },
+      {
+        property: "og:title",
+        content: "Bryant Melliza — Software Developer & AI Systems Architect",
+      },
       {
         property: "og:description",
         content: "Autonomous AI Workflows, Next.js 15 Web Platforms & Custom Enterprise Systems.",

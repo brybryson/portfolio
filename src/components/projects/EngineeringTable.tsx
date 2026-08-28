@@ -89,7 +89,9 @@ export function EngineeringTable() {
                 <span>{cat.label}</span>
                 <span
                   className={`rounded-full px-1.5 py-0.2 text-[10px] font-mono ${
-                    isSelected ? "bg-signal text-background font-bold" : "bg-surface-2 text-muted-foreground"
+                    isSelected
+                      ? "bg-signal text-background font-bold"
+                      : "bg-surface-2 text-muted-foreground"
                   }`}
                 >
                   {count}
@@ -170,7 +172,9 @@ export function EngineeringTable() {
                     <td className="py-3.5 px-4 align-top">
                       <span
                         className={`inline-block h-2.5 w-2.5 rounded-full ${
-                          isFlagship ? "bg-signal animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.6)]" : "bg-muted-foreground/50"
+                          isFlagship
+                            ? "bg-signal animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.6)]"
+                            : "bg-muted-foreground/50"
                         }`}
                         title={isFlagship ? "Flagship System" : "Production System"}
                       />
@@ -327,13 +331,17 @@ export function EngineeringTable() {
                 {images.length > 1 && (
                   <>
                     <button
-                      onClick={() => setActiveSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
+                      onClick={() =>
+                        setActiveSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+                      }
                       className="absolute left-2 top-1/2 -translate-y-1/2 rounded bg-background/80 p-1.5 text-foreground hover:bg-surface transition shadow"
                     >
                       <ChevronLeft className="h-4 w-4" />
                     </button>
                     <button
-                      onClick={() => setActiveSlide((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
+                      onClick={() =>
+                        setActiveSlide((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+                      }
                       className="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-background/80 p-1.5 text-foreground hover:bg-surface transition shadow"
                     >
                       <ChevronRight className="h-4 w-4" />
@@ -368,9 +376,7 @@ export function EngineeringTable() {
                       <span className="text-[10px] uppercase text-muted-foreground font-semibold">
                         {m.label}
                       </span>
-                      <div className="text-sm font-bold text-signal mt-0.5">
-                        {m.value}
-                      </div>
+                      <div className="text-sm font-bold text-signal mt-0.5">{m.value}</div>
                     </div>
                   ))}
                 </div>
@@ -409,7 +415,9 @@ export function EngineeringTable() {
                       <span className="text-signal font-bold uppercase text-[11px] block mb-1">
                         💡 Engineering Solution
                       </span>
-                      <p className="text-muted-foreground whitespace-pre-line">{activeProject.solution}</p>
+                      <p className="text-muted-foreground whitespace-pre-line">
+                        {activeProject.solution}
+                      </p>
                     </div>
                   )}
 

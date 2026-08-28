@@ -26,13 +26,14 @@ export function PinnedBento({ projects }: { projects: Project[] }) {
                   className="flex h-2 w-2 rounded-full ring-pulse"
                   style={{ background: meta.color }}
                 />
-                <span className="uppercase text-[10px] tracking-wider" style={{ color: meta.color }}>
+                <span
+                  className="uppercase text-[10px] tracking-wider"
+                  style={{ color: meta.color }}
+                >
                   {meta.label}
                 </span>
               </div>
-              <span className="text-[10px] uppercase text-muted-foreground">
-                {project.date}
-              </span>
+              <span className="text-[10px] uppercase text-muted-foreground">{project.date}</span>
             </div>
 
             {/* Main Content Area */}
@@ -54,9 +55,7 @@ export function PinnedBento({ projects }: { projects: Project[] }) {
                     <span>{project.role}</span>
                   </div>
                 )}
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {project.summary}
-                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{project.summary}</p>
 
                 {/* Metrics Grid */}
                 {project.metrics && (
@@ -69,9 +68,7 @@ export function PinnedBento({ projects }: { projects: Project[] }) {
                         <span className="text-[9px] uppercase tracking-wider text-muted-foreground">
                           {m.label}
                         </span>
-                        <span className="text-xs font-semibold text-foreground">
-                          {m.value}
-                        </span>
+                        <span className="text-xs font-semibold text-foreground">{m.value}</span>
                       </div>
                     ))}
                   </div>

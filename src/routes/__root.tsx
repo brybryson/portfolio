@@ -143,9 +143,7 @@ function RootComponent() {
       const target = e.target as HTMLElement | null;
       const isInput =
         target &&
-        (target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.isContentEditable);
+        (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable);
       if (isInput) return;
 
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {

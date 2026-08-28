@@ -53,8 +53,14 @@ export function ArchiveTable({ projects }: { projects: Project[] }) {
                       </div>
                     </td>
                     <td className="py-2.5 hidden md:table-cell">
-                      <span className="inline-flex items-center gap-1.5" style={{ color: meta.color }}>
-                        <span className="h-1.5 w-1.5 rounded-full" style={{ background: meta.color }} />
+                      <span
+                        className="inline-flex items-center gap-1.5"
+                        style={{ color: meta.color }}
+                      >
+                        <span
+                          className="h-1.5 w-1.5 rounded-full"
+                          style={{ background: meta.color }}
+                        />
                         {meta.label}
                       </span>
                     </td>

@@ -17,14 +17,54 @@ export function AcademicHonors() {
   const highSchool = EDUCATION[1];
 
   const collegeHonors = [
-    { title: "Summa Cum Laude", desc: "Highest Latin Academic Honor", icon: Crown, highlight: true },
-    { title: "100% Full Merit Blue Scholar", desc: "Full Tuition Merit Scholarship (All Academic Terms)", icon: Medal, highlight: true },
-    { title: "Academic Excellence Award", desc: "Top Ranked IT Department Award (2025–2026)", icon: Trophy, highlight: true },
-    { title: "Consistent First Honor Dean's Lister", desc: "Maintained top GPA standing across all 4 academic years", icon: Star, highlight: false },
-    { title: "Former Chief Creative Officer", desc: "Google Developer Student Clubs (GDSC) NU Fairview", icon: Sparkles, highlight: false },
-    { title: "Champion – UI/UX Design Competition", desc: "1st Place for Interface Design & User Journey", icon: Award, highlight: false },
-    { title: "Champion – Networking Competition", desc: "1st Place in Network Topology & Infrastructure", icon: Award, highlight: false },
-    { title: "Sole Awardee – Best Web Game Design", desc: "XOXO Interactive Web Game Architecture", icon: Trophy, highlight: false },
+    {
+      title: "Summa Cum Laude",
+      desc: "Highest Latin Academic Honor",
+      icon: Crown,
+      highlight: true,
+    },
+    {
+      title: "100% Full Merit Blue Scholar",
+      desc: "Full Tuition Merit Scholarship (All Academic Terms)",
+      icon: Medal,
+      highlight: true,
+    },
+    {
+      title: "Academic Excellence Award",
+      desc: "Top Ranked IT Department Award (2025–2026)",
+      icon: Trophy,
+      highlight: true,
+    },
+    {
+      title: "Consistent First Honor Dean's Lister",
+      desc: "Maintained top GPA standing across all 4 academic years",
+      icon: Star,
+      highlight: false,
+    },
+    {
+      title: "Former Chief Creative Officer",
+      desc: "Google Developer Student Clubs (GDSC) NU Fairview",
+      icon: Sparkles,
+      highlight: false,
+    },
+    {
+      title: "Champion – UI/UX Design Competition",
+      desc: "1st Place for Interface Design & User Journey",
+      icon: Award,
+      highlight: false,
+    },
+    {
+      title: "Champion – Networking Competition",
+      desc: "1st Place in Network Topology & Infrastructure",
+      icon: Award,
+      highlight: false,
+    },
+    {
+      title: "Sole Awardee – Best Web Game Design",
+      desc: "XOXO Interactive Web Game Architecture",
+      icon: Trophy,
+      highlight: false,
+    },
   ];
 
   return (
@@ -92,7 +132,9 @@ export function AcademicHonors() {
 
               {/* Scholar Tag */}
               <div className="flex flex-col sm:items-end justify-center border-t sm:border-t-0 border-border/60 pt-3 sm:pt-0 shrink-0">
-                <span className="text-mono text-[10px] uppercase text-muted-foreground font-semibold">Scholarship</span>
+                <span className="text-mono text-[10px] uppercase text-muted-foreground font-semibold">
+                  Scholarship
+                </span>
                 <span className="rounded border border-signal bg-signal/10 px-3 py-1 text-mono text-xs font-bold text-signal mt-1">
                   100% Blue Scholar
                 </span>
@@ -119,7 +161,9 @@ export function AcademicHonors() {
                     >
                       <span
                         className={`flex h-7 w-7 shrink-0 items-center justify-center rounded ${
-                          h.highlight ? "bg-signal/20 text-signal" : "bg-surface text-muted-foreground"
+                          h.highlight
+                            ? "bg-signal/20 text-signal"
+                            : "bg-surface text-muted-foreground"
                         }`}
                       >
                         <Icon className="h-4 w-4" />
@@ -149,7 +193,9 @@ export function AcademicHonors() {
                 <School className="h-3.5 w-3.5 text-flow" />
                 <span className="font-bold text-foreground">SECONDARY_EDUCATION</span>
               </div>
-              <span className="text-[10.5px] text-muted-foreground font-mono">{highSchool.period}</span>
+              <span className="text-[10.5px] text-muted-foreground font-mono">
+                {highSchool.period}
+              </span>
             </div>
 
             {/* High School Info */}

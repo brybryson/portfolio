@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  ArrowUpRight,
-  Download,
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-} from "lucide-react";
+import { ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { SectionLabel } from "@/components/common/SectionLabel";
 
 export function ContactSection() {
@@ -38,7 +29,8 @@ export function ContactSection() {
               Let's build something.
             </h3>
             <p className="mt-2.5 max-w-lg text-sm text-muted-foreground leading-relaxed">
-              Open to Web Developer, Frontend, Full-Stack, and AI Automation roles — full-time, contract, or freelance.
+              Open to Web Developer, Frontend, Full-Stack, and AI Automation roles — full-time,
+              contract, or freelance.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">

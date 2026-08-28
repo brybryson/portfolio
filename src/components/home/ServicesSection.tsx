@@ -17,7 +17,8 @@ const SERVICES = [
     icon: Bot,
     title: "AI & Workflow Automation",
     tag: "High ROI Automation",
-    summary: "Self-healing backend pipelines that eliminate repetitive operations, manual triage, and data entry.",
+    summary:
+      "Self-healing backend pipelines that eliminate repetitive operations, manual triage, and data entry.",
     points: [
       "Multi-branch n8n & Python pipelines with automated retries",
       "Smart inbound email & lead triage with schema validation",
@@ -32,7 +33,8 @@ const SERVICES = [
     icon: Palette,
     title: "UI/UX Design & Prototyping",
     tag: "Design Systems",
-    summary: "Modern developer aesthetics, glassmorphism interfaces, and high-converting conversion funnels.",
+    summary:
+      "Modern developer aesthetics, glassmorphism interfaces, and high-converting conversion funnels.",
     points: [
       "Figma design systems, tokens, and component libraries",
       "Dark-mode first, glassmorphic UI with micro-animations",
@@ -47,7 +49,8 @@ const SERVICES = [
     icon: Layers,
     title: "Full-Stack Web & SaaS Platforms",
     tag: "Production Ready",
-    summary: "Enterprise web applications built with Next.js 15, React 19, TypeScript, and Supabase.",
+    summary:
+      "Enterprise web applications built with Next.js 15, React 19, TypeScript, and Supabase.",
     points: [
       "Next.js 15 App Router & React 19 server-side architecture",
       "Dynamic booking funnels with atomic real-time slot locks",
@@ -62,7 +65,8 @@ const SERVICES = [
     icon: MessageSquareCode,
     title: "AI Chatbots & RAG Companions",
     tag: "RAG Vector Memory",
-    summary: "24/7 intelligent conversational agents (like Lumi) grounded in verified business SOPs.",
+    summary:
+      "24/7 intelligent conversational agents (like Lumi) grounded in verified business SOPs.",
     points: [
       "24/7 RAG AI assistants powered by Gemini & LLaMA",
       "Supabase pgvector (768-dim) semantic vector similarity search",
@@ -77,7 +81,8 @@ const SERVICES = [
     icon: Boxes,
     title: "Custom Enterprise & POS Systems",
     tag: "Mission Critical",
-    summary: "Bespoke internal platforms for inventory, automated PDF report generation, and compliance.",
+    summary:
+      "Bespoke internal platforms for inventory, automated PDF report generation, and compliance.",
     points: [
       "Custom POS terminals & automated stockout warning digests",
       "Automated medical certificate & invoice PDF generation",
@@ -102,7 +107,8 @@ export function ServicesSection() {
               Solutions & Client Offerings
             </h2>
             <p className="mt-2 text-sm md:text-base text-muted-foreground leading-relaxed">
-              End-to-end engineering: from luxury UI/UX design and full-stack web platforms to autonomous AI pipelines and custom enterprise operating systems.
+              End-to-end engineering: from luxury UI/UX design and full-stack web platforms to
+              autonomous AI pipelines and custom enterprise operating systems.
             </p>
           </div>
 

@@ -82,15 +82,23 @@ function ProjectsPage() {
 
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 text-xs">
           <div className="flex flex-col gap-2 rounded border border-border bg-card/60 p-4">
-            <h4 className="font-bold text-foreground">Lumina Core — Patient Booking &amp; Clinic Operations Platform</h4>
+            <h4 className="font-bold text-foreground">
+              Lumina Core — Patient Booking &amp; Clinic Operations Platform
+            </h4>
             <p className="text-muted-foreground leading-relaxed">
-              4-step real-time patient booking funnel with atomic slot locking, role-based staff administrative portal, ImageDecoder canvas streaming, and 100% Playwright test pass rate.
+              4-step real-time patient booking funnel with atomic slot locking, role-based staff
+              administrative portal, ImageDecoder canvas streaming, and 100% Playwright test pass
+              rate.
             </p>
           </div>
           <div className="flex flex-col gap-2 rounded border border-border bg-card/60 p-4">
-            <h4 className="font-bold text-foreground">8-Workflow n8n Autonomous RAG Engine &amp; Lumi</h4>
+            <h4 className="font-bold text-foreground">
+              8-Workflow n8n Autonomous RAG Engine &amp; Lumi
+            </h4>
             <p className="text-muted-foreground leading-relaxed">
-              Google Gemini 1.5 Flash + Supabase pgvector RAG companion (Lumi), automated Google Calendar sync, timed post-op recovery sequences, 6-month recall cron, and Slack Block Kit urgent triage.
+              Google Gemini 1.5 Flash + Supabase pgvector RAG companion (Lumi), automated Google
+              Calendar sync, timed post-op recovery sequences, 6-month recall cron, and Slack Block
+              Kit urgent triage.
             </p>
           </div>
         </div>

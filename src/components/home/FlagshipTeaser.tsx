@@ -36,9 +36,15 @@ export function FlagshipTeaser() {
             </h2>
             <p className="text-sm md:text-base text-muted-foreground mt-2 max-w-3xl leading-relaxed">
               An enterprise healthcare platform uniting a{" "}
-              <strong className="text-foreground font-bold">Next.js 15 Patient &amp; Staff Web Suite</strong> with an{" "}
-              <strong className="text-foreground font-bold">8-Workflow Autonomous Clinical RAG Engine</strong> and{" "}
-              <strong className="text-foreground font-bold">Lumi</strong>, the 24/7 AI Dental Companion.
+              <strong className="text-foreground font-bold">
+                Next.js 15 Patient &amp; Staff Web Suite
+              </strong>{" "}
+              with an{" "}
+              <strong className="text-foreground font-bold">
+                8-Workflow Autonomous Clinical RAG Engine
+              </strong>{" "}
+              and <strong className="text-foreground font-bold">Lumi</strong>, the 24/7 AI Dental
+              Companion.
             </p>
           </div>
 
@@ -90,17 +96,26 @@ export function FlagshipTeaser() {
                 </h3>
 
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Engineered with Next.js 15 (App Router), React 19, and Supabase. Features a 4-step dynamic booking funnel with real-time atomic slot locks preventing double-bookings, role-based staff admin portal, and 0ms Canvas ImageDecoder streaming.
+                  Engineered with Next.js 15 (App Router), React 19, and Supabase. Features a 4-step
+                  dynamic booking funnel with real-time atomic slot locks preventing
+                  double-bookings, role-based staff admin portal, and 0ms Canvas ImageDecoder
+                  streaming.
                 </p>
 
                 {/* KPI Metrics */}
                 <div className="grid grid-cols-2 gap-3 text-mono text-xs">
                   <div className="rounded border border-border bg-surface-2 p-3">
-                    <span className="text-[10px] uppercase text-muted-foreground font-semibold">Intake Time</span>
-                    <div className="text-sm font-bold text-foreground mt-0.5">-80% via digital tokens</div>
+                    <span className="text-[10px] uppercase text-muted-foreground font-semibold">
+                      Intake Time
+                    </span>
+                    <div className="text-sm font-bold text-foreground mt-0.5">
+                      -80% via digital tokens
+                    </div>
                   </div>
                   <div className="rounded border border-border bg-surface-2 p-3">
-                    <span className="text-[10px] uppercase text-muted-foreground font-semibold">Playwright E2E</span>
+                    <span className="text-[10px] uppercase text-muted-foreground font-semibold">
+                      Playwright E2E
+                    </span>
                     <div className="text-sm font-bold text-foreground mt-0.5">100% Pass Rate</div>
                   </div>
                 </div>
@@ -149,7 +164,9 @@ export function FlagshipTeaser() {
                     Lumi — Autonomous 24/7 Dental RAG Companion
                   </h4>
                   <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    Powered by Google Gemini 1.5 Flash and Supabase pgvector. Ingests clinic SOPs to answer patient inquiries 24/7 with zero hallucinations and automatically alerts surgical teams in Slack for critical trauma and allergies.
+                    Powered by Google Gemini 1.5 Flash and Supabase pgvector. Ingests clinic SOPs to
+                    answer patient inquiries 24/7 with zero hallucinations and automatically alerts
+                    surgical teams in Slack for critical trauma and allergies.
                   </p>
                 </div>
 
@@ -195,7 +212,9 @@ export function FlagshipTeaser() {
                     Clinical Orchestration & Error Telemetry
                   </h4>
                   <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    End-to-end n8n automation engine: timed post-op recovery sequences (2h/24h), &lt;3s allergy escalation to Slack #clinical-urgent-alerts, 2-way Google Calendar sync, and central Slack telemetry.
+                    End-to-end n8n automation engine: timed post-op recovery sequences (2h/24h),
+                    &lt;3s allergy escalation to Slack #clinical-urgent-alerts, 2-way Google
+                    Calendar sync, and central Slack telemetry.
                   </p>
                 </div>
 

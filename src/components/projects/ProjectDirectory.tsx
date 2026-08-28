@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Boxes,
-  Search,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, Boxes, Search } from "lucide-react";
 import { Category, CATEGORY_META, Project, PROJECTS } from "@/data/projects";
 
 export function ProjectDirectory() {
@@ -58,7 +53,9 @@ export function ProjectDirectory() {
                 <span>{cat.label}</span>
                 <span
                   className={`rounded-full px-1.5 py-0.2 text-[10px] font-mono ${
-                    isSelected ? "bg-signal text-background font-bold" : "bg-surface-2 text-muted-foreground"
+                    isSelected
+                      ? "bg-signal text-background font-bold"
+                      : "bg-surface-2 text-muted-foreground"
                   }`}
                 >
                   {count}
@@ -94,7 +91,9 @@ export function ProjectDirectory() {
         <div className="flex flex-col items-center justify-center rounded-sm border border-dashed border-border py-16 text-center text-mono text-xs">
           <Boxes className="h-8 w-8 text-muted-foreground mb-3" />
           <p className="text-foreground font-semibold">No systems found matching your search</p>
-          <p className="text-muted-foreground mt-1">Try searching for "Next.js", "n8n", "RAG", or clear filters.</p>
+          <p className="text-muted-foreground mt-1">
+            Try searching for "Next.js", "n8n", "RAG", or clear filters.
+          </p>
           <button
             onClick={() => {
               setSelectedCategory("all");

@@ -66,7 +66,9 @@ export function EditorialBentoGrid() {
                 <span>{cat.label}</span>
                 <span
                   className={`rounded-full px-2 py-0.5 text-[10px] font-mono ${
-                    isSelected ? "bg-signal text-background font-bold" : "bg-surface-2 text-muted-foreground"
+                    isSelected
+                      ? "bg-signal text-background font-bold"
+                      : "bg-surface-2 text-muted-foreground"
                   }`}
                 >
                   {count}
@@ -102,7 +104,9 @@ export function EditorialBentoGrid() {
         <div className="flex flex-col items-center justify-center rounded-sm border border-dashed border-border py-16 text-center text-mono text-xs">
           <Boxes className="h-8 w-8 text-muted-foreground mb-3" />
           <p className="text-foreground font-semibold">No systems found matching your query</p>
-          <p className="text-muted-foreground mt-1">Try searching for "Next.js", "n8n", "RAG", or reset filters.</p>
+          <p className="text-muted-foreground mt-1">
+            Try searching for "Next.js", "n8n", "RAG", or reset filters.
+          </p>
           <button
             onClick={() => {
               setSelectedCategory("all");

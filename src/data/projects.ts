@@ -1,18 +1,9 @@
-import {
-  Bot,
-  Boxes,
-  Cpu,
-  Layers,
-  LucideIcon,
-} from "lucide-react";
+import { Bot, Boxes, Cpu, Layers, LucideIcon } from "lucide-react";
 
 export type ProjectTier = "pinned" | "core" | "archive";
 export type Category = "ai" | "web" | "system" | "iot";
 
-export const CATEGORY_META: Record<
-  Category,
-  { label: string; color: string; icon: LucideIcon }
-> = {
+export const CATEGORY_META: Record<Category, { label: string; color: string; icon: LucideIcon }> = {
   ai: { label: "AI & Automation", color: "var(--pulse-c)", icon: Bot },
   web: { label: "Web Applications", color: "var(--signal)", icon: Layers },
   system: { label: "Systems", color: "var(--flow)", icon: Boxes },
